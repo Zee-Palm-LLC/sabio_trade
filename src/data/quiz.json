@@ -1,0 +1,97 @@
+{
+  "quizTitle": "Investing Style Quiz",
+  "totalQuestions": 7,
+  "questions": [
+    {
+      "id": 1,
+      "questionText": "What's your age?",
+      "description": "We will personalize your trading challenges based on your answers",
+      "type": "single-choice",
+      "options": [
+        { "value": "18-24", "label": "18-24", "color": "purple" },
+        { "value": "25-34", "label": "25-34", "color": "blue" },
+        { "value": "35-44", "label": "35-44", "color": "teal" },
+        { "value": "45+", "label": "45+", "color": "purple" }
+      ],
+      "illustration": "sitting_avatar.png"
+    },
+    {
+      "id": 2,
+      "questionText": "Have you earned money from trading before?",
+      "description": "Whether you've traded before or not, you'll discover your best trading path.",
+      "type": "single-choice",
+      "options": [
+        { "value": "yes-profits", "label": "Yes, I've made profits trading.", "color": "purple" },
+        { "value": "yes-breakeven", "label": "Yes, but I mostly broke even.", "color": "blue" },
+        { "value": "no-lost", "label": "No, I've tried but lost money.", "color": "teal" },
+        { "value": "never-traded", "label": "I've never traded before.", "color": "purple" }
+      ],
+      "illustration": "standing_avatar.png"
+    },
+    {
+      "id": 3,
+      "questionText": "What's your #1 reason for wanting to trade?",
+      "description": "",
+      "type": "single-choice",
+      "options": [
+        { "value": "long-term-wealth", "label": "Build long-term wealth", "color": "purple" },
+        { "value": "short-term-income", "label": "Generate short-term income", "color": "blue" },
+        { "value": "learn-challenge", "label": "Learn & challenge myself", "color": "teal" },
+        { "value": "own-boss", "label": "Be my own boss", "color": "purple" },
+        { "value": "work-anywhere", "label": "Being able to work from anywhere", "color": "blue" }
+      ],
+      "illustration": "standing_avatar.png"
+    },
+    {
+      "id": 4,
+      "questionText": "How fast do you want to build a profitable portfolio?",
+      "description": "",
+      "type": "single-choice",
+      "options": [
+        { "value": "before-retire", "label": "Before I retire", "color": "purple" },
+        { "value": "few-years", "label": "In few years", "color": "blue" },
+        { "value": "asap", "label": "As Soon As Possible", "color": "teal" },
+        { "value": "not-sure", "label": "Not Sure", "color": "purple" }
+      ],
+      "illustration": "standing_avatar.png"
+    },
+    {
+      "id": 5,
+      "questionText": "How would you react if your portfolio dropped 10%?",
+      "description": "",
+      "type": "single-choice",
+      "options": [
+        { "value": "sell-everything", "label": "Sell everything", "color": "purple" },
+        { "value": "hold-wait", "label": "Hold and wait", "color": "blue" },
+        { "value": "buy-more", "label": "Buy more (opportunity!)", "color": "teal" },
+        { "value": "optimize-strategy", "label": "Optimize based on my strategy", "color": "purple" }
+      ],
+      "illustration": "standing_avatar.png"
+    },
+    {
+      "id": 6,
+      "questionText": "Do you know anything about trading?",
+      "description": "",
+      "type": "single-choice",
+      "options": [
+        { "value": "experienced-improve", "label": "I'm experienced, but want to improve", "color": "purple" },
+        { "value": "heard-things", "label": "I've heard a thing or two", "color": "blue" },
+        { "value": "no-but-want", "label": "No, but I'd like to know", "color": "teal" }
+      ],
+      "illustration": "standing_avatar.png"
+    },
+    {
+      "id": 7,
+      "questionText": "Which trading topic interests you the most?",
+      "description": "",
+      "type": "single-choice",
+      "options": [
+        { "value": "timing", "label": "Right time to sell and buy", "color": "purple" },
+        { "value": "ai-stocks", "label": "AI stocks and it's revolution", "color": "blue" },
+        { "value": "risk-rewards", "label": "Risk and rewards", "color": "teal" },
+        { "value": "not-sure", "label": "I'm not sure yet", "color": "purple" }
+      ],
+      "illustration": "standing_avatar.png"
+    }
+  ]
+}
