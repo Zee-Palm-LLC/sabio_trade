@@ -1,13 +1,15 @@
 
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { InvestingStyleQuizPage, QuestionPage, TrustPage, WelcomePage } from './pages';
+import { AnalyzingAnswerPage, InvestingStyleQuizPage, QuestionPage, ResultsPage, TrustPage, WelcomePage } from './pages';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<InvestingStyleQuizPage />} />
-        <Route path="/onboarding" element={<WelcomePage />} />
+        <Route path="/welcome" element={<WelcomePage />} />
+        <Route path="/analyzing" element={<AnalyzingAnswerPage />} />
+        <Route path="/results" element={<ResultsPage />} />
         <Route path="/trust" element={<TrustPage />} />
         <Route path="/question" element={<QuestionPage />} />
       </Routes>

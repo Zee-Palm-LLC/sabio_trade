@@ -51,12 +51,11 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                         <button
                             key={option.value}
                             onClick={() => onOptionSelect(option.value)}
-                            className="w-full py-4 px-6 rounded-xl text-white font-semibold transition-all duration-300 hover:scale-105 relative overflow-hidden group"
+                            className="w-full py-4 px-6 rounded-xl text-white font-semibold text-lg transition-all duration-300 hover:scale-105 relative overflow-hidden group"
                             style={{
                                 backgroundColor: 'rgba(52, 8, 99, 0.46)', // 340863 with 46% opacity
                                 border: '1px solid rgba(125, 49, 216, 0.47)', // 7D31D8 with 47% opacity
-                                boxShadow: '0 0 8px rgba(125, 49, 216, 0.3)', // Subtle glow
-                                fontSize: '16px'
+                                boxShadow: '0 0 8px rgba(125, 49, 216, 0.3)' // Subtle glow
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.background = getGradientStyle(index);

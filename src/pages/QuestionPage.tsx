@@ -3,14 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import StandingAvatar from '../assets/standing_avatar.png';
 import { BackButton, ProgressIndicator, QuestionCard } from '../components';
-import ResultsDialog from '../components/ui/ResultsDialog';
 import quizData from '../data/quiz.json';
 
 const QuestionPage: React.FC = () => {
     const navigate = useNavigate();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<Record<number, string>>({});
-    const [showResultsDialog, setShowResultsDialog] = useState(false);
     const currentQuestion = quizData.questions[currentQuestionIndex];
 
     const handleBackClick = () => {
@@ -23,7 +21,7 @@ const QuestionPage: React.FC = () => {
 
     const handleOptionSelect = (value: string) => {
         console.log('Selected option:', value);
-        
+
         // Store the answer
         setAnswers(prev => ({
             ...prev,
@@ -35,9 +33,9 @@ const QuestionPage: React.FC = () => {
             if (currentQuestionIndex < quizData.questions.length - 1) {
                 setCurrentQuestionIndex(currentQuestionIndex + 1);
             } else {
-                // Quiz completed - show results dialog
-                console.log('Quiz completed!', answers);
-                setShowResultsDialog(true);
+                // Quiz completed - navigate to analyzing page
+                const newAnswers = { ...answers, [currentQuestion.id]: value };
+                navigate('/analyzing', { state: { answers: newAnswers } });
             }
         }, 500);
     };
@@ -60,9 +58,6 @@ const QuestionPage: React.FC = () => {
                             </span>
                         </div>
                     </div>
-                    <div className="flex space-x-3 w-full px-4">
-                        {/* Empty badges section to maintain layout structure */}
-                    </div>
                 </div>
                 <ProgressIndicator
                     current={currentQuestionIndex + 1}
@@ -76,16 +71,6 @@ const QuestionPage: React.FC = () => {
                     onOptionSelect={handleOptionSelect}
                 />
 
-                {/* Results Dialog */}
-                <ResultsDialog
-                    isOpen={showResultsDialog}
-                    onClose={() => setShowResultsDialog(false)}
-                    onNext={() => {
-                        setShowResultsDialog(false);
-                        // Navigate to onboarding page
-                        navigate('/onboarding');
-                    }}
-                />
             </div>
         </div>
     );

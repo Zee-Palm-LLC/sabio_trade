@@ -1,9 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
 import { BulletPointsList, TrustMainContentCard } from '../components';
 
 
+
 const TrustPage: React.FC = () => {
+    const navigate = useNavigate();
+    const handleContinueClick = () => {
+        navigate('/question');
+    };
 
     const bulletPoints = [
         {
@@ -46,6 +53,21 @@ const TrustPage: React.FC = () => {
 
                 <div className="flex-1 flex items-center justify-center px-4 mb-4">
                     <BulletPointsList items={bulletPoints} />
+                </div>
+                <div className="px-4 pb-6">
+                    <button
+                        onClick={handleContinueClick}
+                        className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
+                        style={{
+                            borderRadius: 108,
+                            background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
+                            paddingTop: 12,
+                            paddingBottom: 12,
+                        }}
+                    >
+                        <span className="mr-2">Continue</span>
+                        <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" />
+                    </button>
                 </div>
             </div>
         </div>

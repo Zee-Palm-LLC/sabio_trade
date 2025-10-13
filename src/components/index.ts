@@ -8,7 +8,7 @@ export { default as FeaturedBadge } from './ui/FeaturedBadge';
 export { default as InvestingStyleCard } from './ui/InvestingStyleCard';
 export { default as ProgressIndicator } from './ui/ProgressIndicator';
 export { default as QuestionCard } from './ui/QuestionCard';
-export { default as ResultsDialog } from './ui/ResultsDialog';
+export { default as ResultsCard } from './ui/ResultsCard';
 export { default as TrustMainContentCard } from './ui/TrustMainContentCard';
 
 // Layout Components (to be added)

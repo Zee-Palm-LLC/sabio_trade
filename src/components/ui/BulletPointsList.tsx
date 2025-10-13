@@ -7,6 +7,7 @@ interface BulletPoint {
     highlightedText?: string;
     prefixText?: string;
     prefixOpacity?: number;
+    textOpacity?: number; // 1 for full opacity, 0.6 for 60% opacity
 }
 
 interface BulletPointsListProps {
@@ -24,7 +25,10 @@ const BulletPointsList: React.FC<BulletPointsListProps> = ({ className = '', ite
                         alt="Bullet" 
                         className="w-4 h-4 mt-0.5 flex-shrink-0" 
                     />
-                    <span className="text-white text-[14px] font-normal leading-relaxed">
+                    <span 
+                        className="text-white text-[14px] font-normal leading-relaxed"
+                        style={{ opacity: item.textOpacity || 1 }}
+                    >
                         {item.prefixText && (
                             <span style={{ opacity: item.prefixOpacity || 0.6 }}>
                                 {item.prefixText}
@@ -33,7 +37,7 @@ const BulletPointsList: React.FC<BulletPointsListProps> = ({ className = '', ite
                         {item.highlightedText ? (
                             <span className="font-bold">{item.highlightedText}</span>
                         ) : (
-                            item.text
+                            <span style={{ color: 'rgba(255,255,255,0.6)' }}>{item.text}</span>
                         )}
                     </span>
                 </li>
