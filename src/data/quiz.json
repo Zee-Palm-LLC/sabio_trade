@@ -1,6 +1,6 @@
 {
   "quizTitle": "Investing Style Quiz",
-  "totalQuestions": 7,
+  "totalQuestions": 9,
   "questions": [
     {
       "id": 1,
@@ -118,6 +118,136 @@
         {
           "value": "not-sure",
           "label": "Not Sure",
+          "color": "purple"
+        }
+      ],
+      "illustration": "standing_avatar.png"
+    },
+    {
+      "id": 5,
+      "questionText": "How would you react if your portfolio dropped 10%?",
+      "description": "",
+      "type": "single-choice",
+      "options": [
+        {
+          "value": "sell-everything",
+          "label": "Sell everything",
+          "color": "purple"
+        },
+        {
+          "value": "buy-drop",
+          "label": "Buy more (take opportunity!)",
+          "color": "teal"
+        },
+        {
+          "value": "do-nothing",
+          "label": "Do nothing",
+          "color": "blue"
+        },
+        {
+          "value": "optimize-risk",
+          "label": "Optimize and lower my risk/exposure",
+          "color": "purple"
+        }
+      ],
+      "illustration": "standing_avatar.png"
+    },
+    {
+      "id": 6,
+      "questionText": "How would you react if your portfolio dropped 50%?",
+      "description": "",
+      "type": "single-choice",
+      "options": [
+        {
+          "value": "sell-everything",
+          "label": "Sell everything",
+          "color": "purple"
+        },
+        {
+          "value": "buy-drop",
+          "label": "Buy more (take opportunity!)",
+          "color": "teal"
+        },
+        {
+          "value": "do-nothing",
+          "label": "Do nothing",
+          "color": "blue"
+        },
+        {
+          "value": "optimize-risk",
+          "label": "Optimize and lower my risk/exposure",
+          "color": "purple"
+        }
+      ],
+      "illustration": "standing_avatar.png"
+    },
+    {
+      "id": 7,
+      "questionText": "How would you react if your portfolio dropped 90%?",
+      "description": "",
+      "type": "single-choice",
+      "options": [
+        {
+          "value": "sell-everything",
+          "label": "Sell everything",
+          "color": "purple"
+        },
+        {
+          "value": "buy-drop",
+          "label": "Buy more (take opportunity!)",
+          "color": "teal"
+        },
+        {
+          "value": "do-nothing",
+          "label": "Do nothing",
+          "color": "blue"
+        },
+        {
+          "value": "optimize-risk",
+          "label": "Optimize and lower my risk/exposure",
+          "color": "purple"
+        }
+      ],
+      "illustration": "standing_avatar.png"
+    },
+    {
+      "id": 8,
+      "questionText": "Do you already know anything about trading?",
+      "description": "",
+      "type": "single-choice",
+      "options": [
+        {
+          "value": "i-know-basics",
+          "label": "I've read about it or have some basic idea",
+          "color": "blue"
+        },
+        {
+          "value": "no-clue",
+          "label": "No / This is all new to me",
+          "color": "purple"
+        }
+      ],
+      "illustration": "standing_avatar.png"
+    },
+    {
+      "id": 9,
+      "questionText": "Which trading topic interests you the most?",
+      "description": "",
+      "type": "single-choice",
+      "options": [
+        {
+          "value": "right-asset",
+          "label": "Right asset for my portfolio",
+          "color": "teal"
+        },
+        {
+          "value": "when-to-sell",
+          "label": "When to sell or buy",
+          "color": "blue"
+        },
+        {
+          "value": "find-edge",
+          "label": "How to find my edge",
           "color": "purple"
         }
       ],
