@@ -1,7 +1,7 @@
 {
   "quizTitle": "Investing Style Quiz",
   "totalQuestions": 9,
-  "questions": [
+  "basicQuestions": [
     {
       "id": 1,
       "questionText": "What's your age?",
@@ -11,22 +11,22 @@
         {
           "value": "18-24",
           "label": "18-24",
-          "color": "purple"
+          "color": "var(--color-purple-primary)"
         },
         {
           "value": "25-34",
           "label": "25-34",
-          "color": "blue"
+          "color": "var(--color-blue-primary)"
         },
         {
           "value": "35-44",
           "label": "35-44",
-          "color": "teal"
+          "color": "var(--color-teal-primary)"
         },
         {
           "value": "45+",
           "label": "45+",
-          "color": "purple"
+          "color": "var(--color-purple-primary)"
         }
       ],
       "illustration": "sitting_avatar.png"
@@ -40,22 +40,22 @@
         {
           "value": "yes-profits",
           "label": "Yes, I've made profits trading.",
-          "color": "purple"
+          "color": "var(--color-purple-primary)"
         },
         {
           "value": "yes-breakeven",
           "label": "Yes, but I mostly broke even.",
-          "color": "blue"
+          "color": "var(--color-blue-primary)"
         },
         {
           "value": "no-lost",
           "label": "No, I've tried but lost money.",
-          "color": "teal"
+          "color": "var(--color-teal-primary)"
         },
         {
           "value": "never-traded",
           "label": "I've never traded before.",
-          "color": "purple"
+          "color": "var(--color-purple-primary)"
         }
       ],
       "illustration": "standing_avatar.png"
@@ -69,27 +69,27 @@
         {
           "value": "long-term-wealth",
           "label": "Build long-term wealth",
-          "color": "purple"
+          "color": "var(--color-purple-primary)"
         },
         {
           "value": "short-term-income",
           "label": "Generate short-term income",
-          "color": "blue"
+          "color": "var(--color-blue-primary)"
         },
         {
           "value": "learn-challenge",
           "label": "Learn & challenge myself",
-          "color": "teal"
+          "color": "var(--color-teal-primary)"
         },
         {
           "value": "own-boss",
           "label": "Be my own boss",
-          "color": "purple"
+          "color": "var(--color-purple-primary)"
         },
         {
           "value": "work-anywhere",
           "label": "Being able to work from anywhere",
-          "color": "blue"
+          "color": "var(--color-blue-primary)"
         }
       ],
       "illustration": "standing_avatar.png"
@@ -103,26 +103,28 @@
         {
           "value": "before-retire",
           "label": "Before I retire",
-          "color": "purple"
+          "color": "var(--color-purple-primary)"
         },
         {
           "value": "few-years",
           "label": "In few years",
-          "color": "blue"
+          "color": "var(--color-blue-primary)"
         },
         {
           "value": "asap",
           "label": "As Soon As Possible",
-          "color": "teal"
+          "color": "var(--color-teal-primary)"
         },
         {
           "value": "not-sure",
           "label": "Not Sure",
-          "color": "purple"
+          "color": "var(--color-purple-primary)"
         }
       ],
       "illustration": "standing_avatar.png"
-    },
+    }
+  ],
+  "advancedQuestions": [
     {
       "id": 5,
       "questionText": "How would you react if your portfolio dropped 10%?",
@@ -132,123 +134,75 @@
         {
           "value": "sell-everything",
           "label": "Sell everything",
-          "color": "purple"
+          "color": "var(--color-purple-primary)"
         },
         {
-          "value": "buy-drop",
-          "label": "Buy more (take opportunity!)",
-          "color": "teal"
+          "value": "hold-wait",
+          "label": "Hold and wait",
+          "color": "var(--color-blue-primary)"
         },
         {
-          "value": "do-nothing",
-          "label": "Do nothing",
-          "color": "blue"
+          "value": "buy-opportunity",
+          "label": "Buy more (opportunity!)",
+          "color": "var(--color-teal-primary)"
         },
         {
-          "value": "optimize-risk",
-          "label": "Optimize and lower my risk/exposure",
-          "color": "purple"
+          "value": "optimize-strategy",
+          "label": "Optimize based on my strategy",
+          "color": "var(--color-purple-primary)"
         }
       ],
       "illustration": "standing_avatar.png"
     },
     {
       "id": 6,
-      "questionText": "How would you react if your portfolio dropped 50%?",
+      "questionText": "Do you know anything about trading?",
       "description": "",
       "type": "single-choice",
       "options": [
         {
-          "value": "sell-everything",
-          "label": "Sell everything",
-          "color": "purple"
+          "value": "experienced-improve",
+          "label": "I'm experienced, but want to improve",
+          "color": "var(--color-purple-primary)"
         },
         {
-          "value": "buy-drop",
-          "label": "Buy more (take opportunity!)",
-          "color": "teal"
+          "value": "heard-things",
+          "label": "I've heard a thing or two",
+          "color": "var(--color-blue-primary)"
         },
         {
-          "value": "do-nothing",
-          "label": "Do nothing",
-          "color": "blue"
-        },
-        {
-          "value": "optimize-risk",
-          "label": "Optimize and lower my risk/exposure",
-          "color": "purple"
+          "value": "no-but-want",
+          "label": "No, but I'd like to know",
+          "color": "var(--color-teal-primary)"
         }
       ],
       "illustration": "standing_avatar.png"
     },
     {
       "id": 7,
-      "questionText": "How would you react if your portfolio dropped 90%?",
-      "description": "",
-      "type": "single-choice",
-      "options": [
-        {
-          "value": "sell-everything",
-          "label": "Sell everything",
-          "color": "purple"
-        },
-        {
-          "value": "buy-drop",
-          "label": "Buy more (take opportunity!)",
-          "color": "teal"
-        },
-        {
-          "value": "do-nothing",
-          "label": "Do nothing",
-          "color": "blue"
-        },
-        {
-          "value": "optimize-risk",
-          "label": "Optimize and lower my risk/exposure",
-          "color": "purple"
-        }
-      ],
-      "illustration": "standing_avatar.png"
-    },
-    {
-      "id": 8,
-      "questionText": "Do you already know anything about trading?",
-      "description": "",
-      "type": "single-choice",
-      "options": [
-        {
-          "value": "i-know-basics",
-          "label": "I've read about it or have some basic idea",
-          "color": "blue"
-        },
-        {
-          "value": "no-clue",
-          "label": "No / This is all new to me",
-          "color": "purple"
-        }
-      ],
-      "illustration": "standing_avatar.png"
-    },
-    {
-      "id": 9,
       "questionText": "Which trading topic interests you the most?",
       "description": "",
       "type": "single-choice",
       "options": [
         {
-          "value": "right-asset",
-          "label": "Right asset for my portfolio",
-          "color": "teal"
+          "value": "timing",
+          "label": "Right time to sell and buy",
+          "color": "var(--color-purple-primary)"
         },
         {
-          "value": "when-to-sell",
-          "label": "When to sell or buy",
-          "color": "blue"
+          "value": "ai-stocks",
+          "label": "AI stocks and it's revolution",
+          "color": "var(--color-blue-primary)"
         },
         {
-          "value": "find-edge",
-          "label": "How to find my edge",
-          "color": "purple"
+          "value": "risk-rewards",
+          "label": "Risk and rewards",
+          "color": "var(--color-teal-primary)"
+        },
+        {
+          "value": "not-sure",
+          "label": "I'm not sure yet",
+          "color": "var(--color-purple-primary)"
         }
       ],
       "illustration": "standing_avatar.png"

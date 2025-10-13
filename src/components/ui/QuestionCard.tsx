@@ -39,10 +39,10 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                 {options.map((option, index) => {
                     const getGradientStyle = (colorIndex: number) => {
                         const gradients = [
-                            'linear-gradient(135deg, #8844EE 0%, #4B0082 100%)', // First option
-                            'linear-gradient(135deg, #4A55E6 0%, #2DB3EC 100%)', // Second option
-                            'linear-gradient(135deg, #0FB084 0%, #44CCD1 100%)', // Third option
-                            'linear-gradient(135deg, #594FE7 0%, #A58FF7 100%)'  // Fourth option
+                            `linear-gradient(135deg, var(--color-purple-light) 0%, var(--color-purple-dark) 100%)`, // First option
+                            `linear-gradient(135deg, var(--color-blue-primary) 0%, var(--color-blue-secondary) 100%)`, // Second option
+                            `linear-gradient(135deg, var(--color-teal-primary) 0%, var(--color-teal-secondary) 100%)`, // Third option
+                            `linear-gradient(135deg, var(--color-purple-primary) 0%, var(--color-purple-light) 100%)`  // Fourth option
                         ];
                         return gradients[colorIndex] || gradients[0];
                     };
@@ -53,19 +53,19 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                             onClick={() => onOptionSelect(option.value)}
                             className="w-full py-4 px-6 rounded-xl text-white font-semibold text-lg transition-all duration-300 hover:scale-105 relative overflow-hidden group"
                             style={{
-                                backgroundColor: 'rgba(52, 8, 99, 0.46)', // 340863 with 46% opacity
-                                border: '1px solid rgba(125, 49, 216, 0.47)', // 7D31D8 with 47% opacity
-                                boxShadow: '0 0 8px rgba(125, 49, 216, 0.3)' // Subtle glow
+                                backgroundColor: `rgba(52, 8, 99, var(--opacity-46))`, // 340863 with 46% opacity
+                                border: `1px solid rgba(125, 49, 216, var(--opacity-47))`, // 7D31D8 with 47% opacity
+                                boxShadow: `0 0 8px rgba(125, 49, 216, var(--opacity-30))` // Subtle glow
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.background = getGradientStyle(index);
                                 e.currentTarget.style.border = 'none';
-                                e.currentTarget.style.boxShadow = '0 0 12px rgba(125, 49, 216, 0.5)';
+                                e.currentTarget.style.boxShadow = `0 0 12px rgba(125, 49, 216, 0.5)`;
                             }}
                             onMouseLeave={(e) => {
-                                e.currentTarget.style.background = 'rgba(52, 8, 99, 0.46)';
-                                e.currentTarget.style.border = '1px solid rgba(125, 49, 216, 0.47)';
-                                e.currentTarget.style.boxShadow = '0 0 8px rgba(125, 49, 216, 0.3)';
+                                e.currentTarget.style.background = `rgba(52, 8, 99, var(--opacity-46))`;
+                                e.currentTarget.style.border = `1px solid rgba(125, 49, 216, var(--opacity-47))`;
+                                e.currentTarget.style.boxShadow = `0 0 8px rgba(125, 49, 216, var(--opacity-30))`;
                             }}
                         >
                             {option.label}

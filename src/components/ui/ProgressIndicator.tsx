@@ -15,14 +15,14 @@ const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({ current, total, c
                 className="w-full rounded-full overflow-hidden relative"
                 style={{ 
                     height: '8px',
-                    backgroundColor: 'rgba(217, 217, 217, 0.24)'
+                    backgroundColor: `rgba(217, 217, 217, var(--opacity-24))`
                 }}
             >
                 <div
                     className="h-full transition-all duration-300 ease-out rounded-full absolute top-0 left-0"
                     style={{ 
                         width: `${progressPercentage}%`,
-                        backgroundColor: '#17F871'
+                        backgroundColor: 'var(--color-primary)'
                     }}
                 />
             </div>

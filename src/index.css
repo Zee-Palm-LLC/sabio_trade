@@ -16,6 +16,58 @@
   --color-text: #ffffff;
   --color-text-secondary: #d1d5db;
   --color-text-muted: #9ca3af;
+  
+  /* Brand Colors */
+  --color-primary: #17F871;
+  --color-primary-dark: #0FB084;
+  --color-primary-light: #2FA6B9;
+  
+  /* Purple Theme Colors */
+  --color-purple-primary: #340863;
+  --color-purple-secondary: #7D31D8;
+  --color-purple-light: #A58FF7;
+  --color-purple-dark: #4B0082;
+  
+  /* Blue Theme Colors */
+  --color-blue-primary: #4A55E6;
+  --color-blue-secondary: #2DB3EC;
+  --color-blue-light: #44CCD1;
+  --color-blue-dark: #031340;
+  
+  /* Teal Theme Colors */
+  --color-teal-primary: #0FB084;
+  --color-teal-secondary: #44CCD1;
+  --color-teal-light: #2FA6B9;
+  
+  /* Neutral Colors */
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+  
+  /* Card Colors */
+  --color-card-bg: #1A2036;
+  --color-card-border: rgba(148, 163, 184, 0.3);
+  
+  /* Button Colors */
+  --color-button-disabled: #4A4A4A;
+  --color-button-disabled-text: #9CA3AF;
+  
+  /* Opacity Values */
+  --opacity-12: 0.12;
+  --opacity-24: 0.24;
+  --opacity-30: 0.30;
+  --opacity-46: 0.46;
+  --opacity-47: 0.47;
+  --opacity-60: 0.60;
+  --opacity-70: 0.70;
+  --opacity-80: 0.80;
 }
 
 * {

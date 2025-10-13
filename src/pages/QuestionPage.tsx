@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
 import StandingAvatar from '../assets/standing_avatar.png';
 import { BackButton, ProgressIndicator, QuestionCard } from '../components';
@@ -31,22 +32,23 @@ const QuestionPage: React.FC = () => {
     // Determine available questions based on navigation source
     const fromWelcome = location.state?.fromWelcome;
     const fromTrust = location.state?.fromTrust;
+    const questionList = location.state?.questionList; // New parameter to specify which list
     
     let availableQuestions;
     let totalQuestions;
     
-    if (fromWelcome) {
-        // Show questions 5-9 (indices 4-8)
-        availableQuestions = quizData.questions.slice(4, 9);
-        totalQuestions = 5;
-    } else if (fromTrust) {
-        // Show questions 1-4 (indices 0-3)
-        availableQuestions = quizData.questions.slice(0, 4);
-        totalQuestions = 4;
+    if (questionList === 'basic' || fromTrust) {
+        // Show basic questions (1-4)
+        availableQuestions = quizData.basicQuestions;
+        totalQuestions = quizData.basicQuestions.length;
+    } else if (questionList === 'advanced' || fromWelcome) {
+        // Show advanced questions (5-9)
+        availableQuestions = quizData.advancedQuestions;
+        totalQuestions = quizData.advancedQuestions.length;
     } else {
-        // Default: show all questions
-        availableQuestions = quizData.questions;
-        totalQuestions = quizData.totalQuestions;
+        // Default: show basic questions
+        availableQuestions = quizData.basicQuestions;
+        totalQuestions = quizData.basicQuestions.length;
     }
     
     const currentQuestion = availableQuestions[currentQuestionIndex];
@@ -56,9 +58,9 @@ const QuestionPage: React.FC = () => {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
         } else {
             // Go back to the appropriate page based on navigation source
-            if (fromWelcome) {
+            if (questionList === 'advanced' || fromWelcome) {
                 navigate('/welcome');
-            } else if (fromTrust) {
+            } else if (questionList === 'basic' || fromTrust) {
                 navigate('/trust');
             } else {
                 navigate(-1); // Default fallback
@@ -66,25 +68,27 @@ const QuestionPage: React.FC = () => {
         }
     };
 
+    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
     const handleOptionSelect = (value: string) => {
         console.log('Selected option:', value);
-
+        setSelectedOption(value);
+        
         // Store the answer
         setAnswers(prev => ({
             ...prev,
             [currentQuestion.id]: value
         }));
+    };
 
-        // Move to next question after a short delay for better UX
-        setTimeout(() => {
-            if (currentQuestionIndex < availableQuestions.length - 1) {
-                setCurrentQuestionIndex(currentQuestionIndex + 1);
-            } else {
-                // Quiz completed - navigate to analyzing page
-                const newAnswers = { ...answers, [currentQuestion.id]: value };
-                navigate('/analyzing', { state: { answers: newAnswers } });
-            }
-        }, 500);
+    const handleContinueClick = () => {
+        if (currentQuestionIndex < availableQuestions.length - 1) {
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+            setSelectedOption(null); // Reset selection for next question
+        } else {
+            // Quiz completed - navigate to analyzing page
+            navigate('/analyzing', { state: { answers } });
+        }
     };
 
     return (
@@ -97,12 +101,12 @@ const QuestionPage: React.FC = () => {
                             <img src={Logo} alt="SabioTrade" className="h-14" />
                         </div>
                         <div className="flex items-center space-x-1">
-                            <span className="text-[#17F871] font-bold text-base leading-[18px]">
-                                {currentQuestionIndex + 1} /
-                            </span>
-                            <span className="text-white/80 font-bold text-base leading-[18px]">
-                                {totalQuestions}
-                            </span>
+                                <span className="font-bold text-base leading-[18px]" style={{ color: 'var(--color-primary)' }}>
+                                    {currentQuestionIndex + 1} /
+                                </span>
+                                <span className="font-bold text-base leading-[18px]" style={{ color: 'rgba(255, 255, 255, var(--opacity-80))' }}>
+                                    {totalQuestions}
+                                </span>
                         </div>
                     </div>
                 </div>
@@ -114,9 +118,36 @@ const QuestionPage: React.FC = () => {
                     questionText={currentQuestion.questionText}
                     description={currentQuestion.description}
                     options={currentQuestion.options}
-                    illustration={StandingAvatar}
+                    illustration={questionList === 'advanced' ? undefined : StandingAvatar}
                     onOptionSelect={handleOptionSelect}
                 />
+
+                {/* Continue Button - Only show for advanced questions */}
+                {questionList === 'advanced' && (
+                    <div className="px-4 pb-6">
+                        <button
+                            onClick={handleContinueClick}
+                            disabled={!selectedOption}
+                            className={`w-full font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center ${
+                                selectedOption ? 'cursor-pointer' : 'cursor-not-allowed'
+                            }`}
+                            style={{
+                                borderRadius: 108,
+                                background: selectedOption 
+                                    ? `linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%)`
+                                    : 'var(--color-button-disabled)',
+                                color: selectedOption ? 'var(--color-text)' : 'var(--color-button-disabled-text)',
+                                paddingTop: 12,
+                                paddingBottom: 12,
+                            }}
+                        >
+                            <span className="mr-2">
+                                {currentQuestionIndex < availableQuestions.length - 1 ? 'Continue' : 'Finish'}
+                            </span>
+                            {selectedOption && <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" />}
+                        </button>
+                    </div>
+                )}
 
             </div>
         </div>

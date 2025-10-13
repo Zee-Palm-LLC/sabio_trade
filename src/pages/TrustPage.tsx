@@ -9,7 +9,7 @@ import { BulletPointsList, TrustMainContentCard } from '../components';
 const TrustPage: React.FC = () => {
     const navigate = useNavigate();
     const handleContinueClick = () => {
-        navigate('/question', { state: { fromTrust: true } });
+        navigate('/question', { state: { questionList: 'basic' } });
     };
 
     const bulletPoints = [

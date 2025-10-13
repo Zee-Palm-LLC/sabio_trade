@@ -13,7 +13,7 @@ const WelcomePage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleContinueClick = () => {
-        navigate('/question', { state: { fromWelcome: true } });
+        navigate('/question', { state: { questionList: 'advanced' } });
     };
 
     const handleCloseClick = () => {
@@ -55,7 +55,7 @@ const WelcomePage: React.FC = () => {
                         </p>
                     </div>
                     <div className="flex-1 flex items-center justify-center px-0 mb-6">
-                        <div className="w-full max-w-sm bg-[#1A2036] rounded-[12px] border border-slate-600/30 px-2 pt-4 pb-2 relative flex items-start">
+                        <div className="w-full max-w-sm rounded-[12px] px-2 pt-4 pb-2 relative flex items-start" style={{ backgroundColor: 'var(--color-card-bg)', border: '1px solid var(--color-card-border)' }}>
                             <div className="flex-1 space-y-2 mb-0">
                                 <div className="flex items-center space-x-3">
                                     <img src={EducationIcon} alt="Bullet" className="w-4 h-4 mt-0.5 flex-shrink-0" />
