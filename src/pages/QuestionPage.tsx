@@ -79,6 +79,15 @@ const QuestionPage: React.FC = () => {
             ...prev,
             [currentQuestion.id]: value
         }));
+    
+        setTimeout(() => {
+            if (currentQuestionIndex < availableQuestions.length - 1) {
+                setCurrentQuestionIndex(currentQuestionIndex + 1);
+                setSelectedOption(null);
+            } else {
+                navigate('/analyzing', { state: { answers } });
+            }
+        }, 200);
     };
 
     const handleContinueClick = () => {
