@@ -12,6 +12,7 @@ interface QuestionCardProps {
     options: QuestionOption[];
     illustration?: string;
     onOptionSelect: (value: string) => void;
+    selectedOption?: string | null;
     className?: string;
 }
 
@@ -21,6 +22,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
     options,
     illustration,
     onOptionSelect,
+    selectedOption,
     className = ''
 }) => {
     return (
@@ -73,6 +75,15 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                     );
                 })}
             </div>
+
+            {/* Quote Text - Only show when "buy-opportunity" is selected */}
+            {selectedOption === 'buy-opportunity' && (
+                <div className="text-center mb-6">
+                    <p className="text-white text-base leading-relaxed italic">
+                        "Making money teaches you confidence. Losing some teaches you resilience. Together, they make you wise."
+                    </p>
+                </div>
+            )}
 
             {/* Illustration */}
             {illustration && (

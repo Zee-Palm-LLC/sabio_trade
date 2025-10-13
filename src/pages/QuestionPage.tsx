@@ -120,6 +120,7 @@ const QuestionPage: React.FC = () => {
                     options={currentQuestion.options}
                     illustration={questionList === 'advanced' ? undefined : StandingAvatar}
                     onOptionSelect={handleOptionSelect}
+                    selectedOption={selectedOption}
                 />
 
                 {/* Continue Button - Only show for advanced questions */}
