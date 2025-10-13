@@ -1,5 +1,6 @@
 // Pages
 export { default as InvestingStyleQuizPage } from './InvestingStyleQuizPage';
+export { default as QuestionPage } from './QuestionPage';
 export { default as TrustPage } from './TrustPage';
 
 // Add other pages here as they are created

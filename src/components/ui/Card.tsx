@@ -11,7 +11,7 @@ const Card: React.FC<CardProps> = ({
   className = '',
   padding = 'md'
 }) => {
-  const baseClasses = 'bg-slate-800/90 rounded-3xl shadow-xl backdrop-blur-sm';
+  const baseClasses = 'bg-[#340863] rounded-[12px] shadow-xl backdrop-blur-sm';
   
   const paddingClasses = {
     sm: 'p-4',

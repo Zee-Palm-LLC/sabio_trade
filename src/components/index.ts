@@ -1,5 +1,6 @@
 // UI Components
 export { default as Badge } from './ui/Badge';
+export { default as BulletPointsList } from './ui/BulletPointsList';
 export { default as Button } from './ui/Button';
 export { default as Card } from './ui/Card';
 export { default as FeaturedBadge } from './ui/FeaturedBadge';

@@ -12,7 +12,7 @@ const InvestingStyleCard: React.FC<InvestingStyleCardProps> = ({ className = '' 
     const navigate = useNavigate();
 
     const handleSaverClick = () => {
-        navigate('/trust');
+        navigate('/question');
     };
 
     const handleInvestorClick = () => {

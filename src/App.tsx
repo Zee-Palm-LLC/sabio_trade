@@ -1,6 +1,6 @@
 
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { InvestingStyleQuizPage, TrustPage } from './pages';
+import { InvestingStyleQuizPage, QuestionPage, TrustPage } from './pages';
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
       <Routes>
         <Route path="/" element={<InvestingStyleQuizPage />} />
         <Route path="/trust" element={<TrustPage />} />
+        <Route path="/question" element={<QuestionPage />} />
       </Routes>
     </Router>
   );
