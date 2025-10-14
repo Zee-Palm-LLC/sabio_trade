@@ -2,17 +2,32 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
-import { SellEverythingCard } from '../components';
+import { BuyMoreOptionCard, HoldAndWaitCard, OptimizedBasedCard, SellEverythingCard } from '../components';
 
 const OptionBasedPage: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    // optionIndices: number[] where each item is 1..n (selected option index per question)
     const { optionIndices = [] } = (location.state as any) || {};
-
+    console.log('OptionBasedPage - optionIndices:', optionIndices);
     const handleContinueClick = () => {
-        // Return to AdvanceQuestionPage at the last question (index  (length - 1) )
         navigate('/advance-question', { state: { startAtLastAdvanced: true } });
+    };
+    const renderCard = () => {
+        const firstAnswer = optionIndices[0];
+        console.log('First answer index:', firstAnswer);
+
+        switch (firstAnswer) {
+            case 1:
+                return <SellEverythingCard />;
+            case 2:
+                return <HoldAndWaitCard />;
+            case 3:
+                return <BuyMoreOptionCard />;
+            case 4:
+                return <OptimizedBasedCard />;
+            default:
+                return <SellEverythingCard />; // Default fallback
+        }
     };
 
     return (
@@ -41,8 +56,8 @@ const OptionBasedPage: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Example: Render a card based on first answer (question id 5) */}
-                {optionIndices[0] === 1 && <SellEverythingCard />}
+                {/* Render card based on first answer (question id 5) */}
+                {renderCard()}
 
                 <div className="pt-10 pb-6">
                     <button
