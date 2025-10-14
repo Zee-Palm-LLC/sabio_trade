@@ -81,8 +81,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = () => {
                         </div>
                     </div>
                     <div className="flex items-center mb-2">
-                        {[1, 2, 3, 4, 5].map(i => (
-                            <img key={i} src={TrustPilot} alt="TrustPilot" className="w-4 h-4 mr-1 last:mr-0" />
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <img key={star} src={TrustPilot} alt="TrustPilot" className="w-4 h-4 mr-1 last:mr-0" />
                         ))}
                     </div>
                     <div>
