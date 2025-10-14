@@ -1,13 +1,31 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PointAvatar from '../../assets/pointing_avatar.png';
 import Card from './Card';
+import { saveEmail } from '../../services/emailService';
 
 const EmailCaptureCard: React.FC = () => {
     const [email, setEmail] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Email submitted:', email);
+        setIsSubmitting(true);
+        setErrorMessage('');
+        
+        const result = await saveEmail(email);
+        
+        if (result.success) {
+            console.log('✓ Email saved successfully!');
+            navigate('/welcome', { state: { email } });
+        } else {
+            console.error('✗ Failed to save email');
+            setErrorMessage('Failed to save email. Please try again.');
+        }
+        
+        setIsSubmitting(false);
     };
 
     return (
@@ -39,20 +57,27 @@ const EmailCaptureCard: React.FC = () => {
                             placeholder="Enter your email"
                             className="w-full pl-10 pr-4 py-3 bg-[#1A2B50] border border-blue-300 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
                             required
+                            disabled={isSubmitting}
                         />
                     </div>
+                    {errorMessage && (
+                        <p className="text-red-400 text-sm mt-2">{errorMessage}</p>
+                    )}
                     <div className='mt-4 flex justify-center flex-col items-start'>
                         <button
                             type="submit"
+                            disabled={isSubmitting}
                             className="font-[16px] font-normal py-4 px-6 transition-colors duration-200 flex items-center justify-center ${selectedOption ? 'cursor-pointer' : 'cursor-not-allowed'}"
                             style={{
                                 borderRadius: 108,
                                 background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
                                 paddingTop: 12,
                                 paddingBottom: 12,
+                                opacity: isSubmitting ? 0.7 : 1,
+                                cursor: isSubmitting ? 'not-allowed' : 'pointer',
                             }}
                         >
-                            Unlock my trader profile
+                            {isSubmitting ? 'Saving...' : 'Unlock my trader profile'}
                         </button>
                     </div>
                 </form>
