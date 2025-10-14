@@ -21,7 +21,7 @@ const WelcomePage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 md:bg-gradient-to-br md:from-slate-900 md:via-purple-900 md:to-slate-900 text-white">
+        <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
             <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">
                 <div className="flex flex-col items-center justify-between pt-8 pb-0">
                     <div className="flex items-center justify-between w-full mb-3">
@@ -115,8 +115,8 @@ const WelcomePage: React.FC = () => {
                                     </div>
                                 </div>
                                 <div className="flex items-center mb-2">
-                                    {[1, 2, 3, 4, 5].map(i => (
-                                        <img src={TrustPilot} alt="TrustPilot" className="w-4 h-5 mr-1 last:mr-0" />
+                                    {[1, 2, 3, 4, 5].map((_, i) => (
+                                        <img key={i} src={TrustPilot} alt="TrustPilot" className="w-4 h-5 mr-1 last:mr-0" />
                                     ))}
                                 </div>
                                 <div>
