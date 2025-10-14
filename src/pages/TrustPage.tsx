@@ -40,7 +40,7 @@ const TrustPage: React.FC = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 md:bg-gradient-to-br md:from-slate-900 md:via-purple-900 md:to-slate-900 text-white">
+        <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
                 <div className="flex flex-col items-center pt-8 pb-0">
                     <div className="flex items-center space-x-3 mb-3">
