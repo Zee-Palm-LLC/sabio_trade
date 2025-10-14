@@ -1,4 +1,5 @@
 // UI Components
+export { default as AdvancedQuestionCard } from './ui/AdvancedQuestionCard';
 export { default as BackButton } from './ui/BackButton';
 export { default as Badge } from './ui/Badge';
 export { default as BulletPointsList } from './ui/BulletPointsList';
@@ -8,6 +9,7 @@ export { default as ChartCard } from './ui/ChartCard';
 export { default as EmailCaptureCard } from './ui/EmailCaptureCard';
 export { default as FeaturedBadge } from './ui/FeaturedBadge';
 export { default as HoldAndWaitCard } from './ui/HoldAndWaitCard';
+export { default as IconOptionCard } from './ui/IconOptionCard';
 export { default as InvestingStyleCard } from './ui/InvestingStyleCard';
 export { default as MediaLogosCard } from './ui/MediaLogosCard';
 export { default as OptimizedBasedCard } from './ui/OptimizedBasedCard';

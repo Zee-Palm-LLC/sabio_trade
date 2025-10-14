@@ -1,16 +1,19 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
 import { SellEverythingCard } from '../components';
 
-
-
 const OptionBasedPage: React.FC = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    // optionIndices: number[] where each item is 1..n (selected option index per question)
+    const { optionIndices = [] } = (location.state as any) || {};
 
     const handleContinueClick = () => {
+        // Return to AdvanceQuestionPage at the last question (index  (length - 1) )
+        navigate('/advance-question', { state: { startAtLastAdvanced: true } });
     };
-
-
 
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
@@ -21,7 +24,7 @@ const OptionBasedPage: React.FC = () => {
                             <img src={Logo} alt="SabioTrade" className="h-14" />
                         </div>
                         <button
-                            onClick={() => { }}
+                            onClick={() => navigate(-1)}
                             className={`flex items-center justify-center`}
                             style={{
                                 width: 35,
@@ -37,7 +40,10 @@ const OptionBasedPage: React.FC = () => {
                         </button>
                     </div>
                 </div>
-                <SellEverythingCard />
+
+                {/* Example: Render a card based on first answer (question id 5) */}
+                {optionIndices[0] === 1 && <SellEverythingCard />}
+
                 <div className="pt-10 pb-6">
                     <button
                         onClick={handleContinueClick}
@@ -49,7 +55,7 @@ const OptionBasedPage: React.FC = () => {
                             paddingBottom: 12,
                         }}
                     >
-                        <span className="mr-2">Continue</span>
+                        <span className="mr-2">Next Step</span>
                         <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" />
                     </button>
                 </div>

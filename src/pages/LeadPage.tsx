@@ -3,7 +3,14 @@ import Logo from '../assets/logo.png';
 import SheildFilledIcon from '../assets/sheild_filled.svg';
 import { ChartCard, EmailCaptureCard, TestimonialCard } from '../components';
 
+import { useNavigate } from 'react-router-dom';
+
 const LeadPage: React.FC = () => {
+    const navigate = useNavigate();
+   
+    const handleOnClick = ()=>{
+        navigate('/trading-profiles');
+    }
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
@@ -21,6 +28,7 @@ const LeadPage: React.FC = () => {
                     <TestimonialCard />
                     <button
                         className="w-full mt-5 text-white font-bold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
+                        onClick={handleOnClick}
                         style={{
                             borderRadius: 108,
                             background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',

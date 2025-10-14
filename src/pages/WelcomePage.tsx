@@ -13,7 +13,7 @@ const WelcomePage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleContinueClick = () => {
-        navigate('/question', { state: { questionList: 'advanced' } });
+        navigate('/advance-question');
     };
 
     const handleCloseClick = () => {

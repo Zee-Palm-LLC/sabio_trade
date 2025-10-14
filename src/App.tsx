@@ -1,9 +1,11 @@
 
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import {
+  AdvanceQuestionPage,
   AnalyzingAnswerPage, InvestingStyleQuizPage, LeadPage, OptionBasedPage,
   QuestionPage, ScratchPage,
   TradingProfiles,
+  TradingQuizExtraPage,
   TrustPage, WelcomePage,
   YourTraderProfile
 } from './pages';
@@ -15,6 +17,7 @@ function App() {
         <Route path="/" element={<InvestingStyleQuizPage />} />
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/analyzing" element={<AnalyzingAnswerPage />} />
+        <Route path="/advance-question" element={<AdvanceQuestionPage />} />
         <Route path="/lead" element={<LeadPage />} />
         <Route path="/trust" element={<TrustPage />} />
         <Route path="/question" element={<QuestionPage />} />
@@ -22,6 +25,8 @@ function App() {
         <Route path="/scratch" element={<ScratchPage />} />
         <Route path="/trading-profiles" element={<TradingProfiles />} />
         <Route path='/your-trader-profile' element={<YourTraderProfile/>}/>
+        <Route path='/quiz-extra' element={<TradingQuizExtraPage/>}/>
+        <Route path='/trading-quiz-extra' element={<TradingQuizExtraPage/>}/>
       </Routes>
     </Router>
   );
