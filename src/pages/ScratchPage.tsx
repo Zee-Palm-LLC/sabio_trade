@@ -1,87 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import amdIcon from '../assets/amd.svg';
 import Logo from '../assets/logo.png';
 import ArrowUpIcon from '../assets/up.svg';
-import { Card, ScratchTicket } from '../components';
+import { Card, MediaLogosCard, SabioTradeFeatures, ScratchTicket } from '../components';
 
 const ScratchPage: React.FC = () => {
-    const [isScratched, setIsScratched] = useState(false);
-    const [scratchPercentage, setScratchPercentage] = useState(0);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const isScratching = useRef(false);
+    const [showReserveButton, setShowReserveButton] = useState(false);
+    const [showFeatures, setShowFeatures] = useState(false);
 
-    const handleScratch = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        if (isScratched) return;
-
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.beginPath();
-        ctx.arc(x, y, 20, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Calculate scratched percentage
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const pixels = imageData.data;
-        let transparentPixels = 0;
-
-        for (let i = 3; i < pixels.length; i += 4) {
-            if (pixels[i] === 0) transparentPixels++;
-        }
-
-        const percentage = (transparentPixels / (canvas.width * canvas.height)) * 100;
-        setScratchPercentage(percentage);
-
-        if (percentage > 30) {
-            setIsScratched(true);
-        }
+    const handleScratchComplete = () => {
+        console.log("🎉 Scratch card completed!");
+        setShowReserveButton(true);
     };
 
-    const handleMouseDown = () => {
-        isScratching.current = true;
+    const handleReserveClick = () => {
+        console.log("🎉 Reserve button clicked!");
+        setShowFeatures(true);
     };
 
-    const handleMouseUp = () => {
-        isScratching.current = false;
+    const handleContinueClick = () => {
+        console.log("🎉 Continue button clicked!");
+        // Add your next step logic here
     };
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        if (isScratching.current) {
-            handleScratch(e);
-        }
-    };
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        // Set canvas size
-        canvas.width = 200;
-        canvas.height = 200;
-
-        // Fill with silver color
-        ctx.fillStyle = '#C0C0C0';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Add some texture
-        ctx.fillStyle = '#A0A0A0';
-        for (let i = 0; i < 50; i++) {
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height;
-            ctx.fillRect(x, y, 2, 2);
-        }
-    }, []);
 
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
@@ -139,9 +79,57 @@ const ScratchPage: React.FC = () => {
                 <span className="text-white text-[17px] font-bold block text-center mt-6">
                     Eventually you'll be ready to spot those events. Passing the challenge will grant you a unique opportunity to trade with our funds!
                 </span>
+                <ScratchTicket onScratchComplete={handleScratchComplete} />
+                
+                {/* Condition 2: Reserve Button (after scratching) */}
+                {showReserveButton && !showFeatures && (
+                    <div className="w-full mt-4">
+                        <button
+                            onClick={handleReserveClick}
+                            className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
+                            style={{
+                                borderRadius: 108,
+                                background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
+                                paddingTop: 12,
+                                paddingBottom: 12,
+                            }}
+                        >
+                            <span className="mr-2">Reserve my spot</span>
+                        </button>
+                    </div>
+                )}
 
-                {/* Scratch Card Section */}
-                <ScratchTicket />
+                {/* Condition 3: All Content After Reserve Button Click */}
+                {showFeatures && (
+                    <div className="mt-6 space-y-4">
+                        <SabioTradeFeatures />
+                        <MediaLogosCard />
+
+                        {/* Continue Button */}
+                        <div className="w-full mt-4">
+                            <button
+                                onClick={handleContinueClick}
+                                className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
+                                style={{
+                                    borderRadius: 108,
+                                    background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
+                                    paddingTop: 12,
+                                    paddingBottom: 12,
+                                }}
+                            >
+                                <span className="mr-2">Continue</span>
+                            </button>
+                        </div>
+                        
+                        {/* Privacy and Terms Links */}
+                        <div className="flex justify-center items-center space-x-2 mt-4 mb-4">
+                            <span className="text-white">•</span>
+                            <a href="#" className="underline text-white hover:text-white transition-colors">Terms & Conditions</a>
+                            <span className="text-white">•</span>
+                            <a href="#" className="underline text-white hover:text-white transition-colors">Privacy Policy</a>
+                        </div>
+                    </div>
+                )}
 
             </div>
         </div>
