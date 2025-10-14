@@ -4,6 +4,8 @@ export { default as Badge } from './ui/Badge';
 export { default as BulletPointsList } from './ui/BulletPointsList';
 export { default as Button } from './ui/Button';
 export { default as Card } from './ui/Card';
+export { default as ChartCard } from './ui/ChartCard';
+export { default as EmailCaptureCard } from './ui/EmailCaptureCard';
 export { default as FeaturedBadge } from './ui/FeaturedBadge';
 export { default as HoldAndWaitCard } from './ui/HoldAndWaitCard';
 export { default as InvestingStyleCard } from './ui/InvestingStyleCard';
