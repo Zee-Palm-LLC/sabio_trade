@@ -1,6 +1,7 @@
 // Pages
 export { default as AnalyzingAnswerPage } from './AnalyzingAnswerPage';
 export { default as InvestingStyleQuizPage } from './InvestingStyleQuizPage';
+export { default as LeadPage } from './LeadPage';
 export { default as OptionBasedPage } from './OptionBasedPage';
 export { default as QuestionPage } from './QuestionPage';
 export { default as ScratchPage } from './ScratchPage';
