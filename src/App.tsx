@@ -16,7 +16,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        <h5>This hosting is for QA</h5>
         <Route path="/" element={<InvestingStyleQuizPage />} />
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/sabio-intro" element={<SabioIntroPage />} />
