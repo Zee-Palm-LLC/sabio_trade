@@ -45,12 +45,12 @@ const WelcomePage: React.FC = () => {
                         </button>
                     </div>
                 </div>
-                <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]'>
+                <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_20px_0_rgba(125,49,216,0.5)]'>
                     <div className="text-center px-0 mb-6">
                         <h1 className="text-white text-2xl font-bold mb-4 leading-tight">
                             We got you every step of the way.
                         </h1>
-                        <p className="text-white/70 text-[14px] leading-relaxed">
+                        <p className="text-white/70 text-[14px] leading-snug">
                             We will provide you with the education to react comfortably to any situation. Our challenge is backed by research and crafted to suit your level while encouraging you to use our tools to succeed.
                         </p>
                     </div>
@@ -95,7 +95,7 @@ const WelcomePage: React.FC = () => {
                                 <img
                                     src={SittingAvatar}
                                     alt="3D Character"
-                                    className="w-20 h-20 object-contain"
+                                    className="w-22 h-24 object-contain"
                                 />
                             </div>
                         </div>
@@ -116,11 +116,11 @@ const WelcomePage: React.FC = () => {
                                 </div>
                                 <div className="flex items-center mb-2">
                                     {[1, 2, 3, 4, 5].map(i => (
-                                        <img src={TrustPilot} alt="TrustPilot" className="w-4 h-4 mr-1 last:mr-0" />
+                                        <img src={TrustPilot} alt="TrustPilot" className="w-4 h-5 mr-1 last:mr-0" />
                                     ))}
                                 </div>
                                 <div>
-                                    <p className="text-[#edf1fd] text-[12px] font-normal leading-6">
+                                    <p className="text-[#edf1fd] text-[12px] font-normal leading-snug">
                                         "I've been consistently impressed with the quality of service provided by this website"
                                     </p>
                                 </div>
@@ -137,7 +137,7 @@ const WelcomePage: React.FC = () => {
                 <div className="pb-6 justify-center mt-5">
                     <button
                         onClick={handleContinueClick}
-                        className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
+                        className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center mt-4"
                         style={{
                             borderRadius: 108,
                             background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
