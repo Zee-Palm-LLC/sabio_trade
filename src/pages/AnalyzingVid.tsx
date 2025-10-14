@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import AnalyzingImage from '../assets/analyzing.png';
 import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
-import AnalyzingImage from '../assets/analyzing.png';
 import StarBullets from '../assets/star_bullet.png';
 import { Card } from '../components';
 
@@ -10,7 +10,7 @@ const AnalyzingVid: React.FC = () => {
     const navigate = useNavigate();
 
     const handleContinueClick = () => {
-        navigate('/question', { state: { questionList: 'advanced' } });
+        navigate('/sabio-intro', { state: { questionList: 'advanced' } });
     };
 
     const handleCloseClick = () => {

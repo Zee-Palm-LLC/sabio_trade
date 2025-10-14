@@ -4,6 +4,7 @@ export { default as BackButton } from './ui/BackButton';
 export { default as Badge } from './ui/Badge';
 export { default as BulletPointsList } from './ui/BulletPointsList';
 export { default as Button } from './ui/Button';
+export { default as BuyMoreOptionCard } from './ui/BuyMoreOptionCard';
 export { default as Card } from './ui/Card';
 export { default as ChartCard } from './ui/ChartCard';
 export { default as EmailCaptureCard } from './ui/EmailCaptureCard';
