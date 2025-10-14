@@ -4,6 +4,8 @@ export { default as InvestingStyleQuizPage } from './InvestingStyleQuizPage';
 export { default as LeadPage } from './LeadPage';
 export { default as OptionBasedPage } from './OptionBasedPage';
 export { default as QuestionPage } from './QuestionPage';
+export { default as SabioIntroPage } from './SabioIntroPage';
+export { default as AnalyzingVid } from './AnalyzingVid';
 export { default as ScratchPage } from './ScratchPage';
 export { default as TradingProfiles } from './TradingProfiles';
 export { default as TrustPage } from './TrustPage';

@@ -3,9 +3,11 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import {
   AnalyzingAnswerPage, InvestingStyleQuizPage, LeadPage, OptionBasedPage,
   QuestionPage, ScratchPage,
+  SabioIntroPage,
   TradingProfiles,
   TrustPage, WelcomePage,
-  YourTraderProfile
+  YourTraderProfile,
+  AnalyzingVid
 } from './pages';
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<InvestingStyleQuizPage />} />
         <Route path="/welcome" element={<WelcomePage />} />
+        <Route path="/sabio-intro" element={<SabioIntroPage />} />
+        <Route path="/analyzing-final" element={<AnalyzingVid />} />
         <Route path="/analyzing" element={<AnalyzingAnswerPage />} />
         <Route path="/lead" element={<LeadPage />} />
         <Route path="/trust" element={<TrustPage />} />
