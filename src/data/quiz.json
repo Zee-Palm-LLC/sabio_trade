@@ -1,211 +1,47 @@
-{
-  "quizTitle": "Investing Style Quiz",
-  "totalQuestions": 9,
-  "basicQuestions": [
-    {
-      "id": 1,
-      "questionText": "What's your age?",
-      "description": "We will personalize your trading challenges based on your answers",
-      "type": "single-choice",
-      "options": [
-        {
-          "value": "18-24",
-          "label": "18-24",
-          "color": "var(--color-purple-primary)"
-        },
-        {
-          "value": "25-34",
-          "label": "25-34",
-          "color": "var(--color-blue-primary)"
-        },
-        {
-          "value": "35-44",
-          "label": "35-44",
-          "color": "var(--color-teal-primary)"
-        },
-        {
-          "value": "45+",
-          "label": "45+",
-          "color": "var(--color-purple-primary)"
-        }
-      ],
-      "illustration": "sitting_avatar.png"
-    },
-    {
-      "id": 2,
-      "questionText": "Have you earned money from trading before?",
-      "description": "Whether you've traded before or not, you'll discover your best trading path.",
-      "type": "single-choice",
-      "options": [
-        {
-          "value": "yes-profits",
-          "label": "Yes, I've made profits trading.",
-          "color": "var(--color-purple-primary)"
-        },
-        {
-          "value": "yes-breakeven",
-          "label": "Yes, but I mostly broke even.",
-          "color": "var(--color-blue-primary)"
-        },
-        {
-          "value": "no-lost",
-          "label": "No, I've tried but lost money.",
-          "color": "var(--color-teal-primary)"
-        },
-        {
-          "value": "never-traded",
-          "label": "I've never traded before.",
-          "color": "var(--color-purple-primary)"
-        }
-      ],
-      "illustration": "standing_avatar.png"
-    },
-    {
-      "id": 3,
-      "questionText": "What's your #1 reason for wanting to trade?",
-      "description": "",
-      "type": "single-choice",
-      "options": [
-        {
-          "value": "long-term-wealth",
-          "label": "Build long-term wealth",
-          "color": "var(--color-purple-primary)"
-        },
-        {
-          "value": "short-term-income",
-          "label": "Generate short-term income",
-          "color": "var(--color-blue-primary)"
-        },
-        {
-          "value": "learn-challenge",
-          "label": "Learn & challenge myself",
-          "color": "var(--color-teal-primary)"
-        },
-        {
-          "value": "own-boss",
-          "label": "Be my own boss",
-          "color": "var(--color-purple-primary)"
-        },
-        {
-          "value": "work-anywhere",
-          "label": "Being able to work from anywhere",
-          "color": "var(--color-blue-primary)"
-        }
-      ],
-      "illustration": "standing_avatar.png"
-    },
-    {
-      "id": 4,
-      "questionText": "How fast do you want to build a profitable portfolio?",
-      "description": "",
-      "type": "single-choice",
-      "options": [
-        {
-          "value": "before-retire",
-          "label": "Before I retire",
-          "color": "var(--color-purple-primary)"
-        },
-        {
-          "value": "few-years",
-          "label": "In few years",
-          "color": "var(--color-blue-primary)"
-        },
-        {
-          "value": "asap",
-          "label": "As Soon As Possible",
-          "color": "var(--color-teal-primary)"
-        },
-        {
-          "value": "not-sure",
-          "label": "Not Sure",
-          "color": "var(--color-purple-primary)"
-        }
-      ],
-      "illustration": "standing_avatar.png"
-    }
-  ],
-  "advancedQuestions": [
-    {
-      "id": 5,
-      "questionText": "How would you react if your portfolio dropped 10%?",
-      "description": "",
-      "type": "single-choice",
-      "options": [
-        {
-          "value": "sell-everything",
-          "label": "Sell everything",
-          "color": "var(--color-purple-primary)"
-        },
-        {
-          "value": "hold-wait",
-          "label": "Hold and wait",
-          "color": "var(--color-blue-primary)"
-        },
-        {
-          "value": "buy-opportunity",
-          "label": "Buy more (opportunity!)",
-          "color": "var(--color-teal-primary)"
-        },
-        {
-          "value": "optimize-strategy",
-          "label": "Optimize based on my strategy",
-          "color": "var(--color-purple-primary)"
-        }
-      ],
-      "illustration": "standing_avatar.png"
-    },
-    {
-      "id": 6,
-      "questionText": "Do you know anything about trading?",
-      "description": "",
-      "type": "single-choice",
-      "options": [
-        {
-          "value": "experienced-improve",
-          "label": "I'm experienced, but want to improve",
-          "color": "var(--color-purple-primary)"
-        },
-        {
-          "value": "heard-things",
-          "label": "I've heard a thing or two",
-          "color": "var(--color-blue-primary)"
-        },
-        {
-          "value": "no-but-want",
-          "label": "No, but I'd like to know",
-          "color": "var(--color-teal-primary)"
-        }
-      ],
-      "illustration": "standing_avatar.png"
-    },
-    {
-      "id": 7,
-      "questionText": "Which trading topic interests you the most?",
-      "description": "",
-      "type": "single-choice",
-      "options": [
-        {
-          "value": "timing",
-          "label": "Right time to sell and buy",
-          "color": "var(--color-purple-primary)"
-        },
-        {
-          "value": "ai-stocks",
-          "label": "AI stocks and it's revolution",
-          "color": "var(--color-blue-primary)"
-        },
-        {
-          "value": "risk-rewards",
-          "label": "Risk and rewards",
-          "color": "var(--color-teal-primary)"
-        },
-        {
-          "value": "not-sure",
-          "label": "I'm not sure yet",
-          "color": "var(--color-purple-primary)"
-        }
-      ],
-      "illustration": "standing_avatar.png"
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "question": "What's your age?",
+    "description": "We will personalize your trading challenges based on your answers",
+    "options": [
+      "18-24",
+      "25-34",
+      "35-44",
+      "45+"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Have you earned money from trading before?",
+    "description": "Whether you've traded before or not, you'll discover your best trading path.",
+    "options": [
+      "Yes, I've made profits trading.",
+      "Yes, but I mostly broke even.",
+      "No, I've tried but lost money.",
+      "I've never traded before."
+    ]
+  },
+  {
+    "id": 3,
+    "question": "What's your #1 reason for wanting to trade?",
+    "description": "",
+    "options": [
+      "Build long-term wealth",
+      "Generate short-term income",
+      "Learn & challenge myself",
+      "Be my own boss",
+      "Being able to work from anywhere"
+    ]
+  },
+  {
+    "id": 4,
+    "question": "How fast do you want to build a profitable portfolio?",
+    "description": "",
+    "options": [
+      "Before I retire",
+      "In few years",
+      "As Soon As Possible",
+      "Not Sure"
+    ]
+  }
+]

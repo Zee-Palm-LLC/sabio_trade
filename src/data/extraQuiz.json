@@ -1,0 +1,56 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "title": "How do you picture your ideal trading day?",
+      "options": [
+        { "label": "A clear routine — charts, coffee, and steady profits.", "icon": "clear_routine.svg" },
+        { "label": "Fast moves and quick wins — I thrive on action.", "icon": "fast_moves.svg" },
+        { "label": "Calm and focused, following my plan step by step.", "icon": "clean_and_focused.svg" },
+        { "label": "Exploring new strategies and feeling confident in my growth.", "icon": "exploring.svg" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "What yearly income would you like to make from trading?",
+      "options": [
+        { "label": "$30,000 - $50,000" },
+        { "label": "$50,000 - $100,000" },
+        { "label": "More than $100,000" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "What would you do with extra income from trading?",
+      "options": [
+        { "label": "Paying off bills or loans" },
+        { "label": "Investing and growing it" },
+        { "label": "Enjoying life experiences" },
+        { "label": "Saving for unexpected expenses" }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Which of these trading terms rings a bell?",
+      "options": [
+        { "label": "Dividend income" },
+        { "label": "Day trading" },
+        { "label": "Steady portfolio growth" },
+        { "label": "IPO investing" },
+        { "label": "Breaking news trading" }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "How much time are you ready to spend to achieve your goal?",
+      "options": [
+        { "label": "5 min / day" },
+        { "label": "10 min / day" },
+        { "label": "15 min / day" },
+        { "label": "20 min / day" }
+      ]
+    }
+  ]
+}
+
+
