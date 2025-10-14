@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Analyzing from '../assets/analyzing.png';
 import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
+import MuteIcon from '../assets/muted.svg';
 import { BackButton, Card, ProgressIndicator } from '../components';
 
 const AnalyzingAnswerPage: React.FC = () => {
@@ -29,7 +30,7 @@ const AnalyzingAnswerPage: React.FC = () => {
     };
 
     const handleContinueClick = () => {
-        navigate('/welcome');
+        navigate('/advance-question');
     };
 
     return (
@@ -115,10 +116,7 @@ const AnalyzingAnswerPage: React.FC = () => {
                                     className="absolute top-3 left-3 flex items-center justify-center w-8 h-8 bg-[#23224C]/80 rounded-full shadow focus:outline-none"
                                     aria-label="Play testimonial audio"
                                 >
-                                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                                        <circle cx="12" cy="12" r="12" fill="#fff" fillOpacity="0.25" />
-                                        <path d="M9 8l6 4-6 4V8z" fill="#fff" />
-                                    </svg>
+                                    <img src={MuteIcon} alt="Mute" className="w-5 h-5" />
                                 </button>
                                 <div className="absolute left-0 bottom-0 w-full px-5 pb-2 pt-10 flex items-end bg-gradient-to-t from-[#23224C] via-[#23224C99] to-transparent rounded-xl">
                                     <span className="text-white text-lg font-semibold leading-tight !leading-snug">

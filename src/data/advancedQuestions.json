@@ -1,0 +1,84 @@
+[
+    {
+        "id": 5,
+        "question": "How would you react if your portfolio dropped 10%?",
+        "options": [
+            {
+                "label": "Sell everything",
+                "description": ""
+            },
+            {
+                "label": "Hold and wait",
+                "description": ""
+            },
+            {
+                "label": "Buy more (opportunity!)",
+                "description": "Making money teaches you confidence. Losing some teaches you resilience. Together, they make you wise.",
+                "subtitle": "We will provide you with the necessary education to react comfortably to any situation"
+            },
+            {
+                "label": "Optimize based on my strategy",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "question": "Do you know anything about trading?",
+        "subtitle": "",
+        "options": [
+            {
+                "label": "I'm experienced, but want to improve",
+                "description": ""
+            },
+            {
+                "label": "I've heard a thing or two",
+                "description": ""
+            },
+            {
+                "label": "No, but I'd like to know",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "question": "Which trading topic interests you the most?",
+        "subtitle": "",
+        "options": [
+            {
+                "label": "Right time to sell and buy",
+                "description": ""
+            },
+            {
+                "label": "AI stocks and it's revolution",
+                "description": ""
+            },
+            {
+                "label": "Risk and rewards",
+                "description": ""
+            },
+            {
+                "label": "I'm not sure yet",
+                "description": ""
+            }
+        ]
+  },
+  {
+    "id": 8,
+    "question": "If you had $1,000 today, which stock would you buy?",
+    "subtitle": "Choose all that apply",
+    "multi": true,
+    "options": [
+      "Nvidia",
+      "Boeing",
+      "Netflix",
+      "Apple",
+      "Tesla",
+      "Amazon",
+      "Google",
+      "Microsoft",
+      "None"
+    ]
+  }
+]

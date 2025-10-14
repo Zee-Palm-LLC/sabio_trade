@@ -36,6 +36,9 @@ const BuyMoreOptionCard: React.FC = () => {
                 <p className="text-[#24FFA3] text-[16px] font-semibold mt-2">
                     “It’s ok to be unsure, we will guide you”
                 </p>
+                <p className="text-[#cfc9e1] text-base mb-2">
+                We cover all the important steps, our challenge adapts your skill level, helping you gain confidence and improve your trading decisions.
+                </p>
             </div>
             <TestimonialCard />
         </Card>

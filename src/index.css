@@ -81,6 +81,27 @@ body {
   min-height: 100vh;
   background: #031340;
   color: var(--color-text);
+  position: relative;
+}
+
+/* Dotted background pattern for entire app */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure all content appears above the dots */
+#root {
+  position: relative;
+  z-index: 1;
 }
 
 /* Dark theme base styles */

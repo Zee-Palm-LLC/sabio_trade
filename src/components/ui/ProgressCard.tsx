@@ -21,7 +21,7 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
 
     return (
         <Card
-            className={`w-full max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] p-6`}
+            className={`w-full mb-4 max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] p-6`}
         >
             {/* Top Text */}
             <div className="text-center mb-8">

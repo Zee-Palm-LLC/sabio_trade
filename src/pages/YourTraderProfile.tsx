@@ -1,10 +1,17 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import ScoreIcon from '../assets/score.svg';
 import { ScoreBreakdownCard, TraderProfileCard } from "../components";
 
 
 const YourTraderProfile: React.FC = () => {
+    const navigate = useNavigate();
+
+    const handleContinue = () => {
+        navigate('/quiz-extra', { state: { fromProfile: true } });
+    };
+
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
             <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">
@@ -43,6 +50,7 @@ const YourTraderProfile: React.FC = () => {
                 {/* Continue Button */}
                 <div className="mb-6">
                     <button
+                        onClick={handleContinue}
                         className="w-full text-white font-bold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
                         style={{
                             borderRadius: 108,
