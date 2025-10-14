@@ -49,7 +49,7 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
     };
 
     return (
-        <div className="flex-1 flex flex-col justify-center px-4 mb-1 mt-5">
+        <div className="flex flex-col px-4 mb-1 mt-5">
             {/* Question Header */}
             <div className="text-center mb-8">
                 <h2 className="text-white text-3xl font-bold mb-2 leading-tight">

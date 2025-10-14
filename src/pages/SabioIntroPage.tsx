@@ -9,7 +9,7 @@ const SabioIntroPage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleContinueClick = () => {
-        navigate('/question', { state: { questionList: 'advanced' } });
+        navigate('/trading-quiz-extra', { state: { questionList: 'advanced' } });
     };
 
     const handleCloseClick = () => {

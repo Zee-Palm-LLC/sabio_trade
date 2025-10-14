@@ -51,6 +51,7 @@ const AdvanceQuestionPage: React.FC = () => {
             const selected = finalAnswers[q.id];
             return selected ? getSelectedOptionIndex(qIdx, selected) : 0;
         });
+        console.log('Navigating to OptionBasedPage with:', { finalAnswers, optionIndices });
         navigate('/option-based', { state: { optionIndices } });
     };
 
@@ -67,7 +68,10 @@ const AdvanceQuestionPage: React.FC = () => {
         // Auto-advance if no Continue button (questions 2 & 3)
         if (!showContinueButton) {
             setTimeout(() => {
-                if (currentQuestionIndex < advancedQuestions.length - 1) {
+                // After question 3 (id 7, index 2), navigate to OptionBasedPage
+                if (currentQuestion.id === 7) {
+                    navigateToOptionBased({ ...answers, [currentQuestion.id]: value });
+                } else if (currentQuestionIndex < advancedQuestions.length - 1) {
                     setCurrentQuestionIndex(currentQuestionIndex + 1);
                     setSelectedOption(null);
                 } else {
@@ -96,7 +100,8 @@ const AdvanceQuestionPage: React.FC = () => {
                 setCurrentQuestionIndex(currentQuestionIndex + 1);
                 setSelectedOptions([]);
             } else {
-                navigateToOptionBased({ ...answers, [currentQuestion.id]: value });
+                // Last question (multi-select stocks) - navigate to AnalyzingVid
+                navigate('/analyzing-final');
             }
             return;
         }
