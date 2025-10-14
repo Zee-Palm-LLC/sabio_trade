@@ -35,23 +35,21 @@ const QuestionPage: React.FC = () => {
     const questionList = location.state?.questionList; // New parameter to specify which list
 
     let availableQuestions;
-    let totalQuestions;
+    const totalQuestions = quizData.basicQuestions.length + quizData.advancedQuestions.length;
 
     if (questionList === 'basic' || fromTrust) {
         // Show basic questions (1-4)
         availableQuestions = quizData.basicQuestions;
-        totalQuestions = quizData.basicQuestions.length;
     } else if (questionList === 'advanced' || fromWelcome) {
         // Show advanced questions (5-9)
         availableQuestions = quizData.advancedQuestions;
-        totalQuestions = quizData.advancedQuestions.length;
     } else {
         // Default: show basic questions
         availableQuestions = quizData.basicQuestions;
-        totalQuestions = quizData.basicQuestions.length;
     }
 
     const currentQuestion = availableQuestions[currentQuestionIndex];
+    const currentQuestionNumber = currentQuestion?.id || currentQuestionIndex + 1;
 
     const handleBackClick = () => {
         if (currentQuestionIndex > 0) {
@@ -110,7 +108,7 @@ const QuestionPage: React.FC = () => {
                         </div>
                         <div className="flex items-center space-x-1">
                             <span className="font-bold text-base leading-[18px]" style={{ color: 'var(--color-primary)' }}>
-                                {currentQuestionIndex + 1} /
+                                {currentQuestionNumber} /
                             </span>
                             <span className="font-bold text-base leading-[18px]" style={{ color: 'rgba(255, 255, 255, var(--opacity-80))' }}>
                                 {totalQuestions}
@@ -119,7 +117,7 @@ const QuestionPage: React.FC = () => {
                     </div>
                 </div>
                 <ProgressIndicator
-                    current={currentQuestionIndex + 1}
+                    current={currentQuestionNumber}
                     total={totalQuestions}
                 />
                 <QuestionCard
