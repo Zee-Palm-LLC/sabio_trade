@@ -11,13 +11,16 @@ export { default as HoldAndWaitCard } from './ui/HoldAndWaitCard';
 export { default as InvestingStyleCard } from './ui/InvestingStyleCard';
 export { default as MediaLogosCard } from './ui/MediaLogosCard';
 export { default as OptimizedBasedCard } from './ui/OptimizedBasedCard';
+export { default as ProgressCard } from './ui/ProgressCard';
 export { default as ProgressIndicator } from './ui/ProgressIndicator';
 export { default as QuestionCard } from './ui/QuestionCard';
 export { default as ResultsCard } from './ui/ResultsCard';
 export { default as SabioTradeFeatures } from './ui/SabioTradeFeatures';
+export { default as ScoreBreakdownCard } from './ui/ScoreBreakdownCard';
 export { default as ScratchTicket } from './ui/ScratchTicket';
 export { default as SellEverythingCard } from './ui/SellEverythingCard';
 export { default as TestimonialCard } from './ui/TestimonialCard';
+export { default as TraderProfileCard } from './ui/TraderProfileCard';
 export { default as TrustMainContentCard } from './ui/TrustMainContentCard';
 
 // Layout Components (to be added)
