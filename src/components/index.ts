@@ -11,6 +11,7 @@ export { default as OptimizedBasedCard } from './ui/OptimizedBasedCard';
 export { default as ProgressIndicator } from './ui/ProgressIndicator';
 export { default as QuestionCard } from './ui/QuestionCard';
 export { default as ResultsCard } from './ui/ResultsCard';
+export { default as ScratchTicket } from './ui/ScratchTicket';
 export { default as SellEverythingCard } from './ui/SellEverythingCard';
 export { default as TestimonialCard } from './ui/TestimonialCard';
 export { default as TrustMainContentCard } from './ui/TrustMainContentCard';

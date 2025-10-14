@@ -1,7 +1,7 @@
 import React from 'react';
 import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
-import { OptimizedBasedCard } from '../components';
+import { SellEverythingCard } from '../components';
 
 
 
@@ -37,7 +37,7 @@ const OptionBasedPage: React.FC = () => {
                         </button>
                     </div>
                 </div>
-                <OptimizedBasedCard />
+                <SellEverythingCard />
                 <div className="pt-10 pb-6">
                     <button
                         onClick={handleContinueClick}
