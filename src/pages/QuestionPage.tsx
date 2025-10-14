@@ -11,12 +11,12 @@ const QuestionPage: React.FC = () => {
     const location = useLocation();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<Record<number, string>>({});
-    
+
     // Determine starting question and available questions based on navigation source
     useEffect(() => {
         const fromWelcome = location.state?.fromWelcome;
         const fromTrust = location.state?.fromTrust;
-        
+
         if (fromWelcome) {
             // Start from question 5 (index 4) when coming from WelcomePage
             setCurrentQuestionIndex(4);
@@ -28,15 +28,15 @@ const QuestionPage: React.FC = () => {
             setCurrentQuestionIndex(0);
         }
     }, [location.state]);
-    
+
     // Determine available questions based on navigation source
     const fromWelcome = location.state?.fromWelcome;
     const fromTrust = location.state?.fromTrust;
     const questionList = location.state?.questionList; // New parameter to specify which list
-    
+
     let availableQuestions;
     let totalQuestions;
-    
+
     if (questionList === 'basic' || fromTrust) {
         // Show basic questions (1-4)
         availableQuestions = quizData.basicQuestions;
@@ -50,7 +50,7 @@ const QuestionPage: React.FC = () => {
         availableQuestions = quizData.basicQuestions;
         totalQuestions = quizData.basicQuestions.length;
     }
-    
+
     const currentQuestion = availableQuestions[currentQuestionIndex];
 
     const handleBackClick = () => {
@@ -73,13 +73,13 @@ const QuestionPage: React.FC = () => {
     const handleOptionSelect = (value: string) => {
         console.log('Selected option:', value);
         setSelectedOption(value);
-        
+
         // Store the answer
         setAnswers(prev => ({
             ...prev,
             [currentQuestion.id]: value
         }));
-    
+
         setTimeout(() => {
             if (currentQuestionIndex < availableQuestions.length - 1) {
                 setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -93,9 +93,8 @@ const QuestionPage: React.FC = () => {
     const handleContinueClick = () => {
         if (currentQuestionIndex < availableQuestions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
-            setSelectedOption(null); // Reset selection for next question
+            setSelectedOption(null);
         } else {
-            // Quiz completed - navigate to analyzing page
             navigate('/analyzing', { state: { answers } });
         }
     };
@@ -110,12 +109,12 @@ const QuestionPage: React.FC = () => {
                             <img src={Logo} alt="SabioTrade" className="h-14" />
                         </div>
                         <div className="flex items-center space-x-1">
-                                <span className="font-bold text-base leading-[18px]" style={{ color: 'var(--color-primary)' }}>
-                                    {currentQuestionIndex + 1} /
-                                </span>
-                                <span className="font-bold text-base leading-[18px]" style={{ color: 'rgba(255, 255, 255, var(--opacity-80))' }}>
-                                    {totalQuestions}
-                                </span>
+                            <span className="font-bold text-base leading-[18px]" style={{ color: 'var(--color-primary)' }}>
+                                {currentQuestionIndex + 1} /
+                            </span>
+                            <span className="font-bold text-base leading-[18px]" style={{ color: 'rgba(255, 255, 255, var(--opacity-80))' }}>
+                                {totalQuestions}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -138,12 +137,11 @@ const QuestionPage: React.FC = () => {
                         <button
                             onClick={handleContinueClick}
                             disabled={!selectedOption}
-                            className={`w-full font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center ${
-                                selectedOption ? 'cursor-pointer' : 'cursor-not-allowed'
-                            }`}
+                            className={`w-full font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center ${selectedOption ? 'cursor-pointer' : 'cursor-not-allowed'
+                                }`}
                             style={{
                                 borderRadius: 108,
-                                background: selectedOption 
+                                background: selectedOption
                                     ? `linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%)`
                                     : 'var(--color-button-disabled)',
                                 color: selectedOption ? 'var(--color-text)' : 'var(--color-button-disabled-text)',

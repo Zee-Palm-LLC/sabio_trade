@@ -5,12 +5,11 @@ import TestimonialCard from "./TestimonialCard";
 const SellEverythingCard: React.FC = () => {
     return (
         <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]'>
-            <div className="flex flex-col items-center text-center px-2 py-6 md:px-8">
-                <h2 className="text-[24px] md:text-3xl font-bold text-[#18FE6C] leading-tight mb-4">
-                    AI won’t replace people<br />
-                    <span className="text-[#18FE6C]">but people using AI will.</span>
+            <div className="flex flex-col items-center text-center px-0 py-6 md:px-8">
+                <h2 className="text-[22px] font-bold text-[#18FE6C] leading-tight mb-4">
+                    AI won’t replace people but people using AI will.
                 </h2>
-                <p className="text-base md:text-lg text-[#E2D9F7] font-normal leading-tight">
+                <p className="text-[14px] text-[#E2D9F7] font-normal leading-tight">
                     AI is transforming trading by making everyday
                     tasks more accessible, by learning from
                     endless data. It makes investing more

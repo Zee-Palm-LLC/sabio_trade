@@ -4,6 +4,7 @@ export { default as InvestingStyleQuizPage } from './InvestingStyleQuizPage';
 export { default as OptionBasedPage } from './OptionBasedPage';
 export { default as QuestionPage } from './QuestionPage';
 export { default as ResultsPage } from './ResultsPage';
+export { default as ScratchPage } from './ScratchPage';
 export { default as TrustPage } from './TrustPage';
 export { default as WelcomePage } from './WelcomePage';
 
