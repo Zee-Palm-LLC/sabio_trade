@@ -1,13 +1,31 @@
 import React, { useState } from 'react';
 import PointAvatar from '../../assets/pointing_avatar.png';
 import Card from './Card';
+import { saveEmail } from '../../services/emailService';
 
 const EmailCaptureCard: React.FC = () => {
     const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Email submitted:', email);
+        setLoading(true);
+        setError(null);
+
+        try {
+            const result = await saveEmail(email);
+            if (result.success) {
+                console.log('Email saved successfully:', result);
+            } else {
+                setError('Failed to save email. Please try again.');
+            }
+        } catch (err) {
+            console.error('Error submitting email:', err);
+            setError('An error occurred. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -39,12 +57,21 @@ const EmailCaptureCard: React.FC = () => {
                             placeholder="Enter your email"
                             className="w-full pl-10 pr-4 py-3 bg-[#1A2B50] border border-blue-300 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
                             required
+                            disabled={loading}
                         />
                     </div>
+                    
+                    {error && (
+                        <div className="mt-2 text-red-400 text-sm text-center">
+                            {error}
+                        </div>
+                    )}
+
                     <div className='mt-4 flex justify-center flex-col items-start'>
                         <button
                             type="submit"
-                            className="font-[16px] font-normal py-4 px-6 transition-colors duration-200 flex items-center justify-center ${selectedOption ? 'cursor-pointer' : 'cursor-not-allowed'}"
+                            disabled={loading || !email}
+                            className={`font-[16px] font-normal py-4 px-6 transition-colors duration-200 flex items-center justify-center ${loading || !email ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                             style={{
                                 borderRadius: 108,
                                 background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
@@ -52,7 +79,7 @@ const EmailCaptureCard: React.FC = () => {
                                 paddingBottom: 12,
                             }}
                         >
-                            Unlock my trader profile
+                            {loading ? 'Saving...' : 'Unlock my trader profile'}
                         </button>
                     </div>
                 </form>
