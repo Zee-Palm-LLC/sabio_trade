@@ -13,7 +13,11 @@ const FeaturedBadge: React.FC<FeaturedBadgeProps> = ({
 }) => {
     return (
         <div
-            className={`flex items-center px-3 py-2 bg-[#340863] rounded-lg border border-blue-400/20 text-white text-xs font-medium whitespace-nowrap shadow-lg ${className}`}
+            className={`flex items-center px-3 py-2 rounded-lg  text-white text-xs font-medium whitespace-nowrap shadow-lg ${className}`}
+            style={{
+                backgroundColor: 'var(--color-card-bg)',
+                border: '1px solid rgba(125, 49, 216, 0.47)',
+            }}
         >
             <div
                 className="w-6 h-6 rounded-md flex items-center justify-center mr-3 flex-shrink-0"

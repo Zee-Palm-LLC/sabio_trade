@@ -31,7 +31,7 @@ const InvestingStyleQuizPage: React.FC = () => {
                         />
                     </div>
                 </div>
-                <div className="flex-1 flex items-center justify-center px-4 mb-1">
+                <div className="flex items-center justify-center px-4 mb-3">
                     <InvestingStyleCard />
                 </div>
 

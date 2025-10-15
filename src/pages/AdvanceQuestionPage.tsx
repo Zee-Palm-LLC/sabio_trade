@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
-import { BackButton, ProgressIndicator } from '../components';
+import { AnalyzingModal, BackButton, ProgressIndicator } from '../components';
 import AdvancedQuestionCard from '../components/ui/AdvancedQuestionCard';
 import advancedQuestions from '../data/advancedQuestions.json';
 
@@ -16,15 +16,16 @@ const AdvanceQuestionPage: React.FC = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(initialIndex);
     const [answers, setAnswers] = useState<Record<number, string>>({});
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]); // for multi-select
+    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const [showButton, setShowButton] = useState(false);
+    const [isButtonActive, setIsButtonActive] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const totalQuestions = advancedQuestions.length;
     const currentQuestion: any = advancedQuestions[currentQuestionIndex];
 
     const isMulti = Boolean(currentQuestion.multi);
-    
-    // Determine if current question should show Continue button
-    // Question 1 (id: 5) has Continue button, Questions 2 & 3 (id: 6, 7) don't. Last (multi) shows button.
+
     const showContinueButton = currentQuestion.id === 5 || isMulti;
 
     const handleBackClick = () => {
@@ -32,6 +33,8 @@ const AdvanceQuestionPage: React.FC = () => {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
             setSelectedOption(null);
             setSelectedOptions([]);
+            setShowButton(false);
+            setIsButtonActive(false);
         } else {
             navigate(-1);
         }
@@ -78,6 +81,13 @@ const AdvanceQuestionPage: React.FC = () => {
                     navigateToOptionBased({ ...answers, [currentQuestion.id]: value });
                 }
             }, 250);
+        } else {
+            // For questions with continue button: show button immediately (inactive), then activate after 1s
+            setShowButton(true);
+            setIsButtonActive(false);
+            setTimeout(() => {
+                setIsButtonActive(true);
+            }, 1000);
         }
     };
 
@@ -86,11 +96,26 @@ const AdvanceQuestionPage: React.FC = () => {
         setSelectedOptions(prev => {
             const exists = prev.includes(value);
             const next = exists ? prev.filter(v => v !== value) : [...prev, value];
+
+            // Show button when at least one option is selected
+            if (next.length > 0 && !showButton) {
+                setShowButton(true);
+                setIsButtonActive(false);
+                setTimeout(() => {
+                    setIsButtonActive(true);
+                }, 1000);
+            } else if (next.length === 0) {
+                setShowButton(false);
+                setIsButtonActive(false);
+            }
+
             return next;
         });
     };
 
     const handleContinueClick = () => {
+        if (!isButtonActive) return; // Don't allow click if button is not active
+
         if (isMulti) {
             // For multi, concatenate selected options into a comma string
             if (selectedOptions.length === 0) return;
@@ -99,9 +124,11 @@ const AdvanceQuestionPage: React.FC = () => {
                 setAnswers(prev => ({ ...prev, [currentQuestion.id]: value }));
                 setCurrentQuestionIndex(currentQuestionIndex + 1);
                 setSelectedOptions([]);
+                setShowButton(false);
+                setIsButtonActive(false);
             } else {
-                // Last question (multi-select stocks) - navigate to AnalyzingVid
-                navigate('/analyzing-final');
+                // Last question (multi-select stocks) - show modal instead of navigating
+                setShowModal(true);
             }
             return;
         }
@@ -111,9 +138,15 @@ const AdvanceQuestionPage: React.FC = () => {
         if (currentQuestionIndex < advancedQuestions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
             setSelectedOption(null);
+            setShowButton(false);
+            setIsButtonActive(false);
         } else {
             navigateToOptionBased({ ...answers, [currentQuestion.id]: selectedOption });
         }
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -156,31 +189,38 @@ const AdvanceQuestionPage: React.FC = () => {
                     multi={isMulti}
                 />
 
-                {/* Continue Button */}
-                {showContinueButton && (
-                    <div className="px-4 pb-6">
+                {/* Continue Button - Only show when showButton is true */}
+                {showContinueButton && showButton && (
+                    <div className="px-4 pb-6 animate-fade-in">
                         <button
                             onClick={handleContinueClick}
-                            disabled={(!isMulti && !selectedOption) || (isMulti && selectedOptions.length === 0)}
-                            className={`w-full font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center ${
-                                (!isMulti && selectedOption) || (isMulti && selectedOptions.length > 0) ? 'cursor-pointer' : 'cursor-not-allowed'
-                            }`}
+                            disabled={!isButtonActive}
+                            className={`w-full font-semibold py-4 px-6 transition-all duration-200 flex items-center justify-center ${isButtonActive ? 'cursor-pointer' : 'cursor-not-allowed'
+                                }`}
                             style={{
                                 borderRadius: 108,
-                                background: ((!isMulti && selectedOption) || (isMulti && selectedOptions.length > 0))
+                                background: isButtonActive
                                     ? 'linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%)'
                                     : 'var(--color-button-disabled)',
-                                color: ((!isMulti && selectedOption) || (isMulti && selectedOptions.length > 0)) ? 'var(--color-text)' : 'var(--color-button-disabled-text)',
+                                color: isButtonActive ? 'var(--color-text)' : 'var(--color-button-disabled-text)',
                                 paddingTop: 12,
                                 paddingBottom: 12,
+                                opacity: isButtonActive ? 1 : 0.6,
                             }}
                         >
                             <span className="mr-2">Next Step</span>
-                            {((!isMulti && selectedOption) || (isMulti && selectedOptions.length > 0)) && <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" />}
+                            {isButtonActive && <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" style={{ opacity: isButtonActive ? 1 : 0.5 }} />}
                         </button>
                     </div>
                 )}
             </div>
+
+            {/* Analyzing Modal */}
+            <AnalyzingModal
+                isOpen={showModal}
+                onClose={handleCloseModal}
+                selectedStocks={selectedOptions}
+            />
         </div>
     );
 };

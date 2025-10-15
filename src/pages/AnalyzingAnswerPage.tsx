@@ -30,7 +30,7 @@ const AnalyzingAnswerPage: React.FC = () => {
     };
 
     const handleContinueClick = () => {
-        navigate('/advance-question');
+        navigate('/welcome');
     };
 
     return (
@@ -68,7 +68,7 @@ const AnalyzingAnswerPage: React.FC = () => {
                         />
                         <div className='flex justify-end mr-4'>
                             <span className="text-white/70 text-base leading-relaxed mb-6">
-                                {progress}% in progress...
+                                {progress === 100 ? 'Completed' : `${progress}% in progress...`}
                             </span>
                         </div>
                     </div>
@@ -135,16 +135,28 @@ const AnalyzingAnswerPage: React.FC = () => {
                 <div className="px-4 pb-6">
                     <button
                         onClick={handleContinueClick}
-                        className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
+                        disabled={progress < 100}
+                        className="w-full text-white font-semibold py-4 px-6 transition-all duration-200 flex items-center justify-center"
                         style={{
                             borderRadius: 108,
-                            background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
+                            background: progress === 100 
+                                ? 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)' 
+                                : 'var(--color-button-disabled)',
                             paddingTop: 12,
                             paddingBottom: 12,
+                            cursor: progress === 100 ? 'pointer' : 'not-allowed',
+                            opacity: progress === 100 ? 1 : 0.6,
                         }}
                     >
-                        <span className="mr-2">Continue</span>
-                        <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" />
+                        <span className="mr-2" style={{ color: progress === 100 ? 'white' : 'var(--color-button-disabled-text)' }}>
+                            Next
+                        </span>
+                        <img 
+                            src={ArrowRight} 
+                            alt="Arrow Right" 
+                            className="w-5 h-3" 
+                            style={{ opacity: progress === 100 ? 1 : 0.5 }}
+                        />
                     </button>
                 </div>
             </div>
