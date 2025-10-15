@@ -79,7 +79,7 @@ const SabioIntroPage: React.FC = () => {
                             className="w-full rounded-xl mb-4 relative overflow-hidden"
                             style={{
                                 border: '1px solid rgba(125, 49, 216, 0.47)',
-                            height: '160px',
+                                height: '160px',
                             }}
                         >
                             {/* Background Video */}
@@ -99,12 +99,13 @@ const SabioIntroPage: React.FC = () => {
                             {/* Centered Text Content */}
                             <div className="relative z-10 flex items-center justify-center min-h-[200px] px-4 py-6">
                                 <div className="text-center">
-                                    <h2 className="text-white text-[22px] font-bold leading-tight mb-2">
-                                        You're 1 step away to, you're so close!
-                                    </h2>
                                     <p className="text-white/80 text-[13px] font-normal">
                                         Our job is to teach you how to trade with our money
                                     </p>
+                                    <h2 className="text-white text-[22px] font-bold leading-tight mb-2">
+                                    You're so close!
+                                    </h2>
+
                                 </div>
                             </div>
                         </div>

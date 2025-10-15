@@ -27,7 +27,7 @@ const TrustMainContentCard: React.FC<TrustMainContentCardProps> = ({ className =
                 </div>
             </div>
             <QuoteCard
-                quote="In trading, it's not about being right, it's about making money."
+                quote="“In trading, it’s not about being right, it’s about making money.”"
                 profileImage={profileImage}
                 name="Marty Schwartz"
             />
