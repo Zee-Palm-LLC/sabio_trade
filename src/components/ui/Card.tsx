@@ -16,9 +16,9 @@ const Card: React.FC<CardProps> = ({
   const baseClasses = 'rounded-[12px]';
   
   const paddingClasses = {
-    sm: 'px-2 py-4',
-    md: 'px-2 py-6',
-    lg: 'px-2 py-8'
+    sm: 'px-4 py-4',
+    md: 'px-4 py-6',
+    lg: 'px-4 py-8'
   };
   
   return (

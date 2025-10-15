@@ -6,8 +6,7 @@ import EducationIcon from '../assets/education.png';
 import Logo from '../assets/logo.png';
 import SittingAvatar from '../assets/sitting_avatar.png';
 import ToolsIcon from '../assets/tools.png';
-import TrustPilot from '../assets/trustpilot.png';
-import { Card } from '../components';
+import { Card, TestimonialCard } from '../components';
 
 const WelcomePage: React.FC = () => {
     const navigate = useNavigate();
@@ -55,10 +54,10 @@ const WelcomePage: React.FC = () => {
                         </p>
                     </div>
                     <div className="flex-1 flex items-center justify-center px-0 mb-6">
-                        <div className="w-full max-w-sm rounded-[12px] px-2 pt-4 pb-2 relative flex items-start" style={{ backgroundColor: 'var(--color-card-bg)', border: '1px solid var(--color-card-border)' }}>
+                        <div className="w-full max-w-sm rounded-[12px] px-4 pt-4 pb-2 relative flex items-start bg-[#031340] rounded-[12px]">
                             <div className="flex-1 space-y-2 mb-0">
                                 <div className="flex items-center space-x-3">
-                                    <img src={EducationIcon} alt="Bullet" className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                                    <img src={EducationIcon} alt="Bullet" className="w-5 h-5 mt-0.5 flex-shrink-0" />
                                     <div>
                                         <p className="text-white text-[15px] font-bold leading-relaxed">
                                             Education
@@ -69,7 +68,7 @@ const WelcomePage: React.FC = () => {
                                     </div>
                                 </div>
                                 <div className="flex items-center space-x-3">
-                                    <img src={ToolsIcon} alt="Bullet" className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                                    <img src={ToolsIcon} alt="Bullet" className="w-5 h-5 mt-0.5 flex-shrink-0" />
                                     <div>
                                         <p className="text-white text-[15px] font-bold leading-relaxed">
                                             Tools
@@ -80,7 +79,7 @@ const WelcomePage: React.FC = () => {
                                     </div>
                                 </div>
                                 <div className="flex items-center space-x-3">
-                                    <img src={ChallengesIcon} alt="Bullet" className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                                    <img src={ChallengesIcon} alt="Bullet" className="w-5 h-5 mt-0.5 flex-shrink-0" />
                                     <div>
                                         <p className="text-white text-[15px] font-bold leading-relaxed">
                                             Challenges
@@ -100,38 +99,7 @@ const WelcomePage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex-1 flex items-center justify-center px-0 mb-0">
-                        <div className="relative w-full max-w-md">
-                            <div className="w-full max-w-sm bg-[#1A2036] rounded-[12px] border border-slate-600/30 px-4 pt-4 pb-4">
-                                <div className="flex items-center mb-2">
-                                    <img
-                                        src="https://randomuser.me/api/portraits/men/32.jpg" // use a placeholder or static photo
-                                        alt="Wade Warren"
-                                        className="w-9 h-9 rounded-full mr-4 object-cover"
-                                    />
-                                    <div>
-                                        <div className="text-white font-bold text-base">Wade Warren</div>
-                                        <div className="text-[#99A3C3] text-sm font-medium">Company CEO</div>
-                                    </div>
-                                </div>
-                                <div className="flex items-center mb-2">
-                                    {[1, 2, 3, 4, 5].map((_, i) => (
-                                        <img key={i} src={TrustPilot} alt="TrustPilot" className="w-4 h-5 mr-1 last:mr-0" />
-                                    ))}
-                                </div>
-                                <div>
-                                    <p className="text-[#edf1fd] text-[12px] font-normal leading-snug">
-                                        "I've been consistently impressed with the quality of service provided by this website"
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="flex justify-center mt-4">
-                                <span className="w-2 h-2 rounded-full bg-white/80 mx-1 inline-block"></span>
-                                <span className="w-2 h-2 rounded-full bg-white/20 mx-1 inline-block"></span>
-                                <span className="w-2 h-2 rounded-full bg-white/20 mx-1 inline-block"></span>
-                            </div>
-                        </div>
-                    </div>
+                    <TestimonialCard/>
                 </Card>
 
                 <div className="pb-6 justify-center mt-5">
