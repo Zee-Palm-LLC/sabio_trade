@@ -60,7 +60,8 @@ const TradingQuizExtraPage: React.FC = () => {
     const [current, setCurrent] = useState(fromProfile ? 4 : 0);
     const [selected, setSelected] = useState<Record<number, string>>({});
 
-    const total = fromProfile ? 5 : mapExtraQuestions.length; // Show as "5 / 5" when from profile
+    const total = 13;
+    const questionOffset = 8;
     const question = mapExtraQuestions[fromProfile ? 4 : current];
 
     const handleSelect = (value: string) => {
@@ -92,7 +93,7 @@ const TradingQuizExtraPage: React.FC = () => {
                         </div>
                         <div className="flex items-center space-x-1">
                             <span className="font-bold text-base" style={{ color: 'var(--color-primary)' }}>
-                                {current + 1} /
+                                {fromProfile ? 13 : current + 1 + questionOffset} /
                             </span>
                             <span className="font-bold text-base" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
                                 {total}
@@ -101,7 +102,7 @@ const TradingQuizExtraPage: React.FC = () => {
                     </div>
                 </div>
 
-                <ProgressIndicator current={current + 1} total={total} />
+                <ProgressIndicator current={fromProfile ? 13 : current + 1 + questionOffset} total={total} />
 
                 <div className="flex flex-col justify-center px-4 mb-1 mt-5">
                     <div className="text-center mb-6">

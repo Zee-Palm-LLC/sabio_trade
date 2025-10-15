@@ -43,12 +43,7 @@ const AnalyzingAnswerPage: React.FC = () => {
                             <img src={Logo} alt="SabioTrade" className="h-14" />
                         </div>
                         <div className="flex items-center space-x-1">
-                            <span className="text-[#17F871] font-bold text-base leading-[18px]">
-                                05 /
-                            </span>
-                            <span className="text-white/80 font-bold text-base leading-[18px]">
-                                18
-                            </span>
+                            {/* Hidden - this is a transition page, not a question */}
                         </div>
                     </div>
                 </div>

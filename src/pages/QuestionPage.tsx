@@ -10,7 +10,7 @@ const QuestionPage: React.FC = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<Record<number, string>>({});
     const availableQuestions = quizData;
-    const totalQuestions = quizData.length;
+    const totalQuestions = 13;
     const currentQuestion = availableQuestions[currentQuestionIndex];
     const questionOptions = currentQuestion.options.map((option: string) => ({
         value: option,
