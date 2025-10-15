@@ -2,7 +2,7 @@ import React from "react";
 import plant from '../../assets/plant.png';
 import Card from "./Card";
 
-const OptimizedBasedCard: React.FC = () => {
+const NotSureCard: React.FC = () => {
     return (
         <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]'>
             <h2 className="text-[22px] font-bold text-[#18FE6C] leading-tight mb-4 text-center">
@@ -28,4 +28,4 @@ const OptimizedBasedCard: React.FC = () => {
     );
 };
 
-export default OptimizedBasedCard;
+export default NotSureCard;

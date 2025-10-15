@@ -81,9 +81,21 @@ const ScratchPage: React.FC = () => {
                 </span>
                 <ScratchTicket onScratchComplete={handleScratchComplete} />
                 
-                {/* Condition 2: Reserve Button (after scratching) */}
+                {/* Condition 2: Reserve Button with Pricing (after scratching) */}
                 {showReserveButton && !showFeatures && (
-                    <div className="w-full mt-4">
+                    <div className="w-full mt-0">
+                        {/* Pricing Section */}
+                        <div className="text-center mb-6">
+                            <div className="flex items-center justify-center gap-2 mb-2">
+                                <span className="text-white/60 text-xl line-through">$229</span>
+                                <span className="text-[#17F871] text-4xl font-bold">$89</span>
+                            </div>
+                            <p className="text-white/70 text-sm">
+                                Price for next 2 days
+                            </p>
+                        </div>
+
+                        {/* Reserve Button */}
                         <button
                             onClick={handleReserveClick}
                             className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
@@ -106,7 +118,7 @@ const ScratchPage: React.FC = () => {
                         <MediaLogosCard />
 
                         {/* Continue Button */}
-                        <div className="w-full mt-4">
+                        <div className="w-full mt-4 mb-4">
                             <button
                                 onClick={handleContinueClick}
                                 className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
@@ -122,7 +134,7 @@ const ScratchPage: React.FC = () => {
                         </div>
                         
                         {/* Privacy and Terms Links */}
-                        <div className="flex justify-center items-center space-x-2 mt-4 mb-4">
+                        <div className="flex justify-center items-center space-x-2 mb-4">
                             <span className="text-white">•</span>
                             <a href="#" className="underline text-white hover:text-white transition-colors">Terms & Conditions</a>
                             <span className="text-white">•</span>

@@ -2,31 +2,40 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
-import { BuyMoreOptionCard, HoldAndWaitCard, OptimizedBasedCard, SellEverythingCard } from '../components';
+import { AIStockCard, NotSureCard, RightTimeToSell, RiskAndRewardsCard } from '../components';
 
 const OptionBasedPage: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { optionIndices = [] } = (location.state as any) || {};
-    console.log('OptionBasedPage - optionIndices:', optionIndices);
+    const { selectedOption } = (location.state as any) || { selectedOption: 1 };
+    
+    console.log('OptionBasedPage - Full location.state:', location.state);
+    console.log('OptionBasedPage - selectedOption:', selectedOption);
+    console.log('OptionBasedPage - type of selectedOption:', typeof selectedOption);
+    
     const handleContinueClick = () => {
         navigate('/advance-question', { state: { startAtLastAdvanced: true } });
     };
+    
     const renderCard = () => {
-        const firstAnswer = optionIndices[0];
-        console.log('First answer index:', firstAnswer);
-
-        switch (firstAnswer) {
+        console.log('renderCard - Selected option number:', selectedOption);
+        
+        switch (selectedOption) {
             case 1:
-                return <SellEverythingCard />;
+                console.log('-> Rendering RightTimeToSell (Option 1)');
+                return <RightTimeToSell />;
             case 2:
-                return <HoldAndWaitCard />;
+                console.log('-> Rendering AIStockCard (Option 2)');
+                return <AIStockCard />;
             case 3:
-                return <BuyMoreOptionCard />;
+                console.log('-> Rendering RiskAndRewardsCard (Option 3)');
+                return <RiskAndRewardsCard />;
             case 4:
-                return <OptimizedBasedCard />;
+                console.log('-> Rendering NotSureCard (Option 4)');
+                return <NotSureCard />;
             default:
-                return <SellEverythingCard />;
+                console.log('-> Rendering default RightTimeToSell');
+                return <RightTimeToSell />;
         }
     };
 
