@@ -42,9 +42,6 @@ const AnalyzingAnswerPage: React.FC = () => {
                         <div className="flex items-center">
                             <img src={Logo} alt="SabioTrade" className="h-14" />
                         </div>
-                        <div className="flex items-center space-x-1">
-                            {/* Hidden - this is a transition page, not a question */}
-                        </div>
                     </div>
                 </div>
 
@@ -69,9 +66,9 @@ const AnalyzingAnswerPage: React.FC = () => {
                     </div>
 
                     <Card
-                        className={`w-full max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]`}
+                        className={`w-full max-w-sm`}
                     >
-                        <div className="bg-[#031340] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] p-4">
+                        <div className="bg-[#031340] rounded-[12px] p-4">
                             <div className="text-center">
                                 <div className="w-12 h-12 bg-gray-400 rounded-full mx-auto mb-2 flex items-center justify-center">
                                     <span className="text-gray-600 text-2xl font-bold">CP</span>
@@ -97,7 +94,7 @@ const AnalyzingAnswerPage: React.FC = () => {
                         <div className="mt-6 flex flex-col items-center">
                             <div
                                 className="relative w-full rounded-xl overflow-hidden bg-[#29245A] p-0"
-                                style={{ maxWidth: 350 }}
+                                style={{ maxWidth: 350, height: 180 }}
                             >
                                 <img
                                     src={Analyzing}
@@ -113,12 +110,15 @@ const AnalyzingAnswerPage: React.FC = () => {
                                 >
                                     <img src={MuteIcon} alt="Mute" className="w-5 h-5" />
                                 </button>
-                                <div className="absolute left-0 bottom-0 w-full px-5 pb-2 pt-10 flex items-end bg-gradient-to-t from-[#23224C] via-[#23224C99] to-transparent rounded-xl">
-                                    <span className="text-white text-lg font-semibold leading-tight !leading-snug">
-                                        <span className="mr-1 text-[18px] align-bottom leading-tight"
-                                            aria-hidden="true">“</span>
-                                        I used to panic at losses, Sabio taught me resilience.
-                                        <span className="ml-1 text-2xl align-bottom" aria-hidden="true">”</span>
+                                <div className="absolute left-0 bottom-0 w-full px-5 pb-2 pt-4 flex items-end bg-gradient-to-t from-[#23224C] via-[#23224C99] to-transparent rounded-xl">
+                                    <span
+                                        className="text-white font-bold text-[16px] text-center leading-snug block text-left"
+                                        style={{ textShadow: '0 2px 8px rgba(18,19,52,0.38)' }}
+                                    >
+                                        <span className="mr-1 align-bottom" aria-hidden="true">“</span>
+                                        I used to panic at losses, Sabio
+                                        taught me resilience.
+                                        <span className="ml-1 align-bottom" aria-hidden="true">”</span>
                                     </span>
                                 </div>
                             </div>
@@ -134,8 +134,8 @@ const AnalyzingAnswerPage: React.FC = () => {
                         className="w-full text-white font-semibold py-4 px-6 transition-all duration-200 flex items-center justify-center"
                         style={{
                             borderRadius: 108,
-                            background: progress === 100 
-                                ? 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)' 
+                            background: progress === 100
+                                ? 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)'
                                 : 'var(--color-button-disabled)',
                             paddingTop: 12,
                             paddingBottom: 12,
@@ -146,10 +146,10 @@ const AnalyzingAnswerPage: React.FC = () => {
                         <span className="mr-2" style={{ color: progress === 100 ? 'white' : 'var(--color-button-disabled-text)' }}>
                             Next
                         </span>
-                        <img 
-                            src={ArrowRight} 
-                            alt="Arrow Right" 
-                            className="w-5 h-3" 
+                        <img
+                            src={ArrowRight}
+                            alt="Arrow Right"
+                            className="w-5 h-3"
                             style={{ opacity: progress === 100 ? 1 : 0.5 }}
                         />
                     </button>

@@ -128,7 +128,7 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
                         
                         {/* Discount Code Button */}
                         <button className="bg-green-100 border-2 border-dashed border-green-300 rounded-lg px-2 py-1 flex items-center space-x-2 mx-auto">
-                            <span className="text-green-700 font-bold">SAVE43</span>
+                            <span className="text-green-700 text-[14px] font-bold">TRADENOW</span>
                             <img src={SaveIcon} alt="Save Icon" className="w-4 h-4" />
                         </button>
                     </div>

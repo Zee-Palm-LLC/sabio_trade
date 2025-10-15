@@ -26,7 +26,7 @@ const BulletPointsList: React.FC<BulletPointsListProps> = ({ className = '', ite
                         className="w-3 h-3 mt-0.5 flex-shrink-0" 
                     />
                     <span 
-                        className="text-white text-[14px] font-normal leading-relaxed"
+                        className="text-white/60 text-[14px] font-[400px] leading-relaxed"
                         style={{ opacity: item.textOpacity || 1 }}
                     >
                         {item.prefixText && (
@@ -35,7 +35,7 @@ const BulletPointsList: React.FC<BulletPointsListProps> = ({ className = '', ite
                             </span>
                         )}
                         {item.highlightedText ? (
-                            <span className="font-bold">{item.highlightedText}</span>
+                            <span className="font-semibold">{item.highlightedText}</span>
                         ) : (
                             item.text
                         )}

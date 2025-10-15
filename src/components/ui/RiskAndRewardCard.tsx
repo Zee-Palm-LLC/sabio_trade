@@ -1,14 +1,14 @@
 import React from "react";
 import profileImage from '../../assets/profile.png';
-import QuoteIcon from '../../assets/quote.svg';
 import Card from "./Card";
 import ResultsCard from "./ResultsCard";
 import TestimonialCard from "./TestimonialCard";
+import QuoteCard from "./QuoteCard";
 
 const RiskAndRewardsCard: React.FC = () => {
     return (
         <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]'>
-            <div className="bg-[#031340] rounded-[12px] p-4 mb-2 border border-slate-600/30">
+            {/* <div className="bg-[#031340] rounded-[12px] p-4 mb-2 border border-slate-600/30">
                 <div className="flex justify-center">
                     <img src={QuoteIcon} alt="Quote" className="w-10 h-10 mb-0" />
                 </div>
@@ -27,7 +27,12 @@ const RiskAndRewardsCard: React.FC = () => {
                     </div>
                     <span className="text-white text-sm">Marty Schwartz</span>
                 </div>
-            </div>
+            </div> */}
+            <QuoteCard
+                quote="In trading, it's not about being right, it's about making money."
+                profileImage={profileImage}
+                name="Marty Schwartz"
+            />
             <div className="text-center mb-8">
                 <p className="text-[#24FFA3] text-[16px] font-semibold mt-2 mb-2">
                     We got you, steady growth beats chasing noise.

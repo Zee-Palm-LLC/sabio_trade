@@ -134,12 +134,12 @@ const ScratchPage: React.FC = () => {
                         </div>
                         
                         {/* Privacy and Terms Links */}
-                        <div className="flex justify-center items-center space-x-2 mb-4">
-                            <span className="text-white">•</span>
-                            <a href="#" className="underline text-white hover:text-white transition-colors">Terms & Conditions</a>
-                            <span className="text-white">•</span>
-                            <a href="#" className="underline text-white hover:text-white transition-colors">Privacy Policy</a>
-                        </div>
+                        <div className="flex justify-center items-center space-x-2">
+                        <span className="text-white">•</span>
+                        <a href="https://sabio.trade/terms" className="underline text-white hover:text-white transition-colors">Terms & Conditions</a>
+                        <span className="text-white">•</span>
+                        <a href="https://sabio.trade/privacy-policy" className="underline text-white hover:text-white transition-colors">Privacy Policy</a>
+                    </div>
                     </div>
                 )}
 
