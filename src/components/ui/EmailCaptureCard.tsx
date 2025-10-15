@@ -8,24 +8,47 @@ const EmailCaptureCard: React.FC = () => {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
+    const [warning, setWarning] = useState<string | null>(null);
     const navigate = useNavigate();
+
+    const validateEmail = (email: string): boolean => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
+        setSuccess(null);
+        setWarning(null);
+
+        if (!validateEmail(email)) {
+            setError('Please enter a valid email address.');
+            setLoading(false);
+            return;
+        }
 
         try {
             const result = await saveEmail(email);
             if (result.success) {
                 console.log('Email saved successfully:', result);
-                navigate('/trading-profiles');
+                if (result.message === 'Email already registered') {
+                    setWarning('This email is already registered!');
+                } else {
+                    setSuccess('Email registered successfully!');
+                    navigate('/trading-profiles');
+                }
             } else {
-                setError('Failed to save email. Please try again.');
+                const errorMessage = typeof result.error === 'string' 
+                    ? result.error 
+                    : 'Failed to register email. Please try again.';
+                setError(errorMessage);
             }
-        } catch (err) {
-            console.error('Error submitting email:', err);
-            setError('An error occurred. Please try again.');
+        } catch (err: any) {
+            const errorMessage = err?.message || 'An error occurred. Please check your connection and try again.';
+            setError(errorMessage);
         } finally {
             setLoading(false);
         }
@@ -48,12 +71,28 @@ const EmailCaptureCard: React.FC = () => {
                         </div>
                         <input
                             type="email"
+                            name="email"
+                            id="email-input"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => {
+                                setEmail(e.target.value);
+                                setError(null);
+                                setSuccess(null);
+                                setWarning(null);
+                            }}
                             placeholder="Enter your email"
-                            className="w-full pl-12 pr-4 py-4 rounded-lg text-white placeholder-white/40 focus:outline-none transition-all"
+                            className={`w-full pl-12 pr-4 py-4 rounded-lg text-white placeholder-white/40 focus:outline-none transition-all ${
+                                error ? 'border-red-400 focus:border-red-400 focus:ring-red-400' : 
+                                warning ? 'border-orange-400 focus:border-orange-400 focus:ring-orange-400' :
+                                success ? 'border-green-400 focus:border-green-400 focus:ring-green-400' : 
+                                'border-blue-300 focus:border-blue-400 focus:ring-blue-400'
+                            }`}
+                            aria-label="Email address"
+                            aria-describedby={error ? 'email-error' : warning ? 'email-warning' : success ? 'email-success' : undefined}
+                            aria-invalid={error ? 'true' : 'false'}
                             required
                             disabled={loading}
+                            autoComplete="email"
                             style={{
                                 background: 'rgba(255, 255, 255, 0.05)',
                                 border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -69,8 +108,20 @@ const EmailCaptureCard: React.FC = () => {
                     </div>
                     
                     {error && (
-                        <div className="mb-4 text-red-400 text-sm text-center">
+                        <div id="email-error" className="mb-4 text-red-400 text-sm text-center font-medium" role="alert">
                             {error}
+                        </div>
+                    )}
+                    
+                    {warning && (
+                        <div id="email-warning" className="mt-2 text-orange-400 text-sm text-center font-medium" role="alert">
+                            {warning}
+                        </div>
+                    )}
+                    
+                    {success && (
+                        <div id="email-success" className="mt-2 text-green-400 text-sm text-center font-medium" role="status">
+                            {success}
                         </div>
                     )}
 
