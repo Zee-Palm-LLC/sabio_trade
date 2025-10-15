@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
-import { BulletPointsList, TrustMainContentCard } from '../components';
+import { BackButton, BulletPointsList, TrustMainContentCard } from '../components';
 
 
 
@@ -39,12 +39,21 @@ const TrustPage: React.FC = () => {
         }
     ];
 
+    const handleBackClick = () => {
+        navigate(-1);
+    };
+
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
-                <div className="flex flex-col items-center pt-8 pb-0">
-                    <div className="flex items-center space-x-3 mb-3">
-                        <img src={Logo} alt="SabioTrade" className=" h-14" />
+                <div className="relative w-full mb-3 pt-8 px-4 flex items-center justify-center" style={{ minHeight: 56 }}>
+                    <div className="flex items-center justify-center w-full">
+                        <div className="flex items-center justify-center">
+                            <BackButton onClick={handleBackClick} />
+                        </div>
+                        <div className="flex items-center justify-center mx-auto w-full">
+                            <img src={Logo} alt="SabioTrade" className="h-14 mx-auto" />
+                        </div>
                     </div>
                 </div>
                 <div className="flex-1 flex items-center justify-center px-4 mb-5">

@@ -26,7 +26,7 @@ const OptionBasedPage: React.FC = () => {
             case 4:
                 return <OptimizedBasedCard />;
             default:
-                return <SellEverythingCard />; // Default fallback
+                return <SellEverythingCard />;
         }
     };
 

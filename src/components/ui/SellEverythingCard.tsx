@@ -5,7 +5,7 @@ import TestimonialCard from "./TestimonialCard";
 const SellEverythingCard: React.FC = () => {
     return (
         <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]'>
-            <div className="flex flex-col items-center text-center px-0 py-6 md:px-8">
+            <div className="flex flex-col items-center text-center mb-4">
                 <h2 className="text-[22px] font-bold text-[#18FE6C] leading-tight mb-4">
                     AI won’t replace people but people using AI will.
                 </h2>
