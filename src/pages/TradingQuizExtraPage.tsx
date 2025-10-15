@@ -68,13 +68,16 @@ const TradingQuizExtraPage: React.FC = () => {
         setSelected(prev => ({ ...prev, [question.id]: value }));
         setTimeout(() => {
             if (fromProfile) {
-                // If from profile, navigate to scratch after answering
+                // If from profile, navigate to scratch after answering the last question
                 navigate('/scratch');
             } else {
-                // Normal flow
-                if (current < mapExtraQuestions.length - 1) {
+                // Normal flow from SabioIntroPage - skip the last question (index 4)
+                // Show only questions 0, 1, 2, 3 (first 4 questions)
+                if (current < mapExtraQuestions.length - 2) {
+                    // Still more questions to show (before the last one)
                     setCurrent(current + 1);
                 } else {
+                    // Reached question 3 (index 3), skip question 4 and navigate to /lead
                     navigate('/lead');
                 }
             }

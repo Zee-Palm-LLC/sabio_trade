@@ -1,8 +1,10 @@
 import React from "react";
+import SceneImage from '../../assets/scene.png';
 import Card from "./Card";
+import ResultsCard from "./ResultsCard";
 import TestimonialCard from "./TestimonialCard";
 
-const SellEverythingCard: React.FC = () => {
+const AIStockCard: React.FC = () => {
     return (
         <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]'>
             <div className="flex flex-col items-center text-center mb-4">
@@ -18,9 +20,10 @@ const SellEverythingCard: React.FC = () => {
                     need&nbsp; educated people behind them.
                 </p>
             </div>
+            <ResultsCard text="Our education and tools are utilizing the latest technologies to make your experience silky smooth, the challenge will safely prepare you." />
             <div className="flex-1 flex items-center justify-center px-0 mb-3">
                 <div className="relative w-full max-w-md">
-                    <div className="w-full max-w-sm bg-[#031340] rounded-[12px] border border-slate-600/30 px-4 pt-4 pb-4">
+                    <div className="w-full max-w-sm rounded-[12px] pt-4 pb-4">
                         <div
                             style={{
                                 height: 157,
@@ -30,36 +33,31 @@ const SellEverythingCard: React.FC = () => {
                             }}
                         >
                             <img
-                                src="https://images.unsplash.com/photo-1760340641889-7d215d84bda3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1332"
+                                src={SceneImage}
                                 className="w-full h-full object-cover rounded-[12px]"
                                 style={{ borderRadius: 12 }}
                                 alt="Fitting Example"
                             />
                         </div>
-                        <span className="text-[#17F871] text-[12px] font-medium mt-3 block">
+                        <span
+                            className="block mt-3 text-center"
+                            style={{
+                                color: "#17F871",
+                                fontWeight: 700,
+                                fontStyle: "bold",
+                                fontSize: 16,
+                                lineHeight: "140%",
+                                letterSpacing: "0%",
+                            }}
+                        >
                             We got you, covered with guidance on how to utilize the latest AI technology.
                         </span>
                     </div>
                 </div>
             </div>
-            {/* <div className="px-2 py-4">
-                <div className="w-full h-32 bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-yellow-300/30 to-orange-500/20"></div>
-                    <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-slate-800 to-transparent"></div>
-                    <div className="relative z-10 text-center">
-                        <div className="w-8 h-8 bg-slate-600 rounded-full mx-auto mb-2"></div>
-                        <div className="text-white/60 text-xs">Landscape Image</div>
-                    </div>
-                </div>
-                <p className="text-[#18FE6C] text-sm font-medium text-center mt-4 leading-relaxed">
-                    We got you, covered with guidance on<br />
-                    how to utilize the latest AI technology.
-                </p>
-            </div> */}
-
             <TestimonialCard />
         </Card>
     );
 }
 
-export default SellEverythingCard;
+export default AIStockCard;

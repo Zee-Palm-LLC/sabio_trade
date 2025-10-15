@@ -45,8 +45,15 @@ const AdvanceQuestionPage: React.FC = () => {
     const getSelectedOptionIndex = (questionIdx: number, value: string): number => {
         const opts: any[] = advancedQuestions[questionIdx].options as any[];
         const labels = opts.map((opt: any) => typeof opt === 'string' ? opt : opt.label);
+        console.log(`DEBUG getSelectedOptionIndex - Question ${questionIdx}:`, {
+            value: value,
+            availableLabels: labels,
+            matching: labels.findIndex(l => l === value)
+        });
         const idx = labels.findIndex(l => l === value);
-        return idx >= 0 ? idx + 1 : 0; // 1..n or 0 if not found
+        const result = idx >= 0 ? idx + 1 : 0;
+        console.log(`DEBUG - Selected value "${value}" maps to index ${result}`);
+        return result;
     };
 
     const navigateToOptionBased = (finalAnswers: Record<number, string>) => {
@@ -55,7 +62,9 @@ const AdvanceQuestionPage: React.FC = () => {
             const selected = finalAnswers[q.id];
             return selected ? getSelectedOptionIndex(qIdx, selected) : 0;
         });
-        console.log('Navigating to OptionBasedPage with:', { finalAnswers, optionIndices });
+        console.log('DEBUG - Final Answers:', finalAnswers);
+        console.log('DEBUG - Option Indices being passed:', optionIndices);
+        console.log('DEBUG - First question answer index:', optionIndices[0]);
         navigate('/option-based', { state: { optionIndices } });
     };
 
@@ -69,17 +78,43 @@ const AdvanceQuestionPage: React.FC = () => {
             [currentQuestion.id]: value
         }));
 
+        // If this is question 7 (Which trading topic interests you the most?), store the option index for routing
+        if (currentQuestion.id === 7) {
+            // IMPORTANT: Always search in the ORIGINAL options array from advancedQuestions
+            // Don't rely on the displayed order (which might be reordered by AdvancedQuestionCard)
+            const originalQuestion = advancedQuestions.find((q: any) => q.id === 7);
+            if (originalQuestion) {
+                const optionIndex = originalQuestion.options.findIndex((opt: any) => {
+                    const label = typeof opt === 'string' ? opt : opt.label;
+                    return label === value;
+                }) + 1; // Convert to 1-based index
+                
+                console.log('Question 7 - Option selected:', value);
+                console.log('Question 7 - Option index:', optionIndex);
+                console.log('Question 7 - Original options:', originalQuestion.options.map((o: any) => typeof o === 'string' ? o : o.label));
+                
+                // Store it in localStorage
+                localStorage.setItem('tradingTopicOption', String(optionIndex));
+            }
+        }
+
         // Auto-advance if no Continue button (questions 2 & 3)
         if (!showContinueButton) {
             setTimeout(() => {
                 // After question 3 (id 7, index 2), navigate to OptionBasedPage
                 if (currentQuestion.id === 7) {
-                    navigateToOptionBased({ ...answers, [currentQuestion.id]: value });
+                    const tradingTopic = localStorage.getItem('tradingTopicOption') || '1';
+                    console.log('Navigating to OptionBased - tradingTopic from localStorage:', tradingTopic);
+                    console.log('Navigating to OptionBased - Number(tradingTopic):', Number(tradingTopic));
+                    navigate('/option-based', { state: { selectedOption: Number(tradingTopic) } });
                 } else if (currentQuestionIndex < advancedQuestions.length - 1) {
                     setCurrentQuestionIndex(currentQuestionIndex + 1);
                     setSelectedOption(null);
                 } else {
-                    navigateToOptionBased({ ...answers, [currentQuestion.id]: value });
+                    const tradingTopic = localStorage.getItem('tradingTopicOption') || '1';
+                    console.log('Navigating to OptionBased - tradingTopic from localStorage:', tradingTopic);
+                    console.log('Navigating to OptionBased - Number(tradingTopic):', Number(tradingTopic));
+                    navigate('/option-based', { state: { selectedOption: Number(tradingTopic) } });
                 }
             }, 250);
         } else {

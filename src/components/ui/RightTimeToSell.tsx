@@ -1,10 +1,10 @@
 import React from "react";
 import profileImage from '../../assets/profile.png';
 import QuoteIcon from '../../assets/quote.svg';
-import Card from "./Card";
-import TestimonialCard from "./TestimonialCard";
+import { Card, TestimonialCard } from "../index";
 
-const HoldAndWaitCard: React.FC = () => {
+
+const RightTimeToSell: React.FC = () => {
     return (
         <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]'>
             <div className="bg-[#031340] rounded-[12px] p-4 mb-6 border border-slate-600/30">
@@ -27,17 +27,24 @@ const HoldAndWaitCard: React.FC = () => {
                     <span className="text-white text-sm">Marty Schwartz</span>
                 </div>
             </div>
+
             <div className="text-center mb-8">
                 <p className="text-[#cfc9e1] text-base mb-2">
-                    In trading, every reward comes with risk. Quick gains tempt, but losses can be just as fast. People should remember: protect your money first, aim for steady growth, and never risk more than you can afford.
+                    To make it simple, don’t rush, hold with<br className="sm:hidden" />
+                    patience, and avoid emotional timing.
                 </p>
                 <p className="text-[#24FFA3] text-[16px] font-semibold mt-2">
-                    We got you, steady growth beats chasing noise.
+                    “It’s ok to be unsure, we will guide you”
+                </p>
+                <p className="text-[#cfc9e1] text-base mb-2">
+                We cover all the important steps, our challenge adapts your skill level, helping you gain confidence and improve your trading decisions.
                 </p>
             </div>
             <TestimonialCard />
         </Card>
-    );
-};
 
-export default HoldAndWaitCard;
+    );
+
+}
+
+export default RightTimeToSell;
