@@ -3,13 +3,13 @@ import { getAnalytics, type Analytics } from "firebase/analytics";
 import { getFirestore, Firestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDnhH_3HzJIo3ixoTuBaxD_JhBjyZQ_l_M",
-    authDomain: "sabiotrade-d5da1.firebaseapp.com",
-    projectId: "sabiotrade-d5da1",
-    storageBucket: "sabiotrade-d5da1.firebasestorage.app",
-    messagingSenderId: "602647395393",
-    appId: "1:602647395393:web:75713647c1fc406651dac0",
-    measurementId: "G-4SGNCQ2Q43"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
