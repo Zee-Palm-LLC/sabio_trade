@@ -1,4 +1,5 @@
 import React from 'react';
+import QuoteIcon from '../../assets/quote.svg';
 
 interface QuoteCardProps {
     quote: string;
@@ -12,37 +13,26 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
     quote,
     profileImage,
     name,
-    role,
-    className = ''
 }) => {
     return (
-        <div
-            className={`rounded-xl p-4 ${className}`}
-            style={{
-                background: '#031340',
-                border: '1px solid rgba(255, 255, 255, 0.16)',
-            }}
-        >
-            {/* Quote Text */}
-            <div className="mb-4">
-                <p className="text-white text-sm leading-relaxed italic">
-                    "{quote}"
-                </p>
+        <div className="bg-[#031340] rounded-[12px] p-4 mb-6 border border-slate-600/30">
+            <div className="flex justify-center">
+                <img src={QuoteIcon} alt="Quote" className="w-8 h-6 mb-2" />
             </div>
-
-            {/* Profile Section */}
-            <div className="flex items-center gap-3">
-                <img
-                    src={profileImage}
-                    alt={name}
-                    className="w-10 h-10 rounded-full object-cover"
-                />
-                <div>
-                    <p className="text-white font-semibold text-sm">{name}</p>
-                    {role && (
-                        <p className="text-white/60 text-xs">{role}</p>
-                    )}
+            <p className="text-white  text-[17px] leading-relaxed mb-2">
+                <span className="block text-center">
+                    {quote}
+                </span>
+            </p>
+            <div className="flex items-center justify-center">
+                <div className="w-8 h-6 rounded-full flex items-center justify-center mr-3 overflow-hidden">
+                    <img
+                        src={profileImage}
+                        alt="Profile"
+                        className="object-cover w-6 h-6 rounded-full"
+                    />
                 </div>
+                <span className="text-white text-sm">{name}</span>
             </div>
         </div>
     );

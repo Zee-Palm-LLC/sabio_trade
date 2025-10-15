@@ -1,44 +1,58 @@
 import React from 'react';
+import ArrowRight from '../../assets/arrow-right.svg';
 
 interface PrimaryButtonProps {
     text?: string;
+    showIcon?: boolean;
     onClick?: () => void;
     disabled?: boolean;
     className?: string;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
-    text = 'PULSE',
+    text = 'Continue',
+    showIcon = true,
     onClick,
     disabled = false,
     className = ''
 }) => {
+    const [isHovered, setIsHovered] = React.useState(false);
+
     return (
-        <div className={`flex items-center justify-center ${className}`}>
-            <div className="relative inline-flex group">
-                {/* Continuous Pulse Rings */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#0FB084] to-[#2FA6B9] opacity-75 animate-pulse-ring"></div>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#0FB084] to-[#2FA6B9] opacity-50 animate-pulse-ring-delayed"></div>
+        <div className={`w-full ${className}`}>
+            <div className="relative w-full group">
+                {/* Pulse Rings - Only on Hover */}
+                {isHovered && !disabled && (
+                    <>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#0FB084] to-[#2FA6B9] opacity-75 animate-pulse-ring" style={{ borderRadius: 108 }}></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#0FB084] to-[#2FA6B9] opacity-50 animate-pulse-ring-delayed" style={{ borderRadius: 108 }}></div>
+                    </>
+                )}
                 
                 {/* Main Button */}
                 <button
                     onClick={onClick}
                     disabled={disabled}
+                    onMouseEnter={() => !disabled && setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
                     className={`
                         relative
-                        px-8 py-4
+                        w-full
+                        px-6 py-4
                         bg-gradient-to-r from-[#0FB084] to-[#2FA6B9]
-                        text-white font-bold text-lg
-                        rounded-full
+                        text-white font-semibold text-base
                         transition-transform duration-200
                         hover:scale-105
                         active:scale-95
                         disabled:opacity-50 disabled:cursor-not-allowed
                         shadow-lg shadow-[#0FB084]/50
                         z-10
+                        flex items-center justify-center
                     `}
+                    style={{ borderRadius: 108, paddingTop: 12, paddingBottom: 12 }}
                 >
-                    <span className="relative z-10">{text}</span>
+                    <span className="relative z-10 mr-2">{text}</span>
+                    {showIcon && <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3 relative z-10" />}
                 </button>
             </div>
 
