@@ -18,7 +18,8 @@ const AdvanceQuestionPage: React.FC = () => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [selectedOptions, setSelectedOptions] = useState<string[]>([]); // for multi-select
 
-    const totalQuestions = advancedQuestions.length;
+    const totalQuestions = 13;
+    const questionOffset = 4;
     const currentQuestion: any = advancedQuestions[currentQuestionIndex];
 
     const isMulti = Boolean(currentQuestion.multi);
@@ -128,7 +129,7 @@ const AdvanceQuestionPage: React.FC = () => {
                         </div>
                         <div className="flex items-center space-x-1">
                             <span className="font-bold text-base leading-[18px]" style={{ color: 'var(--color-primary)' }}>
-                                {currentQuestionIndex + 1} /
+                                {currentQuestionIndex + 1 + questionOffset} /
                             </span>
                             <span className="font-bold text-base leading-[18px]" style={{ color: 'rgba(255, 255, 255, var(--opacity-80))' }}>
                                 {totalQuestions}
@@ -139,7 +140,7 @@ const AdvanceQuestionPage: React.FC = () => {
 
                 {/* Progress Indicator */}
                 <ProgressIndicator
-                    current={currentQuestionIndex + 1}
+                    current={currentQuestionIndex + 1 + questionOffset}
                     total={totalQuestions}
                 />
 
