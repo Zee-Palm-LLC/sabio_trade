@@ -2,14 +2,16 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import {
   AdvanceQuestionPage,
-  AnalyzingAnswerPage, InvestingStyleQuizPage, LeadPage, OptionBasedPage,
-  QuestionPage, ScratchPage,
+  AnalyzingAnswerPage,
+  AnalyzingVid,
+  InvestingStyleQuizPage, LeadPage, OptionBasedPage,
+  QuestionPage,
   SabioIntroPage,
+  ScratchPage,
   TradingProfiles,
   TradingQuizExtraPage,
   TrustPage, WelcomePage,
-  YourTraderProfile,
-  AnalyzingVid
+  YourTraderProfile
 } from './pages';
 
 function App() {
