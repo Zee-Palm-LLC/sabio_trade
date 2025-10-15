@@ -102,25 +102,25 @@ const EmailCaptureCard: React.FC = () => {
                     </div>
 
                     {/* Privacy Text */}
-                    <div className="flex items-center gap-2 mb-6">
+                    <div className="flex items-center gap-2 mb-2">
                         <img src={ShieldIcon} alt="Shield" className="w-4 h-4" />
                         <span className="text-white/70 text-[14px]">We respect your privacy. No spam</span>
                     </div>
                     
                     {error && (
-                        <div id="email-error" className="mb-4 text-red-400 text-sm text-center font-medium" role="alert">
+                        <div id="email-error" className="mb-4 pr-32 text-red-400 text-sm text-left font-medium" role="alert">
                             {error}
                         </div>
                     )}
                     
                     {warning && (
-                        <div id="email-warning" className="mt-2 text-orange-400 text-sm text-center font-medium" role="alert">
+                        <div id="email-warning" className="mb-4 pr-32 text-orange-400 text-sm text-left font-medium" role="alert">
                             {warning}
                         </div>
                     )}
                     
                     {success && (
-                        <div id="email-success" className="mt-2 text-green-400 text-sm text-center font-medium" role="status">
+                        <div id="email-success" className="mb-4 pr-32 text-green-400 text-sm text-left font-medium" role="status">
                             {success}
                         </div>
                     )}
