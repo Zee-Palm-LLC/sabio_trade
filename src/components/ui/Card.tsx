@@ -13,20 +13,21 @@ const Card: React.FC<CardProps> = ({
   padding = 'md',
   style
 }) => {
-  const baseClasses = 'rounded-[12px] shadow-xl';
+  const baseClasses = 'rounded-[12px]';
   
   const paddingClasses = {
-    sm: 'p-4',
-    md: 'p-6',
-    lg: 'p-8'
+    sm: 'px-2 py-4',
+    md: 'px-2 py-6',
+    lg: 'px-2 py-8'
   };
   
   return (
     <div 
       className={`${baseClasses} ${paddingClasses[padding]} ${className}`}
       style={{ 
-        backgroundColor: 'var(--color-card-bg)',
+        background: 'rgba(52, 8, 99, 0.46)',
         border: '1px solid rgba(125, 49, 216, 0.47)',
+        boxShadow: '2px 2px 13px 0px rgba(122, 75, 173, 0.66)',
         ...style 
       }}
     >

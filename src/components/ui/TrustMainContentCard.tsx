@@ -11,7 +11,7 @@ const TrustMainContentCard: React.FC<TrustMainContentCardProps> = ({ className =
 
     return (
         <Card
-            className={`w-full max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_18px_0_rgba(125,49,216,0.5)] ${className}`}
+            className={`w-full max-w-sm ${className}`}
         >
             <div className="text-center p-1">
                 <div className="text-center mb-3">
