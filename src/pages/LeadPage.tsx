@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../assets/logo.png';
-import SheildFilledIcon from '../assets/sheild_filled.svg';
 import { ChartCard, EmailCaptureCard, TestimonialCard } from '../components';
 
-import { useNavigate } from 'react-router-dom';
-
 const LeadPage: React.FC = () => {
-    const navigate = useNavigate();
-   
-    const handleOnClick = ()=>{
-        navigate('/trading-profiles');
+    const [showEmailModal, setShowEmailModal] = useState(false);
+
+    const handleOnClick = () => {
+        setShowEmailModal(true);
+    }
+
+    const handleCloseModal = () => {
+        setShowEmailModal(false);
     }
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
@@ -18,11 +19,7 @@ const LeadPage: React.FC = () => {
                     <div className="flex items-center space-x-3 mb-3">
                         <img src={Logo} alt="SabioTrade" className=" h-14" />
                     </div>
-                    <EmailCaptureCard />
-                    <div className="w-full mt-0 mb-4 py-3 bg-[#0C1540] rounded-[4px] flex items-center justify-start">
-                        <img src={SheildFilledIcon} alt="Sheild Filled" className="w-6 h-6 mr-2 flex-shrink-0" />
-                        <span className="text-[14px] text-[#A6B8D3] font-normal">We respect your privacy. No spam.</span>
-                    </div>
+                    {/* <EmailCaptureCard /> */}
                     <ChartCard />
                     <div className="mt-4" />
                     <TestimonialCard />
@@ -40,6 +37,46 @@ const LeadPage: React.FC = () => {
                     </button>
                 </div>
             </div>
+
+            {/* Bottom Sheet Modal */}
+            {showEmailModal && (
+                <div
+                    className="fixed inset-0 z-50 flex items-end justify-center"
+                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
+                    onClick={handleCloseModal}
+                >
+                    <div
+                        className="w-full animate-slide-up"
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                            maxWidth: '375px',
+                            background: '#0A1432',
+                            borderTopLeftRadius: '12px',
+                            borderTopRightRadius: '12px',
+                            padding: '12px',
+                            maxHeight: '100vh',
+                            overflowY: 'auto',
+                        }}
+                    >
+                        <EmailCaptureCard />
+                    </div>
+                </div>
+            )}
+
+            <style>{`
+                @keyframes slide-up {
+                    from {
+                        transform: translateY(100%);
+                    }
+                    to {
+                        transform: translateY(0);
+                    }
+                }
+                
+                .animate-slide-up {
+                    animation: slide-up 0.3s ease-out;
+                }
+            `}</style>
         </div>
     );
 };

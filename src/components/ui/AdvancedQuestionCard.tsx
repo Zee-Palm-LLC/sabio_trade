@@ -48,24 +48,18 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
         'microsoft': MicrosoftIcon,
     };
 
-    // Reorder options: move selected to top (only for questions with continue button)
-    const orderedOptions = React.useMemo(() => {
+    // Filter options: hide non-selected options (only for questions with continue button)
+    const filteredOptions = React.useMemo(() => {
+        // If no continue button OR multi-select OR nothing selected, show all options
         if (!showContinueButton || multi || !selectedOption) {
             return options;
         }
         
-        const optionsCopy = [...options];
-        const selectedIndex = optionsCopy.findIndex(opt => {
+        // Show only the selected option
+        return options.filter(opt => {
             const label = typeof opt === 'string' ? opt : opt.label;
             return label === selectedOption;
         });
-        
-        if (selectedIndex > 0) {
-            const [selectedOpt] = optionsCopy.splice(selectedIndex, 1);
-            optionsCopy.unshift(selectedOpt);
-        }
-        
-        return optionsCopy;
     }, [options, selectedOption, showContinueButton, multi]);
 
     return (
@@ -86,7 +80,7 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
 
             {/* Options */}
             <div className={multi ? "mb-4 flex flex-wrap gap-3 justify-center" : "mb-4"}>
-                {orderedOptions.map((option, index) => {
+                {filteredOptions.map((option, index) => {
                     // Handle both object and string formats
                     const optionLabel = typeof option === 'string' ? option : option.label;
                     const optionDescription = typeof option === 'string' ? '' : (option.description || '');
@@ -96,7 +90,7 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                     return (
                         <div 
                             key={optionLabel} 
-                            className={`${!multi && index < orderedOptions.length - 1 ? 'mb-3' : ''} transition-all duration-500 ease-in-out`}
+                            className={`${!multi && index < filteredOptions.length - 1 ? 'mb-3' : ''} transition-all duration-500 ease-in-out`}
                         >
                             <button
                                 onClick={() => (multi ? onToggleOption && onToggleOption(optionLabel) : onOptionSelect(optionLabel))}
