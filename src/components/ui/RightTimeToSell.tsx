@@ -1,13 +1,12 @@
 import React from "react";
-import profileImage from '../../assets/profile.png';
 import QuoteIcon from '../../assets/quote.svg';
-import { Card, TestimonialCard } from "../index";
+import { Card, QuoteCard, TestimonialCard } from "../index";
 
 
 const RightTimeToSell: React.FC = () => {
     return (
         <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]'>
-            <div className="bg-[#031340] rounded-[12px] p-4 mb-6 border border-slate-600/30">
+            {/* <div className="bg-[#031340] rounded-[12px] p-4 mb-6 border border-slate-600/30">
                 <div className="flex justify-center">
                     <img src={QuoteIcon} alt="Quote" className="w-10 h-10 mb-0" />
                 </div>
@@ -26,7 +25,12 @@ const RightTimeToSell: React.FC = () => {
                     </div>
                     <span className="text-white text-sm">Marty Schwartz</span>
                 </div>
-            </div>
+            </div> */}
+            <QuoteCard
+                quote="In trading, it's not about being right, it's about making money."
+                profileImage={QuoteIcon}
+                name="Marty Schwartz"
+            />
 
             <div className="text-center mb-8">
                 <p className="text-[#cfc9e1] text-base mb-2">
