@@ -45,7 +45,12 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
           if (!disabled) {
             const reflection = e.currentTarget.querySelector('.reflection-layer') as HTMLElement;
             if (reflection) {
-              reflection.style.backgroundPosition = '200% 0';
+              // Start from left (off-screen)
+              reflection.style.backgroundPositionX = '-1000px';
+              // Force a reflow
+              reflection.offsetHeight;
+              // Animate to right (off-screen)
+              reflection.style.backgroundPositionX = '1000px';
             }
           }
         }}
@@ -53,7 +58,8 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
           if (!disabled) {
             const reflection = e.currentTarget.querySelector('.reflection-layer') as HTMLElement;
             if (reflection) {
-              reflection.style.backgroundPosition = '-200% 0';
+              // Reset to starting position (completely hidden)
+              reflection.style.backgroundPositionX = '-200px';
             }
           }
         }}
@@ -63,10 +69,11 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
            <div
              className="reflection-layer absolute inset-0 overflow-hidden rounded-full pointer-events-none"
              style={{
-               background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)',
-               backgroundSize: '200% 100%',
-               backgroundPosition: '-200% 0',
-               transition: 'background-position 0.8s ease-in-out'
+               backgroundImage: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent)',
+               backgroundRepeat: 'no-repeat',
+               backgroundSize: '200px 100%',
+               backgroundPositionX: '-200px',
+               transition: 'background-position-x 800ms ease-out'
              }}
            />
          )}
