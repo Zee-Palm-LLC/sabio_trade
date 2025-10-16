@@ -1,25 +1,24 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
-import { AIStockCard, NotSureCard, RightTimeToSell, RiskAndRewardsCard } from '../components';
+import { AIStockCard, NotSureCard, PrimaryButton, RightTimeToSell, RiskAndRewardsCard } from '../components';
 
 const OptionBasedPage: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { selectedOption } = (location.state as any) || { selectedOption: 1 };
-    
+
     console.log('OptionBasedPage - Full location.state:', location.state);
     console.log('OptionBasedPage - selectedOption:', selectedOption);
     console.log('OptionBasedPage - type of selectedOption:', typeof selectedOption);
-    
+
     const handleContinueClick = () => {
         navigate('/advance-question', { state: { startAtLastAdvanced: true } });
     };
-    
+
     const renderCard = () => {
         console.log('renderCard - Selected option number:', selectedOption);
-        
+
         switch (selectedOption) {
             case 1:
                 console.log('-> Rendering RightTimeToSell (Option 1)');
@@ -69,19 +68,12 @@ const OptionBasedPage: React.FC = () => {
                 {renderCard()}
 
                 <div className="pt-10 pb-6">
-                    <button
+                    <PrimaryButton
                         onClick={handleContinueClick}
-                        className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
-                        style={{
-                            borderRadius: 108,
-                            background: 'linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%)',
-                            paddingTop: 12,
-                            paddingBottom: 12,
-                        }}
-                    >
-                        <span className="mr-2">Next Step</span>
-                        <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" />
-                    </button>
+                        className=''
+                        text="Next Step"
+                        showIcon={true}
+                    />
                 </div>
             </div>
         </div>

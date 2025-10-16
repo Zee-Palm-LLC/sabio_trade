@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Analyzing from '../assets/analyzing.png';
-import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
 import MuteIcon from '../assets/muted.svg';
-import { BackButton, Card, ProgressIndicator } from '../components';
+import { BackButton, Card, PrimaryButton, ProgressIndicator } from '../components';
 
 const AnalyzingAnswerPage: React.FC = () => {
     const navigate = useNavigate();
@@ -37,9 +36,11 @@ const AnalyzingAnswerPage: React.FC = () => {
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
                 <div className="flex flex-col items-center pt-8 pb-4 px-4">
-                    <div className="flex items-center justify-between w-full mb-3">
-                        <BackButton onClick={handleBackClick} />
-                        <div className="flex items-center">
+                    <div className="relative w-full mb-3 flex items-center" style={{ minHeight: 56 }}>
+                        <div className="absolute left-0">
+                            <BackButton onClick={handleBackClick} />
+                        </div>
+                        <div className="flex-1 flex justify-center">
                             <img src={Logo} alt="SabioTrade" className="h-14" />
                         </div>
                     </div>
@@ -128,35 +129,14 @@ const AnalyzingAnswerPage: React.FC = () => {
 
                 </div>
                 <div className="px-4 pb-6">
-                    <button
+                    <PrimaryButton
+                        text="Next"
                         onClick={handleContinueClick}
                         disabled={progress < 100}
-                        className="w-full text-white font-semibold py-4 px-6 transition-all duration-200 flex items-center justify-center"
-                        style={{
-                            borderRadius: 108,
-                            background: progress === 100
-                                ? 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)'
-                                : 'var(--color-button-disabled)',
-                            paddingTop: 12,
-                            paddingBottom: 12,
-                            cursor: progress === 100 ? 'pointer' : 'not-allowed',
-                            opacity: progress === 100 ? 1 : 0.6,
-                        }}
-                    >
-                        <span className="mr-2" style={{ color: progress === 100 ? 'white' : 'var(--color-button-disabled-text)' }}>
-                            Next
-                        </span>
-                        <img
-                            src={ArrowRight}
-                            alt="Arrow Right"
-                            className="w-5 h-3"
-                            style={{ opacity: progress === 100 ? 1 : 0.5 }}
-                        />
-                    </button>
+                    />
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
-
 export default AnalyzingAnswerPage;

@@ -1,12 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ArrowRight from '../assets/arrow-right.svg';
 import ChallengesIcon from '../assets/challenges.png';
 import EducationIcon from '../assets/education.png';
 import Logo from '../assets/logo.png';
 import SittingAvatar from '../assets/sitting_avatar.png';
 import ToolsIcon from '../assets/tools.png';
-import { Card, TestimonialCard } from '../components';
+import { Card, PrimaryButton, TestimonialCard } from '../components';
 
 const WelcomePage: React.FC = () => {
     const navigate = useNavigate();
@@ -16,7 +15,7 @@ const WelcomePage: React.FC = () => {
     };
 
     const handleCloseClick = () => {
-        navigate('/');
+        navigate(-2);
     };
 
     return (
@@ -103,19 +102,11 @@ const WelcomePage: React.FC = () => {
                 </Card>
 
                 <div className="pb-6 justify-center mt-5">
-                    <button
+                    <PrimaryButton
                         onClick={handleContinueClick}
-                        className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center mt-4"
-                        style={{
-                            borderRadius: 108,
-                            background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
-                            paddingTop: 12,
-                            paddingBottom: 12,
-                        }}
-                    >
-                        <span className="mr-2">Continue</span>
-                        <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" />
-                    </button>
+                        text="Continue"
+                        showIcon={true}
+                    />
                 </div>
             </div>
         </div>

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
-import { AnalyzingModal, BackButton, ProgressIndicator } from '../components';
+import { AnalyzingModal, BackButton, PrimaryButton, ProgressIndicator } from '../components';
 import AdvancedQuestionCard from '../components/ui/AdvancedQuestionCard';
 import advancedQuestions from '../data/advancedQuestions.json';
 
@@ -20,6 +19,10 @@ const AdvanceQuestionPage: React.FC = () => {
     const [showButton, setShowButton] = useState(false);
     const [isButtonActive, setIsButtonActive] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [selectedTopic, setSelectedTopic] = useState<string>(() => {
+        // Initialize from localStorage if available, otherwise use default
+        return localStorage.getItem('selectedTopic') || "Risk and rewards";
+    });
 
     const totalQuestions = 13;
     const questionOffset = 4;
@@ -73,13 +76,23 @@ const AdvanceQuestionPage: React.FC = () => {
         setSelectedOption(value);
 
         // Store the answer keyed by question id
-        setAnswers(prev => ({
-            ...prev,
-            [currentQuestion.id]: value
-        }));
+        setAnswers(prev => {
+            const newAnswers = {
+                ...prev,
+                [currentQuestion.id]: value
+            };
+            console.log('DEBUG - Storing answer for question', currentQuestion.id, ':', value);
+            console.log('DEBUG - Updated answers:', newAnswers);
+            return newAnswers;
+        });
 
         // If this is question 7 (Which trading topic interests you the most?), store the option index for routing
         if (currentQuestion.id === 7) {
+            // Set the selected topic for the modal and store in localStorage
+            console.log('DEBUG - Setting selectedTopic to:', value);
+            setSelectedTopic(value);
+            localStorage.setItem('selectedTopic', value);
+            
             // IMPORTANT: Always search in the ORIGINAL options array from advancedQuestions
             // Don't rely on the displayed order (which might be reordered by AdvancedQuestionCard)
             const originalQuestion = advancedQuestions.find((q: any) => q.id === 7);
@@ -88,11 +101,11 @@ const AdvanceQuestionPage: React.FC = () => {
                     const label = typeof opt === 'string' ? opt : opt.label;
                     return label === value;
                 }) + 1; // Convert to 1-based index
-                
+ 
                 console.log('Question 7 - Option selected:', value);
                 console.log('Question 7 - Option index:', optionIndex);
                 console.log('Question 7 - Original options:', originalQuestion.options.map((o: any) => typeof o === 'string' ? o : o.label));
-                
+ 
                 // Store it in localStorage
                 localStorage.setItem('tradingTopicOption', String(optionIndex));
             }
@@ -105,7 +118,7 @@ const AdvanceQuestionPage: React.FC = () => {
                 if (currentQuestion.id === 7) {
                     const tradingTopic = localStorage.getItem('tradingTopicOption') || '1';
                     console.log('Navigating to OptionBased - tradingTopic from localStorage:', tradingTopic);
-                    console.log('Navigating to OptionBased - Number(tradingTopic):', Number(tradingTopic));
+                    console.log('Navigating to OptionBasaed - Number(tradingTopic):', Number(tradingTopic));
                     navigate('/option-based', { state: { selectedOption: Number(tradingTopic) } });
                 } else if (currentQuestionIndex < advancedQuestions.length - 1) {
                     setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -163,7 +176,8 @@ const AdvanceQuestionPage: React.FC = () => {
                 setShowButton(false);
                 setIsButtonActive(false);
             } else {
-                // Last question (multi-select stocks) - show modal instead of navigating
+                // Last question (multi-select stocks) - store answer and show modal
+                setAnswers(prev => ({ ...prev, [currentQuestion.id]: value }));
                 setShowModal(true);
             }
             return;
@@ -184,6 +198,7 @@ const AdvanceQuestionPage: React.FC = () => {
     const handleCloseModal = () => {
         setShowModal(false);
     };
+
 
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
@@ -228,25 +243,12 @@ const AdvanceQuestionPage: React.FC = () => {
                 {/* Continue Button - Only show when showButton is true */}
                 {showContinueButton && showButton && (
                     <div className="px-4 pb-6 animate-fade-in">
-                        <button
+                        <PrimaryButton
                             onClick={handleContinueClick}
+                            text={currentQuestion.id === 5 ? 'Continue' : 'Next Step'}
+                            showIcon={true}
                             disabled={!isButtonActive}
-                            className={`w-full font-semibold py-4 px-6 transition-all duration-200 flex items-center justify-center ${isButtonActive ? 'cursor-pointer' : 'cursor-not-allowed'
-                                }`}
-                            style={{
-                                borderRadius: 108,
-                                background: isButtonActive
-                                    ? 'linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%)'
-                                    : 'var(--color-button-disabled)',
-                                color: isButtonActive ? 'var(--color-text)' : 'var(--color-button-disabled-text)',
-                                paddingTop: 12,
-                                paddingBottom: 12,
-                                opacity: isButtonActive ? 1 : 0.6,
-                            }}
-                        >
-                            <span className="mr-2">Next Step</span>
-                            {isButtonActive && <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" style={{ opacity: isButtonActive ? 1 : 0.5 }} />}
-                        </button>
+                        />
                     </div>
                 )}
             </div>
@@ -256,7 +258,14 @@ const AdvanceQuestionPage: React.FC = () => {
                 isOpen={showModal}
                 onClose={handleCloseModal}
                 selectedStocks={selectedOptions}
+                selectedTopic={selectedTopic}
             />
+            {/* Debug info */}
+            {showModal && (
+                <div style={{ position: 'fixed', top: 0, left: 0, background: 'black', color: 'white', padding: '10px', zIndex: 9999 }}>
+                    DEBUG: selectedTopic = "{selectedTopic}"
+                </div>
+            )}
         </div>
     );
 };
