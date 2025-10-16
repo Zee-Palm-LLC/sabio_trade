@@ -55,9 +55,9 @@ const EmailCaptureCard: React.FC = () => {
     };
 
     return (
-        <div className="w-full relative pt-2">
+        <div className="w-full relative pt-2 min-h-[220px] overflow-hidden">
             {/* Content */}
-            <div className="relative z-10 pb-6">
+            <div className="relative z-10 pb-6 pt-4 px-4">
                 <h2 className="text-white font-bold text-[18px] leading-tight mb-6 text-left pr-20">
                     Enter your email to unlock your results + get a tailored plan.
                 </h2>
@@ -132,9 +132,10 @@ const EmailCaptureCard: React.FC = () => {
                         className={`px-6 text-white font-semibold transition-colors duration-200 flex items-center justify-center ${loading || !email ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                         style={{
                             borderRadius: 100,
+                            height: '50px',
                             background: loading || !email 
-                                ? 'rgba(15, 176, 132, 0.3)' 
-                                : '#0F9D7C',
+                                ? '#0F9D7C'
+                                : 'linear-gradient(to right, #0FB084, #2FA6B9)',
                             paddingTop: 14,
                             paddingBottom: 14,
                             fontSize: '16px',
@@ -147,7 +148,7 @@ const EmailCaptureCard: React.FC = () => {
             </div>
 
             {/* Avatar positioned at bottom-right */}
-            <div className="absolute bottom-[-8px] right-[-8px] pointer-events-none z-0">
+            <div className="absolute bottom-[-20px] right-[-8px] pointer-events-none z-0">
                 <img src={PointAvatar} alt="Point Avatar" className="w-[130px] h-[130px] object-contain" />
             </div>
         </div>

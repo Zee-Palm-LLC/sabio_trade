@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import AmazonIcon from '../../assets/amazon.png';
 import Analyzing from '../../assets/analyzing.png';
 import AppleIcon from '../../assets/apple.png';
-import ArrowRight from '../../assets/arrow-right.svg';
 import BoeingIcon from '../../assets/boeing.png';
 import GoogleIcon from '../../assets/google.png';
 import MicrosoftIcon from '../../assets/microsoft.png';
@@ -12,6 +11,7 @@ import NvidiaIcon from '../../assets/nvidia.png';
 import BulletIcon from '../../assets/star_bullet.png';
 import TeslaIcon from '../../assets/tesla.png';
 import TopicIcon from '../../assets/topic.png';
+import PrimaryButton from './PrimaryButton';
 
 interface AnalyzingModalProps {
     isOpen: boolean;
@@ -141,17 +141,11 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                 </div>
 
                 {/* Next Step Button */}
-                <button
+                <PrimaryButton
                     onClick={handleNextStep}
-                    className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
-                    style={{
-                        borderRadius: 108,
-                        background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
-                    }}
-                >
-                    <span className="mr-2">Next Step</span>
-                    <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" />
-                </button>
+                    text="Next Step"
+                    showIcon={true}
+                />
             </div>
         </div>
     );
