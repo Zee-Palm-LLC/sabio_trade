@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import SaveIcon from '../../assets/copy.svg';
+import GiftIcon from '../../assets/gift.png';
 import SabioIcon from '../../assets/sabio_icon.svg';
 
 interface TicketScratchCardProps {
@@ -50,13 +51,13 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             const pixels = imageData.data;
             let transparentPixels = 0;
-            
+
             for (let i = 3; i < pixels.length; i += 4) {
                 if (pixels[i] === 0) transparentPixels++;
             }
-            
+
             const percentage = (transparentPixels / (canvas.width * canvas.height)) * 100;
-            
+
             if (percentage > 30 && !scratched) {
                 setScratched(true);
                 onScratchComplete?.();
@@ -113,19 +114,19 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
                 </svg>
 
                 {/* Content underneath - White background */}
-                <div className="absolute inset-0 flex items-center justify-center bg-white rounded-lg" 
-                     style={{ clipPath: 'path("M0,16 a16,16 0 0,1 16,-16 h124 a16,16 0 0,1 16,16 v68 a16,16 0 1,0 0,32 v68 a16,16 0 0,1 -16,16 h-124 a16,16 0 0,1 -16,-16 v-68 a16,16 0 1,0 0,-32 z")' }}>
+                <div className="absolute inset-0 flex items-center justify-center bg-white rounded-lg"
+                    style={{ clipPath: 'path("M0,16 a16,16 0 0,1 16,-16 h124 a16,16 0 0,1 16,16 v68 a16,16 0 1,0 0,32 v68 a16,16 0 0,1 -16,16 h-124 a16,16 0 0,1 -16,-16 v-68 a16,16 0 1,0 0,-32 z")' }}>
                     <div className="text-center p-4">
                         {/* Logo */}
                         <div className="mb-2">
                             <img src={SabioIcon} alt="Sabio Icon" className="w-12 h-12 mx-auto" />
                         </div>
-                        
+
                         {/* Discount Text */}
                         <div className="mb-2">
                             <h2 className="text-gray-800 font-medium text-[18px] leading-tight">You get 43% off</h2>
                         </div>
-                        
+
                         {/* Discount Code Button */}
                         <button className="bg-green-100 border-2 border-dashed border-green-300 rounded-lg px-2 py-1 flex items-center space-x-2 mx-auto">
                             <span className="text-green-700 text-[14px] font-bold">TRADENOW</span>
@@ -142,6 +143,13 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
                     className="absolute inset-0 cursor-pointer"
                     style={{ clipPath: 'path("M0,16 a16,16 0 0,1 16,-16 h124 a16,16 0 0,1 16,16 v68 a16,16 0 1,0 0,32 v68 a16,16 0 0,1 -16,16 h-124 a16,16 0 0,1 -16,-16 v-68 a16,16 0 1,0 0,-32 z")' }}
                 />
+
+                {/* Circular div for gift icon - only show when not scratched, behind canvas */}
+                {!scratched && (
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-black rounded-full flex items-center justify-center z-0">
+                        <img src={GiftIcon} alt="Gift Icon" className="w-10 h-10" />
+                    </div>
+                )}
             </div>
 
             {/* Text below ticket - only show when not scratched */}

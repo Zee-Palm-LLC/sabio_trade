@@ -92,7 +92,7 @@ const AdvanceQuestionPage: React.FC = () => {
             console.log('DEBUG - Setting selectedTopic to:', value);
             setSelectedTopic(value);
             localStorage.setItem('selectedTopic', value);
-            
+
             // IMPORTANT: Always search in the ORIGINAL options array from advancedQuestions
             // Don't rely on the displayed order (which might be reordered by AdvancedQuestionCard)
             const originalQuestion = advancedQuestions.find((q: any) => q.id === 7);
@@ -101,11 +101,11 @@ const AdvanceQuestionPage: React.FC = () => {
                     const label = typeof opt === 'string' ? opt : opt.label;
                     return label === value;
                 }) + 1; // Convert to 1-based index
- 
+
                 console.log('Question 7 - Option selected:', value);
                 console.log('Question 7 - Option index:', optionIndex);
                 console.log('Question 7 - Original options:', originalQuestion.options.map((o: any) => typeof o === 'string' ? o : o.label));
- 
+
                 // Store it in localStorage
                 localStorage.setItem('tradingTopicOption', String(optionIndex));
             }
@@ -260,12 +260,6 @@ const AdvanceQuestionPage: React.FC = () => {
                 selectedStocks={selectedOptions}
                 selectedTopic={selectedTopic}
             />
-            {/* Debug info */}
-            {showModal && (
-                <div style={{ position: 'fixed', top: 0, left: 0, background: 'black', color: 'white', padding: '10px', zIndex: 9999 }}>
-                    DEBUG: selectedTopic = "{selectedTopic}"
-                </div>
-            )}
         </div>
     );
 };

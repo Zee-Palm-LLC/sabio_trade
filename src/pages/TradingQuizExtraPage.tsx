@@ -116,11 +116,11 @@ const TradingQuizExtraPage: React.FC = () => {
                             <p className="text-white/70 text-sm mt-2">{question.subtitle}</p>
                         )}
                     </div>
-
                     <IconOptionCard
                         options={question.options}
                         selected={selected[question.id] || null}
                         onSelect={handleSelect}
+                        align={question.id === 1 ? 'left' : 'center'}
                     />
                 </div>
             </div>

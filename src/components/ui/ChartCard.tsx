@@ -34,19 +34,6 @@ const ChartCard: React.FC = () => {
                     <span className="text-white text-[14px] font-normal">Education + community included</span>
                 </div>
             </div>
-
-            {/* Call-to-Action Button */}
-            <button
-                className="w-full text-white font-bold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
-                style={{
-                    borderRadius: 108,
-                    background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
-                    paddingTop: 12,
-                    paddingBottom: 12,
-                }}
-            >
-                Unlock my trader profile
-            </button>
         </Card>
     );
 };

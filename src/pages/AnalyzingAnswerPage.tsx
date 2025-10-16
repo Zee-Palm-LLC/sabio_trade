@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Analyzing from '../assets/analyzing.png';
 import Logo from '../assets/logo.png';
-import MuteIcon from '../assets/muted.svg';
 import { BackButton, Card, PrimaryButton, ProgressIndicator } from '../components';
 
 const AnalyzingAnswerPage: React.FC = () => {
@@ -103,14 +102,6 @@ const AnalyzingAnswerPage: React.FC = () => {
                                     className="w-full h-auto object-cover"
                                     style={{ borderRadius: 16 }}
                                 />
-                                {/* Audio button */}
-                                <button
-                                    type="button"
-                                    className="absolute top-3 left-3 flex items-center justify-center w-8 h-8 bg-[#23224C]/80 rounded-full shadow focus:outline-none"
-                                    aria-label="Play testimonial audio"
-                                >
-                                    <img src={MuteIcon} alt="Mute" className="w-5 h-5" />
-                                </button>
                                 <div className="absolute left-0 bottom-0 w-full px-5 pb-2 pt-4 flex items-end bg-gradient-to-t from-[#23224C] via-[#23224C99] to-transparent rounded-xl">
                                     <span
                                         className="text-white font-bold text-[16px] text-center leading-snug block text-left"
