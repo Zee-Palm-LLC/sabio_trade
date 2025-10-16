@@ -5,11 +5,13 @@
         "options": [
             {
                 "label": "Sell everything",
-                "description": ""
+                "description": "Making money teaches you confidence. Losing some teaches you resilience. Together, they make you wise.",
+                "subtitle": "We will provide you with the necessary education to react comfortably to any situation"
             },
             {
                 "label": "Hold and wait",
-                "description": ""
+                "description": "Making money teaches you confidence. Losing some teaches you resilience. Together, they make you wise.",
+                "subtitle": "We will provide you with the necessary education to react comfortably to any situation"
             },
             {
                 "label": "Buy more (opportunity!)",
@@ -18,7 +20,8 @@
             },
             {
                 "label": "Optimize based on my strategy",
-                "description": ""
+                "description": "Making money teaches you confidence. Losing some teaches you resilience. Together, they make you wise.",
+                "subtitle": "We will provide you with the necessary education to react comfortably to any situation"
             }
         ]
     },
@@ -63,22 +66,22 @@
                 "description": ""
             }
         ]
-  },
-  {
-    "id": 8,
-    "question": "If you had $1,000 today, which stock would you buy?",
-    "subtitle": "Choose all that apply",
-    "multi": true,
-    "options": [
-      "Nvidia",
-      "Boeing",
-      "Netflix",
-      "Apple",
-      "Tesla",
-      "Amazon",
-      "Google",
-      "Microsoft",
-      "None"
-    ]
-  }
+    },
+    {
+        "id": 8,
+        "question": "If you had $1,000 today, which stock would you buy?",
+        "subtitle": "Choose all that apply",
+        "multi": true,
+        "options": [
+            "Nvidia",
+            "Boeing",
+            "Netflix",
+            "Apple",
+            "Tesla",
+            "Amazon",
+            "Google",
+            "Microsoft",
+            "None"
+        ]
+    }
 ]

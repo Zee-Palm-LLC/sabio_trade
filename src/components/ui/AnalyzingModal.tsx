@@ -17,9 +17,10 @@ interface AnalyzingModalProps {
     isOpen: boolean;
     onClose: () => void;
     selectedStocks: string[];
+    selectedTopic?: string;
 }
 
-const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, selectedStocks }) => {
+const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, selectedStocks, selectedTopic = "Risk and rewards" }) => {
     const navigate = useNavigate();
 
     const iconMap: Record<string, string> = {
@@ -84,7 +85,7 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                 <div className="mb-0">
                     <div className="flex items-center gap-2 mb-3">
                         <img src={TopicIcon} alt="Risk and Rewards" className="w-6 h-6 object-contain" />
-                        <span className="text-white font-normal">Topic: Risk and Rewards</span>
+                        <span className="text-white font-normal">Topic: {selectedTopic}</span>
                     </div>
 
                     {/* Selected Stocks */}

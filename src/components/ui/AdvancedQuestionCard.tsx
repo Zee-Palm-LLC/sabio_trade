@@ -54,7 +54,7 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
         if (!showContinueButton || multi || !selectedOption) {
             return options;
         }
-        
+
         // Show only the selected option
         return options.filter(opt => {
             const label = typeof opt === 'string' ? opt : opt.label;
@@ -69,7 +69,7 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                 <h2 className="text-white text-3xl font-bold mb-2 leading-tight">
                     {question}
                 </h2>
-                
+
                 {/* Subtitle - Show if exists */}
                 {subtitle && (
                     <p className="text-white/70 text-sm leading-tight mt-3 italic">
@@ -86,10 +86,10 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                     const optionDescription = typeof option === 'string' ? '' : (option.description || '');
                     const optionSubtitle = typeof option === 'string' ? '' : (option.subtitle || '');
                     const isSelected = multi ? selectedOptions.includes(optionLabel) : (selectedOption === optionLabel);
-                    
+
                     return (
-                        <div 
-                            key={optionLabel} 
+                        <div
+                            key={optionLabel}
                             className={`${!multi && index < filteredOptions.length - 1 ? 'mb-3' : ''} transition-all duration-500 ease-in-out`}
                         >
                             <button
@@ -103,14 +103,14 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                                     background: '#1A0C4E',
                                     border: '1px solid #FFFFFF2E'
                                 } : {
-                                    backgroundColor: isSelected 
-                                        ? 'rgba(125, 49, 216, 0.6)' 
+                                    backgroundColor: isSelected
+                                        ? 'rgba(125, 49, 216, 0.6)'
                                         : 'rgba(52, 8, 99, 0.46)',
-                                    border: isSelected 
-                                        ? '2px solid rgba(125, 49, 216, 0.8)' 
+                                    border: isSelected
+                                        ? '2px solid rgba(125, 49, 216, 0.8)'
                                         : '1px solid rgba(125, 49, 216, 0.47)',
-                                    boxShadow: isSelected 
-                                        ? '0 0 12px rgba(125, 49, 216, 0.5)' 
+                                    boxShadow: isSelected
+                                        ? '0 0 12px rgba(125, 49, 216, 0.5)'
                                         : '0 0 8px rgba(125, 49, 216, 0.30)'
                                 }}
                             >
@@ -118,9 +118,7 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                                     const iconSrc = iconMap[optionLabel.toLowerCase()];
                                     if (iconSrc) {
                                         return (
-                                            <span className="w-8 h-8 rounded-full flex items-center justify-center bg-white/10">
-                                                <img src={iconSrc} alt={optionLabel} className="w-5 h-5 object-contain" />
-                                            </span>
+                                            <img src={iconSrc} alt={optionLabel} className="w-5 h-5 object-contain" />
                                         );
                                     }
                                     return (
@@ -138,7 +136,7 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                                     </div>
                                 )}
                             </button>
-                            
+
                             {/* Show subtitle and description only for this specific selected option */}
                             {!multi && showContinueButton && isSelected && (
                                 <div className="mt-4">
@@ -148,7 +146,7 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                                             {optionSubtitle}
                                         </p>
                                     )}
-                                    
+
                                     {/* Option-specific description */}
                                     {optionDescription && optionDescription.trim() !== '' && (
                                         <p className="text-white text-base leading-relaxed text-center">

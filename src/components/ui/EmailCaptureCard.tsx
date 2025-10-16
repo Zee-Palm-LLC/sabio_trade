@@ -65,7 +65,7 @@ const EmailCaptureCard: React.FC = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="relative mb-4">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <svg className="w-5 h-5 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                         </div>
@@ -81,7 +81,7 @@ const EmailCaptureCard: React.FC = () => {
                                 setWarning(null);
                             }}
                             placeholder="Enter your email"
-                            className={`w-full pl-12 pr-4 py-4 rounded-lg text-white placeholder-white/40 focus:outline-none transition-all ${
+                            className={`w-full pl-12 pr-4 py-3 rounded-lg placeholder-white/40 focus:outline-none transition-all ${
                                 error ? 'border-red-400 focus:border-red-400 focus:ring-red-400' : 
                                 warning ? 'border-orange-400 focus:border-orange-400 focus:ring-orange-400' :
                                 success ? 'border-green-400 focus:border-green-400 focus:ring-green-400' : 
@@ -96,7 +96,8 @@ const EmailCaptureCard: React.FC = () => {
                             style={{
                                 background: 'rgba(255, 255, 255, 0.05)',
                                 border: '1px solid rgba(255, 255, 255, 0.15)',
-                                fontSize: '15px'
+                                fontSize: '15px',
+                                color: 'rgba(255, 255, 255, 0.7)'
                             }}
                         />
                     </div>
