@@ -17,7 +17,6 @@ const IconOptionCard: React.FC<IconOptionCardProps> = ({ options, selected, onSe
         <div className="space-y-3">
             {options.map((opt, idx) => {
                 const isSelected = selected === opt.label;
-                const hasIcon = !!opt.icon;
                 return (
                     <button
                         key={`${opt.label}-${idx}`}
