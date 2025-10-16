@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../assets/logo.png';
-import { ChartCard, EmailCaptureCard, TestimonialCard } from '../components';
+import { ChartCard, EmailCaptureCard, PrimaryButton, TestimonialCard } from '../components';
 
 const LeadPage: React.FC = () => {
     const [showEmailModal, setShowEmailModal] = useState(false);
@@ -23,25 +23,19 @@ const LeadPage: React.FC = () => {
                     <ChartCard />
                     <div className="mt-4" />
                     <TestimonialCard />
-                    <button
-                        className="w-full mt-5 text-white font-bold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
+                    <PrimaryButton
+                        text="Unlock my trader profile"
+                        showIcon={false}
                         onClick={handleOnClick}
-                        style={{
-                            borderRadius: 108,
-                            background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
-                            paddingTop: 12,
-                            paddingBottom: 12,
-                        }}
-                    >
-                        Unlock my trader profile
-                    </button>
+                    />
+
                 </div>
             </div>
 
             {/* Bottom Sheet Modal */}
             {showEmailModal && (
                 <div
-                    className="fixed inset-0 z-50 flex items-end justify-center"
+                    className="fixed inset-0 z-50 flex items-end justify-center right-0"
                     style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
                     onClick={handleCloseModal}
                 >
@@ -49,11 +43,11 @@ const LeadPage: React.FC = () => {
                         className="w-full animate-slide-up"
                         onClick={(e) => e.stopPropagation()}
                         style={{
-                            maxWidth: '375px',
+                            width: window.innerWidth <= 500 ? '100%' : '375px',
                             background: '#0A1432',
                             borderTopLeftRadius: '12px',
                             borderTopRightRadius: '12px',
-                            padding: '12px',
+                            padding: '0px',
                             maxHeight: '100vh',
                             overflowY: 'auto',
                         }}

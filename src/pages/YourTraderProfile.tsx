@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import ScoreIcon from '../assets/score.svg';
-import { ScoreBreakdownCard, TraderProfileCard } from "../components";
+import { PrimaryButton, ScoreBreakdownCard, TraderProfileCard } from "../components";
 
 
 const YourTraderProfile: React.FC = () => {
@@ -49,19 +49,11 @@ const YourTraderProfile: React.FC = () => {
 
                 {/* Continue Button */}
                 <div className="mb-6">
-                    <button
+                    <PrimaryButton
+                        text="Continue"
+                        showIcon={true}
                         onClick={handleContinue}
-                        className="w-full text-white font-bold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
-                        style={{
-                            borderRadius: 108,
-                            background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
-                            paddingTop: 12,
-                            paddingBottom: 12,
-                        }}
-                    >
-                        <span className="mr-2">Continue</span>
-                        <span>→</span>
-                    </button>
+                    />
                 </div>
 
             </div>

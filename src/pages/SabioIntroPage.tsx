@@ -1,10 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import AnimationVideo from '../assets/animation.mp4';
-import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
 import SabioIntroImage from '../assets/sabio-intro-fig.png';
-import { Card } from '../components';
+import { Card, PrimaryButton } from '../components';
 
 const SabioIntroPage: React.FC = () => {
     const navigate = useNavigate();
@@ -103,7 +102,7 @@ const SabioIntroPage: React.FC = () => {
                                         Our job is to teach you how to trade with our money
                                     </p>
                                     <h2 className="text-white text-[22px] font-bold leading-tight mb-2">
-                                    You're so close!
+                                        You're so close!
                                     </h2>
 
                                 </div>
@@ -120,17 +119,12 @@ const SabioIntroPage: React.FC = () => {
 
                     {/* Continue Button - Outside Card */}
                     <div className="px-4 mt-6">
-                        <button
+                        <PrimaryButton
                             onClick={handleContinueClick}
-                            className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
-                            style={{
-                                borderRadius: 108,
-                                background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
-                            }}
-                        >
-                            <span className="mr-2">Continue</span>
-                            <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" />
-                        </button>
+                            text="Continue"
+                            showIcon={true}
+                        />
+
                     </div>
                 </div>
             </div>

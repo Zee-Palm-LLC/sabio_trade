@@ -1,13 +1,12 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
-import { ProgressCard, TestimonialCard } from "../components";
+import { PrimaryButton, ProgressCard, TestimonialCard } from "../components";
 
 
 const TradingProfiles: React.FC = () => {
     const navigate = useNavigate();
-    const handleContinueClick = ()=>{
+    const handleContinueClick = () => {
         navigate('/your-trader-profile');
     }
     return (
@@ -25,19 +24,12 @@ const TradingProfiles: React.FC = () => {
                 />
                 <TestimonialCard />
                 <div className="pt-10 pb-6">
-                    <button
+                    <PrimaryButton
                         onClick={handleContinueClick}
-                        className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
-                        style={{
-                            borderRadius: 108,
-                            background: 'linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%)',
-                            paddingTop: 12,
-                            paddingBottom: 12,
-                        }}
-                    >
-                        <span className="mr-2">Next Step</span>
-                        <img src={ArrowRight} alt="Arrow Right" className="w-5 h-3" />
-                    </button>
+                        text="Next Step"
+                        showIcon={true}
+                    />
+
                 </div>
 
             </div>

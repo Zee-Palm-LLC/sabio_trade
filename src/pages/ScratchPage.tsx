@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import amdIcon from '../assets/amd.svg';
 import Logo from '../assets/logo.png';
 import ArrowUpIcon from '../assets/up.svg';
-import { Card, MediaLogosCard, SabioTradeFeatures, ScratchTicket } from '../components';
+import { Card, MediaLogosCard, PrimaryButton, SabioTradeFeatures, ScratchTicket } from '../components';
 
 const ScratchPage: React.FC = () => {
     const [showReserveButton, setShowReserveButton] = useState(false);
@@ -96,18 +96,12 @@ const ScratchPage: React.FC = () => {
                         </div>
 
                         {/* Reserve Button */}
-                        <button
+                        <PrimaryButton
                             onClick={handleReserveClick}
-                            className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
-                            style={{
-                                borderRadius: 108,
-                                background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
-                                paddingTop: 12,
-                                paddingBottom: 12,
-                            }}
-                        >
-                            <span className="mr-2">Reserve my spot</span>
-                        </button>
+                            text="Reserve my spot"
+                            showIcon={false}
+                            className='mb-4'
+                        />
                     </div>
                 )}
 
@@ -119,18 +113,11 @@ const ScratchPage: React.FC = () => {
 
                         {/* Continue Button */}
                         <div className="w-full mt-4 mb-4">
-                            <button
+                            <PrimaryButton
                                 onClick={handleContinueClick}
-                                className="w-full text-white font-semibold py-4 px-6 transition-colors duration-200 flex items-center justify-center"
-                                style={{
-                                    borderRadius: 108,
-                                    background: 'linear-gradient(135deg, #0FB084 0%, #2FA6B9 100%)',
-                                    paddingTop: 12,
-                                    paddingBottom: 12,
-                                }}
-                            >
-                                <span className="mr-2">Continue</span>
-                            </button>
+                                text="Continue"
+                                showIcon={true}
+                            />
                         </div>
 
                         {/* Privacy and Terms Links */}
