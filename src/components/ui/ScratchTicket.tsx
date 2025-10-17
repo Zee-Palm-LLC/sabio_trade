@@ -10,6 +10,13 @@ interface TicketScratchCardProps {
 const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [scratched, setScratched] = useState(false);
+    const [copied, setCopied] = useState(false);
+
+    const handleCopyCode = () => {
+        navigator.clipboard.writeText('TRADENOW');
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -18,15 +25,12 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        // Set canvas size to match the ticket
         canvas.width = 156;
         canvas.height = 212;
 
-        // Fill with teal scratch layer
         ctx.fillStyle = "#28BDA8";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Set up scratch functionality
         ctx.globalCompositeOperation = "destination-out";
         let isDrawing = false;
 
@@ -58,7 +62,7 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
 
             const percentage = (transparentPixels / (canvas.width * canvas.height)) * 100;
 
-            if (percentage > 30 && !scratched) {
+            if (percentage > 70 && !scratched) {
                 setScratched(true);
                 onScratchComplete?.();
             }
@@ -128,21 +132,28 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
                         </div>
 
                         {/* Discount Code Button */}
-                        <button className="bg-green-100 border-2 border-dashed border-green-300 rounded-lg px-2 py-1 flex items-center space-x-2 mx-auto">
-                            <span className="text-green-700 text-[14px] font-bold">TRADENOW</span>
+                        <button 
+                            onClick={handleCopyCode}
+                            className="bg-green-100 border-2 border-dashed border-green-300 rounded-lg px-2 py-1 flex items-center space-x-2 mx-auto hover:bg-green-200 transition-colors"
+                        >
+                            <span className="text-green-700 text-[14px] font-bold">{copied ? 'COPIED!' : 'TRADENOW'}</span>
                             <img src={SaveIcon} alt="Save Icon" className="w-4 h-4" />
                         </button>
                     </div>
                 </div>
 
                 {/* Scratch canvas */}
-                <canvas
-                    ref={canvasRef}
-                    width={156}
-                    height={212}
-                    className="absolute inset-0 cursor-pointer"
-                    style={{ clipPath: 'path("M0,16 a16,16 0 0,1 16,-16 h124 a16,16 0 0,1 16,16 v68 a16,16 0 1,0 0,32 v68 a16,16 0 0,1 -16,16 h-124 a16,16 0 0,1 -16,-16 v-68 a16,16 0 1,0 0,-32 z")' }}
-                />
+                {!scratched && (
+                    <canvas
+                        ref={canvasRef}
+                        width={156}
+                        height={212}
+                        className="absolute inset-0 cursor-pointer"
+                        style={{ 
+                            clipPath: 'path("M0,16 a16,16 0 0,1 16,-16 h124 a16,16 0 0,1 16,16 v68 a16,16 0 1,0 0,32 v68 a16,16 0 0,1 -16,16 h-124 a16,16 0 0,1 -16,-16 v-68 a16,16 0 1,0 0,-32 z")'
+                        }}
+                    />
+                )}
 
                 {/* Circular div for gift icon - only show when not scratched, behind canvas */}
                 {!scratched && (
