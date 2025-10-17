@@ -144,7 +144,25 @@ const AdvanceQuestionPage: React.FC = () => {
         // Toggle for multi-select chips
         setSelectedOptions(prev => {
             const exists = prev.includes(value);
-            const next = exists ? prev.filter(v => v !== value) : [...prev, value];
+            let next: string[];
+
+            // Special handling for "None"
+            if (value.toLowerCase() === 'none') {
+                // If "None" is clicked and not selected, clear all and select only "None"
+                if (!exists) {
+                    next = ['None'];
+                } else {
+                    // If "None" is clicked and already selected, deselect it
+                    next = [];
+                }
+            } else {
+                // If any other option is clicked, remove "None" if it's selected
+                if (exists) {
+                    next = prev.filter(v => v !== value);
+                } else {
+                    next = [...prev.filter(v => v.toLowerCase() !== 'none'), value];
+                }
+            }
 
             // Show button when at least one option is selected
             if (next.length > 0 && !showButton) {
