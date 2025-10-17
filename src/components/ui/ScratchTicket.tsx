@@ -35,6 +35,7 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
         let isDrawing = false;
 
         const start = (e: MouseEvent | TouchEvent) => {
+            e.preventDefault();
             isDrawing = true;
             draw(e);
         };
@@ -43,6 +44,7 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
 
         const draw = (e: MouseEvent | TouchEvent) => {
             if (!isDrawing) return;
+            e.preventDefault();
             const rect = canvas.getBoundingClientRect();
             const pos = "touches" in e ? e.touches[0] : e;
             const x = pos.clientX - rect.left;
@@ -73,10 +75,10 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
         canvas.addEventListener("mouseup", stop);
         canvas.addEventListener("mousemove", draw);
 
-        // Touch events
-        canvas.addEventListener("touchstart", start);
+        // Touch events (with passive: false to allow preventDefault)
+        canvas.addEventListener("touchstart", start, { passive: false });
         canvas.addEventListener("touchend", stop);
-        canvas.addEventListener("touchmove", draw);
+        canvas.addEventListener("touchmove", draw, { passive: false });
 
         return () => {
             canvas.removeEventListener("mousedown", start);
