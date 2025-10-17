@@ -20,29 +20,28 @@ const WelcomePage: React.FC = () => {
 
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
-            <div className="w-full max-w-[375px] mx-auto min-h-screen flex flex-col px-4">
-                <div className="flex flex-col items-center justify-between pt-8 pb-0">
-                    <div className="flex items-center justify-between w-full mb-3">
-                        <div className="flex items-center">
-                            <img src={Logo} alt="SabioTrade" className="h-14" />
-                        </div>
-                        <button
-                            onClick={handleCloseClick}
-                            className={`flex items-center justify-center`}
-                            style={{
-                                width: 35,
-                                height: 35,
-                                borderRadius: 6,
-                                backgroundColor: '#031340',
-                                border: '1.1px solid rgba(255,255,255,0.12)',
-                                transition: 'background-color 0.2s',
-                            }}>
-                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
+            <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">        <div className="flex flex-col items-center justify-between pt-8 pb-0">
+                <div className="flex items-center justify-between w-full mb-3">
+                    <div className="flex items-center">
+                        <img src={Logo} alt="SabioTrade" className="h-14" />
                     </div>
+                    <button
+                        onClick={handleCloseClick}
+                        className={`flex items-center justify-center`}
+                        style={{
+                            width: 35,
+                            height: 35,
+                            borderRadius: 6,
+                            backgroundColor: '#031340',
+                            border: '1.1px solid rgba(255,255,255,0.12)',
+                            transition: 'background-color 0.2s',
+                        }}>
+                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
+            </div>
                 <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_20px_0_rgba(125,49,216,0.5)]'>
                     <div className="text-center px-0 mb-6">
                         <h1 className="text-white text-2xl font-bold mb-4 leading-tight">
@@ -98,7 +97,7 @@ const WelcomePage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <TestimonialCard/>
+                    <TestimonialCard />
                 </Card>
 
                 <div className="pb-6 justify-center mt-5">
