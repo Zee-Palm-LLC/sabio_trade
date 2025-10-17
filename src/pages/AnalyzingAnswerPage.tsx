@@ -76,8 +76,8 @@ const AnalyzingAnswerPage: React.FC = () => {
                                     <img src={ColinImage} alt="Colin Powell" className="w-full h-full object-cover" />
                                 </div>
                                 <div className="flex justify-center space-x-1 mb-2">
-                                    {[1, 2, 3, 4, 5].map((star) => (
-                                        <img src={StarIcon} alt="Star" className="w-4 h-4" />
+                                    {[1, 2, 3, 4, 5].map((_, idx) => (
+                                        <img key={idx} src={StarIcon} alt="Star" className="w-4 h-4" />
                                     ))}
                                 </div>
                                 <h3
