@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { PrimaryButton, ProgressCard, TestimonialCard } from "../components";
@@ -6,6 +6,29 @@ import { PrimaryButton, ProgressCard, TestimonialCard } from "../components";
 
 const TradingProfiles: React.FC = () => {
     const navigate = useNavigate();
+    const [progress, setProgress] = useState(0);
+    const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+
+    useEffect(() => {
+        const duration = 3000; // 3 seconds to reach 100%
+        const intervalTime = 30; // Update every 30ms
+        const increment = (100 / duration) * intervalTime;
+
+        const interval = setInterval(() => {
+            setProgress(prev => {
+                const next = prev + increment;
+                if (next >= 100) {
+                    clearInterval(interval);
+                    setIsButtonEnabled(true);
+                    return 100;
+                }
+                return next;
+            });
+        }, intervalTime);
+
+        return () => clearInterval(interval);
+    }, []);
+
     const handleContinueClick = () => {
         navigate('/your-trader-profile');
     }
@@ -18,7 +41,7 @@ const TradingProfiles: React.FC = () => {
                     </div>
                 </div>
                 <ProgressCard
-                    progress={65}
+                    progress={progress}
                     topText="1,000,000+ trading profiles built — your personalized path is next."
                     bottomText="Creating the personal challenge and trading profile..."
                 />
@@ -28,6 +51,7 @@ const TradingProfiles: React.FC = () => {
                         onClick={handleContinueClick}
                         text="Next Step"
                         showIcon={true}
+                        disabled={!isButtonEnabled}
                     />
 
                 </div>
