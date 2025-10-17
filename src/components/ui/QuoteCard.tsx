@@ -32,7 +32,19 @@ const QuoteCard: React.FC<QuoteCardProps> = ({
                         className="object-cover w-6 h-6 rounded-full"
                     />
                 </div>
-                <span className="text-white text-sm">{name}</span>
+                <span
+                    className="text-white"
+                    style={{
+                        fontWeight: 400,
+                        fontStyle: 'italic',
+                        fontSize: '15px',
+                        lineHeight: '100%',
+                        letterSpacing: '0%',
+                        color: 'rgba(255,255,255,0.7)',
+                    }}
+                >
+                    {name}
+                </span>
             </div>
         </div>
     );

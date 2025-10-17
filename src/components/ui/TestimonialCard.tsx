@@ -86,7 +86,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = () => {
                 >
                     {testimonials.map((testimonial, index) => (
                         <SwiperSlide key={index}>
-                            <div className="bg-[#031340] rounded-[12px] border border-slate-600/30 px-4 pt-4 pb-4 select-none">
+                            <div className="bg-[#031340] rounded-[12px] border px-4 pt-4 pb-4 select-none" style={{ border: "1px solid #FFFFFF66" }}>
                                 <div className="flex items-center mb-1">
                                     <img
                                         src={testimonial.image}
@@ -112,7 +112,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = () => {
                                         />
                                     ))}
                                 </div>
-                                <p className="text-[#edf1fd] text-[12px] font-normal">
+                                <p className="text-[#edf1fd] text-[13px] font-normal">
                                     "{testimonial.text}"
                                 </p>
                             </div>

@@ -44,17 +44,16 @@ const TrustPage: React.FC = () => {
 
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
-            <div className="w-[375px] mx-auto min-h-screen flex flex-col">
-                <div className="relative w-full mb-3 pt-8 px-4 flex items-center justify-center" style={{ minHeight: 56 }}>
-                    <div className="flex items-center justify-center w-full">
-                        <div className="flex items-center justify-center">
-                            <BackButton onClick={handleBackClick} />
-                        </div>
-                        <div className="flex items-center justify-center mx-auto w-full">
-                            <img src={Logo} alt="SabioTrade" className="h-14 mx-auto" />
-                        </div>
+            <div className="w-[375px] mx-auto min-h-screen flex flex-col">        <div className="relative w-full mb-3 pt-8 px-4 flex items-center justify-center" style={{ minHeight: 56 }}>
+                <div className="flex items-center justify-center w-full">
+                    <div className="flex items-center justify-center">
+                        <BackButton onClick={handleBackClick} />
+                    </div>
+                    <div className="flex items-center justify-center mx-auto w-full">
+                        <img src={Logo} alt="SabioTrade" className="h-14 mx-auto" />
                     </div>
                 </div>
+            </div>
                 <div className="flex items-center justify-center px-4 mb-5">
                     <TrustMainContentCard />
                 </div>
