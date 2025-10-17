@@ -44,7 +44,7 @@ const TrustPage: React.FC = () => {
 
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
-            <div className="w-[375px] mx-auto min-h-screen flex flex-col">
+            <div className="w-full max-w-[375px] mx-auto min-h-screen flex flex-col">
                 <div className="relative w-full mb-3 pt-8 px-4 flex items-center justify-center" style={{ minHeight: 56 }}>
                     <div className="flex items-center justify-center w-full">
                         <div className="flex items-center justify-center">

@@ -18,7 +18,7 @@ const SabioIntroPage: React.FC = () => {
 
     return (
         <div className="min-h-screen text-white" style={{ background: '#031340' }}>
-            <div className="w-[375px] mx-auto min-h-screen flex flex-col">
+            <div className="w-full max-w-[375px] mx-auto min-h-screen flex flex-col">
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 pt-6 pb-4">
                     <img src={Logo} alt="SabioTrade" className="h-10" />

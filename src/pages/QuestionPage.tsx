@@ -50,7 +50,7 @@ const QuestionPage: React.FC = () => {
 
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
-            <div className="w-[375px] mx-auto min-h-screen flex flex-col">
+            <div className="w-full max-w-[375px] mx-auto min-h-screen flex flex-col">
                 <div className="flex flex-col items-center pt-8 pb-4 px-4">
                     <div className="flex items-center justify-between w-full mb-3">
                         <BackButton onClick={handleBackClick} />
