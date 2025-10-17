@@ -14,7 +14,7 @@ const YourTraderProfile: React.FC = () => {
 
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
-            <div className="w-full max-w-[375px] mx-auto min-h-screen flex flex-col px-4">
+            <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">
                 {/* Header */}
                 <div className="flex flex-col items-center pt-8 pb-4">
                     <div className="flex items-center space-x-3 mb-3">

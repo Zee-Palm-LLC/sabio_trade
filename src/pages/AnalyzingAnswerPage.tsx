@@ -35,7 +35,7 @@ const AnalyzingAnswerPage: React.FC = () => {
 
     return (
         <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
-            <div className="w-full max-w-[375px] mx-auto min-h-screen flex flex-col">
+            <div className="w-[375px] mx-auto min-h-screen flex flex-col">
                 <div className="flex flex-col items-center pt-8 pb-4 px-4">
                     <div className="relative w-full mb-3 flex items-center" style={{ minHeight: 56 }}>
                         <div className="absolute left-0">
