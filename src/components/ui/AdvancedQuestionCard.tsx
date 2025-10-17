@@ -71,7 +71,7 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                 )}
             </div>
 
-            <div className={multi ? "mb-4 flex flex-wrap gap-3 justify-center" : "mb-4"}>
+            <div className={multi ? "mb-4 flex flex-wrap gap-3 justify-center items-center max-w-md mx-auto" : "mb-4"}>
                 {filteredOptions.map((option, index) => {
                     const optionLabel = typeof option === 'string' ? option : option.label;
                     const optionDescription = typeof option === 'string' ? '' : (option.description || '');
@@ -81,7 +81,7 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                     return (
                         <div
                             key={optionLabel}
-                            className={`${!multi && index < filteredOptions.length - 1 ? 'mb-3' : ''} transition-all duration-500 ease-in-out`}
+                            className={`${!multi && index < filteredOptions.length - 1 ? 'mb-3' : ''} ${multi && optionLabel.toLowerCase() === 'none' ? 'w-full flex justify-center' : ''} transition-all duration-500 ease-in-out`}
                         >
                             <button
                                 onClick={() => (multi ? onToggleOption && onToggleOption(optionLabel) : onOptionSelect(optionLabel))}

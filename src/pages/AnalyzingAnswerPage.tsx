@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Analyzing from '../assets/analyzing.png';
+import ColinImage from '../assets/colin.png';
 import Logo from '../assets/logo.png';
+import StarIcon from '../assets/yellow_star.svg';
 import { BackButton, Card, PrimaryButton, ProgressIndicator } from '../components';
 
 const AnalyzingAnswerPage: React.FC = () => {
@@ -71,22 +73,38 @@ const AnalyzingAnswerPage: React.FC = () => {
                         <div className="bg-[#031340] rounded-[12px] p-4">
                             <div className="text-center">
                                 <div className="w-12 h-12 bg-gray-400 rounded-full mx-auto mb-2 flex items-center justify-center">
-                                    <span className="text-gray-600 text-2xl font-bold">CP</span>
+                                    <img src={ColinImage} alt="Colin Powell" className="w-full h-full object-cover" />
                                 </div>
                                 <div className="flex justify-center space-x-1 mb-2">
                                     {[1, 2, 3, 4, 5].map((star) => (
-                                        <svg
-                                            key={star}
-                                            className="w-4 h-4 text-yellow-400"
-                                            fill="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                                        </svg>
+                                        <img src={StarIcon} alt="Star" className="w-4 h-4" />
                                     ))}
                                 </div>
-                                <h3 className="text-white text-lg font-semibold mb-1">Colin Powell</h3>
-                                <p className="text-white text-sm leading-relaxed italic">
+                                <h3
+                                    style={{
+                                        fontWeight: 600,
+                                        fontStyle: 'italic',
+                                        fontSize: 15,
+                                        lineHeight: '30px',
+                                        letterSpacing: 0,
+                                        textAlign: 'center',
+                                        verticalAlign: 'middle'
+                                    }}
+                                    className="text-white mb-1"
+                                >
+                                    Colin Powell
+                                </h3>
+                                <p
+                                    style={{
+                                        fontWeight: 400,
+                                        fontStyle: 'normal',
+                                        fontSize: 13,
+                                        lineHeight: '130%',
+                                        letterSpacing: 0,
+                                        textAlign: 'center'
+                                    }}
+                                    className="text-white/80 px-2"
+                                >
                                     "There is no secret to success. It is the result of preparation, work, and learning from failure."
                                 </p>
                             </div>
