@@ -138,15 +138,23 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                                 background: 'rgba(24, 21, 49, 0.5)',
                             }}
                         />
-                        <div className="absolute left-0 bottom-0 w-full px-5 pb-2 flex items-center rounded-xl"
+                        <div
+                            className="absolute left-0 bottom-0 w-full px-2 pb-2 flex items-center rounded-xl"
                             style={{
                                 height: 'auto',
                                 minHeight: 0,
                                 paddingTop: 0,
                                 background: 'linear-gradient(to top, #23224C, rgba(35,34,76,0.6) 40%, transparent 100%)',
                                 zIndex: 10,
-                            }}>
-                            <span className="text-white text-[10px] font-semibold flex items-center">
+                            }}
+                        >
+                            <span
+                                className="text-white text-[10px] font-semibold flex items-center w-full whitespace-nowrap overflow-hidden text-ellipsis justify-center"
+                                style={{
+                                    paddingLeft: 0,
+                                    paddingRight: 0,
+                                }}
+                            >
                                 <span className="mr-1 text-lg align-bottom" aria-hidden="true"></span>
                                 I used to panic at losses, Sabio taught me resilience.
                                 <span className="ml-1 text-lg align-bottom" aria-hidden="true"></span>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
-import { BackButton, BulletPointsList, PrimaryButton, TrustMainContentCard } from '../components';
+import { BackButton, BottomShade, BulletPointsList, PrimaryButton, TrustMainContentCard } from '../components';
 
 
 
@@ -43,8 +43,9 @@ const TrustPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
-            <div className="w-[375px] mx-auto min-h-screen flex flex-col">        <div className="relative w-full mb-3 pt-8 px-4 flex items-center justify-center" style={{ minHeight: 56 }}>
+        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <BottomShade />
+            <div className="w-[375px] mx-auto min-h-screen flex flex-col relative z-10">        <div className="relative w-full mb-3 pt-8 px-4 flex items-center justify-center" style={{ minHeight: 56 }}>
                 <div className="flex items-center justify-center w-full">
                     <div className="flex items-center justify-center">
                         <BackButton onClick={handleBackClick} />

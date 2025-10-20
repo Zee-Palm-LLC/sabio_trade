@@ -8,7 +8,7 @@ const AIStockCard: React.FC = () => {
         <div>
             <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] mb-6'>
                 <div className="flex flex-col items-center text-center mb-4">
-                    <h2 className="text-[22px] font-bold text-[#18FE6C] leading-tight mb-4">
+                    <h2 className="text-[22px] font-bold text-[#17F871] leading-tight mb-4">
                         AI won’t replace people but people using AI will.
                     </h2>
                     <p className="text-[14px] text-[#E2D9F7] font-normal leading-tight">

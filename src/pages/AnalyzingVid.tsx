@@ -4,7 +4,7 @@ import AnalyzingImage from '../assets/analyzing.png';
 import ArrowRight from '../assets/arrow-right.svg';
 import Logo from '../assets/logo.png';
 import StarBullets from '../assets/star_bullet.png';
-import { Card } from '../components';
+import { BottomShade, Card } from '../components';
 
 const AnalyzingVid: React.FC = () => {
     const navigate = useNavigate();
@@ -18,9 +18,9 @@ const AnalyzingVid: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
+        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">
-                {/* Header with Logo */}
                 <div className="flex flex-col items-center justify-between pt-8 pb-0">
                     <div className="flex items-center justify-between w-full mb-3">
                         <div className="flex items-center">
@@ -43,7 +43,7 @@ const AnalyzingVid: React.FC = () => {
                         </button>
                     </div>
                 </div>
-                
+
                 <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_20px_0_rgba(125,49,216,0.5)]'>
                     <div className="text-center px-0 mb-6">
                         <h1 className="text-white text-2xl font-bold mb-4 leading-tight">
@@ -55,7 +55,7 @@ const AnalyzingVid: React.FC = () => {
                         <div className="flex items-center space-x-3 px-4 py-3 rounded-full" style={{ backgroundColor: 'var(--color-card-bg)', border: '1px solid var(--color-card-border)' }}>
                             <div className="w-6 h-6 flex items-center justify-center">
                                 <svg className="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
                                 </svg>
                             </div>
                             <span className="text-white text-lg font-semibold">Topic: Risk and Rewards</span>

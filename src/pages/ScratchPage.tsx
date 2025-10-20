@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import amdIcon from '../assets/amd.svg';
 import Logo from '../assets/logo.png';
 import ArrowUpIcon from '../assets/up.svg';
-import { Card, MediaLogosCard, PrimaryButton, SabioTradeFeatures, ScratchTicket } from '../components';
+import { BottomShade, Card, MediaLogosCard, PrimaryButton, SabioTradeFeatures, ScratchTicket } from '../components';
 
 const ScratchPage: React.FC = () => {
     const [showReserveButton, setShowReserveButton] = useState(false);
@@ -24,7 +24,8 @@ const ScratchPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
+        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">
                 <div className="flex flex-col items-center pt-8 pb-4">
                     <div className="flex items-center space-x-3 mb-3">

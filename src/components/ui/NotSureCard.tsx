@@ -16,7 +16,7 @@ const NotSureCard: React.FC = () => {
                 <img src={plant} alt="plant" className="w-full h-full" />
             </div>
             <div className="text-center mb-0">
-                <p className="text-[#24FFA3] text-[15px] font-semibold mt-2">
+                <p className="text-[#17F871] text-[15px] font-semibold mt-2">
                     We got you , progress builds confidence.
                 </p>
                 <p className="text-[#cfc9e1] text-base mb-2">

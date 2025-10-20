@@ -13,7 +13,7 @@ import IpoPng from '../assets/ipo.png';
 import Logo from '../assets/logo.png';
 import SteadyPng from '../assets/steady.png';
 import SteadyLarge from '../assets/steadyLarge.png';
-import { BackButton, ProgressIndicator } from '../components';
+import { BackButton, BottomShade, ProgressIndicator } from '../components';
 import IconOptionCard, { type IconOption } from '../components/ui/IconOptionCard';
 import extraQuiz from '../data/extraQuiz.json';
 
@@ -81,6 +81,7 @@ const TradingQuizExtraPage: React.FC = () => {
 
     return (
         <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col relative z-10">
                 <div className="flex flex-col items-center pt-8 pb-4 px-4">
                     <div className="flex justify-between w-full mb-3">

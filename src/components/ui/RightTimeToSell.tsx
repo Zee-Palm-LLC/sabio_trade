@@ -18,7 +18,7 @@ const RightTimeToSell: React.FC = () => {
                     To make it simple, don’t rush, hold with<br className="sm:hidden" />
                     patience, and avoid emotional timing.
                 </p>
-                <p className="text-[#24FFA3] text-[16px] font-semibold mt-2 mb-2">
+                <p className="text-[#17F871] text-[16px] font-semibold mt-2 mb-2">
                     “It’s ok to be unsure, we will guide you”
                 </p>
                 <p className="text-[#cfc9e1] text-base">

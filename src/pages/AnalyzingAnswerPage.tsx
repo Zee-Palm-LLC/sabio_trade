@@ -4,7 +4,7 @@ import Analyzing from '../assets/analyzing.png';
 import ColinImage from '../assets/colin.png';
 import Logo from '../assets/logo.png';
 import StarIcon from '../assets/yellow_star.svg';
-import { BackButton, Card, PrimaryButton, ProgressIndicator } from '../components';
+import { BackButton, BottomShade, Card, PrimaryButton, ProgressIndicator } from '../components';
 
 const AnalyzingAnswerPage: React.FC = () => {
     const navigate = useNavigate();
@@ -34,7 +34,8 @@ const AnalyzingAnswerPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
+        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
                 <div className="flex flex-col items-center pt-8 pb-4 px-4">
                     <div className="relative w-full mb-3 flex items-center" style={{ minHeight: 56 }}>

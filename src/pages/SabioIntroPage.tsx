@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AnimationVideo from '../assets/animation.mp4';
 import Logo from '../assets/logo.png';
 import SabioIntroImage from '../assets/sabio-intro-fig.png';
-import { Card, PrimaryButton } from '../components';
+import { BottomShade, Card, PrimaryButton } from '../components';
 
 const SabioIntroPage: React.FC = () => {
     const navigate = useNavigate();
@@ -17,7 +17,8 @@ const SabioIntroPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen text-white" style={{ background: '#031340' }}>
+        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 pt-6 pb-4">
