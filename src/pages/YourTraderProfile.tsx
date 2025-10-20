@@ -30,7 +30,7 @@ const YourTraderProfile: React.FC = () => {
                     />
                 </div>
                 <div className="flex items-center mb-4">
-                    <span className="text-white font-bold text-[24px] leading-[38px] mr-2" style={{ fontFamily: 'inherit', letterSpacing: '-0.2px' }}>
+                    <span className="text-white font-bold text-[24px] leading-[38px] mr-2" style={{ letterSpacing: '-0.2px' }}>
                         Score Breakdown
                     </span>
                     <img src={ScoreIcon} alt="" className="h-8 w-8" />
