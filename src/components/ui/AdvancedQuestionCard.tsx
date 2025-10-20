@@ -80,7 +80,7 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                 )}
             </div>
 
-            <div className={multi ? "mb-4 flex flex-wrap gap-3 justify-center items-center max-w-md mx-auto" : "mb-4"}>
+            <div className={multi ? "mb-12 flex flex-wrap gap-3 justify-center items-center max-w-md mx-auto" : "mb-4"}>
                 {filteredOptions.map((option, index) => {
                     const optionLabel = typeof option === 'string' ? option : option.label;
                     const optionDescription = typeof option === 'string' ? '' : (option.description || '');
