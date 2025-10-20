@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import amdIcon from '../assets/amd.svg';
 import Logo from '../assets/logo.png';
+import BulletPointIcon from '../assets/star_bullet.png';
 import ArrowUpIcon from '../assets/up.svg';
 import { BottomShade, Card, MediaLogosCard, PrimaryButton, SabioTradeFeatures, ScratchTicket } from '../components';
 
@@ -72,9 +73,12 @@ const ScratchPage: React.FC = () => {
                             <span className="text-white/70 text-sm">2 days ago</span>
                         </div>
                         <div className="space-y-1">
-                            <div className="flex items-start space-x-2">
-                                <div className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-2 flex-shrink-0"></div>
-                                <p
+                            <div className="flex items-center space-x-2">
+                                <img
+                                    src={BulletPointIcon}
+                                    alt="Bullet"
+                                    className="w-3 h-3 mt-0.5 flex-shrink-0"
+                                />   <p
                                     className="text-white/50"
                                     style={{
                                         fontWeight: 500,
@@ -87,8 +91,12 @@ const ScratchPage: React.FC = () => {
                                     Partnership announcements with major tech players sparked investor confidence.
                                 </p>
                             </div>
-                            <div className="flex items-start space-x-2">
-                                <div className="w-1.5 h-1.5 bg-gray-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <div className="flex items-center space-x-2">
+                                <img
+                                    src={BulletPointIcon}
+                                    alt="Bullet"
+                                    className="w-3 h-3 mt-0.5 flex-shrink-0"
+                                />
                                 <p
                                     className="text-white/50"
                                     style={{
