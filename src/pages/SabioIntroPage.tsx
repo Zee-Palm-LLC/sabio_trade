@@ -70,7 +70,7 @@ const SabioIntroPage: React.FC = () => {
                         {/* Description Text */}
                         <div className="mb-4">
                             <p className="text-white/70 text-[13px] leading-relaxed text-center">
-                                Here at Sabio, we do things differently. Forget classic trading where you're just left to figure it out. We believe in preparation and training first.
+                                Here at Sabio Academy, we do things differently. Forget classic trading where you're just left to figure it out. We believe in preparation and training first.
                             </p>
                         </div>
 
