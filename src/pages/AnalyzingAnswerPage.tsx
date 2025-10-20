@@ -141,7 +141,7 @@ const AnalyzingAnswerPage: React.FC = () => {
                                 />
                                 <div className="absolute left-0 bottom-0 w-full px-5 pb-2 pt-4 flex items-end bg-gradient-to-t from-[#23224C] via-[#23224C99] to-transparent rounded-xl">
                                     <span
-                                        className="text-white font-bold text-[16px] text-center leading-snug block text-left"
+                                        className="text-white font-bold text-[16px] text-start leading-snug block text-left"
                                         style={{ textShadow: '0 2px 8px rgba(18,19,52,0.38)' }}
                                     >
                                         <span className="mr-1 align-bottom" aria-hidden="true">“</span>
