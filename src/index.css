@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Ensure all Tailwind font classes use Plus Jakarta Sans */
+.font-sans, .font-jakarta {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
 :root {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
@@ -134,22 +141,34 @@ body::before {
 /* Dark theme base styles */
 * {
   color: inherit;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-text);
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
 p, span, div {
   color: var(--color-text);
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
 a {
   color: var(--color-text-secondary);
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
 a:hover {
   color: var(--color-text);
+}
+
+button, input, textarea, select {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+label, legend, caption {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
 /* Animation for button fade-in */
