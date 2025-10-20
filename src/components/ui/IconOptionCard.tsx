@@ -24,13 +24,13 @@ const IconOptionCard: React.FC<IconOptionCardProps> = ({ options, selected, onSe
                         className={`w-full py-3 px-4 rounded-xl text-white transition-all duration-200 flex items-center gap-3 relative ${align === 'left' ? 'justify-start' : 'justify-center'}`}
                         style={{
                             minHeight: '56px',
-                            backgroundColor: isSelected ? 'rgba(125, 49, 216, 0.6)' : 'rgba(52, 8, 99, 0.46)',
-                            border: isSelected ? '2px solid rgba(125, 49, 216, 0.8)' : '1px solid rgba(125, 49, 216, 0.47)',
-                            boxShadow: isSelected ? '0 0 12px rgba(125, 49, 216, 0.5)' : '0 0 8px rgba(125, 49, 216, 0.30)'
+                            backgroundColor: isSelected ? '#340863' : 'rgba(52, 8, 99, 0.46)',
+                            border: isSelected ? '2px solid #7D31D8' : '1px solid rgba(125, 49, 216, 0.47)',
+                            boxShadow: '2px 2px 13px 0px rgba(122, 75, 173, 0.6)'
                         }}
                     >
                         {opt.icon && (
-                            <img src={opt.icon} alt={opt.label} className="w-6 h-6 object-contain" />
+                            <img src={opt.icon} alt={opt.label} className="w-7 h-7 object-contain" />
                         )}
                         <span className="font-medium text-[18px] leading-tight text-left">{opt.label}</span>
                         {isSelected && (

@@ -4,12 +4,15 @@ import BreakingNewsPng from '../assets/breaking_news.png';
 import CleanFocused from '../assets/clean_and_focused.svg';
 import ClearRoutine from '../assets/clear_routine.svg';
 import DayTradingPng from '../assets/day_trading.png';
+import DayTradeLarge from '../assets/dayTradeLarge.png';
 import DividendPng from '../assets/dividend.png';
+import DividendLarge from '../assets/dividendLarge.png';
 import Exploring from '../assets/exploring.svg';
 import FastMoves from '../assets/fast_moves.svg';
 import IpoPng from '../assets/ipo.png';
 import Logo from '../assets/logo.png';
 import SteadyPng from '../assets/steady.png';
+import SteadyLarge from '../assets/steadyLarge.png';
 import { BackButton, ProgressIndicator } from '../components';
 import IconOptionCard, { type IconOption } from '../components/ui/IconOptionCard';
 import extraQuiz from '../data/extraQuiz.json';
@@ -21,7 +24,6 @@ interface ExtraQuestion {
     options: IconOption[];
 }
 
-// hydrate options with icons from assets for question 1 and trading terms icons for question 4
 const mapExtraQuestions: ExtraQuestion[] = (extraQuiz as any).questions.map((q: any) => {
     if (q.id === 1) {
         const iconMap: Record<string, string> = {
@@ -36,14 +38,13 @@ const mapExtraQuestions: ExtraQuestion[] = (extraQuiz as any).questions.map((q: 
         };
     }
     if (q.id === 4) {
-        // Prefer PNG icons provided in assets if available (fallback to SVGs)
         return {
             ...q,
             options: [
                 { label: 'Dividend income', icon: (DividendPng) as string },
                 { label: 'Day trading', icon: (DayTradingPng) as string },
                 { label: 'Steady portfolio growth', icon: (SteadyPng) as string },
-                { label: 'IPO investing', icon: (IpoPng) as string},
+                { label: 'IPO investing', icon: (IpoPng) as string },
                 { label: 'Breaking news trading', icon: (BreakingNewsPng) as string }
             ]
         };
@@ -56,7 +57,6 @@ const TradingQuizExtraPage: React.FC = () => {
     const location = useLocation();
     const fromProfile = location.state?.fromProfile || false;
 
-    // If coming from profile, show only question 5 (index 4) - "How much time are you ready to spend to achieve your goal?"
     const [current, setCurrent] = useState(fromProfile ? 4 : 0);
     const [selected, setSelected] = useState<Record<number, string>>({});
 
@@ -68,16 +68,11 @@ const TradingQuizExtraPage: React.FC = () => {
         setSelected(prev => ({ ...prev, [question.id]: value }));
         setTimeout(() => {
             if (fromProfile) {
-                // If from profile, navigate to scratch after answering the last question
                 navigate('/scratch');
             } else {
-                // Normal flow from SabioIntroPage - skip the last question (index 4)
-                // Show only questions 0, 1, 2, 3 (first 4 questions)
                 if (current < mapExtraQuestions.length - 2) {
-                    // Still more questions to show (before the last one)
                     setCurrent(current + 1);
                 } else {
-                    // Reached question 3 (index 3), skip question 4 and navigate to /lead
                     navigate('/lead');
                 }
             }
@@ -85,9 +80,8 @@ const TradingQuizExtraPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
-            <div className="w-[375px] mx-auto min-h-screen flex flex-col">
-                {/* Header */}
+        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <div className="w-[375px] mx-auto min-h-screen flex flex-col relative z-10">
                 <div className="flex flex-col items-center pt-8 pb-4 px-4">
                     <div className="flex justify-between w-full mb-3">
                         <BackButton onClick={() => navigate(-1)} />
@@ -107,7 +101,15 @@ const TradingQuizExtraPage: React.FC = () => {
 
                 <ProgressIndicator current={fromProfile ? 13 : current + 1 + questionOffset} total={total} />
 
-                <div className="flex flex-col justify-center px-4 mb-1 mt-5">
+                {question.id === 4 && (
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                        <img src={DividendLarge} alt="" className="absolute" style={{ top: '20%', height: '62px', left: '0%' }} />
+                        <img src={SteadyLarge} alt="" className="absolute " style={{ top: '18%', right: '0%', width: '31px' }} />
+                        <img src={DayTradeLarge} alt="" className="absolute " style={{ top: '29%', right: '10%', width: '31px' }} />
+                    </div>
+                )}
+
+                <div className="flex flex-col justify-center px-4 mb-1 mt-6">
                     <div className="text-center mb-6">
                         <h2 className="text-white text-2xl font-bold leading-tight">
                             {question.title}

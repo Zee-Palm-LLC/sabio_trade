@@ -58,8 +58,8 @@ const EmailCaptureCard: React.FC = () => {
         <div className="w-full relative pt-2 min-h-[220px] overflow-hidden">
             {/* Content */}
             <div className="relative z-10 pb-6 pt-4 px-4">
-                <h2 className="text-white font-bold text-[18px] leading-tight mb-6 text-left pr-20">
-                    Enter your email to unlock your results + get a tailored plan.
+                <h2 className="text-white font-bold text-[18px] leading-tight mb-6 text-center">
+                    Enter your email to unlock your <br /> results + get a tailored plan.
                 </h2>
 
                 <form onSubmit={handleSubmit}>

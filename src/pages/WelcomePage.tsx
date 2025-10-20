@@ -52,7 +52,10 @@ const WelcomePage: React.FC = () => {
                         </p>
                     </div>
                     <div className="flex-1 flex items-center justify-center px-0 mb-6">
-                        <div className="w-full max-w-sm rounded-[12px] px-4 pt-4 pb-2 relative flex items-start bg-[#031340] rounded-[12px]">
+                        <div
+                            className="w-full max-w-sm rounded-[12px] px-4 pt-4 pb-2 relative flex items-start bg-[#031340]"
+                            style={{ border: '1px solid rgba(255,255,255,0.1)' }}
+                        >
                             <div className="flex-1 space-y-2 mb-0">
                                 <div className="flex items-center space-x-3">
                                     <img src={EducationIcon} alt="Bullet" className="w-5 h-5 mt-0.5 flex-shrink-0" />

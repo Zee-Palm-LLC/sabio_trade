@@ -38,53 +38,28 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
 
             {/* Options */}
             <div className="space-y-2 mb-4">
-                {options.map((option, index) => {
+                {options.map((option) => {
                     const isSelected = selectedOption === option.value;
-                    const getGradientStyle = (colorIndex: number) => {
-                        const gradients = [
-                            `linear-gradient(135deg, var(--color-purple-light) 0%, var(--color-purple) 100%)`,
-                            `linear-gradient(135deg, var(--color-purple-light) 0%, var(--color-purple) 100%)`,
-                            `linear-gradient(135deg, var(--color-purple-light) 0%, var(--color-purple) 100%)`,
-                            `linear-gradient(135deg, var(--color-purple-light) 0%, var(--color-purple) 100%)` 
-                        ];
-                        return gradients[colorIndex] || gradients[0];
-                    };
 
                     return (
                         <button
                             key={option.value}
                             onClick={() => onOptionSelect(option.value)}
-                            className="w-full py-4 px-6 rounded-xl text-white font-semibold text-lg relative"
+                            className="w-full py-4 px-6 rounded-xl text-white font-semibold text-lg relative mb-1"
                             style={{
                                 backgroundColor: isSelected 
-                                    ? 'rgba(125, 49, 216, 0.6)' 
-                                    : `rgba(52, 8, 99, var(--opacity-46))`,
+                                    ? '#340863' 
+                                    : 'rgba(52, 8, 99, 0.46)',
                                 border: isSelected 
-                                    ? '2px solid rgba(125, 49, 216, 0.8)' 
-                                    : `1px solid rgba(125, 49, 216, var(--opacity-47))`,
-                                boxShadow: isSelected 
-                                    ? '0 0 12px rgba(125, 49, 216, 0.5)' 
-                                    : `0 0 8px rgba(125, 49, 216, var(--opacity-30))`
-                            }}
-                            onMouseEnter={(e) => {
-                                if (!isSelected) {
-                                    e.currentTarget.style.background = getGradientStyle(index);
-                                    e.currentTarget.style.border = 'none';
-                                    e.currentTarget.style.boxShadow = `0 0 12px rgba(125, 49, 216, 0.5)`;
-                                }
-                            }}
-                            onMouseLeave={(e) => {
-                                if (!isSelected) {
-                                    e.currentTarget.style.background = `rgba(52, 8, 99, var(--opacity-46))`;
-                                    e.currentTarget.style.border = `1px solid rgba(125, 49, 216, var(--opacity-47))`;
-                                    e.currentTarget.style.boxShadow = `0 0 8px rgba(125, 49, 216, var(--opacity-30))`;
-                                }
+                                    ? '2px solid #7D31D8' 
+                                    : '1px solid rgba(125, 49, 216, 0.47)',
+                                boxShadow: '2px 2px 13px 0px rgba(122, 75, 173, 0.6)'
                             }}
                         >
                             {option.label}
                             {isSelected && (
                                 <div className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>

@@ -24,7 +24,7 @@ const TrustPage: React.FC = () => {
             id: '3',
             prefixText: 'As seen on ',
             prefixOpacity: 0.6,
-            highlightedText: 'Investing.com, DailyForex, TradingNews.'
+            highlightedText: 'Investing.com, Wall Street Journal, TradingNews.'
         },
         {
             id: '4',

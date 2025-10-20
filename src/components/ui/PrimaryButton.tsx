@@ -55,8 +55,8 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
                     />
                 )}
 
-                <span className="relative mr-2 z-10">{text}</span>
-                {showIcon && (
+                <span className="relative mr-2 z-10">{disabled ? 'Continue…' : text}</span>
+                {showIcon && !disabled && (
                     <img
                         src={ArrowRight}
                         alt="Arrow Right"

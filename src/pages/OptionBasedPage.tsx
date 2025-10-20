@@ -70,7 +70,7 @@ const OptionBasedPage: React.FC = () => {
                     <PrimaryButton
                         onClick={handleContinueClick}
                         className=''
-                        text="Next Step"
+                        text="Continue"
                         showIcon={true}
                     />
                 </div>
