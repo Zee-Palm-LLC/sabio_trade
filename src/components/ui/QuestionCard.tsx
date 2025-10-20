@@ -45,7 +45,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                         <button
                             key={option.value}
                             onClick={() => onOptionSelect(option.value)}
-                            className="w-full py-4 px-6 rounded-xl text-white font-semibold text-[10px] relative mb-1"
+                            className="w-full py-4 px-6 rounded-xl text-white font-semibold text-[18px] relative mb-1"
                             style={{
                                 backgroundColor: isSelected 
                                     ? '#340863' 
