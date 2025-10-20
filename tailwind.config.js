@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-        'jakarta': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        'sans': ['Plus Jakarta Sans', 'sans-serif'],
+        'jakarta': ['Plus Jakarta Sans', 'sans-serif'],
       },
       colors: {
         'navy': {
