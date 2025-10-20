@@ -53,12 +53,14 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
     return (
         <div
             className="fixed inset-0 z-50 flex items-center justify-center"
-            style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
         >
             <div
                 className="relative w-[340px] rounded-2xl p-6 animate-fade-in scrollbar-hide"
                 style={{
-                    background: 'linear-gradient(180deg, #1A0F51 0%, #0B0729 100%)',
+                    background: '#210742',
+                    border: '1px solid rgba(125, 49, 216, 0.47)',
+                    boxShadow: '2px 2px 13px 0px rgba(122, 75, 173, 0.6)',
                     maxHeight: '90vh',
                     overflowY: 'auto'
                 }}
@@ -130,8 +132,29 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                             className="w-full h-full object-cover"
                             style={{ borderRadius: 16, height: 180 }}
                         />
-                        <div className="absolute left-0 bottom-0 w-full px-5 pb-2 flex items-center bg-gradient-to-t from-[#23224C] via-[#23224C99] to-transparent rounded-xl" style={{ height: 'auto', minHeight: 0, paddingTop: 0 }}>
-                            <span className="text-white text-[10px] font-semibold flex items-center">
+                        <div
+                            className="absolute left-0 top-0 w-full h-full"
+                            style={{
+                                background: 'rgba(24, 21, 49, 0.5)',
+                            }}
+                        />
+                        <div
+                            className="absolute left-0 bottom-0 w-full px-2 pb-2 flex items-center rounded-xl"
+                            style={{
+                                height: 'auto',
+                                minHeight: 0,
+                                paddingTop: 0,
+                                background: 'linear-gradient(to top, #23224C, rgba(35,34,76,0.6) 40%, transparent 100%)',
+                                zIndex: 10,
+                            }}
+                        >
+                            <span
+                                className="text-white text-[10px] font-semibold flex items-center w-full whitespace-nowrap overflow-hidden text-ellipsis justify-center"
+                                style={{
+                                    paddingLeft: 0,
+                                    paddingRight: 0,
+                                }}
+                            >
                                 <span className="mr-1 text-lg align-bottom" aria-hidden="true"></span>
                                 I used to panic at losses, Sabio taught me resilience.
                                 <span className="ml-1 text-lg align-bottom" aria-hidden="true"></span>
@@ -139,8 +162,6 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                         </div>
                     </div>
                 </div>
-
-                {/* Next Step Button */}
                 <PrimaryButton
                     onClick={handleNextStep}
                     text="Next Step"

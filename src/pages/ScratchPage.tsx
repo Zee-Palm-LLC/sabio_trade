@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import amdIcon from '../assets/amd.svg';
 import Logo from '../assets/logo.png';
 import ArrowUpIcon from '../assets/up.svg';
-import { Card, MediaLogosCard, PrimaryButton, SabioTradeFeatures, ScratchTicket } from '../components';
+import { BottomShade, Card, MediaLogosCard, PrimaryButton, SabioTradeFeatures, ScratchTicket } from '../components';
 
 const ScratchPage: React.FC = () => {
     const [showReserveButton, setShowReserveButton] = useState(false);
@@ -24,7 +24,8 @@ const ScratchPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
+        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">
                 <div className="flex flex-col items-center pt-8 pb-4">
                     <div className="flex items-center space-x-3 mb-3">
@@ -52,8 +53,19 @@ const ScratchPage: React.FC = () => {
                     <div className="w-full max-w-sm bg-[#031340] rounded-[12px] border border-slate-600/30 px-4 pt-4 pb-4">
                         <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center space-x-2">
-                                <div className="w-8 h-8 bg-white/10 rounded flex items-center justify-center">
-                                    <img src={amdIcon} alt="AMD" className="w-4 h-4" />
+                                <div
+                                    className="w-8 h-8 flex items-center justify-center rounded-t-[6px] rounded-b-[6px] relative overflow-hidden"
+                                    style={{
+                                        background: 'linear-gradient(135deg, #232e63 0%, #121840 100%)',
+                                        boxShadow: '0px 2px 8px 0 #232e63 inset, 0 0 0 1.5px #3a467a',
+                                        borderTop: '1.5px solid #3a467a',
+                                        borderBottom: '1.5px solid #3a467a',
+                                        borderLeft: 'none',
+                                        borderRight: 'none',
+                                        opacity: 0.5,
+                                    }}
+                                >
+                                    <img src={amdIcon} alt="AMD" className="w-4 h-4 relative z-10" />
                                 </div>
                                 <span className="text-[18px] font-bold" style={{ color: 'var(--color-primary)' }}>+2.5%</span>
                                 <img src={ArrowUpIcon} alt="Arrow Up" className="w-4 h-4" />
@@ -122,11 +134,11 @@ const ScratchPage: React.FC = () => {
 
                         {/* Privacy and Terms Links */}
                         <div className="flex justify-center items-center space-x-2">
-                        <span className="text-white">•</span>
-                        <a href="https://sabiotrade.com/terms" className="underline text-white hover:text-white transition-colors">Terms & Conditions</a>
-                        <span className="text-white">•</span>
-                        <a href="https://sabiotrade.com/privacy" className="underline text-white hover:text-white transition-colors">Privacy Policy</a>
-                    </div>
+                            <span className="text-white">•</span>
+                            <a href="https://sabiotrade.com/terms" className="underline text-white hover:text-white transition-colors">Terms & Conditions</a>
+                            <span className="text-white">•</span>
+                            <a href="https://sabiotrade.com/privacy" className="underline text-white hover:text-white transition-colors">Privacy Policy</a>
+                        </div>
                     </div>
                 )}
 

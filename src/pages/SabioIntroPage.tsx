@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AnimationVideo from '../assets/animation.mp4';
 import Logo from '../assets/logo.png';
 import SabioIntroImage from '../assets/sabio-intro-fig.png';
-import { Card, PrimaryButton } from '../components';
+import { BottomShade, Card, PrimaryButton } from '../components';
 
 const SabioIntroPage: React.FC = () => {
     const navigate = useNavigate();
@@ -17,7 +17,8 @@ const SabioIntroPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen text-white" style={{ background: '#031340' }}>
+        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 pt-6 pb-4">
@@ -68,7 +69,7 @@ const SabioIntroPage: React.FC = () => {
 
                         {/* Description Text */}
                         <div className="mb-4">
-                            <p className="text-white/70 text-[13px] leading-relaxed">
+                            <p className="text-white/70 text-[13px] leading-relaxed text-center">
                                 Here at Sabio, we do things differently. Forget classic trading where you're just left to figure it out. We believe in preparation and training first.
                             </p>
                         </div>
@@ -111,7 +112,7 @@ const SabioIntroPage: React.FC = () => {
 
                         {/* Bottom Description */}
                         <div className="mb-0">
-                            <p className="text-white/70 text-[13px] leading-relaxed">
+                            <p className="text-white/70 text-[13px] leading-relaxed text-center">
                                 Every day, we're crafting articles, market reviews, and practical trading guides, plus hands-on lessons to help you master everything from reading charts to profitable trading strategies.
                             </p>
                         </div>

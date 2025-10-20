@@ -4,9 +4,17 @@ interface ProgressIndicatorProps {
     current: number;
     total: number;
     className?: string;
+    inactiveColor?: string;
+    activeColor?: string;
 }
 
-const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({ current, total, className = '' }) => {
+const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({ 
+    current, 
+    total, 
+    className = '',
+    inactiveColor = 'rgba(217, 217, 217, 0.24)',
+    activeColor = '#17F871'
+}) => {
     const progressPercentage = (current / total) * 100;
 
     return (
@@ -15,14 +23,14 @@ const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({ current, total, c
                 className="w-full rounded-full overflow-hidden relative"
                 style={{ 
                     height: '8px',
-                    backgroundColor: `rgba(217, 217, 217, var(--opacity-24))`
+                    backgroundColor: inactiveColor
                 }}
             >
                 <div
                     className="h-full transition-all duration-300 ease-out rounded-full absolute top-0 left-0"
                     style={{ 
                         width: `${progressPercentage}%`,
-                        backgroundColor: 'var(--color-primary)'
+                        backgroundColor: activeColor
                     }}
                 />
             </div>

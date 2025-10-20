@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
-import { PrimaryButton, ProgressCard, TestimonialCard } from "../components";
+import { BottomShade, PrimaryButton, ProgressCard, TestimonialCard } from "../components";
 
 
 const TradingProfiles: React.FC = () => {
@@ -33,7 +33,8 @@ const TradingProfiles: React.FC = () => {
         navigate('/your-trader-profile');
     }
     return (
-        <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
+        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <BottomShade />
             <div className="w-full max-w-[375px] mx-auto min-h-screen flex flex-col px-4">
                 <div className="flex flex-col items-center pt-8 pb-4">
                     <div className="flex items-center space-x-3 mb-3">

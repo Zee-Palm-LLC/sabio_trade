@@ -19,10 +19,8 @@ const TrustMainContentCard: React.FC<TrustMainContentCardProps> = ({ className =
                         “Opening The 3rd Year”
                     </div>
                     <div className="text-center">
-                        <div className="text-white font-medium leading-tight" style={{ fontSize: 14, opacity: 0.7 }}>
-                            1 000 000 + people already use
-                            <br />
-                            Sabio
+                        <div className="text-white font-[400] leading-tight" style={{ fontSize: 14, opacity: 0.7 }}>
+                            “1 000 000 + people already<br /> use Sabio”
                         </div>
                     </div>
                 </div>
@@ -36,7 +34,7 @@ const TrustMainContentCard: React.FC<TrustMainContentCardProps> = ({ className =
                 <p className="text-white text-[14px] font-medium mb-2">Rated 4.3 on Trustpilot</p>
                 <div className="flex justify-center space-x-1">
                     {[1, 2, 3, 4, 5].map((_, index) => (
-                        <img key={index} src={StarIcon} alt="Star" className="w-4 h-4" />
+                        <img key={index} src={StarIcon} alt="Star" className="w-4 h-5" />
                     ))}
                 </div>
             </div>

@@ -14,7 +14,7 @@ const RiskAndRewardsCard: React.FC = () => {
                     name="Mellody Hobson"
                 />
                 <div className="text-center mb-0">
-                    <p className="text-[#24FFA3] text-[16px] font-semibold mt-2 mb-2">
+                    <p className="text-[#17F871] text-[16px] font-semibold mt-2 mb-2">
                         We got you, steady growth beats chasing noise.
                     </p>
                     {/* <ResultsCard text="Our education and tools are utilizing the latest technologies to make 

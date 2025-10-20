@@ -65,7 +65,16 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                     {question}
                 </h2>
                 {subtitle && (
-                    <p className="text-white/70 text-sm leading-tight mt-3 italic">
+                    <p
+                        style={{
+                            fontWeight: 500,
+                            fontSize: '14px',
+                            lineHeight: '140%',
+                            letterSpacing: '0%',
+                            textAlign: 'center',
+                        }}
+                        className="text-white/70 mt-3"
+                    >
                         {subtitle}
                     </p>
                 )}
@@ -95,14 +104,12 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                                     border: '1px solid #FFFFFF2E'
                                 } : {
                                     backgroundColor: isSelected
-                                        ? 'rgba(125, 49, 216, 0.6)'
+                                        ? '#340863'
                                         : 'rgba(52, 8, 99, 0.46)',
                                     border: isSelected
-                                        ? '2px solid rgba(125, 49, 216, 0.8)'
+                                        ? '2px solid #7D31D8'
                                         : '1px solid rgba(125, 49, 216, 0.47)',
-                                    boxShadow: isSelected
-                                        ? '0 0 12px rgba(125, 49, 216, 0.5)'
-                                        : '0 0 8px rgba(125, 49, 216, 0.30)'
+                                    boxShadow: '2px 2px 13px 0px rgba(122, 75, 173, 0.6)'
                                 }}
                             >
                                 {multi && (() => {

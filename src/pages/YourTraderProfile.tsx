@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import ScoreIcon from '../assets/score.svg';
-import { PrimaryButton, ScoreBreakdownCard, TraderProfileCard } from "../components";
+import { BottomShade, PrimaryButton, ScoreBreakdownCard, TraderProfileCard } from "../components";
 
 
 const YourTraderProfile: React.FC = () => {
@@ -13,16 +13,14 @@ const YourTraderProfile: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
+        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">
-                {/* Header */}
                 <div className="flex flex-col items-center pt-8 pb-4">
                     <div className="flex items-center space-x-3 mb-3">
                         <img src={Logo} alt="SabioTrade" className="h-14" />
                     </div>
                 </div>
-
-                {/* Trader Profile Card */}
                 <div className="mb-4">
                     <TraderProfileCard
                         rating="Very Good"

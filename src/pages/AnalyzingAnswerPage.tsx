@@ -4,7 +4,7 @@ import Analyzing from '../assets/analyzing.png';
 import ColinImage from '../assets/colin.png';
 import Logo from '../assets/logo.png';
 import StarIcon from '../assets/yellow_star.svg';
-import { BackButton, Card, PrimaryButton, ProgressIndicator } from '../components';
+import { BackButton, BottomShade, Card, PrimaryButton, ProgressIndicator } from '../components';
 
 const AnalyzingAnswerPage: React.FC = () => {
     const navigate = useNavigate();
@@ -34,7 +34,8 @@ const AnalyzingAnswerPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen text-white" style={{ background: 'var(--bg-gradient)' }}>
+        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+            <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
                 <div className="flex flex-col items-center pt-8 pb-4 px-4">
                     <div className="relative w-full mb-3 flex items-center" style={{ minHeight: 56 }}>
@@ -44,10 +45,18 @@ const AnalyzingAnswerPage: React.FC = () => {
                         <div className="flex-1 flex justify-center">
                             <img src={Logo} alt="SabioTrade" className="h-14" />
                         </div>
+                        <div className="flex items-center space-x-1">
+                            <span className="font-bold text-base leading-[18px]" style={{ color: 'var(--color-primary)' }}>
+                                {4} /
+                            </span>
+                            <span className="font-bold text-base leading-[18px]" style={{ color: 'rgba(255, 255, 255, var(--opacity-80))' }}>
+                                {13}
+                            </span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="flex-1 flex flex-col items-center justify-center px-4 mb-6">
+                <div className="flex flex-col items-center justify-center px-4 mb-6">
                     <div className="text-center mb-2">
                         <h1 className="text-white text-2xl font-bold mb-0 leading-tight">
                             Analyzing your answers...
@@ -59,6 +68,8 @@ const AnalyzingAnswerPage: React.FC = () => {
                             current={progress}
                             total={100}
                             className="mb-0"
+                            activeColor='#25BBA4'
+                            inactiveColor='#2C3B39'
                         />
                         <div className='flex justify-end mr-4'>
                             <span className="text-white/70 text-base leading-relaxed mb-6">
@@ -119,6 +130,14 @@ const AnalyzingAnswerPage: React.FC = () => {
                                     alt="Testimonial"
                                     className="w-full h-auto object-cover"
                                     style={{ borderRadius: 16 }}
+                                />
+                                {/* Black overlay */}
+                                <div
+                                    className="absolute inset-0"
+                                    style={{
+                                        background: 'rgba(0,0,0,0.50)',
+                                        borderRadius: 16,
+                                    }}
                                 />
                                 <div className="absolute left-0 bottom-0 w-full px-5 pb-2 pt-4 flex items-end bg-gradient-to-t from-[#23224C] via-[#23224C99] to-transparent rounded-xl">
                                     <span
