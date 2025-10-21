@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
-import { AIStockCard, BottomShade, NotSureCard, PrimaryButton, RightTimeToSell, RiskAndRewardsCard } from '../components';
+import { AIStockCard, BackButton, BottomShade, NotSureCard, PrimaryButton, RightTimeToSell, RiskAndRewardsCard } from '../components';
 
 const OptionBasedPage: React.FC = () => {
     const navigate = useNavigate();
@@ -14,6 +14,12 @@ const OptionBasedPage: React.FC = () => {
 
     const handleContinueClick = () => {
         navigate('/advance-question', { state: { startAtLastAdvanced: true } });
+    };
+
+    const handleBackClick = () => {
+        localStorage.removeItem('tradingTopicOption');
+        localStorage.removeItem('selectedTopic');
+        navigate('/advance-question', { state: { startIndex: 2, clearCurrentAnswer: true }, replace: true });
     };
 
     const renderCard = () => {
@@ -43,24 +49,11 @@ const OptionBasedPage: React.FC = () => {
             <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4 relative z-10">         <div className="flex flex-col items-center justify-between pt-8 pb-0">
                 <div className="flex items-center justify-between w-full mb-3">
+                    <BackButton onClick={handleBackClick} />
                     <div className="flex items-center">
                         <img src={Logo} alt="SabioTrade" className="h-14" />
                     </div>
-                    <button
-                        onClick={() => navigate(-1)}
-                        className={`flex items-center justify-center`}
-                        style={{
-                            width: 35,
-                            height: 35,
-                            borderRadius: 6,
-                            backgroundColor: '#031340',
-                            border: '1.1px solid rgba(255,255,255,0.12)',
-                            transition: 'background-color 0.2s',
-                        }}>
-                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
+                    <div style={{ width: 35 }}></div>
                 </div>
             </div>
 
