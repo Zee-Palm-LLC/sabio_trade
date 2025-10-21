@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Logo from '../assets/logo.png';
 import { BottomShade, ChartCard, EmailCaptureCard } from '../components';
 
 const LeadPage: React.FC = () => {
-    const [showEmailModal] = useState(true);
-
     return (
         <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
             <BottomShade />
@@ -13,7 +11,7 @@ const LeadPage: React.FC = () => {
                     <div className="flex items-center space-x-3 mb-3">
                         <img src={Logo} alt="SabioTrade" className=" h-14" />
                     </div>
-                    {/* <EmailCaptureCard /> */}
+                    <EmailCaptureCard />
                     <ChartCard />
                     {/* <div className="mt-4" />
                     <TestimonialCard />
@@ -25,44 +23,6 @@ const LeadPage: React.FC = () => {
 
                 </div>
             </div>
-
-            {/* Bottom Sheet Modal */}
-            {showEmailModal && (
-                <div
-                    className="fixed inset-0 z-50 flex items-end justify-center right-0"
-                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
-                >
-                    <div
-                        className="w-full animate-slide-up"
-                        style={{
-                            width: window.innerWidth <= 500 ? '100%' : '375px',
-                            background: '#0A1432',
-                            borderTopLeftRadius: '12px',
-                            borderTopRightRadius: '12px',
-                            padding: '0px',
-                            maxHeight: '100vh',
-                            overflowY: 'auto',
-                        }}
-                    >
-                        <EmailCaptureCard />
-                    </div>
-                </div>
-            )}
-
-            <style>{`
-                @keyframes slide-up {
-                    from {
-                        transform: translateY(100%);
-                    }
-                    to {
-                        transform: translateY(0);
-                    }
-                }
-                
-                .animate-slide-up {
-                    animation: slide-up 0.3s ease-out;
-                }
-            `}</style>
         </div>
     );
 };
