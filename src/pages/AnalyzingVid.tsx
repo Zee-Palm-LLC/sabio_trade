@@ -133,6 +133,9 @@ const AnalyzingVid: React.FC = () => {
                         </button>
                     </div>
                 </Card>
+                
+                {/* Bottom spacer */}
+                <div className="mb-20"></div>
             </div>
         </div>
     );

@@ -114,13 +114,18 @@ const ScratchPage: React.FC = () => {
                     </div>
                 </Card>
                 <span className="text-white text-[17px] font-bold block text-center mt-6">
-                    In two weeks, you’ll spot these moves yourself
+                    In two weeks, you'll spot these moves yourself
                 </span>
                 <ScratchTicket onScratchComplete={handleScratchComplete} />
+                
+                {/* Spacer when only showing scratch ticket */}
+                {!showReserveButton && !showFeatures && (
+                    <div className="mb-20"></div>
+                )}
 
                 {/* Condition 2: Reserve Button with Pricing (after scratching) */}
                 {showReserveButton && !showFeatures && (
-                    <div className="w-full mt-0 mb-11">
+                    <div className="w-full mt-0 mb-20">
                         <div className="text-center mb-6">
                             <div className="flex items-center justify-center gap-2 mb-2">
                                 <span className="text-white/60 text-xl line-through">$229</span>
@@ -142,7 +147,7 @@ const ScratchPage: React.FC = () => {
 
                 {/* Condition 3: All Content After Reserve Button Click */}
                 {showFeatures && (
-                    <div className="mt-6 space-y-4 mb-11">
+                    <div className="mt-6 space-y-4 mb-20">
                         <SabioTradeFeatures />
                         <MediaLogosCard />
 

@@ -47,7 +47,7 @@ const TradingProfiles: React.FC = () => {
                     bottomText="Creating the personal challenge and trading profile..."
                 />
                 <TestimonialCard />
-                <div className="pt-10 pb-6">
+                <div className="pt-10 pb-6 mb-20">
                     <PrimaryButton
                         onClick={handleContinueClick}
                         text="Next Step"

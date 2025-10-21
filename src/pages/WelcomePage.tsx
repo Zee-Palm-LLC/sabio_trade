@@ -104,7 +104,7 @@ const WelcomePage: React.FC = () => {
                     <TestimonialCard />
                 </Card>
 
-                <div className="pb-6 justify-center mt-5">
+                <div className="pb-6 mb-20 justify-center mt-5">
                     <PrimaryButton
                         onClick={handleContinueClick}
                         text="Continue"

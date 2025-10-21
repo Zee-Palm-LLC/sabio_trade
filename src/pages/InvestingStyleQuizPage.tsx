@@ -37,7 +37,7 @@ const InvestingStyleQuizPage: React.FC = () => {
                 </div>
 
                 {/* Footer Section */}
-                <div className="text-center text-black text-xs px-4 pb-6">
+                <div className="text-center text-black text-xs px-4 pb-6 mb-20">
                     <p className="mb-1 text-white text-opacity-30">CODEVIL IT ENGINEERING LIMITED 2021-2025</p>
                     <p className="mb-1 text-white text-opacity-30">registered with company number 680139 at 2c,</p>
                     <p className="mb-1 text-white text-opacity-30">Grangegorman Lower, Smithfield, Dublin, Ireland,</p>

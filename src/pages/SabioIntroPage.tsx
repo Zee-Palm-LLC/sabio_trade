@@ -119,7 +119,7 @@ const SabioIntroPage: React.FC = () => {
                     </Card>
 
                     {/* Continue Button - Outside Card */}
-                    <div className="px-4 mt-6">
+                    <div className="px-4 mt-6 mb-20">
                         <PrimaryButton
                             onClick={handleContinueClick}
                             text="Continue"
