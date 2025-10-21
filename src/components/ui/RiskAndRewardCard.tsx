@@ -2,7 +2,7 @@ import React from "react";
 import MellodyHobsonImage from '../../assets/mellody.png';
 import Card from "./Card";
 import QuoteCard from "./QuoteCard";
-import TestimonialCard from "./TestimonialCard";
+import TabImageCarousel from "./TabImageCarousel";
 
 const RiskAndRewardsCard: React.FC = () => {
     return (
@@ -26,7 +26,7 @@ your experience silky smooth, the challenge will safely prepare you" /> */}
                 </div>
             </Card>
 
-            <TestimonialCard />
+            <TabImageCarousel />
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import WarrenBuffettImage from '../../assets/warren.png';
-import { Card, QuoteCard, TestimonialCard } from "../index";
+import { Card, QuoteCard, TabImageCarousel } from "../index";
 
 
 const RightTimeToSell: React.FC = () => {
@@ -26,7 +26,7 @@ const RightTimeToSell: React.FC = () => {
                 </p>
             </div>
         </Card>
-        <TestimonialCard />
+        <TabImageCarousel />
         </div>
 
     );
