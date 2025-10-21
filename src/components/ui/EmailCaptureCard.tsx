@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import PointAvatar from '../../assets/pointing_avatar.png';
 import ShieldIcon from '../../assets/sheild_filled.svg';
 import { saveEmail } from '../../services/emailService';
-import Card from './Card';
 
 const EmailCaptureCard: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -56,9 +55,9 @@ const EmailCaptureCard: React.FC = () => {
     };
 
     return (
-        <Card className="w-full relative pt-2 min-h-[200px] overflow-hidden mb-4">
+        <div className="w-full relative pt-2 min-h-[220px] overflow-hidden">
             {/* Content */}
-            <div className="relative z-10 pb-6 pt-4 px-0">
+            <div className="relative z-10 pb-6 pt-4 px-4">
                 <h2 className="text-white font-bold text-[18px] leading-tight mb-6 text-center">
                     Enter your email to unlock your <br /> results + get a tailored plan.
                 </h2>
@@ -152,7 +151,7 @@ const EmailCaptureCard: React.FC = () => {
             <div className="absolute bottom-[-20px] right-[-8px] pointer-events-none z-0">
                 <img src={PointAvatar} alt="Point Avatar" className="w-[130px] h-[130px] object-contain" />
             </div>
-        </Card>
+        </div>
     );
 };
 
