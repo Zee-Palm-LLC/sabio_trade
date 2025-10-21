@@ -55,22 +55,54 @@ const AdvanceQuestionPage: React.FC = () => {
     const showContinueButton = currentQuestion.id === 5 || isMulti;
 
     const handleBackClick = () => {
+        console.log('handleBackClick called for question id:', currentQuestion.id);
+        
+        // FIRST PRIORITY: Clear any selected option before navigation
         if (selectedOption || selectedOptions.length > 0) {
+            console.log('Clearing selected options');
             setSelectedOption(null);
             setSelectedOptions([]);
             setShowButton(false);
             setIsButtonActive(false);
             setHasUserInteracted(false);
-        } else if (currentQuestionIndex > 0) {
+            return;
+        }
+        
+        // SECOND: Special handling for question 5
+        if (currentQuestion.id === 5) {
+            const lastAttemptedQuestionId = localStorage.getItem('lastAttemptedQuestion');
+            console.log('lastAttemptedQuestionId:', lastAttemptedQuestionId);
+            
+            // Clear only this specific key
+            localStorage.removeItem('lastAttemptedQuestion');
+            
+            if (lastAttemptedQuestionId === '7') {
+                console.log('Navigating -1 because last attempted was question 7');
+                navigate(-1);
+                return;
+            } else {
+                console.log('Navigating -1 from question 5');
+                navigate(-1);
+                return;
+            }
+        }
+        
+        // THIRD: Normal back navigation between questions
+        if (currentQuestionIndex > 0) {
+            console.log('Going to previous question');
             setCurrentQuestionIndex(currentQuestionIndex - 1);
             setSelectedOption(null);
             setSelectedOptions([]);
             setShowButton(false);
             setIsButtonActive(false);
             setHasUserInteracted(false);
-        } else {
-            navigate(-1);
+            return;
         }
+        
+        // LAST: At first question, navigate back in browser history
+        console.log('At first question, navigating back');
+        navigate(-1);
+        return;
     };
 
     const getSelectedOptionIndex = (questionIdx: number, value: string): number => {
@@ -92,6 +124,9 @@ const AdvanceQuestionPage: React.FC = () => {
     const handleOptionSelect = (value: string) => {
         if (isMulti) return;
         
+        // Store the current question ID as the last attempted question
+        localStorage.setItem('lastAttemptedQuestion', String(currentQuestion.id));
+        
         setSelectedOption(value);
         setAnswers(prev => {
             const newAnswers = {
@@ -101,9 +136,11 @@ const AdvanceQuestionPage: React.FC = () => {
             return newAnswers;
         });
 
+        // Special handling for question 7 - save the selected topic
         if (currentQuestion.id === 7) {
             setSelectedTopic(value);
             localStorage.setItem('selectedTopic', value);
+            
             const originalQuestion = advancedQuestions.find((q: any) => q.id === 7);
             if (originalQuestion) {
                 const optionIndex = originalQuestion.options.findIndex((opt: any) => {
@@ -113,11 +150,15 @@ const AdvanceQuestionPage: React.FC = () => {
                 localStorage.setItem('tradingTopicOption', String(optionIndex));
             }
         }
+        
         if (!showContinueButton) {
             setTimeout(() => {
                 if (currentQuestion.id === 7) {
                     const tradingTopic = localStorage.getItem('tradingTopicOption') || '1';
-                    navigate('/option-based', { state: { selectedOption: Number(tradingTopic) } });
+                    navigate('/option-based', { 
+                        state: { selectedOption: Number(tradingTopic) },
+                        replace: true  // Replace history to prevent multiple back clicks
+                    });
                 } else if (currentQuestionIndex < advancedQuestions.length - 1) {
                     setCurrentQuestionIndex(currentQuestionIndex + 1);
                     setSelectedOption(null);
@@ -176,6 +217,8 @@ const AdvanceQuestionPage: React.FC = () => {
 
         if (isMulti) {
             if (selectedOptions.length === 0) return;
+            // Store the current question ID as the last attempted question
+            localStorage.setItem('lastAttemptedQuestion', String(currentQuestion.id));
             const value = selectedOptions.join(',');
             if (currentQuestionIndex < advancedQuestions.length - 1) {
                 setAnswers(prev => ({ ...prev, [currentQuestion.id]: value }));
@@ -192,6 +235,9 @@ const AdvanceQuestionPage: React.FC = () => {
         }
 
         if (!selectedOption) return;
+        
+        // Store the current question ID as the last attempted question
+        localStorage.setItem('lastAttemptedQuestion', String(currentQuestion.id));
 
         if (currentQuestionIndex < advancedQuestions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
