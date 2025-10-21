@@ -14,7 +14,7 @@ const AnalyzingVid: React.FC = () => {
     };
 
     const handleCloseClick = () => {
-        navigate('/');
+        navigate(-1);
     };
 
     return (
