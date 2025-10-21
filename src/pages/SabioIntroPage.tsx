@@ -26,7 +26,7 @@ const SabioIntroPage: React.FC = () => {
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 pt-6 pb-4">
-                    <img src={Logo} alt="SabioTrade" className="h-10" />
+                    <img src={Logo} alt="SabioTrade" className="h-14" />
                     <button
                         onClick={handleCloseClick}
                         className="w-8 h-8 flex items-center justify-center text-white/70 hover:text-white transition-colors"
