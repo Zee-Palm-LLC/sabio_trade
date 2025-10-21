@@ -51,7 +51,7 @@ const TrustPage: React.FC = () => {
                         <div className="absolute left-4">
                             <BackButton onClick={handleBackClick} />
                         </div>
-                        <img src={Logo} alt="SabioTrade" className="h-14 mx-auto" />
+                        <img src={Logo} alt="SabioTrade" className="h-14" />
                     </div>
                 </div>
 
