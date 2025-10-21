@@ -1,7 +1,7 @@
 import React from "react";
 import SceneImage from '../../assets/scene.png';
 import Card from "./Card";
-import TestimonialCard from "./TestimonialCard";
+import TabImageCarousel from "./TabImageCarousel";
 
 const AIStockCard: React.FC = () => {
     return (
@@ -56,7 +56,7 @@ const AIStockCard: React.FC = () => {
                     </div>
                 </div>
             </Card>
-            <TestimonialCard />
+            <TabImageCarousel />
         </div>
     );
 }

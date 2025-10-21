@@ -4,7 +4,7 @@ import Analyzing from '../assets/analyzing.png';
 import ColinImage from '../assets/colin.png';
 import Logo from '../assets/logo.png';
 import StarIcon from '../assets/yellow_star.svg';
-import { BackButton, BottomShade, Card, PrimaryButton, ProgressIndicator } from '../components';
+import { BottomShade, Card, PrimaryButton, ProgressIndicator } from '../components';
 
 const AnalyzingAnswerPage: React.FC = () => {
     const navigate = useNavigate();
@@ -38,19 +38,25 @@ const AnalyzingAnswerPage: React.FC = () => {
             <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
                 <div className="flex flex-col items-center pt-8 pb-4 px-4">
-                    <div className="relative w-full mb-3 flex items-center justify-center" style={{ minHeight: 56 }}>
-                        <div className="absolute left-0">
-                            <BackButton onClick={handleBackClick} />
+                    <div className="flex items-center justify-between w-full mb-3">
+                        <div className="flex items-center">
+                            <img src={Logo} alt="SabioTrade" className="h-14" />
                         </div>
-                        <img src={Logo} alt="SabioTrade" className="h-14 mx-auto" />
-                        <div className="absolute right-0 flex items-center space-x-1">
-                            <span className="font-bold text-base leading-[18px]" style={{ color: 'var(--color-primary)' }}>
-                                {4} /
-                            </span>
-                            <span className="font-bold text-base leading-[18px]" style={{ color: 'rgba(255, 255, 255, var(--opacity-80))' }}>
-                                {13}
-                            </span>
-                        </div>
+                        <button
+                            onClick={() => navigate(-1)}
+                            className={`flex items-center justify-center`}
+                            style={{
+                                width: 35,
+                                height: 35,
+                                borderRadius: 6,
+                                backgroundColor: '#031340',
+                                border: '1.1px solid rgba(255,255,255,0.12)',
+                                transition: 'background-color 0.2s',
+                            }}>
+                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 

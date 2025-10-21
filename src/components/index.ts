@@ -26,6 +26,7 @@ export { default as RiskAndRewardsCard } from './ui/RiskAndRewardCard';
 export { default as SabioTradeFeatures } from './ui/SabioTradeFeatures';
 export { default as ScoreBreakdownCard } from './ui/ScoreBreakdownCard';
 export { default as ScratchTicket } from './ui/ScratchTicket';
+export { default as TabImageCarousel } from './ui/TabImageCarousel';
 export { default as TestimonialCard } from './ui/TestimonialCard';
 export { default as TraderProfileCard } from './ui/TraderProfileCard';
 export { default as TrustMainContentCard } from './ui/TrustMainContentCard';
