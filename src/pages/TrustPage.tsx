@@ -62,7 +62,7 @@ const TrustPage: React.FC = () => {
                 <div className="flex items-center justify-center px-4 mb-4">
                     <BulletPointsList items={bulletPoints} />
                 </div>
-                <div className="px-4 pb-6">
+                <div className="px-4 pb-6 mb-20">
                     <PrimaryButton text="Continue" onClick={handleContinueClick} />
                 </div>
             </div>

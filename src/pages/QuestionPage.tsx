@@ -71,14 +71,16 @@ const QuestionPage: React.FC = () => {
                     current={currentQuestionIndex + 1}
                     total={totalQuestions}
                 />
-                <QuestionCard
-                    questionText={currentQuestion.question}
-                    description={currentQuestion.description}
-                    options={questionOptions}
-                    illustration={StandingAvatar}
-                    onOptionSelect={handleOptionSelect}
-                    selectedOption={selectedOption}
-                />
+                <div className="mb-20">
+                    <QuestionCard
+                        questionText={currentQuestion.question}
+                        description={currentQuestion.description}
+                        options={questionOptions}
+                        illustration={StandingAvatar}
+                        onOptionSelect={handleOptionSelect}
+                        selectedOption={selectedOption}
+                    />
+                </div>
 
             </div>
         </div>

@@ -46,7 +46,7 @@ const YourTraderProfile: React.FC = () => {
                 </div>
 
                 {/* Continue Button */}
-                <div className="mb-11">
+                <div className="mb-20">
                     <PrimaryButton
                         text="Continue"
                         showIcon={true}

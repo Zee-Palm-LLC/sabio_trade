@@ -219,7 +219,7 @@ const AdvanceQuestionPage: React.FC = () => {
                 />
 
                 {showContinueButton && (isMulti || showButton) && (
-                    <div className="px-4 pb-6 animate-fade-in">
+                    <div className="px-4 pb-6 mb-20 animate-fade-in">
                         <PrimaryButton
                             onClick={handleContinueClick}
                             text={currentQuestion.id === 5 ? 'Continue' : 'Next Step'}
@@ -227,6 +227,11 @@ const AdvanceQuestionPage: React.FC = () => {
                             disabled={isMulti ? (selectedOptions.length === 0 || !isButtonActive) : !isButtonActive}
                         />
                     </div>
+                )}
+                
+                {/* Spacer for pages without continue button */}
+                {!showContinueButton && (
+                    <div className="mb-20"></div>
                 )}
             </div>
 

@@ -67,7 +67,7 @@ const OptionBasedPage: React.FC = () => {
                 {/* Render card based on first answer (question id 5) */}
                 {renderCard()}
 
-                <div className="pt-10 pb-6">
+                <div className="pt-10 pb-6 mb-20">
                     <PrimaryButton
                         onClick={handleContinueClick}
                         className=''

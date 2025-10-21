@@ -38,14 +38,12 @@ const AnalyzingAnswerPage: React.FC = () => {
             <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
                 <div className="flex flex-col items-center pt-8 pb-4 px-4">
-                    <div className="relative w-full mb-3 flex items-center" style={{ minHeight: 56 }}>
+                    <div className="relative w-full mb-3 flex items-center justify-center" style={{ minHeight: 56 }}>
                         <div className="absolute left-0">
                             <BackButton onClick={handleBackClick} />
                         </div>
-                        <div className="flex-1 flex justify-center">
-                            <img src={Logo} alt="SabioTrade" className="h-14" />
-                        </div>
-                        <div className="flex items-center space-x-1">
+                        <img src={Logo} alt="SabioTrade" className="h-14 mx-auto" />
+                        <div className="absolute right-0 flex items-center space-x-1">
                             <span className="font-bold text-base leading-[18px]" style={{ color: 'var(--color-primary)' }}>
                                 {4} /
                             </span>
@@ -156,7 +154,7 @@ const AnalyzingAnswerPage: React.FC = () => {
                     </Card>
 
                 </div>
-                <div className="px-4 pb-6">
+                <div className="px-4 pb-6 mb-20">
                     <PrimaryButton
                         text="Next"
                         onClick={handleContinueClick}

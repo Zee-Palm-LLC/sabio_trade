@@ -15,7 +15,7 @@ const RightTimeToSell: React.FC = () => {
 
             <div className="text-center mb-0">
                 <p className="text-[#cfc9e1] text-base mb-2">
-                    To make it simple, don’t rush, hold with<br className="sm:hidden" />
+                    To make it simple, don’t rush, hold with <br className="sm:hidden" />
                     patience, and avoid emotional timing.
                 </p>
                 <p className="text-[#17F871] text-[16px] font-semibold mt-2 mb-2">

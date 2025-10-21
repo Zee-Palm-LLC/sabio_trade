@@ -110,7 +110,7 @@ const TradingQuizExtraPage: React.FC = () => {
                     </div>
                 )}
 
-                <div className="flex flex-col justify-center px-4 mb-1 mt-6">
+                <div className="flex flex-col justify-center px-4 mb-20 mt-6">
                     <div className="text-center mb-6">
                         <h2 className="text-white text-2xl font-bold leading-tight">
                             {question.title}
