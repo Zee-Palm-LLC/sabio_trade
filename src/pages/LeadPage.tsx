@@ -15,7 +15,10 @@ const LeadPage: React.FC = () => {
                     </div>
                     {/* <EmailCaptureCard /> */}
                     <ChartCard />
+                    <div className='mt-6'> 
                     <TestimonialCard/>
+                    
+                    </div>
                     {/* <div className="mt-4" />
                     <TestimonialCard />
                     <PrimaryButton
