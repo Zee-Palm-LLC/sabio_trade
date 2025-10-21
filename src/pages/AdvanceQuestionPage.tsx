@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { AnalyzingModal, BackButton, BottomShade, PrimaryButton, ProgressIndicator } from '../components';
@@ -13,7 +13,12 @@ const AdvanceQuestionPage: React.FC = () => {
         : (location.state?.startAtLastAdvanced ? advancedQuestions.length - 1 : 0);
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(initialIndex);
-    const [answers, setAnswers] = useState<Record<number, string>>({});
+    const [answers, setAnswers] = useState<Record<number, string>>(() => {
+        if (location.state?.clearCurrentAnswer && initialIndex < advancedQuestions.length) {
+            return {};
+        }
+        return {};
+    });
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
     const [showButton, setShowButton] = useState(false);
@@ -24,6 +29,23 @@ const AdvanceQuestionPage: React.FC = () => {
         return localStorage.getItem('selectedTopic') || "Risk and rewards";
     });
 
+    useEffect(() => {
+        if (location.state?.clearCurrentAnswer && currentQuestionIndex === 2) {
+            localStorage.removeItem('tradingTopicOption');
+            localStorage.removeItem('selectedTopic');
+            setSelectedTopic("Risk and rewards");
+            setAnswers(prev => {
+                const newAnswers = { ...prev };
+                delete newAnswers[7];
+                return newAnswers;
+            });
+            window.history.replaceState(
+                { ...location.state, clearCurrentAnswer: false },
+                ''
+            );
+        }
+    }, [location.state?.clearCurrentAnswer, currentQuestionIndex, location.state]);
+
     const totalQuestions = 13;
     const questionOffset = 4;
     const currentQuestion: any = advancedQuestions[currentQuestionIndex];
@@ -33,7 +55,13 @@ const AdvanceQuestionPage: React.FC = () => {
     const showContinueButton = currentQuestion.id === 5 || isMulti;
 
     const handleBackClick = () => {
-        if (currentQuestionIndex > 0) {
+        if (selectedOption || selectedOptions.length > 0) {
+            setSelectedOption(null);
+            setSelectedOptions([]);
+            setShowButton(false);
+            setIsButtonActive(false);
+            setHasUserInteracted(false);
+        } else if (currentQuestionIndex > 0) {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
             setSelectedOption(null);
             setSelectedOptions([]);
@@ -63,6 +91,7 @@ const AdvanceQuestionPage: React.FC = () => {
 
     const handleOptionSelect = (value: string) => {
         if (isMulti) return;
+        
         setSelectedOption(value);
         setAnswers(prev => {
             const newAnswers = {
