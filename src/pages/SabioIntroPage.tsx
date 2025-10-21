@@ -13,7 +13,11 @@ const SabioIntroPage: React.FC = () => {
     };
 
     const handleCloseClick = () => {
-        navigate('/');
+        if (window.history.length > 1) {
+            navigate(-1);
+        } else {
+            navigate(-1);
+        }
     };
 
     return (
