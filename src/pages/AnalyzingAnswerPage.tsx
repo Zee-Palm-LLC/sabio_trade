@@ -25,9 +25,7 @@ const AnalyzingAnswerPage: React.FC = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const handleBackClick = () => {
-        navigate(-1);
-    };
+    
 
     const handleContinueClick = () => {
         navigate('/welcome');
