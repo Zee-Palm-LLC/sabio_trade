@@ -64,6 +64,16 @@ const TradingQuizExtraPage: React.FC = () => {
     const questionOffset = 8;
     const question = mapExtraQuestions[fromProfile ? 4 : current];
 
+    const handleBackClick = () => {
+        if (fromProfile) {
+            navigate(-1);
+        } else if (current > 0) {
+            setCurrent(current - 1);
+        } else {
+            navigate(-1);
+        }
+    };
+
     const handleSelect = (value: string) => {
         setSelected(prev => ({ ...prev, [question.id]: value }));
         setTimeout(() => {
@@ -83,12 +93,10 @@ const TradingQuizExtraPage: React.FC = () => {
         <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
             <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col relative z-10">
-                <div className="flex flex-col items-center pt-8 pb-4 px-4">
-                    <div className="flex justify-between w-full mb-3">
-                        <BackButton onClick={() => navigate(-1)} />
-                        <div className="flex items-center">
-                            <img src={Logo} alt="SabioTrade" className="h-14" />
-                        </div>
+                <div className="flex flex-col items-center pt-8 pb-4">
+                    <div className="flex justify-between w-full px-4 mb-3">
+                        <BackButton onClick={handleBackClick} />
+                        <img src={Logo} alt="SabioTrade" className="h-14" />
                         <div className="flex items-center space-x-1">
                             <span className="font-bold text-base" style={{ color: 'var(--color-primary)' }}>
                                 {fromProfile ? 13 : current + 1 + questionOffset} /
