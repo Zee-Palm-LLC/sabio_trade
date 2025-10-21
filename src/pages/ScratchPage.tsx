@@ -73,11 +73,11 @@ const ScratchPage: React.FC = () => {
                             <span className="text-white/70 text-sm">2 days ago</span>
                         </div>
                         <div className="space-y-1">
-                            <div className="flex items-center space-x-2">
+                            <div className="flex items-start space-x-2">
                                 <img
                                     src={BulletPointIcon}
                                     alt="Bullet"
-                                    className="w-3 h-3 mt-0.5 flex-shrink-0"
+                                    className="w-3 h-3 mt-0.5 flex-shrink-0 mt-0.5"
                                 />   <p
                                     className="text-white/50"
                                     style={{
@@ -91,11 +91,11 @@ const ScratchPage: React.FC = () => {
                                     Partnership announcements with major tech players sparked investor confidence.
                                 </p>
                             </div>
-                            <div className="flex items-center space-x-2">
+                            <div className="flex items-start space-x-2">
                                 <img
                                     src={BulletPointIcon}
                                     alt="Bullet"
-                                    className="w-3 h-3 mt-0.5 flex-shrink-0"
+                                    className="w-3 h-3 mt-0.5 flex-shrink-0 mt-0.5"
                                 />
                                 <p
                                     className="text-white/50"
