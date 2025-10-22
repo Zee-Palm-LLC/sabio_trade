@@ -26,7 +26,7 @@ const RightTimeToSell: React.FC = () => {
                 </p>
             </div>
         </Card>
-        <TabImageCarousel />
+        <TabImageCarousel  />
         </div>
 
     );

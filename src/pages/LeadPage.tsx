@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../assets/logo.png';
-import { BottomShade, ChartCard, EmailCaptureCard, TestimonialCard } from '../components';
+import { BottomShade, ChartCard, EmailCaptureCard, TabImageCarousel } from '../components';
 
 const LeadPage: React.FC = () => {
     const [showEmailModal] = useState(true);
@@ -15,18 +15,10 @@ const LeadPage: React.FC = () => {
                     </div>
                     {/* <EmailCaptureCard /> */}
                     <ChartCard />
-                    <div className='mt-6'> 
-                    <TestimonialCard/>
-                    
+                    <div className='mt-6'>
+                        <TabImageCarousel isPhone={true} />
                     </div>
-                    {/* <div className="mt-4" />
-                    <TestimonialCard />
-                    <PrimaryButton
-                        text="Unlock my trader profile"
-                        showIcon={false}
-                        onClick={handleOnClick}
-                    /> */}
-
+                    <div className='min-h-[200px]'/>
                 </div>
             </div>
 
