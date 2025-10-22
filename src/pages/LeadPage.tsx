@@ -15,18 +15,10 @@ const LeadPage: React.FC = () => {
                     </div>
                     {/* <EmailCaptureCard /> */}
                     <ChartCard />
-                    <div className='mt-6'> 
-                    <TabImageCarousel isPhone={true}/>
-                    
+                    <div className='mt-6'>
+                        <TabImageCarousel isPhone={true} />
                     </div>
-                    {/* <div className="mt-4" />
-                    <TestimonialCard />
-                    <PrimaryButton
-                        text="Unlock my trader profile"
-                        showIcon={false}
-                        onClick={handleOnClick}
-                    /> */}
-
+                    <div className='min-h-[200px]'/>
                 </div>
             </div>
 
