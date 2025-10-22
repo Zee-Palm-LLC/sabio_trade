@@ -156,7 +156,7 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                                 }}
                             >
                                 <span className="mr-1 text-lg align-bottom" aria-hidden="true"></span>
-                                I used to panic at losses, Sabio taught me resilience.
+                                "I used to panic at losses, Sabio taught me resilience."
                                 <span className="ml-1 text-lg align-bottom" aria-hidden="true"></span>
                             </span>
                         </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
-import { BottomShade, PrimaryButton, ProgressCard, TestimonialCard } from "../components";
+import { BottomShade, PrimaryButton, ProgressCard, TabImageCarousel } from "../components";
 
 
 const TradingProfiles: React.FC = () => {
@@ -46,7 +46,7 @@ const TradingProfiles: React.FC = () => {
                     topText="1,000,000+ trading profiles built — your personalized path is next."
                     bottomText="Creating the personal challenge and trading profile..."
                 />
-                <TestimonialCard />
+                <TabImageCarousel isPhone={true} />
                 <div className="pt-10 pb-6 mb-20">
                     <PrimaryButton
                         onClick={handleContinueClick}

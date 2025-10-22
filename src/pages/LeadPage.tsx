@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../assets/logo.png';
-import { BottomShade, ChartCard, EmailCaptureCard, TestimonialCard } from '../components';
+import { BottomShade, ChartCard, EmailCaptureCard, TabImageCarousel } from '../components';
 
 const LeadPage: React.FC = () => {
     const [showEmailModal] = useState(true);
@@ -16,7 +16,7 @@ const LeadPage: React.FC = () => {
                     {/* <EmailCaptureCard /> */}
                     <ChartCard />
                     <div className='mt-6'> 
-                    <TestimonialCard/>
+                    <TabImageCarousel isPhone={true}/>
                     
                     </div>
                     {/* <div className="mt-4" />
