@@ -61,12 +61,13 @@ const TradingQuizExtraPage: React.FC = () => {
     const [current, setCurrent] = useState(fromProfile ? 4 : 0);
     const [selected, setSelected] = useState<Record<number, string>>({});
     const [isIconAnimating, setIsIconAnimating] = useState(false);
+    const [forceUpdate, setForceUpdate] = useState(0); // Force re-render when DNA icons change
 
     const total = 13;
     const questionOffset = 8;
     const question = mapExtraQuestions[fromProfile ? 4 : current];
 
-    // Get stored DNA icons for display
+    // Get stored DNA icons for display (with forceUpdate dependency)
     const storedDNAIcons = DNAIconsService.getDNAIcons();
     const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === question.id);
 
@@ -75,16 +76,27 @@ const TradingQuizExtraPage: React.FC = () => {
             navigate(-1);
         } else if (current > 0) {
             setCurrent(current - 1);
+            // Clear selected option when going back to prevent icon from showing
+            setSelected(prev => {
+                const newSelected = { ...prev };
+                delete newSelected[question.id];
+                return newSelected;
+            });
         } else {
             navigate(-1);
         }
     };
 
     const handleSelect = (value: string) => {
+        console.log('TradingQuizExtraPage - handleSelect called');
+        console.log('Question ID:', question.id);
+        console.log('Selected value:', value);
+        
         setSelected(prev => ({ ...prev, [question.id]: value }));
         
-        // ✅ Store DNA icon if question ID is 1
-        if (question.id === 1) {
+        // ✅ Store DNA icon if question ID is 2
+        if (question.id === 2) {
+            console.log('Question ID 2 detected - storing DNA icon');
             DNAIconsService.storeDNAIcon(
                 question.id,
                 question.title,
@@ -92,15 +104,28 @@ const TradingQuizExtraPage: React.FC = () => {
                 'tradingQuizExtraPage'
             );
             
+            // Force re-render to pick up the new icon
+            setForceUpdate(prev => prev + 1);
+            
+            // Debug: Check if icon was stored
+            setTimeout(() => {
+                const updatedIcons = DNAIconsService.getDNAIcons();
+                console.log('Updated DNA icons after storage:', updatedIcons);
+                const newIcon = updatedIcons.find(icon => icon.questionId === question.id);
+                console.log('New icon found:', newIcon);
+            }, 100);
+            
             // Trigger animation
+            console.log('Setting animation to true');
             setIsIconAnimating(true);
             setTimeout(() => {
+                console.log('Setting animation to false');
                 setIsIconAnimating(false);
             }, 1000);
         }
 
-        // Different timing based on whether it's question ID 1 (with animation)
-        const delayTime = question.id === 1 ? 1300 : 200; // Wait for animation to complete + buffer
+        // Different timing based on whether it's question ID 2 (with animation)
+        const delayTime = question.id === 2 ? 1300 : 200; // Wait for animation to complete + buffer
         
         setTimeout(() => {
             if (fromProfile) {
@@ -139,25 +164,34 @@ const TradingQuizExtraPage: React.FC = () => {
 
                 <ProgressIndicator current={fromProfile ? 13 : current + 1 + questionOffset} total={total} />
 
-                {/* Trader DNA Icons - Visible only for question ID 1 (9) and when option is selected */}
-                {question.id === 1 && currentQuestionIcon && (
-                    <div className="relative flex justify-center mt-4 mb-2">
-                        <div className="flex space-x-3">
-                            <div
-                                className={`w-10 h-10 rounded-full flex items-center justify-center text-2xl ${
-                                    isIconAnimating ? 'animate-fly-from-top-right' : 'animate-float'
-                                }`}
-                                style={{
-                                    background: 'rgba(255, 255, 255, 0.1)',
-                                    border: '2px solid rgba(255,255,255,0.2)',
-                                    backdropFilter: 'blur(6px)',
-                                }}
-                            >
-                                {currentQuestionIcon.icon}
+                {/* Trader DNA Icons - Visible only for question ID 2 and when option is selected */}
+                {(() => {
+                    console.log('Icon display check:');
+                    console.log('Question ID:', question.id);
+                    console.log('Current question icon:', currentQuestionIcon);
+                    console.log('Is icon animating:', isIconAnimating);
+                    console.log('Selected option:', selected[question.id]);
+                    console.log('Should show icon:', question.id === 2 && currentQuestionIcon && selected[question.id]);
+                    
+                    return question.id === 2 && currentQuestionIcon && selected[question.id] && (
+                        <div className="relative flex justify-center mt-4 mb-2">
+                            <div className="flex space-x-3">
+                                <div
+                                    className={`w-10 h-10 rounded-full flex items-center justify-center text-2xl ${
+                                        isIconAnimating ? 'animate-fly-from-top-right' : 'animate-float'
+                                    }`}
+                                    style={{
+                                        background: 'rgba(255, 255, 255, 0.1)',
+                                        border: '2px solid rgba(255,255,255,0.2)',
+                                        backdropFilter: 'blur(6px)',
+                                    }}
+                                >
+                                    {currentQuestionIcon.icon}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    );
+                })()}
 
                 {question.id === 4 && (
                     <div className="absolute inset-0 overflow-hidden pointer-events-none">

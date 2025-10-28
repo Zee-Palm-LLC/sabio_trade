@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShieldIcon from '../../assets/sheild_filled.svg';
 import StandingAvatar from '../../assets/standing_avatar.png';
@@ -16,15 +16,27 @@ const EmailCaptureCard: React.FC<EmailCaptureCardProps> = ({ dnaIcons = [] }) =>
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const [warning, setWarning] = useState<string | null>(null);
+    const [forceUpdate, setForceUpdate] = useState(0); // Force re-render when DNA icons change
     const navigate = useNavigate();
     
-    // Get stored DNA icons
+    // Get stored DNA icons (with forceUpdate dependency)
     const storedDNAIcons = DNAIconsService.getDNAIcons();
     const displayIcons = storedDNAIcons.map(icon => icon.icon);
     
     // Debug logging
     console.log('EmailCaptureCard - Stored DNA icons:', storedDNAIcons);
     console.log('EmailCaptureCard - Display icons:', displayIcons);
+    console.log('EmailCaptureCard - Force update count:', forceUpdate);
+
+    // Listen for DNA icon changes
+    useEffect(() => {
+        const unsubscribe = DNAIconsService.subscribeToChanges(() => {
+            console.log('EmailCaptureCard - DNA icons changed, forcing update');
+            setForceUpdate(prev => prev + 1);
+        });
+
+        return unsubscribe;
+    }, []);
 
     const validateEmail = (email: string): boolean => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -45,30 +45,46 @@ export const QUESTION_ICON_MAPPINGS = {
             'Optimize based on my strategy': '🧠'
         }
     },
-    // TradingQuizExtraPage.tsx - Question ID 1
+    // TradingQuizExtraPage.tsx - Question ID 2
     tradingQuizExtraPage: {
-        1: {
-            'A clear routine — charts, coffee, and steady profits.': '🏗️',
-            'Fast moves and quick wins — I thrive on action.': '🎯',
-            'Calm and focused, following my plan step by step.': '💎',
-            'Exploring new strategies and feeling confident in my growth.': '🚀'
+        2: {
+            '$30,000 - $50,000': '🏗️',
+            '$50,000 - $100,000': '🎯',
+            'More than $100,000': '💎'
         }
     }
 };
 
 const STORAGE_KEY = 'sabio_trader_dna_icons';
 
+// Event listeners for DNA icon changes
+const listeners: Set<() => void> = new Set();
+
 export class DNAIconsService {
     // Store a DNA icon for a specific question
     static storeDNAIcon(questionId: number, questionText: string, selectedAnswer: string, source: 'questionPage' | 'advanceQuestionPage' | 'tradingQuizExtraPage'): void {
+        console.log('DNAIconsService.storeDNAIcon called with:', { questionId, questionText, selectedAnswer, source });
+        
         const mapping = QUESTION_ICON_MAPPINGS[source][questionId as keyof typeof QUESTION_ICON_MAPPINGS[typeof source]];
-        if (!mapping) return;
+        console.log('Found mapping:', mapping);
+        if (!mapping) {
+            console.log('No mapping found for question ID:', questionId);
+            return;
+        }
 
         const icon = mapping[selectedAnswer as keyof typeof mapping];
-        if (!icon) return;
+        console.log('Found icon:', icon);
+        if (!icon) {
+            console.log('No icon found for answer:', selectedAnswer);
+            return;
+        }
 
         const iconData = DNA_ICON_MAPPING[icon];
-        if (!iconData) return;
+        console.log('Found icon data:', iconData);
+        if (!iconData) {
+            console.log('No icon data found for icon:', icon);
+            return;
+        }
 
         const dnaIconData: DNAIconData = {
             icon,
@@ -80,6 +96,7 @@ export class DNAIconsService {
 
         // Get existing DNA icons
         const existingIcons = this.getDNAIcons();
+        console.log('Existing icons:', existingIcons);
         
         // Replace icon for this question if it exists, otherwise add new one
         const filteredIcons = existingIcons.filter(item => item.questionId !== questionId);
@@ -89,6 +106,10 @@ export class DNAIconsService {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedIcons));
         
         console.log(`Stored DNA icon for question ${questionId}:`, dnaIconData);
+        console.log('Updated icons array:', updatedIcons);
+        
+        // Notify all listeners that DNA icons have changed
+        listeners.forEach(listener => listener());
     }
 
     // Get all stored DNA icons
@@ -123,5 +144,17 @@ export class DNAIconsService {
         const icons = this.getDNAIcons();
         console.log('Current DNA Icons:', icons);
         console.log('DNA Icons Array:', this.getDNAIconsArray());
+    }
+
+    // Subscribe to DNA icon changes
+    static subscribeToChanges(callback: () => void): () => void {
+        listeners.add(callback);
+        console.log('Subscribed to DNA icon changes. Total listeners:', listeners.size);
+        
+        // Return unsubscribe function
+        return () => {
+            listeners.delete(callback);
+            console.log('Unsubscribed from DNA icon changes. Total listeners:', listeners.size);
+        };
     }
 }

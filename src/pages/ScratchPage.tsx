@@ -64,7 +64,7 @@ const ScratchPage: React.FC = () => {
                 <Card
                     className={`w-full max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]`}
                 >
-                    <h2 className="text-white font-semibold text-lg leading-tight text-center">
+                    <h2 className="text-white font-semibold text-lg leading-tight text-center mb-4">
                         Lock in your early access savings
                     </h2>
                     <div className="text-center mb-4">
