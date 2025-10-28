@@ -62,21 +62,6 @@ const TraderProfileCard: React.FC<TraderProfileCardProps> = ({
                     </div>
                 )}
             </div>
-
-
-                <p
-                    className="text-white text-center"
-                    style={{
-                        fontWeight: 500,
-                        fontStyle: "normal",
-                        fontSize: "14px",
-                        lineHeight: "140%",
-                        letterSpacing: "0%",
-                        margin: 0
-                    }}
-                >
-                    With the right education and smart tools, everyday people can invest with discipline and insight proving that success in markets isn't reserved for hedge funds, but open to everyone.
-                </p>
         </Card>
     );
 };

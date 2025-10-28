@@ -6,11 +6,10 @@ import {
   AnalyzingVid,
   InvestingStyleQuizPage, LeadPage, OptionBasedPage,
   QuestionPage,
-  SabioIntroPage,
   ScratchPage,
   TradingProfiles,
   TradingQuizExtraPage,
-  TrustPage, WelcomePage,
+  TrustPage,
   YourTraderProfile
 } from './pages';
 
@@ -19,8 +18,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<InvestingStyleQuizPage />} />
-        <Route path="/welcome" element={<WelcomePage />} />
-        <Route path="/sabio-intro" element={<SabioIntroPage />} />
+        {/* <Route path="/welcome" element={<WelcomePage />} /> */}
+        {/* <Route path="/sabio-intro" element={<SabioIntroPage />} /> */}
         <Route path="/analyzing-final" element={<AnalyzingVid />} />
         <Route path="/analyzing" element={<AnalyzingAnswerPage />} />
         <Route path="/advance-question" element={<AdvanceQuestionPage />} />

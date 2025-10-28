@@ -7,6 +7,7 @@ interface PrimaryButtonProps {
     onClick?: () => void;
     disabled?: boolean;
     className?: string;
+    style?: React.CSSProperties;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
@@ -15,6 +16,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     onClick,
     disabled = false,
     className = '',
+    style = {},
 }) => {
     return (
         <div className={`w-full ${className}`}>
@@ -40,6 +42,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
                     boxShadow: disabled
                         ? 'none'
                         : '0 10px 15px -3px rgba(15, 176, 132, 0.5), 0 4px 6px -2px rgba(15, 176, 132, 0.3)',
+                    ...style,
                 }}
             >
                 {/* Reflection Layer */}

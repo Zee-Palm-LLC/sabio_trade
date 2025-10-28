@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PointAvatar from '../../assets/pointing_avatar.png';
 import ShieldIcon from '../../assets/sheild_filled.svg';
+import StandingAvatar from '../../assets/standing_avatar.png';
+import { DNAIconsService } from '../../services/dnaIconsService';
 import { saveEmail } from '../../services/emailService';
 
-const EmailCaptureCard: React.FC = () => {
+interface EmailCaptureCardProps {
+    // Legacy prop for backward compatibility
+    dnaIcons?: string[];
+}
+
+const EmailCaptureCard: React.FC<EmailCaptureCardProps> = ({ dnaIcons = [] }) => {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const [warning, setWarning] = useState<string | null>(null);
     const navigate = useNavigate();
+    
+    // Get stored DNA icons
+    const storedDNAIcons = DNAIconsService.getDNAIcons();
+    const displayIcons = storedDNAIcons.map(icon => icon.icon);
+    
+    // Debug logging
+    console.log('EmailCaptureCard - Stored DNA icons:', storedDNAIcons);
+    console.log('EmailCaptureCard - Display icons:', displayIcons);
 
     const validateEmail = (email: string): boolean => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -61,6 +75,51 @@ const EmailCaptureCard: React.FC = () => {
                 <h2 className="text-white font-bold text-[20px] leading-tight mb-6 text-center">
                     Enter your email to unlock your <br /> results + get a tailored plan.
                 </h2>
+
+                {/* DNA Icons Triangle Formation */}
+                {displayIcons.length > 0 && (
+                    <div className="flex flex-col items-center mb-6">
+                        <div className="flex flex-col items-center space-y-2">
+                            {/* Top icon - always show first icon */}
+                            <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl animate-glow-pulse"
+                                style={{
+                                    background: 'rgba(255, 255, 255, 0.1)',
+                                    border: '2px solid rgba(255,255,255,0.2)',
+                                    backdropFilter: 'blur(6px)',
+                                }}
+                            >
+                                {displayIcons[0] || '♟️'}
+                            </div>
+                            
+                            {/* Bottom row - show second and third icons */}
+                            <div className="flex space-x-4">
+                                <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl animate-glow-pulse"
+                                    style={{
+                                        background: 'rgba(255, 255, 255, 0.1)',
+                                        border: '2px solid rgba(255,255,255,0.2)',
+                                        backdropFilter: 'blur(6px)',
+                                    }}
+                                >
+                                    {displayIcons[1] || '🧘'}
+                                </div>
+                                <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl animate-glow-pulse"
+                                    style={{
+                                        background: 'rgba(255, 255, 255, 0.1)',
+                                        border: '2px solid rgba(255,255,255,0.2)',
+                                        backdropFilter: 'blur(6px)',
+                                    }}
+                                >
+                                    {displayIcons[2] || '🏗️'}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {/* Text below triangle */}
+                        <p className="text-white/90 text-sm font-medium mt-4 text-center">
+                            See the trader your DNA just revealed — it's you
+                        </p>
+                    </div>
+                )}
 
                 <form onSubmit={handleSubmit}>
                     <div className="relative mb-4">
@@ -149,8 +208,23 @@ const EmailCaptureCard: React.FC = () => {
 
             {/* Avatar positioned at bottom-right */}
             <div className="absolute bottom-[-20px] right-[-8px] pointer-events-none z-0">
-                <img src={PointAvatar} alt="Point Avatar" className="w-[130px] h-[130px] object-contain" />
+                <img src={StandingAvatar} alt="Standing Avatar" className="w-[130px] h-[130px] object-contain" />
             </div>
+
+            <style>{`
+                @keyframes glow-pulse {
+                    0%, 100% {
+                        box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+                    }
+                    50% {
+                        box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+                    }
+                }
+                
+                .animate-glow-pulse {
+                    animation: glow-pulse 1.5s ease-in-out infinite;
+                }
+            `}</style>
         </div>
     );
 };

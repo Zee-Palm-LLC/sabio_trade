@@ -38,7 +38,7 @@ const TradingProfiles: React.FC = () => {
             <div className="w-full max-w-[375px] mx-auto min-h-screen flex flex-col px-4">
                 <div className="flex flex-col items-center pt-8 pb-4">
                     <div className="flex items-center space-x-3 mb-3">
-                        <img src={Logo} alt="SabioTrade" className=" h-14" />
+                        <img src={Logo} alt="SabioTrade" width={230} height={80} />
                     </div>
                 </div>
                 <ProgressCard

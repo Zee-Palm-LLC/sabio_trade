@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import amdIcon from '../assets/amd.svg';
 import Logo from '../assets/logo.png';
 import BulletPointIcon from '../assets/star_bullet.png';
@@ -8,9 +8,36 @@ import { BottomShade, Card, MediaLogosCard, PrimaryButton, SabioTradeFeatures, S
 const ScratchPage: React.FC = () => {
     const [showReserveButton, setShowReserveButton] = useState(false);
     const [showFeatures, setShowFeatures] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(12 * 60); // 12 minutes in seconds
+    const [isScratched, setIsScratched] = useState(false);
+
+    // Countdown timer effect
+    useEffect(() => {
+        if (!isScratched) return;
+
+        const timer = setInterval(() => {
+            setTimeLeft((prev) => {
+                if (prev <= 0) {
+                    clearInterval(timer);
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [isScratched]);
+
+    // Format time as MM:SS
+    const formatTime = (seconds: number) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    };
 
     const handleScratchComplete = () => {
         console.log("🎉 Scratch card completed!");
+        setIsScratched(true);
         setShowReserveButton(true);
     };
 
@@ -25,14 +52,15 @@ const ScratchPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
-            <BottomShade />
-            <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">
-                <div className="flex flex-col items-center pt-8 pb-4">
-                    <div className="flex items-center space-x-3 mb-3">
-                        <img src={Logo} alt="SabioTrade" className=" h-14" />
+        <>
+            <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
+                <BottomShade />
+                <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">
+                    <div className="flex flex-col items-center pt-8 pb-4">
+                        <div className="flex items-center space-x-3 mb-3">
+                            <img src={Logo} alt="SabioTrade" className=" h-14" />
+                        </div>
                     </div>
-                </div>
                 <Card
                     className={`w-full max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]`}
                 >
@@ -40,9 +68,6 @@ const ScratchPage: React.FC = () => {
                         Lock in your early access savings
                     </h2>
                     <div className="text-center mb-4">
-                        <p className="text-green-400 text-sm font-medium mb-3">
-                            Your offer expires in 2 days
-                        </p>
                         <div className="w-full bg-gray-600 rounded-full h-2 mb-2">
                             <div className="bg-green-400 h-2 rounded-full" style={{ width: '68%' }}></div>
                         </div>
@@ -123,25 +148,35 @@ const ScratchPage: React.FC = () => {
                     <div className="mb-20"></div>
                 )}
 
-                {/* Condition 2: Reserve Button with Pricing (after scratching) */}
+                {/* Condition 2: Sticky CTA Block (after scratching) */}
                 {showReserveButton && !showFeatures && (
-                    <div className="w-full mt-0 mb-20">
-                        <div className="text-center mb-6">
-                            <div className="flex items-center justify-center gap-2 mb-2">
-                                <span className="text-white/60 text-xl line-through">$229</span>
-                                <span className="text-[#17F871] text-4xl font-bold">$89</span>
+                    <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#340863] to-transparent p-4 z-50">
+                        <div className="w-[375px] mx-auto">
+                            {/* Countdown Timer */}
+                            <div className="text-center mb-4">
+                                <p className={`text-white text-base font-medium ${
+                                    timeLeft < 120 ? 'text-red-400 animate-pulse' : ''
+                                }`}>
+                                    Price for the next {formatTime(timeLeft)} minutes
+                                </p>
                             </div>
-                            <p className="text-white/70 text-sm">
-                                Price for next 2 days
-                            </p>
-                        </div>
 
-                        <PrimaryButton
-                            onClick={handleReserveClick}
-                            text="Reserve my spot"
-                            showIcon={false}
-                            className='mb-4'
-                        />
+                            {/* Continue Button */}
+                            <PrimaryButton
+                                onClick={handleReserveClick}
+                                text="Continue →"
+                                showIcon={false}
+                                className={`w-full ${timeLeft < 120 ? 'animate-glow-pulse' : ''}`}
+                                style={{
+                                    background: timeLeft < 120 
+                                        ? 'linear-gradient(45deg, #ff6b6b, #ee5a24)' 
+                                        : 'linear-gradient(to right, #0FB084, #2FA6B9)',
+                                    boxShadow: timeLeft < 120 
+                                        ? '0 0 20px rgba(255, 107, 107, 0.6)' 
+                                        : '0 0 15px rgba(15, 176, 132, 0.4)'
+                                }}
+                            />
+                        </div>
                     </div>
                 )}
 
@@ -172,6 +207,22 @@ const ScratchPage: React.FC = () => {
 
             </div>
         </div>
+        
+        <style>{`
+            @keyframes glow-pulse {
+                0%, 100% {
+                    box-shadow: 0 0 15px rgba(15, 176, 132, 0.4);
+                }
+                50% {
+                    box-shadow: 0 0 25px rgba(15, 176, 132, 0.8), 0 0 35px rgba(15, 176, 132, 0.6);
+                }
+            }
+            
+            .animate-glow-pulse {
+                animation: glow-pulse 1.5s ease-in-out infinite;
+            }
+        `}</style>
+        </>
     );
 };
 

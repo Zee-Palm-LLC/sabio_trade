@@ -64,7 +64,7 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
 
             const percentage = (transparentPixels / (canvas.width * canvas.height)) * 100;
 
-            if (percentage > 70 && !scratched) {
+            if (percentage > 80 && !scratched) {
                 setScratched(true);
                 onScratchComplete?.();
             }

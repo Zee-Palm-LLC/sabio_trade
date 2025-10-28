@@ -28,7 +28,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
     return (
         <div className={`flex-1 flex flex-col justify-center px-4 mb-1 mt-5 ${className}`}>
             <div className="text-center mb-8">
-                <h2 className="text-white text-3xl font-bold mb-0 leading-tight">
+                <h2 className="text-white text-2xl font-bold mb-0 leading-tight">
                     {questionText}
                 </h2>
                 <p className="text-white/70 text-base leading-tight">
@@ -45,7 +45,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                         <button
                             key={option.value}
                             onClick={() => onOptionSelect(option.value)}
-                            className="w-full py-4 px-6 rounded-xl text-white font-semibold text-[18px] relative mb-1"
+                            className="w-full py-4 px-6 rounded-xl text-white font-semibold text-[16px] relative mb-1"
                             style={{
                                 backgroundColor: isSelected 
                                     ? '#340863' 
