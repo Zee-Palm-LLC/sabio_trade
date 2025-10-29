@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { BottomShade, ChartCard, EmailCaptureCard, TabImageCarousel } from '../components';
 
 const LeadPage: React.FC = () => {
-    const location = useLocation() as any;
     const [showEmailModal] = useState(true);
-    
-    // Collect DNA icons from all sources
-    const allDnaIcons = location.state?.dnaIcons || [];
+
 
     return (
         <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
@@ -23,7 +19,7 @@ const LeadPage: React.FC = () => {
                     <div className='mt-6'>
                         <TabImageCarousel isPhone={true} />
                     </div>
-                    <div className='min-h-[200px]'/>
+                    <div className='min-h-[200px]' />
                 </div>
             </div>
 
@@ -45,7 +41,7 @@ const LeadPage: React.FC = () => {
                             overflowY: 'auto',
                         }}
                     >
-                        <EmailCaptureCard dnaIcons={allDnaIcons} />
+                        <EmailCaptureCard />
                     </div>
                 </div>
             )}

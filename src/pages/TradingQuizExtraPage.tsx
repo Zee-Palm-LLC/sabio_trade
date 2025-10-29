@@ -61,7 +61,6 @@ const TradingQuizExtraPage: React.FC = () => {
     const [current, setCurrent] = useState(fromProfile ? 4 : 0);
     const [selected, setSelected] = useState<Record<number, string>>({});
     const [isIconAnimating, setIsIconAnimating] = useState(false);
-    const [forceUpdate, setForceUpdate] = useState(0); // Force re-render when DNA icons change
 
     const total = 13;
     const questionOffset = 8;
@@ -104,8 +103,7 @@ const TradingQuizExtraPage: React.FC = () => {
                 'tradingQuizExtraPage'
             );
             
-            // Force re-render to pick up the new icon
-            setForceUpdate(prev => prev + 1);
+            // DNA icon will be automatically picked up on next render
             
             // Debug: Check if icon was stored
             setTimeout(() => {

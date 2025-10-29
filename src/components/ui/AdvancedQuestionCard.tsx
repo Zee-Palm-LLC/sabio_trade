@@ -91,7 +91,6 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                 {filteredOptions.map((option, index) => {
                     const optionLabel = typeof option === 'string' ? option : option.label;
                     const optionDescription = typeof option === 'string' ? '' : (option.description || '');
-                    const optionSubtitle = typeof option === 'string' ? '' : (option.subtitle || '');
                     const isSelected = multi ? selectedOptions.includes(optionLabel) : (selectedOption === optionLabel);
 
                     return (

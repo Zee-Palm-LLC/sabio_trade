@@ -16,10 +16,9 @@ interface AnalyzingModalProps {
     isOpen: boolean;
     onClose: () => void;
     selectedStocks: string[];
-    selectedTopic?: string;
 }
 
-const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, selectedStocks, selectedTopic = "Risk and rewards" }) => {
+const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, selectedStocks}) => {
     const navigate = useNavigate();
     const [visibleItems, setVisibleItems] = useState<number[]>([]);
 
