@@ -24,9 +24,23 @@ const AnalyzingAnswerPage: React.FC = () => {
             return { title: "Analyzing...", quote: "Your trading potential is being analyzed..." };
         }
         
+        // Get archetype name (remove "The " prefix if present)
+        const archetypeName = primaryIcon.archetype.replace(/^The\s+/i, '').trim();
+        
+        // Map archetype to specific quotes from screenshot
+        const archetypeQuotes: Record<string, string> = {
+            'Strategist': "You're building foundations, not chasing hype.",
+            'Risk-Taker': "Quick thinking — you spot moves before others.",
+            'Visionary': "Curious minds master the markets.",
+            'Confident': "Ownership mindset — you lead your own path.",
+            'Explorer': "Freedom fuels your focus — trade on your terms."
+        };
+        
+        const quote = archetypeQuotes[archetypeName] || primaryIcon.quote || "Your trading potential is being analyzed...";
+        
         return {
             title: primaryIcon.archetype || "Analyzing...",
-            quote: primaryIcon.quote || "Your trading potential is being analyzed..."
+            quote: quote
         };
     };
 

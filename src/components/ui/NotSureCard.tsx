@@ -15,10 +15,28 @@ const NotSureCard: React.FC<NotSureCardProps> = ({ dnaIcons: _dnaIcons = [] }) =
     // Get the DNA icon from question ID 5 (AdvanceQuestionPage)
     const question5Icon = storedDNAIcons.find(icon => icon.questionId === 5);
     
-    // Map DNA icons to trader archetype info
+    // Map DNA icons to trader archetype info based on icon emoji
     const getTraderDNAInfo = () => {
         if (!question5Icon) return null;
 
+        // Map icon emoji to specific archetype and quote
+        const iconMapping: Record<string, { archetype: string; quote: string }> = {
+            '🧘': { archetype: 'Emotional', quote: "Awareness is power — every trader starts here." },
+            '🦉': { archetype: 'Patient', quote: "Holding your ground — classic discipline." },
+            '📊': { archetype: 'Risk-Taker', quote: "Buying when others panic — a true contrarian spirit." },
+            '🧠': { archetype: 'Composed', quote: "Composure over chaos — strong mental game." }
+        };
+
+        const mappedInfo = iconMapping[question5Icon.icon];
+        
+        if (mappedInfo) {
+            return {
+                archetype: mappedInfo.archetype,
+                quote: mappedInfo.quote
+            };
+        }
+
+        // Fallback to stored values if icon not found in mapping
         return {
             archetype: question5Icon.archetype,
             quote: question5Icon.quote

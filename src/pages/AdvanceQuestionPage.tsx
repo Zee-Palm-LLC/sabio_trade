@@ -159,7 +159,6 @@ const AdvanceQuestionPage: React.FC = () => {
             }, 1000);
         }
 
-        // Special handling for question 7 - save the selected topic
         if (currentQuestion.id === 7) {
             localStorage.setItem('selectedTopic', value);
 
