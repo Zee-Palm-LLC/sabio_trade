@@ -74,13 +74,21 @@ const TradingQuizExtraPage: React.FC = () => {
         if (fromProfile) {
             navigate(-1);
         } else if (current > 0) {
-            setCurrent(current - 1);
-            // Clear selected option when going back to prevent icon from showing
+            // Get the previous question before navigating
+            const previousQuestionIndex = current - 1;
+            const previousQuestion = mapExtraQuestions[previousQuestionIndex];
+            
+            // Clear selected option for the previous question when going back
             setSelected(prev => {
                 const newSelected = { ...prev };
-                delete newSelected[question.id];
+                if (previousQuestion) {
+                    delete newSelected[previousQuestion.id];
+                }
                 return newSelected;
             });
+            
+            // Navigate to previous question
+            setCurrent(previousQuestionIndex);
         } else {
             navigate(-1);
         }
