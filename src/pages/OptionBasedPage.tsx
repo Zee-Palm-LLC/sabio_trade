@@ -51,7 +51,7 @@ const OptionBasedPage: React.FC = () => {
                 <div className="flex items-center justify-between w-full mb-3">
                     <BackButton onClick={handleBackClick} />
                     <div className="flex items-center">
-                        <img src={Logo} alt="SabioTrade" className="h-14" />
+                        <img src={Logo} alt="SabioTrade" width={230} height={80} />
                     </div>
                     <div style={{ width: 35 }}></div>
                 </div>

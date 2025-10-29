@@ -16,6 +16,7 @@ import SteadyLarge from '../assets/steadyLarge.png';
 import { BackButton, BottomShade, ProgressIndicator } from '../components';
 import IconOptionCard, { type IconOption } from '../components/ui/IconOptionCard';
 import extraQuiz from '../data/extraQuiz.json';
+import { DNAIconsService } from '../services/dnaIconsService';
 
 interface ExtraQuestion {
     id: number;
@@ -59,23 +60,71 @@ const TradingQuizExtraPage: React.FC = () => {
 
     const [current, setCurrent] = useState(fromProfile ? 4 : 0);
     const [selected, setSelected] = useState<Record<number, string>>({});
+    const [isIconAnimating, setIsIconAnimating] = useState(false);
 
     const total = 13;
     const questionOffset = 8;
     const question = mapExtraQuestions[fromProfile ? 4 : current];
+
+    // Get stored DNA icons for display (with forceUpdate dependency)
+    const storedDNAIcons = DNAIconsService.getDNAIcons();
+    const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === question.id);
 
     const handleBackClick = () => {
         if (fromProfile) {
             navigate(-1);
         } else if (current > 0) {
             setCurrent(current - 1);
+            // Clear selected option when going back to prevent icon from showing
+            setSelected(prev => {
+                const newSelected = { ...prev };
+                delete newSelected[question.id];
+                return newSelected;
+            });
         } else {
             navigate(-1);
         }
     };
 
     const handleSelect = (value: string) => {
+        console.log('TradingQuizExtraPage - handleSelect called');
+        console.log('Question ID:', question.id);
+        console.log('Selected value:', value);
+        
         setSelected(prev => ({ ...prev, [question.id]: value }));
+        
+        // ✅ Store DNA icon if question ID is 2
+        if (question.id === 2) {
+            console.log('Question ID 2 detected - storing DNA icon');
+            DNAIconsService.storeDNAIcon(
+                question.id,
+                question.title,
+                value,
+                'tradingQuizExtraPage'
+            );
+            
+            // DNA icon will be automatically picked up on next render
+            
+            // Debug: Check if icon was stored
+            setTimeout(() => {
+                const updatedIcons = DNAIconsService.getDNAIcons();
+                console.log('Updated DNA icons after storage:', updatedIcons);
+                const newIcon = updatedIcons.find(icon => icon.questionId === question.id);
+                console.log('New icon found:', newIcon);
+            }, 100);
+            
+            // Trigger animation
+            console.log('Setting animation to true');
+            setIsIconAnimating(true);
+            setTimeout(() => {
+                console.log('Setting animation to false');
+                setIsIconAnimating(false);
+            }, 1000);
+        }
+
+        // Different timing based on whether it's question ID 2 (with animation)
+        const delayTime = question.id === 2 ? 1300 : 200; // Wait for animation to complete + buffer
+        
         setTimeout(() => {
             if (fromProfile) {
                 navigate('/scratch');
@@ -86,7 +135,7 @@ const TradingQuizExtraPage: React.FC = () => {
                     navigate('/lead');
                 }
             }
-        }, 200);
+        }, delayTime);
     };
 
     return (
@@ -94,21 +143,53 @@ const TradingQuizExtraPage: React.FC = () => {
             <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col relative z-10">
                 <div className="flex flex-col items-center pt-8 pb-4">
-                    <div className="flex justify-between w-full px-4 mb-3">
+                    <div className="flex items-center justify-between w-full mb-3">
                         <BackButton onClick={handleBackClick} />
-                        <img src={Logo} alt="SabioTrade" className="h-14" />
+                        <div className="flex items-center">
+                            <img src={Logo} alt="SabioTrade" width={230} height={80} />
+                        </div>
                         <div className="flex items-center space-x-1">
-                            <span className="font-bold text-base" style={{ color: 'var(--color-primary)' }}>
+                            <span className="font-bold text-base leading-[18px]" style={{ color: 'var(--color-primary)' }}>
                                 {fromProfile ? 13 : current + 1 + questionOffset} /
                             </span>
-                            <span className="font-bold text-base" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                            <span className="font-bold text-base leading-[18px]" style={{ color: 'rgba(255, 255, 255, var(--opacity-80))' }}>
                                 {total}
                             </span>
                         </div>
                     </div>
+
                 </div>
 
                 <ProgressIndicator current={fromProfile ? 13 : current + 1 + questionOffset} total={total} />
+
+                {/* Trader DNA Icons - Visible only for question ID 2 and when option is selected */}
+                {(() => {
+                    console.log('Icon display check:');
+                    console.log('Question ID:', question.id);
+                    console.log('Current question icon:', currentQuestionIcon);
+                    console.log('Is icon animating:', isIconAnimating);
+                    console.log('Selected option:', selected[question.id]);
+                    console.log('Should show icon:', question.id === 2 && currentQuestionIcon && selected[question.id]);
+                    
+                    return question.id === 2 && currentQuestionIcon && selected[question.id] && (
+                        <div className="relative flex justify-center mt-4 mb-2">
+                            <div className="flex space-x-3">
+                                <div
+                                    className={`w-10 h-10 rounded-full flex items-center justify-center text-2xl ${
+                                        isIconAnimating ? 'animate-fly-from-top-right' : 'animate-float'
+                                    }`}
+                                    style={{
+                                        background: 'rgba(255, 255, 255, 0.1)',
+                                        border: '2px solid rgba(255,255,255,0.2)',
+                                        backdropFilter: 'blur(6px)',
+                                    }}
+                                >
+                                    {currentQuestionIcon.icon}
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })()}
 
                 {question.id === 4 && (
                     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -135,6 +216,52 @@ const TradingQuizExtraPage: React.FC = () => {
                     />
                 </div>
             </div>
+
+            <style>{`
+                @keyframes float {
+                    0%, 100% {
+                        transform: translateY(0px);
+                    }
+                    50% {
+                        transform: translateY(-5px);
+                    }
+                }
+                
+                @keyframes fly-from-top-right {
+                    0% {
+                        transform: translate(-120px, -120px) scale(0.2);
+                        opacity: 0;
+                    }
+                    20% {
+                        transform: translate(-90px, -90px) scale(0.4);
+                        opacity: 0.3;
+                    }
+                    40% {
+                        transform: translate(-60px, -60px) scale(0.6);
+                        opacity: 0.5;
+                    }
+                    60% {
+                        transform: translate(-30px, -30px) scale(0.8);
+                        opacity: 0.7;
+                    }
+                    80% {
+                        transform: translate(-10px, -10px) scale(0.95);
+                        opacity: 0.9;
+                    }
+                    100% {
+                        transform: translate(0px, 0px) scale(1);
+                        opacity: 1;
+                    }
+                }
+                
+                .animate-float {
+                    animation: float 3s ease-in-out infinite;
+                }
+                
+                .animate-fly-from-top-right {
+                    animation: fly-from-top-right 1.0s ease-out forwards;
+                }
+            `}</style>
         </div>
     );
 };

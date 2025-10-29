@@ -2,7 +2,7 @@ import React from "react";
 import MellodyHobsonImage from '../../assets/mellody.png';
 import Card from "./Card";
 import QuoteCard from "./QuoteCard";
-import TabImageCarousel from "./TabImageCarousel";
+import TestimonialCard from "./TestimonialCard";
 
 const RiskAndRewardsCard: React.FC = () => {
     return (
@@ -19,14 +19,14 @@ const RiskAndRewardsCard: React.FC = () => {
                     </p>
                     {/* <ResultsCard text="Our education and tools are utilizing the latest technologies to make 
 your experience silky smooth, the challenge will safely prepare you" /> */}
-                    <p className="text-[#cfc9e1] text-base mb-2">
+                    {/* <p className="text-[#cfc9e1] text-base mb-2">
                         In trading, every reward comes with risk. Quick gains tempt, but losses can be just as fast. People should remember: protect your money first, aim for steady growth, and never risk more than you can afford.
-                    </p>
+                    </p> */}
 
                 </div>
             </Card>
 
-            <TabImageCarousel />
+            <TestimonialCard />
         </div>
     );
 };

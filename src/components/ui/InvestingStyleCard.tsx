@@ -24,7 +24,7 @@ const InvestingStyleCard: React.FC<InvestingStyleCardProps> = ({ className = '' 
             className={`w-full max-w-sm rounded-[12px] border shadow-[0_0_12px_0_rgba(125,49,216,0.47)] ${className}`}
         >
             <div className="text-center pt-0 pb-2 pl-4 pr-4">
-                <h2 className="text-[30px] font-semibold text-white mb-2 leading-tight">What's your Investing Style?</h2>
+                <h2 className="text-[30px] font-semibold text-white mb-2 leading-tight">What’s your Investor Profile?</h2>
                 <p className="text-[16px] text-gray-300 text-sm mb-0 font-regular leading-[1]">(2 Min Quiz + Free Plan)</p>
                 <div className="relative w-full h-36 mb-6 flex items-center justify-center">
                     <img src={chartIcon} alt="Chart" className="w-full h-24 object-cover" />

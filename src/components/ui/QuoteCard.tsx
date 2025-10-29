@@ -7,15 +7,18 @@ interface QuoteCardProps {
     name: string;
     role?: string;
     className?: string;
+    bottomMargin?: string;
+
 }
 
 const QuoteCard: React.FC<QuoteCardProps> = ({
     quote,
     profileImage,
     name,
+    bottomMargin = 'mb-6'
 }) => {
     return (
-        <div className="bg-[#031340] rounded-[12px] p-4 mb-6 border border-slate-600/30">
+        <div className={`bg-[#031340] rounded-[12px] p-4 ${bottomMargin} border border-slate-600/30`}>
             <div className="flex justify-center">
                 <img src={QuoteIcon} alt="Quote" className="w-8 h-6 mb-2" />
             </div>

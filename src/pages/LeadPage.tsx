@@ -5,20 +5,21 @@ import { BottomShade, ChartCard, EmailCaptureCard, TabImageCarousel } from '../c
 const LeadPage: React.FC = () => {
     const [showEmailModal] = useState(true);
 
+
     return (
         <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
             <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col">
                 <div className="flex flex-col items-center pt-8 pb-4 px-4 mb-20">
                     <div className="flex items-center space-x-3 mb-3">
-                        <img src={Logo} alt="SabioTrade" className=" h-14" />
+                        <img src={Logo} alt="SabioTrade" width={230} height={80} />
                     </div>
                     {/* <EmailCaptureCard /> */}
                     <ChartCard />
                     <div className='mt-6'>
                         <TabImageCarousel isPhone={true} />
                     </div>
-                    <div className='min-h-[200px]'/>
+                    <div className='min-h-[200px]' />
                 </div>
             </div>
 

@@ -24,7 +24,7 @@ const WelcomePage: React.FC = () => {
             <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4 relative z-10">        <div className="flex flex-col items-center justify-between pt-8 pb-0">
                 <div className="flex items-center justify-between w-full mb-3">
                     <div className="flex items-center">
-                        <img src={Logo} alt="SabioTrade" className="h-14" />
+                        <img src={Logo} alt="SabioTrade" width={230} height={80} />
                     </div>
                     <button
                         onClick={handleCloseClick}

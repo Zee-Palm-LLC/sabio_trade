@@ -7,7 +7,7 @@ import Card from './Card';
 
 interface ScoreItem {
     label: string;
-    score: 'High' | 'Intermediate' | 'Low';
+    score: number | 'High' | 'Intermediate' | 'Low';
     icon: string;
 }
 
@@ -23,7 +23,10 @@ const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
         { label: 'Knowledge', score: 'High', icon: KnowledgeIcon },
     ]
 }) => {
-    const getScorePercentage = (score: string) => {
+    const getScorePercentage = (score: number | string) => {
+        if (typeof score === 'number') {
+            return score;
+        }
         switch (score) {
             case 'High': return 100;
             case 'Intermediate': return 100;
@@ -32,13 +35,27 @@ const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
         }
     };
 
-    const getScoreColor = (score: string) => {
+    const getScoreColor = (score: number | string) => {
+        if (typeof score === 'number') {
+            if (score >= 85) return '#10B981'; // green
+            if (score >= 70) return '#F59E0B'; // orange
+            return '#EF4444'; // red
+        }
         switch (score) {
             case 'High': return '#10B981'; // green
             case 'Intermediate': return '#F59E0B'; // orange
             case 'Low': return '#EF4444'; // red
             default: return '#6B7280';
         }
+    };
+
+    const getScoreLabel = (score: number | string) => {
+        if (typeof score === 'number') {
+            if (score >= 85) return 'High';
+            if (score >= 70) return 'Intermediate';
+            return 'Low';
+        }
+        return score;
     };
 
     return (
@@ -112,7 +129,7 @@ const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
                                         className="text-sm font-semibold"
                                         style={{ color: getScoreColor(item.score) }}
                                     >
-                                        {item.score}
+                                        {getScoreLabel(item.score)}
                                     </span>
                                 </div>
                             </div>

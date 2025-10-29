@@ -50,8 +50,7 @@ const TrustPage: React.FC = () => {
                     <div className="relative w-full mb-3 px-4 flex items-center justify-center" style={{ minHeight: 56 }}>
                         <div className="absolute left-4">
                             <BackButton onClick={handleBackClick} />
-                        </div>
-                        <img src={Logo} alt="SabioTrade" className="h-14" />
+                        </div>    <img src={Logo} alt="SabioTrade" width={230} height={80} />
                     </div>
                 </div>
 

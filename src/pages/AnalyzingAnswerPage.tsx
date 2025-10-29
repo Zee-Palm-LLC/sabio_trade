@@ -1,14 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Analyzing from '../assets/analyzing.png';
 import ColinImage from '../assets/colin.png';
 import Logo from '../assets/logo.png';
+import StandingAvatar from '../assets/standing_avatar.png';
 import StarIcon from '../assets/yellow_star.svg';
 import { BottomShade, Card, PrimaryButton, ProgressIndicator } from '../components';
+import { DNAIconsService } from '../services/dnaIconsService';
 
 const AnalyzingAnswerPage: React.FC = () => {
     const navigate = useNavigate();
     const [progress, setProgress] = useState(0);
+
+    const storedDNAIcons = DNAIconsService.getDNAIcons();
+    console.log('AnalyzingAnswerPage - stored DNA icons:', storedDNAIcons);
+
+    const getTraderDNAInfo = () => {
+        if (storedDNAIcons.length === 0) {
+            return { title: "Analyzing...", quote: "Your trading potential is being analyzed..." };
+        }
+        const primaryIcon = storedDNAIcons.find(icon => icon.questionId === 3);
+        
+        if (!primaryIcon) {
+            return { title: "Analyzing...", quote: "Your trading potential is being analyzed..." };
+        }
+        
+        return {
+            title: primaryIcon.archetype || "Analyzing...",
+            quote: primaryIcon.quote || "Your trading potential is being analyzed..."
+        };
+    };
 
     useEffect(() => {
         // Simulate progress animation
@@ -25,10 +45,10 @@ const AnalyzingAnswerPage: React.FC = () => {
         return () => clearInterval(interval);
     }, []);
 
-    
+
 
     const handleContinueClick = () => {
-        navigate('/welcome');
+        navigate('/advance-question');
     };
 
     return (
@@ -38,7 +58,7 @@ const AnalyzingAnswerPage: React.FC = () => {
                 <div className="flex flex-col items-center pt-8 pb-4 px-4">
                     <div className="flex items-center justify-between w-full mb-3">
                         <div className="flex items-center">
-                            <img src={Logo} alt="SabioTrade" className="h-14" />
+                            <img src={Logo} alt="SabioTrade" width={230} height={80} />
                         </div>
                         <button
                             onClick={() => navigate(-1)}
@@ -59,13 +79,10 @@ const AnalyzingAnswerPage: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col items-center justify-center px-4 mb-6">
-                    <div className="text-center mb-2">
-                        <h1 className="text-white text-2xl font-bold mb-0 leading-tight">
-                            Analyzing your answers...
+                    <div className="text-center mb-2 w-full">
+                        <h1 className="text-white text-1xl font-bold mb-0 leading-tight mb-4">
+                            Analyzing your initial potential
                         </h1>
-                        <p className="text-white/70 text-base leading-relaxed mb-6">
-                            We're analyzing your answer for the most accurate result...
-                        </p>
                         <ProgressIndicator
                             current={progress}
                             total={100}
@@ -86,7 +103,7 @@ const AnalyzingAnswerPage: React.FC = () => {
                         <div className="bg-[#031340] rounded-[12px] p-4">
                             <div className="text-center">
                                 <div className="w-12 h-12 bg-gray-400 rounded-full mx-auto mb-2 flex items-center justify-center">
-                                    <img src={ColinImage} alt="Colin Powell" className="w-full h-full object-cover" />
+                                    <img src={ColinImage} alt="Real Trader" className="w-full h-full object-cover" />
                                 </div>
                                 <div className="flex justify-center space-x-1 mb-2">
                                     {[1, 2, 3, 4, 5].map((_, idx) => (
@@ -122,39 +139,40 @@ const AnalyzingAnswerPage: React.FC = () => {
                                 </p>
                             </div>
                         </div>
-                        <div className="mt-6 flex flex-col items-center">
-                            <div
-                                className="relative w-full rounded-xl overflow-hidden bg-[#29245A] p-0"
-                                style={{ maxWidth: 350, height: 180 }}
-                            >
-                                <img
-                                    src={Analyzing}
-                                    alt="Testimonial"
-                                    className="w-full h-auto object-cover"
-                                    style={{ borderRadius: 16 }}
-                                />
-                                {/* Black overlay */}
-                                <div
-                                    className="absolute inset-0"
+                        <div className="mt-4 flex flex-col items-center">
+                            <img
+                                src={StandingAvatar}
+                                alt="Testimonial"
+                                className="h-48 object-contain"
+                            />
+                            <div className="mt-4 text-center px-4">
+                                <h3
                                     style={{
-                                        background: 'rgba(0,0,0,0.50)',
-                                        borderRadius: 16,
+                                        fontWeight: 600,
+                                        fontSize: 16,
+                                        lineHeight: '120%',
+                                        letterSpacing: 0,
+                                        textAlign: 'center'
                                     }}
-                                />
-                                <div className="absolute left-0 bottom-0 w-full px-5 pb-2 pt-4 flex items-end bg-gradient-to-t from-[#23224C] via-[#23224C99] to-transparent rounded-xl">
-                                    <span
-                                        className="text-white font-bold text-[16px] text-start leading-snug block text-left"
-                                        style={{ textShadow: '0 2px 8px rgba(18,19,52,0.38)' }}
-                                    >
-                                        <span className="mr-1 align-bottom" aria-hidden="true">“</span>
-                                        I used to panic at losses, Sabio
-                                        taught me resilience.
-                                        <span className="ml-1 align-bottom" aria-hidden="true">”</span>
-                                    </span>
-                                </div>
+                                    className="text-white mb-2"
+                                >
+                                    {getTraderDNAInfo().title}
+                                </h3>
+                                <p
+                                    style={{
+                                        fontWeight: 400,
+                                        fontStyle: 'normal',
+                                        fontSize: 14,
+                                        lineHeight: '140%',
+                                        letterSpacing: 0,
+                                        textAlign: 'center'
+                                    }}
+                                    className="text-white/90"
+                                >
+                                    "{getTraderDNAInfo().quote}"
+                                </p>
                             </div>
                         </div>
-
                     </Card>
 
                 </div>
