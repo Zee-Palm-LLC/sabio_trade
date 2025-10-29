@@ -27,9 +27,6 @@ const AdvanceQuestionPage: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
     const [hasUserInteracted, setHasUserInteracted] = useState(false);
     const [showValidationMessage, setShowValidationMessage] = useState(false);
-    const [selectedTopic, setSelectedTopic] = useState<string>(() => {
-        return localStorage.getItem('selectedTopic') || "Risk and rewards";
-    });
     const [isIconAnimating, setIsIconAnimating] = useState(false);
 
     const totalQuestions = 13;
@@ -44,7 +41,6 @@ const AdvanceQuestionPage: React.FC = () => {
         if (location.state?.clearCurrentAnswer && currentQuestionIndex === 2) {
             localStorage.removeItem('tradingTopicOption');
             localStorage.removeItem('selectedTopic');
-            setSelectedTopic("Risk and rewards");
             setAnswers(prev => {
                 const newAnswers = { ...prev };
                 delete newAnswers[7];
@@ -165,7 +161,6 @@ const AdvanceQuestionPage: React.FC = () => {
 
         // Special handling for question 7 - save the selected topic
         if (currentQuestion.id === 7) {
-            setSelectedTopic(value);
             localStorage.setItem('selectedTopic', value);
 
             const originalQuestion = advancedQuestions.find((q: any) => q.id === 7);
@@ -382,7 +377,6 @@ const AdvanceQuestionPage: React.FC = () => {
                 isOpen={showModal}
                 onClose={handleCloseModal}
                 selectedStocks={selectedOptions}
-                selectedTopic={selectedTopic}
             />
 
             <style>{`
