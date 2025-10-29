@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import amdIcon from '../assets/amd.svg';
+import Brands1 from '../assets/brands_1.png';
 import Logo from '../assets/logo.png';
 import BulletPointIcon from '../assets/star_bullet.png';
 import ArrowUpIcon from '../assets/up.svg';
@@ -58,157 +59,167 @@ const ScratchPage: React.FC = () => {
                 <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">
                     <div className="flex flex-col items-center pt-8 pb-4">
                         <div className="flex items-center space-x-3 mb-3">
-                            <img src={Logo} alt="SabioTrade" className=" h-14" />
+                            <img src={Logo} alt="SabioTrade" width={230} height={80} />
                         </div>
                     </div>
-                <Card
-                    className={`w-full max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]`}
-                >
-                    <h2 className="text-white font-semibold text-lg leading-tight text-center mb-4">
-                        Lock in your early access savings
-                    </h2>
-                    <div className="text-center mb-4">
-                        <div className="w-full bg-gray-600 rounded-full h-2 mb-2">
-                            <div className="bg-green-400 h-2 rounded-full" style={{ width: '68%' }}></div>
+                    <Card
+                        className={`w-full max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]`}
+                    >
+                        <h2 className="text-white font-semibold text-lg leading-tight text-center mb-4">
+                            Lock in your early access savings
+                        </h2>
+                        <div className="text-center mb-4">
+                            <div className="w-full bg-gray-600 rounded-full h-2 mb-2">
+                                <div className="bg-green-400 h-2 rounded-full" style={{ width: '68%' }}></div>
+                            </div>
+                            <div className="w-full rounded-[12px] bg-[#031340] border border-slate-600/30 flex flex-col justify-center items-center mb-2">
+                                <span className="block text-[#FFFFFF] dark:text-white font-semibold text-[8px] leading-tight text-center mt-2" style={{ color: '#FFFFFF', fontWeight: 700 }}>
+                                    Applauded by Users &amp; Specialists Alike
+                                </span>
+                                <img src={Brands1} alt="Brands" className="w-full" />
+                            </div>
                         </div>
-                    </div>
-                    <div className="w-full max-w-sm bg-[#031340] rounded-[12px] border border-slate-600/30 px-4 pt-4 pb-4">
-                        <div className="flex items-center justify-between mb-4">
-                            <div className="flex items-center space-x-2">
-                                <div
-                                    className="w-8 h-8 flex items-center justify-center rounded-[5px] relative overflow-hidden"
-                                    style={{
-                                        background: 'linear-gradient(to bottom, #232e63 0%, #121840 100%)',
-                                        boxShadow:
-                                            'inset 0 2px 2px rgba(255,255,255,0.25), inset 0 -2px 4px rgba(0,0,0,0.3), inset 0 -4px 12px rgba(23, 248, 113, 0.10)',
-                                        backdropFilter: 'blur(4px)',
-                                        WebkitBackdropFilter: 'blur(4px)',
-                                    }}
-                                >
+                        <div className="w-full max-w-sm bg-[#031340] rounded-[12px] border border-slate-600/30 px-4 pt-4 pb-4">
+                            <div className="flex items-center justify-between mb-4">
+                                <div className="flex items-center space-x-2">
+                                    <div
+                                        className="w-8 h-8 flex items-center justify-center rounded-[5px] relative overflow-hidden"
+                                        style={{
+                                            background: 'linear-gradient(to bottom, #232e63 0%, #121840 100%)',
+                                            boxShadow:
+                                                'inset 0 2px 2px rgba(255,255,255,0.25), inset 0 -2px 4px rgba(0,0,0,0.3), inset 0 -4px 12px rgba(23, 248, 113, 0.10)',
+                                            backdropFilter: 'blur(4px)',
+                                            WebkitBackdropFilter: 'blur(4px)',
+                                        }}
+                                    >
 
-                                    <img src={amdIcon} alt="AMD" className="w-4 h-4 relative z-10" />
+                                        <img src={amdIcon} alt="AMD" className="w-4 h-4 relative z-10" />
+                                    </div>
+
+
+
+
+                                    <span className="text-[18px] font-bold" style={{ color: 'var(--color-primary)' }}>+2.5%</span>
+                                    <img src={ArrowUpIcon} alt="Arrow Up" className="w-4 h-4" />
+                                </div>
+                                <span className="text-white/70 text-sm">2 days ago</span>
+                            </div>
+                            <div className="space-y-1">
+                                <div className="flex items-start space-x-2">
+                                    <img
+                                        src={BulletPointIcon}
+                                        alt="Bullet"
+                                        className="w-3 h-3 mt-0.5 flex-shrink-0 mt-0.5"
+                                    />   <p
+                                        className="text-white/50"
+                                        style={{
+                                            fontWeight: 500,
+                                            fontStyle: 'normal',
+                                            fontSize: '12px',
+                                            lineHeight: '140%',
+                                            letterSpacing: '0%',
+                                        }}
+                                    >
+                                        Partnership announcements with major tech players sparked investor confidence.
+                                    </p>
+                                </div>
+                                <div className="flex items-start space-x-2">
+                                    <img
+                                        src={BulletPointIcon}
+                                        alt="Bullet"
+                                        className="w-3 h-3 mt-0.5 flex-shrink-0 mt-0.5"
+                                    />
+                                    <p
+                                        className="text-white/50"
+                                        style={{
+                                            fontWeight: 500,
+                                            fontStyle: 'normal',
+                                            fontSize: '12px',
+                                            lineHeight: '140%',
+                                            letterSpacing: '0%',
+                                        }}
+                                    >
+                                        Rise as analysts upgraded the stock strong quarterly results.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
+                    <span className="text-white text-[17px] font-bold block text-center mt-6">
+                        In two weeks, you'll spot these moves yourself
+                    </span>
+                    <ScratchTicket onScratchComplete={handleScratchComplete} />
+
+                    {/* Spacer when only showing scratch ticket */}
+                    {!showReserveButton && !showFeatures && (
+                        <div className="mb-20"></div>
+                    )}
+
+                    {/* Add bottom padding when sticky button is shown to prevent overlap */}
+                    {showReserveButton && !showFeatures && (
+                        <div className="h-32"></div> // Add space for sticky button
+                    )}
+
+                    {/* Condition 2: Sticky CTA Block (after scratching) */}
+                    {showReserveButton && !showFeatures && (
+                        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#340863] to-transparent p-4 z-50">
+                            <div className="w-[375px] mx-auto">
+                                {/* Countdown Timer */}
+                                <div className="text-center mb-4">
+                                    <p className={`text-white text-base font-medium ${timeLeft < 120 ? 'text-red-400 animate-pulse' : ''
+                                        }`}>
+                                        Price for the next {formatTime(timeLeft)} minutes
+                                    </p>
                                 </div>
 
-
-
-
-                                <span className="text-[18px] font-bold" style={{ color: 'var(--color-primary)' }}>+2.5%</span>
-                                <img src={ArrowUpIcon} alt="Arrow Up" className="w-4 h-4" />
-                            </div>
-                            <span className="text-white/70 text-sm">2 days ago</span>
-                        </div>
-                        <div className="space-y-1">
-                            <div className="flex items-start space-x-2">
-                                <img
-                                    src={BulletPointIcon}
-                                    alt="Bullet"
-                                    className="w-3 h-3 mt-0.5 flex-shrink-0 mt-0.5"
-                                />   <p
-                                    className="text-white/50"
+                                {/* Continue Button */}
+                                <PrimaryButton
+                                    onClick={handleReserveClick}
+                                    text="Continue"
+                                    showIcon={true}
+                                    className={`w-full ${timeLeft < 120 ? 'animate-glow-pulse' : ''}`}
                                     style={{
-                                        fontWeight: 500,
-                                        fontStyle: 'normal',
-                                        fontSize: '12px',
-                                        lineHeight: '140%',
-                                        letterSpacing: '0%',
+                                        background: timeLeft < 120
+                                            ? 'linear-gradient(45deg, #ff6b6b, #ee5a24)'
+                                            : 'linear-gradient(to right, #0FB084, #2FA6B9)',
+                                        boxShadow: timeLeft < 120
+                                            ? '0 0 20px rgba(255, 107, 107, 0.6)'
+                                            : '0 0 15px rgba(15, 176, 132, 0.4)'
                                     }}
-                                >
-                                    Partnership announcements with major tech players sparked investor confidence.
-                                </p>
-                            </div>
-                            <div className="flex items-start space-x-2">
-                                <img
-                                    src={BulletPointIcon}
-                                    alt="Bullet"
-                                    className="w-3 h-3 mt-0.5 flex-shrink-0 mt-0.5"
                                 />
-                                <p
-                                    className="text-white/50"
-                                    style={{
-                                        fontWeight: 500,
-                                        fontStyle: 'normal',
-                                        fontSize: '12px',
-                                        lineHeight: '140%',
-                                        letterSpacing: '0%',
-                                    }}
-                                >
-                                    Rise as analysts upgraded the stock strong quarterly results.
-                                </p>
                             </div>
                         </div>
-                    </div>
-                </Card>
-                <span className="text-white text-[17px] font-bold block text-center mt-6">
-                    In two weeks, you'll spot these moves yourself
-                </span>
-                <ScratchTicket onScratchComplete={handleScratchComplete} />
-                
-                {/* Spacer when only showing scratch ticket */}
-                {!showReserveButton && !showFeatures && (
-                    <div className="mb-20"></div>
-                )}
+                    )}
 
-                {/* Condition 2: Sticky CTA Block (after scratching) */}
-                {showReserveButton && !showFeatures && (
-                    <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#340863] to-transparent p-4 z-50">
-                        <div className="w-[375px] mx-auto">
-                            {/* Countdown Timer */}
-                            <div className="text-center mb-4">
-                                <p className={`text-white text-base font-medium ${
-                                    timeLeft < 120 ? 'text-red-400 animate-pulse' : ''
-                                }`}>
-                                    Price for the next {formatTime(timeLeft)} minutes
-                                </p>
-                            </div>
+                    {/* Condition 3: All Content After Reserve Button Click */}
+                    {showFeatures && (
+                        <div className="mt-6 space-y-4 mb-20">
+                            <SabioTradeFeatures />
+                            <MediaLogosCard />
 
                             {/* Continue Button */}
-                            <PrimaryButton
-                                onClick={handleReserveClick}
-                                text="Continue →"
-                                showIcon={false}
-                                className={`w-full ${timeLeft < 120 ? 'animate-glow-pulse' : ''}`}
-                                style={{
-                                    background: timeLeft < 120 
-                                        ? 'linear-gradient(45deg, #ff6b6b, #ee5a24)' 
-                                        : 'linear-gradient(to right, #0FB084, #2FA6B9)',
-                                    boxShadow: timeLeft < 120 
-                                        ? '0 0 20px rgba(255, 107, 107, 0.6)' 
-                                        : '0 0 15px rgba(15, 176, 132, 0.4)'
-                                }}
-                            />
+                            <div className="w-full mt-4 mb-4">
+                                <PrimaryButton
+                                    onClick={handleContinueClick}
+                                    text="Continue"
+                                    showIcon={true}
+                                />
+                            </div>
+
+                            {/* Privacy and Terms Links */}
+                            <div className="flex justify-center items-center space-x-2">
+                                <span className="text-white">•</span>
+                                <a href="https://sabiotrade.com/terms" className="underline text-white hover:text-white transition-colors">Terms & Conditions</a>
+                                <span className="text-white">•</span>
+                                <a href="https://sabiotrade.com/privacy" className="underline text-white hover:text-white transition-colors">Privacy Policy</a>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
-                {/* Condition 3: All Content After Reserve Button Click */}
-                {showFeatures && (
-                    <div className="mt-6 space-y-4 mb-20">
-                        <SabioTradeFeatures />
-                        <MediaLogosCard />
-
-                        {/* Continue Button */}
-                        <div className="w-full mt-4 mb-4">
-                            <PrimaryButton
-                                onClick={handleContinueClick}
-                                text="Continue"
-                                showIcon={true}
-                            />
-                        </div>
-
-                        {/* Privacy and Terms Links */}
-                        <div className="flex justify-center items-center space-x-2">
-                            <span className="text-white">•</span>
-                            <a href="https://sabiotrade.com/terms" className="underline text-white hover:text-white transition-colors">Terms & Conditions</a>
-                            <span className="text-white">•</span>
-                            <a href="https://sabiotrade.com/privacy" className="underline text-white hover:text-white transition-colors">Privacy Policy</a>
-                        </div>
-                    </div>
-                )}
-
+                </div>
             </div>
-        </div>
-        
-        <style>{`
+
+            <style>{`
             @keyframes glow-pulse {
                 0%, 100% {
                     box-shadow: 0 0 15px rgba(15, 176, 132, 0.4);

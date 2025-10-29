@@ -69,31 +69,47 @@ const YourTraderProfile: React.FC = () => {
                 
                 {/* Rolling Micro-Feedback Lines */}
                 {earnedFeedback.length > 0 && (
-                    <div className="mb-6">
-                        <div className="bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] p-4">
-                            <div className="flex items-center space-x-3">
-                                {/* Icon with glow animation */}
-                                <div className="w-10 h-10 rounded-full flex items-center justify-center text-2xl animate-glow-pulse"
+                    <div className="mb-4">
+                        <div className="relative bg-gradient-to-tr from-[#340863] via-[#2a094b] to-[#512e88] rounded-[10px] border border-[#A080FF80] shadow-[0_0_24px_0_rgba(160,128,255,0.22)] p-3 transition-all duration-300 hover:shadow-[0_6px_36px_2px_rgba(49,22,114,0.25)]">
+                            <div className="flex items-center space-x-2">
+                                {/* Icon with enhanced vignette glow (smaller and closer) */}
+                                <div
+                                    className="w-10 h-10 rounded-full flex items-center justify-center text-2xl font-bold animate-glow-pulse ring-2 ring-[#9B7EFF]/60 ring-offset-2 shadow-[0_0_18px_4px_rgba(155,126,255,0.15)] bg-gradient-to-tr from-[#3b236e] to-[#6842c3]"
                                     style={{
-                                        background: 'rgba(255, 255, 255, 0.1)',
-                                        border: '2px solid rgba(255,255,255,0.2)',
+                                        background: 'linear-gradient(135deg, rgba(52,8,99,0.18), rgba(104,66,195,0.24))',
                                         backdropFilter: 'blur(6px)',
+                                        border: '2px solid rgba(155,126,255,0.22)',
                                     }}
                                 >
                                     {earnedFeedback[currentFeedbackIndex]?.icon}
                                 </div>
-                                
-                                {/* Archetype and Quote */}
+
                                 <div className="flex-1">
-                                    <div className="text-white font-bold text-sm mb-1">
+                                    <div className="text-white font-extrabold text-[15px] leading-tight mb-0.5 tracking-wide drop-shadow">
                                         {earnedFeedback[currentFeedbackIndex]?.archetype}
                                     </div>
-                                    <div className="text-white/90 italic text-xs">
-                                        "{earnedFeedback[currentFeedbackIndex]?.quote}"
+                                    <div className="text-[#e0dbff] italic text-xs leading-snug -mt-1">
+                                        “{earnedFeedback[currentFeedbackIndex]?.quote}”
                                     </div>
                                 </div>
                             </div>
+                            {/* Subtle gradient line at bottom for emphasis */}
+                            <div className="absolute left-3 right-3 bottom-0 h-[2px] rounded-[1px] bg-gradient-to-r from-[#6842c3cc] via-[#9B7EFF88] to-[#6842c3cc] opacity-60" />
                         </div>
+                        {/* Feedback progression dots shifted below the gradient card */}
+                        {earnedFeedback.length > 1 && (
+                            <div className="flex justify-center gap-1 mt-2">
+                                {earnedFeedback.map((_, idx) => (
+                                    <div
+                                        key={idx}
+                                        className={`rounded-full transition-all duration-300 ${idx === currentFeedbackIndex
+                                            ? 'bg-[#c7b3ff] w-3 h-1.5'
+                                            : 'bg-[#563088] w-1.5 h-1.5'
+                                            }`}
+                                    />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 )}
                 

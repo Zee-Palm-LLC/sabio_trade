@@ -6,11 +6,10 @@ import { DNAIconsService } from '../../services/dnaIconsService';
 import { saveEmail } from '../../services/emailService';
 
 interface EmailCaptureCardProps {
-    // Legacy prop for backward compatibility
-    dnaIcons?: string[];
+    // No props needed - DNA icons are retrieved from service
 }
 
-const EmailCaptureCard: React.FC<EmailCaptureCardProps> = ({ dnaIcons = [] }) => {
+const EmailCaptureCard: React.FC<EmailCaptureCardProps> = () => {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -21,12 +20,23 @@ const EmailCaptureCard: React.FC<EmailCaptureCardProps> = ({ dnaIcons = [] }) =>
     
     // Get stored DNA icons (with forceUpdate dependency)
     const storedDNAIcons = DNAIconsService.getDNAIcons();
-    const displayIcons = storedDNAIcons.map(icon => icon.icon);
+    
+    // Only get the 3 specific icons from the quiz pages (question IDs 3, 5, and 2)
+    const quizQuestionIds = [3, 5, 2]; // QuestionPage, AdvanceQuestionPage, TradingQuizExtraPage
+    const quizIcons = quizQuestionIds.map(questionId => {
+        const iconData = storedDNAIcons.find(icon => icon.questionId === questionId);
+        return iconData ? iconData.icon : null;
+    }).filter(icon => icon !== null); // Remove null values
+    
+    const displayIcons = quizIcons;
     
     // Debug logging
     console.log('EmailCaptureCard - Stored DNA icons:', storedDNAIcons);
+    console.log('EmailCaptureCard - Quiz question IDs:', quizQuestionIds);
+    console.log('EmailCaptureCard - Quiz icons found:', quizIcons);
     console.log('EmailCaptureCard - Display icons:', displayIcons);
     console.log('EmailCaptureCard - Force update count:', forceUpdate);
+    console.log('EmailCaptureCard - localStorage raw data:', localStorage.getItem('sabio_trader_dna_icons'));
 
     // Listen for DNA icon changes
     useEffect(() => {
@@ -92,7 +102,7 @@ const EmailCaptureCard: React.FC<EmailCaptureCardProps> = ({ dnaIcons = [] }) =>
                 {displayIcons.length > 0 && (
                     <div className="flex flex-col items-center mb-6">
                         <div className="flex flex-col items-center space-y-2">
-                            {/* Top icon - always show first icon */}
+                            {/* Top icon - QuestionPage (ID 3) */}
                             <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl animate-glow-pulse"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.1)',
@@ -103,7 +113,7 @@ const EmailCaptureCard: React.FC<EmailCaptureCardProps> = ({ dnaIcons = [] }) =>
                                 {displayIcons[0] || '♟️'}
                             </div>
                             
-                            {/* Bottom row - show second and third icons */}
+                            {/* Bottom row - AdvanceQuestionPage (ID 5) and TradingQuizExtraPage (ID 2) */}
                             <div className="flex space-x-4">
                                 <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl animate-glow-pulse"
                                     style={{
@@ -112,7 +122,7 @@ const EmailCaptureCard: React.FC<EmailCaptureCardProps> = ({ dnaIcons = [] }) =>
                                         backdropFilter: 'blur(6px)',
                                     }}
                                 >
-                                    {displayIcons[1] || '🧘'}
+                                    {displayIcons[1] || '🚀'}
                                 </div>
                                 <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl animate-glow-pulse"
                                     style={{
@@ -121,7 +131,7 @@ const EmailCaptureCard: React.FC<EmailCaptureCardProps> = ({ dnaIcons = [] }) =>
                                         backdropFilter: 'blur(6px)',
                                     }}
                                 >
-                                    {displayIcons[2] || '🏗️'}
+                                    {displayIcons[2] || '🌱'}
                                 </div>
                             </div>
                         </div>

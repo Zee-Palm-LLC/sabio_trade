@@ -10,19 +10,23 @@ export interface DNAIconData {
 
 // Complete mapping of all possible icons with their archetype and quote
 export const DNA_ICON_MAPPING: Record<string, { archetype: string; quote: string }> = {
-    '♟️': { archetype: 'Strategist', quote: "You're building foundations, not chasing hype." },
-    '🚀': { archetype: 'Risk-Taker', quote: "Quick thinking — you spot moves before others." },
-    '🌱': { archetype: 'Visionary', quote: "Curious minds master the markets." },
-    '💪': { archetype: 'Confident', quote: "Ownership mindset — you lead your own path." },
-    '🧭': { archetype: 'Explorer', quote: "Freedom fuels your focus — trade on your terms." },
-    '🧘': { archetype: 'Emotional', quote: "Awareness is power — every trader starts here." },
-    '🦉': { archetype: 'Patient', quote: "Holding your ground — classic discipline." },
-    '📊': { archetype: 'Risk-Taker', quote: "Buying when others panic — a true contrarian spirit." },
-    '🧠': { archetype: 'Composed', quote: "Composure over chaos — strong mental game." },
-    '🏗️': { archetype: 'Builder', quote: "Steady progress builds lasting wealth." },
-    '🎯': { archetype: 'Focused', quote: "Precision beats speed — you aim true." },
-    '💎': { archetype: 'Disciplined', quote: "Patience pays — you wait for the right moment." }
+    '🌱': { archetype: 'The Visionary', quote: 'Big dreams start small — your growth curve is rising.' },
+    '♟️': { archetype: 'The Strategist', quote: 'Thinking two moves ahead — that’s how winners trade.' },
+    '🚀': { archetype: 'The Risk-Taker', quote: 'Bold call — fortune favors your fearless momentum.' },
+    '📊': { archetype: 'The Analyst', quote: 'Data drives your instinct — smart, methodical, precise.' },
+    '🧘': { archetype: 'The Patient', quote: 'Calm under pressure — your discipline builds profits.' },
+    '🪄': { archetype: 'The Resilient', quote: 'You learn, adapt, and bounce back stronger each time.' },
+    '💪': { archetype: 'The Confident', quote: 'Decisive move — self-belief turns logic into results.' },
+    '🧭': { archetype: 'The Explorer', quote: 'Curious and adaptive — you thrive in new directions.' },
+    '🤝': { archetype: 'The Community', quote: 'Collaboration fuels success — strong traders grow together.' },
+    '💡': { archetype: 'The Innovator', quote: 'Original thinking — you spot opportunities others miss.' },
+    '🦉': { archetype: 'The Wise Mentor', quote: 'Your experience guides you — insight few can match.' },
+    '🧠': { archetype: 'The Thinker', quote: 'Sharp mind — you process markets faster than most.' },
+    '🏗️': { archetype: 'The Builder', quote: 'Solid foundations — you’re constructing lasting financial strength.' },
+    '🎯': { archetype: 'The Achiever', quote: 'Focused and driven — you hit your goals with precision.' },
+    '💎': { archetype: 'The High Roller', quote: 'High stakes, high confidence — your boldness defines your edge.' }
 };
+
 
 // Question mappings for each quiz page
 export const QUESTION_ICON_MAPPINGS = {
@@ -64,7 +68,8 @@ export class DNAIconsService {
     // Store a DNA icon for a specific question
     static storeDNAIcon(questionId: number, questionText: string, selectedAnswer: string, source: 'questionPage' | 'advanceQuestionPage' | 'tradingQuizExtraPage'): void {
         console.log('DNAIconsService.storeDNAIcon called with:', { questionId, questionText, selectedAnswer, source });
-        
+        console.log('DNAIconsService - Current localStorage before storage:', localStorage.getItem(STORAGE_KEY));
+
         const mapping = QUESTION_ICON_MAPPINGS[source][questionId as keyof typeof QUESTION_ICON_MAPPINGS[typeof source]];
         console.log('Found mapping:', mapping);
         if (!mapping) {
@@ -97,7 +102,7 @@ export class DNAIconsService {
         // Get existing DNA icons
         const existingIcons = this.getDNAIcons();
         console.log('Existing icons:', existingIcons);
-        
+
         // Replace icon for this question if it exists, otherwise add new one
         const filteredIcons = existingIcons.filter(item => item.questionId !== questionId);
         const updatedIcons = [...filteredIcons, dnaIconData];
@@ -107,6 +112,7 @@ export class DNAIconsService {
         
         console.log(`Stored DNA icon for question ${questionId}:`, dnaIconData);
         console.log('Updated icons array:', updatedIcons);
+        console.log('DNAIconsService - localStorage after storage:', localStorage.getItem(STORAGE_KEY));
         
         // Notify all listeners that DNA icons have changed
         listeners.forEach(listener => listener());
@@ -116,7 +122,10 @@ export class DNAIconsService {
     static getDNAIcons(): DNAIconData[] {
         try {
             const stored = localStorage.getItem(STORAGE_KEY);
-            return stored ? JSON.parse(stored) : [];
+            console.log('DNAIconsService.getDNAIcons - Raw localStorage data:', stored);
+            const parsed = stored ? JSON.parse(stored) : [];
+            console.log('DNAIconsService.getDNAIcons - Parsed data:', parsed);
+            return parsed;
         } catch (error) {
             console.error('Error retrieving DNA icons:', error);
             return [];
@@ -150,7 +159,7 @@ export class DNAIconsService {
     static subscribeToChanges(callback: () => void): () => void {
         listeners.add(callback);
         console.log('Subscribed to DNA icon changes. Total listeners:', listeners.size);
-        
+
         // Return unsubscribe function
         return () => {
             listeners.delete(callback);

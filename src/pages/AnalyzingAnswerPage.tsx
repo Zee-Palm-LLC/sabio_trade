@@ -11,19 +11,19 @@ const AnalyzingAnswerPage: React.FC = () => {
     const navigate = useNavigate();
     const [progress, setProgress] = useState(0);
 
-    // Get stored DNA icons from localStorage
     const storedDNAIcons = DNAIconsService.getDNAIcons();
-    
-    // Debug logging
     console.log('AnalyzingAnswerPage - stored DNA icons:', storedDNAIcons);
 
     const getTraderDNAInfo = () => {
         if (storedDNAIcons.length === 0) {
             return { title: "Analyzing...", quote: "Your trading potential is being analyzed..." };
         }
-
-        // Get the first stored DNA icon (from QuestionPage - question ID 3)
-        const primaryIcon = storedDNAIcons[0];
+        const primaryIcon = storedDNAIcons.find(icon => icon.questionId === 3);
+        
+        if (!primaryIcon) {
+            return { title: "Analyzing...", quote: "Your trading potential is being analyzed..." };
+        }
+        
         return {
             title: primaryIcon.archetype || "Analyzing...",
             quote: primaryIcon.quote || "Your trading potential is being analyzed..."
