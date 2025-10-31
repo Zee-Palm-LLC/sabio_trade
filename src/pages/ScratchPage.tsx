@@ -163,15 +163,7 @@ const ScratchPage: React.FC = () => {
                     {/* Condition 2: Sticky CTA Block (after scratching) */}
                     {showReserveButton && !showFeatures && (
                         <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#340863] to-transparent p-4 z-50">
-                            <div className="w-[375px] mx-auto">
-                                {/* Countdown Timer */}
-                                <div className="text-center mb-4">
-                                    <p className={`text-white text-base font-medium ${timeLeft < 120 ? 'text-red-400 animate-pulse' : ''
-                                        }`}>
-                                        Price for the next {formatTime(timeLeft)} minutes
-                                    </p>
-                                </div>
-
+                            <div className="w-[375px] mx-auto">                                
                                 {/* Continue Button */}
                                 <PrimaryButton
                                     onClick={handleReserveClick}
@@ -187,6 +179,13 @@ const ScratchPage: React.FC = () => {
                                             : '0 0 15px rgba(15, 176, 132, 0.4)'
                                     }}
                                 />
+                                {/* Countdown Timer */}
+                                <div className="text-center mb-4 mt-3">
+                                    <p className={`text-white text-base font-medium ${timeLeft < 120 ? 'text-red-400 animate-pulse' : ''
+                                        }`}>
+                                        Price for the next {formatTime(timeLeft)} minutes
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     )}
@@ -204,6 +203,12 @@ const ScratchPage: React.FC = () => {
                                     text="Continue"
                                     showIcon={true}
                                 />
+                            </div>
+                            {/* Countdown Timer below second button */}
+                            <div className="text-center mb-2 mt-1">
+                                <p className={`text-white text-base font-medium ${timeLeft < 120 ? 'text-red-400 animate-pulse' : ''}`}>
+                                    Price for the next {formatTime(timeLeft)} minutes
+                                </p>
                             </div>
 
                             {/* Privacy and Terms Links */}
