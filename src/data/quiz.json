@@ -12,6 +12,16 @@
   },
   {
     "id": 2,
+    "question": "Do you know anything about trading?",
+    "description": "",
+    "options": [
+      "I'm experienced, but want to improve",
+      "I've heard a thing or two",
+      "No, but I'd like to know"
+    ]
+  },
+  {
+    "id": 3,
     "question": "Have you earned money from trading before?",
     "description": "Whether you've traded before or not, you'll discover your best trading path.",
     "options": [
@@ -22,7 +32,7 @@
     ]
   },
   {
-    "id": 3,
+    "id": 4,
     "question": "What's your #1 reason for wanting to trade?",
     "description": "",
     "options": [
@@ -31,17 +41,6 @@
       "Learn & challenge myself",
       "Be my own boss",
       "Being able to work from anywhere"
-    ]
-  },
-  {
-    "id": 4,
-    "question": "How fast do you want to build a profitable portfolio?",
-    "description": "",
-    "options": [
-      "Before I retire",
-      "In few years",
-      "As Soon As Possible",
-      "Not Sure"
     ]
   }
 ]

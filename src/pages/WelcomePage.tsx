@@ -11,7 +11,7 @@ const WelcomePage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleContinueClick = () => {
-        navigate('/advance-question');
+        navigate('/quiz-extra');
     };
 
     const handleCloseClick = () => {

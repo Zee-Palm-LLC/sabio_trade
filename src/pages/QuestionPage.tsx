@@ -69,8 +69,8 @@ const QuestionPage: React.FC = () => {
                 setCurrentQuestionIndex(currentQuestionIndex + 1);
                 setSelectedOption(null);
             } else {
-                console.log('Navigating to analyzing with:', { answers });
-                navigate('/analyzing', { state: { answers } });
+                console.log('Navigating to advance-question with:', { answers });
+                navigate('/advance-question', { state: { answers } });
             }
         }, delayTime);
     };

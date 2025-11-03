@@ -48,7 +48,8 @@ const YourTraderProfile: React.FC = () => {
     }, [earnedFeedback.length]);
     
     const handleContinue = () => {
-        navigate('/scratch', { state: { fromProfile: true } });
+        // navigate('/scratch', { state: { fromProfile: true } });
+        console.log("Application completed");
     };
 
     return (

@@ -137,10 +137,10 @@ const TradingQuizExtraPage: React.FC = () => {
             if (fromProfile) {
                 navigate('/scratch');
             } else {
-                if (current < mapExtraQuestions.length - 2) {
+                if (current < mapExtraQuestions.length - 1) {
                     setCurrent(current + 1);
                 } else {
-                    navigate('/lead');
+                    navigate('/trading-profiles');
                 }
             }
         }, delayTime);

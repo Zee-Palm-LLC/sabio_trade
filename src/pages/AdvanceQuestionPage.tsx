@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
-import { AnalyzingModal, BackButton, BottomShade, PrimaryButton, ProgressIndicator } from '../components';
+import { BackButton, BottomShade, PrimaryButton, ProgressIndicator } from '../components';
 import AdvancedQuestionCard from '../components/ui/AdvancedQuestionCard';
 import advancedQuestions from '../data/advancedQuestions.json';
 import { DNAIconsService } from '../services/dnaIconsService';
@@ -24,7 +24,7 @@ const AdvanceQuestionPage: React.FC = () => {
     const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
     const [showButton, setShowButton] = useState(false);
     const [isButtonActive, setIsButtonActive] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    // const [showModal, setShowModal] = useState(false);
     const [hasUserInteracted, setHasUserInteracted] = useState(false);
     const [showValidationMessage, setShowValidationMessage] = useState(false);
     const [isIconAnimating, setIsIconAnimating] = useState(false);
@@ -254,7 +254,7 @@ const AdvanceQuestionPage: React.FC = () => {
                 setTimeout(() => {
                     setShowValidationMessage(false);
                     setAnswers(prev => ({ ...prev, [currentQuestion.id]: value }));
-                    setShowModal(true);
+                    navigate('/welcome');
                 }, 2000);
                 return;
             }
@@ -267,7 +267,7 @@ const AdvanceQuestionPage: React.FC = () => {
                 setHasUserInteracted(false);
             } else {
                 setAnswers(prev => ({ ...prev, [currentQuestion.id]: value }));
-                setShowModal(true);
+                navigate('/welcome');
             }
             return;
         }
@@ -285,9 +285,9 @@ const AdvanceQuestionPage: React.FC = () => {
         }
     };
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
+    // const handleCloseModal = () => {
+    //     setShowModal(false);
+    // };
 
 
     return (
@@ -372,11 +372,11 @@ const AdvanceQuestionPage: React.FC = () => {
                 )}
             </div>
 
-            <AnalyzingModal
+            {/* <AnalyzingModal
                 isOpen={showModal}
                 onClose={handleCloseModal}
                 selectedStocks={selectedOptions}
-            />
+            /> */}
 
             <style>{`
                 @keyframes fade-in-out {
