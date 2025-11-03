@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import StandingAvatar from '../assets/standing_avatar.png';
 import { BackButton, BottomShade, ProgressIndicator, QuestionCard } from '../components';
+import IconSlots from '../components/ui/IconSlots';
 import quizData from '../data/quiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
+import { AnswerService } from '../services/answerService';
 
 const QuestionPage: React.FC = () => {
     const navigate = useNavigate();
@@ -45,6 +47,9 @@ const QuestionPage: React.FC = () => {
             [currentQuestion.id]: value,
         }));
 
+        // ✅ Store answer in centralized service with question text
+        AnswerService.storeAnswer(currentQuestion.id, currentQuestion.question, value);
+
         // ✅ Store DNA icon if question ID is 3
         if (currentQuestion.id === 3) {
             DNAIconsService.storeDNAIcon(
@@ -84,7 +89,7 @@ const QuestionPage: React.FC = () => {
             <div className="w-[375px] mx-auto min-h-screen flex flex-col relative z-10">
                 {/* HEADER */}
                 <div className="flex flex-col items-center pt-8 pb-4">
-                    <div className="flex items-center justify-between w-full px-4 mb-3">
+                    <div className="flex items-center justify-between w-full px-4 mb-2">
                         <BackButton onClick={handleBackClick} />
                         <img src={Logo} alt="SabioTrade" width={230} height={80} />
                         <div className="flex items-center space-x-1">
@@ -104,6 +109,8 @@ const QuestionPage: React.FC = () => {
                             </span>
                         </div>
                     </div>
+                    {/* Icon Slots - Persistent across all questions */}
+                    <IconSlots className="mt-1" />
                 </div>
 
                 {/* PROGRESS BAR */}

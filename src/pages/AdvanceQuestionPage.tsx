@@ -3,8 +3,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { AnalyzingModal, BackButton, BottomShade, PrimaryButton, ProgressIndicator } from '../components';
 import AdvancedQuestionCard from '../components/ui/AdvancedQuestionCard';
+import IconSlots from '../components/ui/IconSlots';
 import advancedQuestions from '../data/advancedQuestions.json';
 import { DNAIconsService } from '../services/dnaIconsService';
+import { AnswerService } from '../services/answerService';
 
 const AdvanceQuestionPage: React.FC = () => {
     const navigate = useNavigate();
@@ -143,6 +145,9 @@ const AdvanceQuestionPage: React.FC = () => {
             return newAnswers;
         });
 
+        // ✅ Store answer in centralized service with question text
+        AnswerService.storeAnswer(currentQuestion.id, currentQuestion.question, value);
+
         // ✅ Store DNA icon if question ID is 5
         if (currentQuestion.id === 5) {
             DNAIconsService.storeDNAIcon(
@@ -249,6 +254,10 @@ const AdvanceQuestionPage: React.FC = () => {
             if (selectedOptions.length === 0) return;
             localStorage.setItem('lastAttemptedQuestion', String(currentQuestion.id));
             const value = selectedOptions.join(',');
+            
+            // ✅ Store answer in centralized service with question text
+            AnswerService.storeAnswer(currentQuestion.id, currentQuestion.question, value);
+            
             if (currentQuestion.id === 8) {
                 setShowValidationMessage(true);
                 setTimeout(() => {
@@ -274,6 +283,10 @@ const AdvanceQuestionPage: React.FC = () => {
 
         if (!selectedOption) return;
         localStorage.setItem('lastAttemptedQuestion', String(currentQuestion.id));
+        
+        // ✅ Store answer in centralized service with question text
+        AnswerService.storeAnswer(currentQuestion.id, currentQuestion.question, selectedOption);
+        
         if (currentQuestionIndex < advancedQuestions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
             setSelectedOption(null);
@@ -295,7 +308,7 @@ const AdvanceQuestionPage: React.FC = () => {
             <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col relative z-10">
                 <div className="flex flex-col items-center pt-8 pb-4 px-4">
-                    <div className="flex items-center justify-between w-full mb-3">
+                    <div className="flex items-center justify-between w-full mb-2">
                         <BackButton onClick={handleBackClick} />
                         <div className="flex items-center">
                             <img src={Logo} alt="SabioTrade" width={230} height={80} />
@@ -309,6 +322,8 @@ const AdvanceQuestionPage: React.FC = () => {
                             </span>
                         </div>
                     </div>
+                    {/* Icon Slots - Persistent across all questions */}
+                    <IconSlots className="mt-1" />
                 </div>
 
                 <ProgressIndicator
