@@ -12,6 +12,7 @@ export { default as ChartCard } from './ui/ChartCard';
 export { default as EmailCaptureCard } from './ui/EmailCaptureCard';
 export { default as FeaturedBadge } from './ui/FeaturedBadge';
 export { default as IconOptionCard } from './ui/IconOptionCard';
+export { default as IconSlots } from './ui/IconSlots';
 export { default as InvestingStyleCard } from './ui/InvestingStyleCard';
 export { default as MediaLogosCard } from './ui/MediaLogosCard';
 export { default as NotSureCard } from './ui/NotSureCard';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import StandingAvatar from '../assets/standing_avatar.png';
-import { BackButton, BottomShade, ProgressIndicator, QuestionCard } from '../components';
+import { BackButton, BottomShade, IconSlots, ProgressIndicator, QuestionCard } from '../components';
 import quizData from '../data/quiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
 
@@ -84,7 +84,7 @@ const QuestionPage: React.FC = () => {
             <div className="w-[375px] mx-auto min-h-screen flex flex-col relative z-10">
                 {/* HEADER */}
                 <div className="flex flex-col items-center pt-8 pb-4">
-                    <div className="flex items-center justify-between w-full px-4 mb-3">
+                    <div className="flex items-center justify-between w-full px-4 mb-2">
                         <BackButton onClick={handleBackClick} />
                         <img src={Logo} alt="SabioTrade" width={230} height={80} />
                         <div className="flex items-center space-x-1">
@@ -104,6 +104,8 @@ const QuestionPage: React.FC = () => {
                             </span>
                         </div>
                     </div>
+                    {/* Icon Slots - Persistent across all questions */}
+                    <IconSlots className="mt-1" />
                 </div>
 
                 {/* PROGRESS BAR */}
@@ -117,16 +119,27 @@ const QuestionPage: React.FC = () => {
                     <div className="relative flex justify-center mt-4 mb-2">
                         <div className="flex space-x-3">
                             <div
-                                className={`w-10 h-10 rounded-full flex items-center justify-center text-2xl ${
+                                className={`rounded-full flex items-center justify-center ${
                                     isIconAnimating ? 'animate-fly-from-top-right' : 'animate-float'
                                 }`}
                                 style={{
-                                    background: 'rgba(255, 255, 255, 0.1)',
-                                    border: '2px solid rgba(255,255,255,0.2)',
-                                    backdropFilter: 'blur(6px)',
+                                    width: '48px',
+                                    height: '48px',
+                                    background: 'rgba(255, 255, 255, 0.2)',
+                                    border: '2px solid rgba(255,255,255,0.4)',
+                                    backdropFilter: 'blur(8px)',
+                                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                                 }}
                             >
-                                {currentQuestionIcon.icon}
+                                <span 
+                                    className="text-3xl leading-none"
+                                    style={{
+                                        filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5))',
+                                        display: 'inline-block',
+                                    }}
+                                >
+                                    {currentQuestionIcon.icon}
+                                </span>
                             </div>
                         </div>
                     </div>

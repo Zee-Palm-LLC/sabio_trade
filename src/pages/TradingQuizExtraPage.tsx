@@ -13,7 +13,7 @@ import IpoPng from '../assets/ipo.png';
 import Logo from '../assets/logo.png';
 import SteadyPng from '../assets/steady.png';
 import SteadyLarge from '../assets/steadyLarge.png';
-import { BackButton, BottomShade, ProgressIndicator } from '../components';
+import { BackButton, BottomShade, IconSlots, ProgressIndicator } from '../components';
 import IconOptionCard, { type IconOption } from '../components/ui/IconOptionCard';
 import extraQuiz from '../data/extraQuiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
@@ -151,7 +151,7 @@ const TradingQuizExtraPage: React.FC = () => {
             <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col relative z-10">
                 <div className="flex flex-col items-center pt-8 pb-4">
-                    <div className="flex items-center justify-between w-full mb-3">
+                    <div className="flex items-center justify-between w-full mb-2">
                         <BackButton onClick={handleBackClick} />
                         <div className="flex items-center">
                             <img src={Logo} alt="SabioTrade" width={230} height={80} />
@@ -165,7 +165,8 @@ const TradingQuizExtraPage: React.FC = () => {
                             </span>
                         </div>
                     </div>
-
+                    {/* Icon Slots - Persistent across all questions */}
+                    <IconSlots className="mt-1" />
                 </div>
 
                 <ProgressIndicator current={fromProfile ? 13 : current + 1 + questionOffset} total={total} />
@@ -183,16 +184,27 @@ const TradingQuizExtraPage: React.FC = () => {
                         <div className="relative flex justify-center mt-4 mb-2">
                             <div className="flex space-x-3">
                                 <div
-                                    className={`w-10 h-10 rounded-full flex items-center justify-center text-2xl ${
+                                    className={`rounded-full flex items-center justify-center ${
                                         isIconAnimating ? 'animate-fly-from-top-right' : 'animate-float'
                                     }`}
                                     style={{
-                                        background: 'rgba(255, 255, 255, 0.1)',
-                                        border: '2px solid rgba(255,255,255,0.2)',
-                                        backdropFilter: 'blur(6px)',
+                                        width: '48px',
+                                        height: '48px',
+                                        background: 'rgba(255, 255, 255, 0.2)',
+                                        border: '2px solid rgba(255,255,255,0.4)',
+                                        backdropFilter: 'blur(8px)',
+                                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                                     }}
                                 >
-                                    {currentQuestionIcon.icon}
+                                    <span 
+                                        className="text-3xl leading-none"
+                                        style={{
+                                            filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5))',
+                                            display: 'inline-block',
+                                        }}
+                                    >
+                                        {currentQuestionIcon.icon}
+                                    </span>
                                 </div>
                             </div>
                         </div>
