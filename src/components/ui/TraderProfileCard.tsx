@@ -48,7 +48,7 @@ const TraderProfileCard: React.FC<TraderProfileCardProps> = ({
             >
                 <div className="flex-1">
                     <h4 className="text-white font-medium text-[15px] leading-tight">
-                        You&#39;re ready to take the Sabio Challenge here&#8217;s your next step.
+                        You've advanced — just one more step to unlock funding.
                     </h4>
                 </div>
                 {avatarUrl && (

@@ -21,18 +21,18 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
 
     return (
         <Card
-            className={`w-full mb-4 max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] p-6`}
+            className={`w-full mb-2 max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] p-3`}
         >
             {/* Top Text */}
-            <div className="text-center mb-8">
-                <h2 className="text-white font-bold text-lg leading-tight">
+            <div className="text-center mb-3">
+                <h2 className="text-white font-bold text-sm leading-tight">
                     {topText}
                 </h2>
             </div>
 
             {/* Progress Circle */}
-            <div className="flex justify-center items-center mb-8">
-                <div className="relative">
+            <div className="flex justify-center items-center mb-3">
+                <div className="relative" style={{ transform: 'scale(0.75)' }}>
                     <svg
                         height={radius * 2}
                         width={radius * 2}
@@ -69,7 +69,7 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
                     </svg>
                     {/* Percentage text */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-white font-bold text-3xl">
+                        <span className="text-white font-bold text-2xl">
                             {progress}%
                         </span>
                     </div>
@@ -78,7 +78,7 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
 
             {/* Bottom Text */}
             <div className="text-center">
-                <p className="text-white text-sm">
+                <p className="text-white text-xs leading-tight">
                     {bottomText}
                 </p>
             </div>

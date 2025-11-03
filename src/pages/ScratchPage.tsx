@@ -7,9 +7,8 @@ import ArrowUpIcon from '../assets/up.svg';
 import { BottomShade, Card, MediaLogosCard, PrimaryButton, SabioTradeFeatures, ScratchTicket } from '../components';
 
 const ScratchPage: React.FC = () => {
-    const [showReserveButton, setShowReserveButton] = useState(false);
     const [showFeatures, setShowFeatures] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(12 * 60); // 12 minutes in seconds
+    const [timeLeft, setTimeLeft] = useState(9 * 60 + 59); // 9 minutes 59 seconds = 09:59
     const [isScratched, setIsScratched] = useState(false);
 
     // Countdown timer effect
@@ -39,7 +38,6 @@ const ScratchPage: React.FC = () => {
     const handleScratchComplete = () => {
         console.log("🎉 Scratch card completed!");
         setIsScratched(true);
-        setShowReserveButton(true);
     };
 
     const handleReserveClick = () => {
@@ -57,30 +55,32 @@ const ScratchPage: React.FC = () => {
             <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
                 <BottomShade />
                 <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4">
-                    <div className="flex flex-col items-center pt-8 pb-4">
-                        <div className="flex items-center space-x-3 mb-3">
+                    <div className="flex flex-col items-center pt-4 pb-2">
+                        <div className="flex items-center space-x-3 mb-2">
                             <img src={Logo} alt="SabioTrade" width={230} height={80} />
                         </div>
                     </div>
                     <Card
-                        className={`w-full max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]`}
+                        className={`w-full max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] p-3`}
                     >
-                        <h2 className="text-white font-semibold text-lg leading-tight text-center mb-4">
+                        <h2 className="text-white font-semibold text-base leading-tight text-center mb-2">
                             Lock in your early access savings
                         </h2>
-                        <div className="text-center mb-4">
-                            <div className="w-full bg-gray-600 rounded-full h-2 mb-2">
+                        <div className="text-center mb-3">
+                            <div className="w-full bg-gray-600 rounded-full h-2 mb-1.5">
                                 <div className="bg-green-400 h-2 rounded-full" style={{ width: '68%' }}></div>
                             </div>
-                            <div className="w-full rounded-[12px] bg-[#031340] border border-slate-600/30 flex flex-col justify-center items-center mb-2">
-                                <span className="block text-[#FFFFFF] dark:text-white font-semibold text-[8px] leading-tight text-center mt-2" style={{ color: '#FFFFFF', fontWeight: 700 }}>
-                                    Applauded by Users &amp; Specialists Alike
-                                </span>
-                                <img src={Brands1} alt="Brands" className="w-full" />
+                            <div className="w-full overflow-hidden" style={{ marginBottom: '8px' }}>
+                                <div className="rounded-[12px] bg-[#031340] border border-slate-600/30 flex flex-col justify-center items-center" style={{ transform: 'scale(1.25)', transformOrigin: 'center', width: '80%', margin: '0 auto' }}>
+                                    <span className="block text-[#FFFFFF] dark:text-white font-semibold text-[10px] leading-tight text-center mt-2" style={{ color: '#FFFFFF', fontWeight: 700 }}>
+                                        Applauded by Users &amp; Specialists Alike
+                                    </span>
+                                    <img src={Brands1} alt="Brands" className="w-full" />
+                                </div>
                             </div>
                         </div>
-                        <div className="w-full max-w-sm bg-[#031340] rounded-[12px] border border-slate-600/30 px-4 pt-4 pb-4">
-                            <div className="flex items-center justify-between mb-4">
+                        <div className="w-full max-w-sm bg-[#031340] rounded-[12px] border border-slate-600/30 px-3 pt-3 pb-3">
+                            <div className="flex items-center justify-between mb-2">
                                 <div className="flex items-center space-x-2">
                                     <div
                                         className="w-8 h-8 flex items-center justify-center rounded-[5px] relative overflow-hidden"
@@ -92,19 +92,14 @@ const ScratchPage: React.FC = () => {
                                             WebkitBackdropFilter: 'blur(4px)',
                                         }}
                                     >
-
                                         <img src={amdIcon} alt="AMD" className="w-4 h-4 relative z-10" />
                                     </div>
-
-
-
-
                                     <span className="text-[18px] font-bold" style={{ color: 'var(--color-primary)' }}>+2.5%</span>
                                     <img src={ArrowUpIcon} alt="Arrow Up" className="w-4 h-4" />
                                 </div>
                                 <span className="text-white/70 text-sm">2 days ago</span>
                             </div>
-                            <div className="space-y-1">
+                            <div className="space-y-0.5">
                                 <div className="flex items-start space-x-2">
                                     <img
                                         src={BulletPointIcon}
@@ -145,54 +140,40 @@ const ScratchPage: React.FC = () => {
                             </div>
                         </div>
                     </Card>
-                    <span className="text-white text-[17px] font-bold block text-center mt-6">
+                    <span className="text-white text-[15px] font-bold block text-center mt-2 mb-2">
                         In two weeks, you'll spot these moves yourself
                     </span>
                     <ScratchTicket onScratchComplete={handleScratchComplete} />
 
-                    {/* Spacer when only showing scratch ticket */}
-                    {!showReserveButton && !showFeatures && (
-                        <div className="mb-20"></div>
-                    )}
-
-                    {/* Add bottom padding when sticky button is shown to prevent overlap */}
-                    {showReserveButton && !showFeatures && (
-                        <div className="h-32"></div> // Add space for sticky button
-                    )}
-
-                    {/* Condition 2: Sticky CTA Block (after scratching) */}
-                    {showReserveButton && !showFeatures && (
-                        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#340863] to-transparent p-4 z-50">
-                            <div className="w-[375px] mx-auto">                                
-                                {/* Continue Button */}
-                                <PrimaryButton
-                                    onClick={handleReserveClick}
-                                    text="Continue"
-                                    showIcon={true}
-                                    className={`w-full ${timeLeft < 120 ? 'animate-glow-pulse' : ''}`}
-                                    style={{
-                                        background: timeLeft < 120
-                                            ? 'linear-gradient(45deg, #ff6b6b, #ee5a24)'
-                                            : 'linear-gradient(to right, #0FB084, #2FA6B9)',
-                                        boxShadow: timeLeft < 120
-                                            ? '0 0 20px rgba(255, 107, 107, 0.6)'
-                                            : '0 0 15px rgba(15, 176, 132, 0.4)'
-                                    }}
-                                />
-                                {/* Countdown Timer */}
-                                <div className="text-center mb-4 mt-3">
-                                    <p className={`text-white text-base font-medium ${timeLeft < 120 ? 'text-red-400 animate-pulse' : ''
-                                        }`}>
-                                        Price for the next {formatTime(timeLeft)} minutes
-                                    </p>
-                                </div>
+                    {/* Condition 2: Continue Button (non-sticky, natural bottom) */}
+                    {isScratched && !showFeatures && (
+                        <div className="mt-6 mb-6">
+                            <PrimaryButton
+                                onClick={handleReserveClick}
+                                text="Continue"
+                                showIcon={true}
+                                className={`w-full ${timeLeft < 120 ? 'animate-glow-pulse' : ''}`}
+                                style={{
+                                    background: timeLeft < 120
+                                        ? 'linear-gradient(45deg, #ff6b6b, #ee5a24)'
+                                        : 'linear-gradient(to right, #0FB084, #2FA6B9)',
+                                    boxShadow: timeLeft < 120
+                                        ? '0 0 20px rgba(255, 107, 107, 0.6)'
+                                        : '0 0 15px rgba(15, 176, 132, 0.4)'
+                                }}
+                            />
+                            {/* Countdown Timer */}
+                            <div className="text-center mt-3">
+                                <p className={`text-white text-base font-medium ${timeLeft < 120 ? 'text-red-400 animate-pulse' : ''}`}>
+                                    Price for the next {formatTime(timeLeft)} minutes
+                                </p>
                             </div>
                         </div>
                     )}
 
                     {/* Condition 3: All Content After Reserve Button Click */}
                     {showFeatures && (
-                        <div className="mt-6 space-y-4 mb-20">
+                        <div className="mt-6 space-y-4 mb-6">
                             <SabioTradeFeatures />
                             <MediaLogosCard />
 
@@ -223,6 +204,45 @@ const ScratchPage: React.FC = () => {
 
                 </div>
             </div>
+
+            {/* Sticky Top-Right Button (Post-Scratch) */}
+            {isScratched && (
+                <div 
+                    className="fixed top-4 right-4 z-50"
+                    style={{
+                        background: 'linear-gradient(135deg, #031340 0%, #0A1B3D 50%, #152850 100%)',
+                        borderRadius: '12px',
+                        padding: '12px 16px',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(23, 248, 113, 0.2)',
+                        border: '1px solid rgba(23, 248, 113, 0.3)',
+                        minWidth: '160px',
+                    }}
+                >
+                    {/* SabioTrade ACADEMY Logo/Text */}
+                    <div className="text-white font-bold text-xs mb-1.5 text-center" style={{ 
+                        letterSpacing: '0.3px',
+                        lineHeight: '1.2'
+                    }}>
+                        SabioTrade<br />ACADEMY
+                    </div>
+                    
+                    {/* Expiration Timer */}
+                    <div className="text-white/90 text-[10px] font-medium text-center mb-2" style={{ letterSpacing: '0.2px' }}>
+                        Discount expires in {formatTime(timeLeft)}
+                    </div>
+                    
+                    {/* GET MY PLAN Button */}
+                    <button
+                        onClick={handleReserveClick}
+                        className="w-full bg-white text-[#340863] font-bold text-xs py-2 px-3 rounded-lg hover:bg-gray-100 transition-colors"
+                        style={{
+                            boxShadow: '0 2px 8px rgba(255, 255, 255, 0.2)'
+                        }}
+                    >
+                        GET MY PLAN
+                    </button>
+                </div>
+            )}
 
             <style>{`
             @keyframes glow-pulse {

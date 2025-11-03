@@ -92,9 +92,9 @@ const AnalyzingAnswerPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col items-center justify-center px-4 mb-6">
+                <div className="flex flex-col items-center justify-center px-4 mb-4">
                     <div className="text-center mb-2 w-full">
-                        <h1 className="text-white text-1xl font-bold mb-0 leading-tight mb-4">
+                        <h1 className="text-white text-1xl font-bold mb-0 leading-tight mb-3">
                             Analyzing your initial potential
                         </h1>
                         <ProgressIndicator
@@ -104,15 +104,56 @@ const AnalyzingAnswerPage: React.FC = () => {
                             activeColor='#25BBA4'
                             inactiveColor='#2C3B39'
                         />
-                        <div className='flex justify-end mr-4'>
-                            <span className="text-white/70 text-base leading-relaxed mb-6">
-                                {progress === 100 ? 'Completed' : `${progress}% in progress...`}
+                        <div className='flex justify-end items-center gap-2 mr-4 mt-1'>
+                            <span className="text-white/70 text-base leading-relaxed">
+                                {progress === 100 ? 'Initial Compatibility' : `${progress}% in progress...`}
                             </span>
+                            {progress === 100 && (
+                                <svg 
+                                    className="w-4 h-4 text-[#25BBA4]" 
+                                    fill="none" 
+                                    stroke="currentColor" 
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path 
+                                        strokeLinecap="round" 
+                                        strokeLinejoin="round" 
+                                        strokeWidth={3} 
+                                        d="M5 13l4 4L19 7" 
+                                    />
+                                </svg>
+                            )}
                         </div>
+                        {storedDNAIcons.length > 0 && (
+                            <div className="flex justify-center mt-2">
+                                <div
+                                    className="flex items-center justify-center"
+                                    style={{
+                                        width: '48px',
+                                        height: '48px',
+                                        background: 'rgba(255, 255, 255, 0.25)',
+                                        border: '2px solid rgba(255, 255, 255, 0.5)',
+                                        borderRadius: '50%',
+                                        backdropFilter: 'blur(8px)',
+                                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                                    }}
+                                >
+                                    <span 
+                                        className="text-3xl leading-none"
+                                        style={{
+                                            filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5))',
+                                            display: 'inline-block',
+                                        }}
+                                    >
+                                        {storedDNAIcons[0].icon}
+                                    </span>
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     <Card
-                        className={`w-full max-w-sm`}
+                        className={`w-full max-w-sm mt-2`}
                     >
                         <div className="bg-[#031340] rounded-[12px] p-4">
                             <div className="text-center">
@@ -183,7 +224,7 @@ const AnalyzingAnswerPage: React.FC = () => {
                                     }}
                                     className="text-white/90"
                                 >
-                                    "{getTraderDNAInfo().quote}"
+                                    {getTraderDNAInfo().quote}
                                 </p>
                             </div>
                         </div>

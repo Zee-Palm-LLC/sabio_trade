@@ -42,102 +42,102 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
         'Psychological mastery'
     ];
 
+    const handleNextStep = () => {
+        onClose();
+        navigate('/trading-quiz-extra');
+    };
+
+    // Auto-dismiss after 5 seconds
     useEffect(() => {
         if (isOpen) {
             setVisibleItems([]);
             benefits.forEach((_, index) => {
                 setTimeout(() => {
                     setVisibleItems((prev: number[]) => [...prev, index]);
-                }, index * 300);
+                }, index * 200);
             });
+
+            // Auto-dismiss after 5 seconds
+            const autoCloseTimer = setTimeout(() => {
+                handleNextStep();
+            }, 5000);
+
+            return () => {
+                clearTimeout(autoCloseTimer);
+            };
         }
     }, [isOpen]);
-
-    const handleNextStep = () => {
-        onClose();
-        navigate('/trading-quiz-extra');
-    };
 
     if (!isOpen) return null;
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center"
-            style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
+            className="fixed inset-0 z-50 flex items-center justify-center animate-modal-fade-in"
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(4px)' }}
         >
             <div
-                className="relative w-[340px] rounded-2xl p-6 animate-fade-in scrollbar-hide"
+                className="relative w-[340px] rounded-2xl p-4 animate-modal-slide-in"
                 style={{
-                    background: '#210742',
-                    border: '1px solid rgba(125, 49, 216, 0.47)',
-                    boxShadow: '2px 2px 13px 0px rgba(122, 75, 173, 0.6)',
+                    background: 'linear-gradient(135deg, #210742 0%, #1A0C4E 100%)',
+                    border: '1px solid rgba(125, 49, 216, 0.6)',
+                    boxShadow: '0 8px 32px rgba(125, 49, 216, 0.4), 0 0 20px rgba(23, 248, 113, 0.2)',
                     maxHeight: '90vh',
                     overflowY: 'auto'
                 }}
             >
-                {/* Header with Close Button */}
-                <div className="flex items-center justify-between mb-2">
-                    <div className="flex-1 flex">
-                        <h1 className="text-white text-[14px] font-bold">
-                        You’re aligning with top performers — impressive calls!
-                        </h1>
-                    </div>
-                    <button
-                        onClick={onClose}
-                        className="w-8 h-8 flex items-center justify-center text-white/70 hover:text-white transition-colors flex-shrink-0"
-                        aria-label="Close"
-                    >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
+                {/* Header - No X button */}
+                <div className="text-center mb-3">
+                    <h1 className="text-white text-[14px] font-semibold">
+                        You're aligning with top performers — impressive calls!
+                    </h1>
                 </div>
-                <div className="mb-0">
-                    <div className="flex items-center gap-2 mb-3">
-                        <img src={TopicIcon} alt="Risk and Rewards" className="w-6 h-6 object-contain" />
-                        <span className="text-white font-normal text-[12px]">Building the right path for you… Hold on</span>
-                    </div>
 
-                    <div className="flex flex-wrap gap-1 mb-3">
+                {/* Selected Stocks - Tight Grid */}
+                <div className="mb-3">
+                    <div className="grid grid-cols-3 gap-1.5">
                         {selectedStocks.map((stock) => {
                             const iconSrc = iconMap[stock.toLowerCase()];
                             return (
                                 <div
                                     key={stock}
-                                    className="px-3 py-1.5 rounded-full flex items-center gap-2"
+                                    className="px-2 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all duration-300 hover:scale-105"
                                     style={{
-                                        background: '#1A0C4E',
-                                        border: '1px solid #FFFFFF2E'
+                                        background: 'rgba(26, 12, 78, 0.8)',
+                                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
                                     }}
                                 >
                                     {iconSrc && (
-                                        <img src={iconSrc} alt={stock} className="w-4 h-4 object-contain" />
+                                        <img src={iconSrc} alt={stock} className="w-3.5 h-3.5 object-contain" />
                                     )}
-                                    <span className="text-white font-semibold text-sm">{stock}</span>
+                                    <span className="text-white font-semibold text-[11px] truncate">{stock}</span>
                                 </div>
                             );
                         })}
                     </div>
                 </div>
 
-                {/* Benefits List */}
-                <div className="mb-6 space-y-2">
+                {/* Benefits List - Consistent Padding */}
+                <div className="mb-3 space-y-1.5">
                     {benefits.map((benefit, index) => (
                         <div 
                             key={index} 
-                            className={`flex items-center gap-3 transition-all duration-500 ${
+                            className={`flex items-center gap-2 px-1 transition-all duration-300 ${
                                 visibleItems.includes(index) 
-                                    ? 'opacity-100 translate-y-0' 
-                                    : 'opacity-0 translate-y-2'
+                                    ? 'opacity-100 translate-x-0' 
+                                    : 'opacity-0 -translate-x-2'
                             }`}
                         >
-                            <div className="w-3 h-3 flex items-center justify-center">
+                            <div className="w-3 h-3 flex items-center justify-center flex-shrink-0">
                                 {visibleItems.includes(index) && (
                                     <svg 
-                                        className="w-3 h-3 text-green-400 animate-checkmark" 
+                                        className="w-3 h-3 text-[#17F871] animate-checkmark" 
                                         fill="none" 
                                         stroke="currentColor" 
                                         viewBox="0 0 24 24"
+                                        style={{
+                                            filter: 'drop-shadow(0 0 4px rgba(23, 248, 113, 0.6))',
+                                        }}
                                     >
                                         <path 
                                             strokeLinecap="round" 
@@ -148,58 +148,77 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                                     </svg>
                                 )}
                             </div>
-                            <span className="text-white text-[14px]">{benefit}</span>
+                            <span className="text-white text-[13px]">{benefit}</span>
                         </div>
                     ))}
                 </div>
 
-                {/* Testimonial Image */}
-                <div className="mb-6">
-                    <div className="relative w-full rounded-xl overflow-hidden" style={{ height: 150 }}>
+                {/* Centered Character Image + Quote */}
+                <div className="mb-3 flex flex-col items-center">
+                    <div className="relative w-full rounded-xl overflow-hidden" style={{ height: 120 }}>
                         <img
                             src={Analyzing}
                             alt="Testimonial"
-                            className="w-full h-full object-cover"
-                            style={{ borderRadius: 16, height: 180 }}
-                        />
-                        <div
-                            className="absolute left-0 top-0 w-full h-full"
+                            className="w-full h-full object-cover rounded-xl transition-transform duration-500 hover:scale-105"
                             style={{
-                                background: 'rgba(24, 21, 49, 0.5)',
+                                filter: 'brightness(0.9)',
                             }}
                         />
                         <div
-                            className="absolute left-0 bottom-0 w-full px-2 pb-2 flex items-center rounded-xl"
+                            className="absolute left-0 top-0 w-full h-full rounded-xl"
                             style={{
-                                height: 'auto',
-                                minHeight: 0,
-                                paddingTop: 0,
-                                background: 'linear-gradient(to top, #23224C, rgba(35,34,76,0.6) 40%, transparent 100%)',
+                                background: 'linear-gradient(to bottom, rgba(33, 7, 66, 0.3), rgba(33, 7, 66, 0.6))',
+                            }}
+                        />
+                        <div
+                            className="absolute left-0 bottom-0 w-full px-3 pb-2 flex items-center justify-center rounded-xl"
+                            style={{
+                                background: 'linear-gradient(to top, rgba(35, 34, 76, 0.9), rgba(35, 34, 76, 0.5) 60%, transparent 100%)',
                                 zIndex: 10,
                             }}
                         >
                             <span
-                                className="text-white text-[10px] font-semibold flex items-center w-full whitespace-nowrap overflow-hidden text-ellipsis justify-center"
+                                className="text-white text-[10px] font-medium text-center px-2"
                                 style={{
-                                    paddingLeft: 0,
-                                    paddingRight: 0,
+                                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
                                 }}
                             >
-                                <span className="mr-1 text-lg align-bottom" aria-hidden="true"></span>
                                 "I used to panic at losses, Sabio taught me resilience."
-                                <span className="ml-1 text-lg align-bottom" aria-hidden="true"></span>
                             </span>
                         </div>
                     </div>
                 </div>
+
+                {/* Next Step Button */}
                 <PrimaryButton
                     onClick={handleNextStep}
                     text="Next Step"
                     showIcon={true}
+                    className="w-full"
                 />
             </div>
 
             <style>{`
+                @keyframes modal-fade-in {
+                    from {
+                        opacity: 0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
+
+                @keyframes modal-slide-in {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px) scale(0.95);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0) scale(1);
+                    }
+                }
+
                 @keyframes checkmark {
                     0% {
                         transform: scale(0);
@@ -213,6 +232,14 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                         transform: scale(1);
                         opacity: 1;
                     }
+                }
+                
+                .animate-modal-fade-in {
+                    animation: modal-fade-in 0.3s ease-out;
+                }
+
+                .animate-modal-slide-in {
+                    animation: modal-slide-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
                 }
                 
                 .animate-checkmark {
