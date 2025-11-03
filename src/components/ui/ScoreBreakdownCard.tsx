@@ -7,12 +7,14 @@ import Card from './Card';
 
 interface ScoreItem {
     label: string;
-    score: number | 'High' | 'Intermediate' | 'Low';
+    score: number | 'High' | 'Intermediate' | 'Low' | string;
     icon: string;
+    customLabel?: string; // Optional custom label override
 }
 
 interface ScoreBreakdownCardProps {
     scores?: ScoreItem[];
+    overallScore?: number; // Overall score for top slider (0-100)
 }
 
 const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
@@ -21,7 +23,8 @@ const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
         { label: 'Potential', score: 'Low', icon: PotentialIcon },
         { label: 'Income', score: 'Intermediate', icon: IncomeIcon },
         { label: 'Knowledge', score: 'High', icon: KnowledgeIcon },
-    ]
+    ],
+    overallScore = 75
 }) => {
     const getScorePercentage = (score: number | string) => {
         if (typeof score === 'number') {
@@ -35,10 +38,19 @@ const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
         }
     };
 
-    const getScoreColor = (score: number | string) => {
+    const getScoreColor = (score: number | string, item?: ScoreItem) => {
+        // If custom label exists, determine color based on label
+        if (item?.customLabel === 'Basic +') {
+            return '#F59E0B'; // orange
+        }
+        if (item?.customLabel === 'High') {
+            return '#10B981'; // green
+        }
+        
         if (typeof score === 'number') {
             if (score >= 85) return '#10B981'; // green
             if (score >= 70) return '#F59E0B'; // orange
+            if (score >= 60) return '#F59E0B'; // orange for 60-69
             return '#EF4444'; // red
         }
         switch (score) {
@@ -49,7 +61,12 @@ const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
         }
     };
 
-    const getScoreLabel = (score: number | string) => {
+    const getScoreLabel = (score: number | string, item?: ScoreItem) => {
+        // If custom label provided, use it
+        if (item?.customLabel) {
+            return item.customLabel;
+        }
+        
         if (typeof score === 'number') {
             if (score >= 85) return 'High';
             if (score >= 70) return 'Intermediate';
@@ -70,7 +87,7 @@ const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
                     <div
                         className="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-lg"
                         style={{
-                            left: '50%',
+                            left: `${overallScore}%`,
                             transform: 'translate(-50%, -50%)',
                         }}
                     ></div>
@@ -118,7 +135,7 @@ const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
                                         className="h-[3px] rounded-full transition-all duration-500"
                                         style={{
                                             width: `${getScorePercentage(item.score)}%`,
-                                            background: getScoreColor(item.score)
+                                            background: getScoreColor(item.score, item)
                                         }}
                                     ></div>
                                 </div>
@@ -127,9 +144,9 @@ const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
                                 <div className="flex justify-end mt-1">
                                     <span
                                         className="text-sm font-semibold"
-                                        style={{ color: getScoreColor(item.score) }}
+                                        style={{ color: getScoreColor(item.score, item) }}
                                     >
-                                        {getScoreLabel(item.score)}
+                                        {getScoreLabel(item.score, item)}
                                     </span>
                                 </div>
                             </div>

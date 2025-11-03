@@ -24,7 +24,7 @@ export const DNA_ICON_MAPPING: Record<string, { archetype: string; quote: string
     '🧠': { archetype: 'The Thinker', quote: 'Sharp mind — you process markets faster than most.' },
     '🏗️': { archetype: 'The Builder', quote: 'Solid foundations — you’re constructing lasting financial strength.' },
     '🎯': { archetype: 'The Achiever', quote: 'Focused and driven — you hit your goals with precision.' },
-    '💎': { archetype: 'The High Roller', quote: 'High stakes, high confidence — your boldness defines your edge.' }
+    '💎': { archetype: 'The High Achiever', quote: 'Confident, success-oriented — your boldness defines your edge.' }
 };
 
 

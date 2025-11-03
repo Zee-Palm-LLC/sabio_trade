@@ -98,7 +98,7 @@ const TabImageCarousel: React.FC<TabImageCarouselProps> = ({ isPhone = false }) 
                 </Swiper>
 
                 {/* Navigation & Pagination */}
-                <div className="flex items-center justify-center mt-4 px-8">
+                <div className="flex items-center justify-center mt-2 px-8">
                     <button
                         onClick={handlePrev}
                         className="custom-prev w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
@@ -149,7 +149,7 @@ const TabImageCarousel: React.FC<TabImageCarouselProps> = ({ isPhone = false }) 
         /* Container for proper bottom alignment */
         .tab-image-swiper {
           padding-bottom: 0 !important;
-          height: 270px !important;
+          height: 200px !important;
         }
 
         .tab-image-swiper .swiper-wrapper {
@@ -166,8 +166,8 @@ const TabImageCarousel: React.FC<TabImageCarouselProps> = ({ isPhone = false }) 
         }
 
         .tab-image-swiper .swiper-slide .tab-carousel-item {
-          width: 150px;
-          height: 207.65px;
+          width: 120px;
+          height: 165px;
           border-radius: 10.61px;
           opacity: 1;
           transition: all 0.3s ease;
@@ -175,8 +175,8 @@ const TabImageCarousel: React.FC<TabImageCarouselProps> = ({ isPhone = false }) 
 
         /* Center slide (active) - Red */
         .tab-image-swiper .swiper-slide-active .tab-carousel-item {
-          width: 180px;
-          height: 249.66px;
+          width: 140px;
+          height: 190px;
           border-radius: 12.16px;
           opacity: 1;
         }
@@ -184,7 +184,7 @@ const TabImageCarousel: React.FC<TabImageCarouselProps> = ({ isPhone = false }) 
         /* Mobile carousel styles */
         .mobile-image-swiper {
           padding-bottom: 0 !important;
-          height: 270px !important;
+          height: 200px !important;
         }
 
         .mobile-image-swiper .swiper-wrapper {
@@ -201,8 +201,8 @@ const TabImageCarousel: React.FC<TabImageCarouselProps> = ({ isPhone = false }) 
         }
 
         .mobile-image-swiper .swiper-slide .tab-carousel-item {
-          width: 120px;
-          height: 204.90798950195312px;
+          width: 100px;
+          height: 165px;
           border-radius: 10.61px;
           opacity: 1;
           transition: all 0.3s ease;
@@ -210,8 +210,8 @@ const TabImageCarousel: React.FC<TabImageCarouselProps> = ({ isPhone = false }) 
 
         /* Center slide (active) for mobile */
         .mobile-image-swiper .swiper-slide-active .tab-carousel-item {
-          width: 140px;
-          height: 239.05931091308594px;
+          width: 115px;
+          height: 185px;
           border-radius: 12.16px;
           opacity: 1;
         }

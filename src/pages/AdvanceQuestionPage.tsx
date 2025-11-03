@@ -366,7 +366,7 @@ const AdvanceQuestionPage: React.FC = () => {
                 {showValidationMessage && (
                     <div className="flex justify-center items-center px-4 py-6 animate-fade-in-out">
                         <p className="text-white text-[15px] font-normal text-center leading-relaxed">
-                            Interesting… most consistent traders answered this way too.
+                            Interesting🤔
                         </p>
                     </div>
                 )}

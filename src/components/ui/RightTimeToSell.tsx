@@ -46,9 +46,9 @@ const RightTimeToSell: React.FC<RightTimeToSellProps> = ({ dnaIcons: _dnaIcons =
     const traderInfo = getTraderDNAInfo();
     return (
         <div>
-            <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] mb-6'>
+            <Card className='bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] mb-4'>
                 <QuoteCard
-                    quote="“The stock market is designed to transfer money from the impatient to the patient.”"
+                    quote="The stock market is designed to transfer money from the impatient to the patient."
                     profileImage={WarrenBuffettImage}
                     name="Warren Buffett "
                     bottomMargin="mb-0"
@@ -56,10 +56,10 @@ const RightTimeToSell: React.FC<RightTimeToSellProps> = ({ dnaIcons: _dnaIcons =
 
                 {/* Trader DNA Information */}
                 {traderInfo && (
-                    <div className="px-4 pb-4">
+                    <div className="px-4 pb-2">
                         <div className="text-center">
                             {/* Icon + Archetype */}
-                            <div className="flex items-center justify-center mb-1">
+                            <div className="flex items-center justify-center mb-0">
                                 <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl mr-0"
                                 >
                                     {question5Icon?.icon}
@@ -70,13 +70,8 @@ const RightTimeToSell: React.FC<RightTimeToSellProps> = ({ dnaIcons: _dnaIcons =
                             </div>
 
                             {/* Quote */}
-                            <p className="text-white/90 text-base italic mb-3">
-                                "{traderInfo?.quote}"
-                            </p>
-
-                            {/* Progress Message */}
-                            <p className="text-[#17F871] text-sm font-medium">
-                                Great progress! Your instinct's already showing potential.
+                            <p className="text-white/90 text-base italic mb-1">
+                                {traderInfo?.quote}
                             </p>
                         </div>
                     </div>

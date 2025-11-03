@@ -22,19 +22,15 @@ const YourTraderProfile: React.FC = () => {
     // Use stored DNA icons for feedback
     const earnedFeedback = storedDNAIcons.slice(0, 3); // Max 3 icons
     
-    // Generate random scores within specified ranges
-    const generateRandomScores = () => {
-        return {
-            overall: Math.floor(Math.random() * 16) + 75, // 75-90%
-            motivation: Math.floor(Math.random() * 16) + 80, // 80-95%
-            potential: Math.floor(Math.random() * 16) + 85, // 85-100%
-            income: Math.floor(Math.random() * 36) + 50, // 50-85%
-            knowledge: Math.floor(Math.random() * 31) + 60, // 60-90%
-            spotsLeft: Math.floor(Math.random() * 5) + 14 // 14-18
-        };
+    // Fixed scores (non-dynamic)
+    const scores = {
+        overall: 75, // Always ~75% (three-quarters)
+        motivation: 85, // Keep as-is (example value)
+        potential: 90, // Keep as-is (example value)
+        fundingPotential: 87.5, // 75-100% range, middle = 87.5% (three-quarters to full)
+        knowledge: 67.5, // 60-75% range, middle = 67.5% (middle to three-quarters)
+        spotsLeft: 16 // Fixed value
     };
-    
-    const [scores] = useState(generateRandomScores);
     
     // Auto-rotate feedback every 3 seconds
     useEffect(() => {
@@ -89,7 +85,7 @@ const YourTraderProfile: React.FC = () => {
                                         {earnedFeedback[currentFeedbackIndex]?.archetype}
                                     </div>
                                     <div className="text-[#e0dbff] italic text-xs leading-snug -mt-1">
-                                        “{earnedFeedback[currentFeedbackIndex]?.quote}”
+                                        {earnedFeedback[currentFeedbackIndex]?.quote}
                                     </div>
                                 </div>
                             </div>
@@ -123,11 +119,12 @@ const YourTraderProfile: React.FC = () => {
                 {/* Score Breakdown Card */}
                 <div className="mb-4">
                     <ScoreBreakdownCard 
+                        overallScore={scores.overall}
                         scores={[
                             { label: 'Motivation', score: scores.motivation, icon: MotivationIcon },
                             { label: 'Potential', score: scores.potential, icon: PotentialIcon },
-                            { label: 'Income', score: scores.income, icon: IncomeIcon },
-                            { label: 'Knowledge', score: scores.knowledge, icon: KnowledgeIcon },
+                            { label: 'Funding Potential', score: scores.fundingPotential, icon: IncomeIcon, customLabel: 'High' },
+                            { label: 'Knowledge', score: scores.knowledge, icon: KnowledgeIcon, customLabel: 'Basic +' },
                         ]}
                     />
                 </div>

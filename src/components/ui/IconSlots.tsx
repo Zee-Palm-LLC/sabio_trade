@@ -8,12 +8,14 @@ interface IconSlotsProps {
 const IconSlots: React.FC<IconSlotsProps> = ({ className = '' }) => {
     const [icons, setIcons] = useState<DNAIconData[]>([]);
 
+    // Icon slots correspond to question IDs: 3, 5, 2
+    const iconSlotQuestionIds = [3, 5, 2];
+
     useEffect(() => {
         // Get initial icons
         const updateIcons = () => {
             const storedIcons = DNAIconsService.getDNAIcons();
-            // Only show the first 3 icons (max slots) - they fill in order as earned
-            setIcons(storedIcons.slice(0, 3));
+            setIcons(storedIcons);
         };
 
         updateIcons();
@@ -30,29 +32,32 @@ const IconSlots: React.FC<IconSlotsProps> = ({ className = '' }) => {
 
     return (
         <div className={`flex justify-center items-center gap-2 ${className}`}>
-            {[0, 1, 2].map((index) => {
-                const iconData = icons[index];
+            {iconSlotQuestionIds.map((questionId) => {
+                const iconData = icons.find(icon => icon.questionId === questionId);
                 const isEmpty = !iconData;
+                const isEarned = !!iconData;
                 
                 return (
                     <div
-                        key={index}
+                        key={questionId}
                         className={`flex items-center justify-center transition-all duration-500 ${
                             iconData ? 'animate-fade-in' : ''
-                        }`}
+                        } ${isEarned ? 'animate-icon-glow' : ''}`}
                         style={{
                             width: '40px',
                             height: '40px',
-                            background: iconData 
-                                ? 'rgba(255, 255, 255, 0.2)' 
+                            background: isEarned 
+                                ? 'rgba(255, 255, 255, 0.25)' 
                                 : 'rgba(255, 255, 255, 0.08)',
-                            border: iconData
-                                ? '2px solid rgba(255, 255, 255, 0.4)'
+                            border: isEarned
+                                ? '2px solid rgba(255, 255, 255, 0.5)'
                                 : '2px dashed rgba(255, 255, 255, 0.15)',
                             borderRadius: '50%',
                             backdropFilter: 'blur(8px)',
-                            boxShadow: iconData ? '0 4px 12px rgba(0, 0, 0, 0.3)' : 'none',
-                            opacity: isEmpty ? 0.6 : 1,
+                            boxShadow: isEarned 
+                                ? '0 4px 12px rgba(0, 0, 0, 0.3)' 
+                                : 'none',
+                            opacity: isEmpty ? 0.4 : 1,
                         }}
                     >
                         {iconData ? (
@@ -66,7 +71,16 @@ const IconSlots: React.FC<IconSlotsProps> = ({ className = '' }) => {
                             >
                                 {iconData.icon}
                             </span>
-                        ) : null}
+                        ) : (
+                            <div 
+                                style={{
+                                    width: '16px',
+                                    height: '16px',
+                                    borderRadius: '50%',
+                                    background: 'rgba(255, 255, 255, 0.1)',
+                                }}
+                            />
+                        )}
                     </div>
                 );
             })}
@@ -94,12 +108,27 @@ const IconSlots: React.FC<IconSlotsProps> = ({ className = '' }) => {
                     }
                 }
                 
+                @keyframes icon-glow {
+                    0%, 100% {
+                        filter: drop-shadow(0 0 8px rgba(23, 248, 113, 0.6)) drop-shadow(0 0 12px rgba(23, 248, 113, 0.4));
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(23, 248, 113, 0.4);
+                    }
+                    50% {
+                        filter: drop-shadow(0 0 12px rgba(23, 248, 113, 0.8)) drop-shadow(0 0 16px rgba(23, 248, 113, 0.6));
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 12px rgba(23, 248, 113, 0.6);
+                    }
+                }
+                
                 .animate-fade-in {
                     animation: fade-in 0.3s ease-in;
                 }
                 
                 .animate-pop-in {
                     animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+                }
+                
+                .animate-icon-glow {
+                    animation: icon-glow 2s ease-in-out infinite;
                 }
             `}</style>
         </div>

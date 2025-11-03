@@ -36,8 +36,8 @@ const TradingProfiles: React.FC = () => {
         <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
             <BottomShade />
             <div className="w-full max-w-[375px] mx-auto min-h-screen flex flex-col px-4">
-                <div className="flex flex-col items-center pt-8 pb-4">
-                    <div className="flex items-center space-x-3 mb-3">
+                <div className="flex flex-col items-center pt-4 pb-1">
+                    <div className="flex items-center space-x-3 mb-1">
                         <img src={Logo} alt="SabioTrade" width={230} height={80} />
                     </div>
                 </div>
@@ -47,16 +47,14 @@ const TradingProfiles: React.FC = () => {
                     bottomText="Creating the personal challenge and trading profile..."
                 />
                 <TabImageCarousel isPhone={true} />
-                <div className="pt-10 pb-6 mb-20">
+                <div className="pt-2 pb-4">
                     <PrimaryButton
                         onClick={handleContinueClick}
                         text="Next Step"
                         showIcon={true}
                         disabled={!isButtonEnabled}
                     />
-
                 </div>
-
             </div>
         </div>
     );
