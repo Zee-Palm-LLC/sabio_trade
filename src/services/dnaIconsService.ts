@@ -59,7 +59,9 @@ export const QUESTION_ICON_MAPPINGS = {
     }
 };
 
-const STORAGE_KEY = 'sabio_trader_dna_icons';
+// In-memory storage for DNA icons (clears on page refresh)
+// Note: DNA icons are stored in-memory during the session and persisted to Firestore when email is submitted
+let dnaIconsStorage: DNAIconData[] = [];
 
 // Event listeners for DNA icon changes
 const listeners: Set<() => void> = new Set();
@@ -68,7 +70,6 @@ export class DNAIconsService {
     // Store a DNA icon for a specific question
     static storeDNAIcon(questionId: number, questionText: string, selectedAnswer: string, source: 'questionPage' | 'advanceQuestionPage' | 'tradingQuizExtraPage'): void {
         console.log('DNAIconsService.storeDNAIcon called with:', { questionId, questionText, selectedAnswer, source });
-        console.log('DNAIconsService - Current localStorage before storage:', localStorage.getItem(STORAGE_KEY));
 
         const mapping = QUESTION_ICON_MAPPINGS[source][questionId as keyof typeof QUESTION_ICON_MAPPINGS[typeof source]];
         console.log('Found mapping:', mapping);
@@ -99,20 +100,12 @@ export class DNAIconsService {
             questionText
         };
 
-        // Get existing DNA icons
-        const existingIcons = this.getDNAIcons();
-        console.log('Existing icons:', existingIcons);
-
         // Replace icon for this question if it exists, otherwise add new one
-        const filteredIcons = existingIcons.filter(item => item.questionId !== questionId);
-        const updatedIcons = [...filteredIcons, dnaIconData];
-
-        // Store in localStorage
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedIcons));
+        const filteredIcons = dnaIconsStorage.filter(item => item.questionId !== questionId);
+        dnaIconsStorage = [...filteredIcons, dnaIconData];
         
         console.log(`Stored DNA icon for question ${questionId}:`, dnaIconData);
-        console.log('Updated icons array:', updatedIcons);
-        console.log('DNAIconsService - localStorage after storage:', localStorage.getItem(STORAGE_KEY));
+        console.log('Updated icons array:', dnaIconsStorage);
         
         // Notify all listeners that DNA icons have changed
         listeners.forEach(listener => listener());
@@ -120,16 +113,7 @@ export class DNAIconsService {
 
     // Get all stored DNA icons
     static getDNAIcons(): DNAIconData[] {
-        try {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            console.log('DNAIconsService.getDNAIcons - Raw localStorage data:', stored);
-            const parsed = stored ? JSON.parse(stored) : [];
-            console.log('DNAIconsService.getDNAIcons - Parsed data:', parsed);
-            return parsed;
-        } catch (error) {
-            console.error('Error retrieving DNA icons:', error);
-            return [];
-        }
+        return [...dnaIconsStorage];
     }
 
     // Get DNA icons as simple array (for backward compatibility)
@@ -139,8 +123,11 @@ export class DNAIconsService {
 
     // Clear all DNA icons
     static clearDNAIcons(): void {
-        localStorage.removeItem(STORAGE_KEY);
+        dnaIconsStorage = [];
         console.log('Cleared all DNA icons');
+        
+        // Notify all listeners
+        listeners.forEach(listener => listener());
     }
 
     // Get DNA icons for specific questions

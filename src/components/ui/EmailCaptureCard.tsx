@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ShieldIcon from '../../assets/sheild_filled.svg';
 import StandingAvatar from '../../assets/standing_avatar.png';
 import { DNAIconsService } from '../../services/dnaIconsService';
+import { AnswerService } from '../../services/answerService';
 import { saveEmail } from '../../services/emailService';
 
 interface EmailCaptureCardProps {
@@ -36,7 +37,6 @@ const EmailCaptureCard: React.FC<EmailCaptureCardProps> = () => {
     console.log('EmailCaptureCard - Quiz icons found:', quizIcons);
     console.log('EmailCaptureCard - Display icons:', displayIcons);
     console.log('EmailCaptureCard - Force update count:', forceUpdate);
-    console.log('EmailCaptureCard - localStorage raw data:', localStorage.getItem('sabio_trader_dna_icons'));
 
     // Listen for DNA icon changes
     useEffect(() => {
@@ -67,7 +67,44 @@ const EmailCaptureCard: React.FC<EmailCaptureCardProps> = () => {
         }
 
         try {
-            const result = await saveEmail(email);
+            // Collect all answers from AnswerService using question text as keys
+            // This ensures we get ALL answers even if question IDs conflict between quiz files
+            const allAnswersByQuestionText = AnswerService.getAllAnswersByQuestionText();
+            const allAnswersById = AnswerService.getAllAnswers();
+            
+            // Collect all DNA icons from DNAIconsService
+            const allDNAIcons = DNAIconsService.getDNAIcons();
+            
+            // Transform answers to the format expected by saveEmail
+            // Format: Record<string, { answer: string; icon?: string }>
+            // Key is question text (not question ID) to avoid conflicts
+            const attemptedQuestions: Record<string, { answer: string; icon?: string }> = {};
+            
+            // Build attemptedQuestions using question text as keys
+            // Use answersByQuestionText to get all unique questions (handles ID conflicts)
+            Object.entries(allAnswersByQuestionText).forEach(([questionText, answerObj]) => {
+                // Find the corresponding answer data to get questionId for icon lookup
+                const answerData = Object.values(allAnswersById).find(data => data.questionText === questionText);
+                
+                // Find corresponding DNA icon for this question by questionId
+                const dnaIcon = answerData 
+                    ? allDNAIcons.find(icon => icon.questionId === answerData.questionId)
+                    : null;
+                
+                // Use question text as the key (this avoids ID conflicts and makes questions the keys)
+                attemptedQuestions[questionText] = {
+                    answer: answerObj.answer,
+                    ...(dnaIcon && { icon: dnaIcon.icon })
+                };
+            });
+            
+            console.log('Collected attemptedQuestions:', attemptedQuestions);
+            console.log('All answers by question text:', allAnswersByQuestionText);
+            console.log('All answers by ID:', allAnswersById);
+            console.log('All DNA icons:', allDNAIcons);
+            console.log('Total questions captured:', Object.keys(attemptedQuestions).length);
+            
+            const result = await saveEmail(email, attemptedQuestions);
             if (result.success) {
                 console.log('Email saved successfully:', result);
                 if (result.message === 'Email already registered') {
