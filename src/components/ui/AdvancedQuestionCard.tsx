@@ -8,11 +8,6 @@ import NetflixIcon from '../../assets/netflix.png';
 import NvidiaIcon from '../../assets/nvidia.png';
 import TeslaIcon from '../../assets/tesla.png';
 import TestimonialCard from './TestimonialCard';
-
-import ChallengesIcon from '../../assets/challenges.png';
-import EducationIcon from '../../assets/education.png';
-import SittingAvatar from '../../assets/sitting_avatar.png';
-import ToolsIcon from '../../assets/tools.png';
 import Card from './Card';
 
 interface OptionWithDescription {

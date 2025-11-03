@@ -9,7 +9,6 @@ import MicrosoftIcon from '../../assets/microsoft.png';
 import NetflixIcon from '../../assets/netflix.png';
 import NvidiaIcon from '../../assets/nvidia.png';
 import TeslaIcon from '../../assets/tesla.png';
-import TopicIcon from '../../assets/topic.png';
 import PrimaryButton from './PrimaryButton';
 
 interface AnalyzingModalProps {
