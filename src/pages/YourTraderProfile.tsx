@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import IncomeIcon from '../assets/income.svg';
 import KnowledgeIcon from '../assets/knowledge.svg';
 import Logo from '../assets/logo.png';
@@ -11,8 +10,6 @@ import { DNAIconsService } from '../services/dnaIconsService';
 
 
 const YourTraderProfile: React.FC = () => {
-    const navigate = useNavigate();
-    
     // Get stored DNA icons
     const storedDNAIcons = DNAIconsService.getDNAIcons();
     

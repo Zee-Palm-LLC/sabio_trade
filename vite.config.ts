@@ -6,5 +6,6 @@ export default defineConfig({
   plugins: [react()],
   build: {
     chunkSizeWarningLimit: 1000, // increases warning threshold from 500 kB → 1000 kB
+    outDir: process.env.BUILD_DIR || 'dist', // Use BUILD_DIR env var or default to 'dist'
   },
 })
