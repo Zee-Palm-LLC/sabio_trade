@@ -2,7 +2,6 @@
   "hosting": [
     {
       "target": "master",
-      "site": "quiz-development-project-c5ba9",
       "public": "dist",
       "ignore": [
         "firebase.json",
@@ -18,7 +17,6 @@
     },
     {
       "target": "main",
-      "site": "quiz-development-project-short-c5ba9",
       "public": "dist-main",
       "ignore": [
         "firebase.json",

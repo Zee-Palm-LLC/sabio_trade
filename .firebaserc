@@ -1,5 +1,13 @@
 {
   "projects": {
     "default": "quiz-development-project-c5ba9"
+  },
+  "targets": {
+    "quiz-development-project-c5ba9": {
+      "hosting": {
+        "master": ["quiz-development-project-c5ba9"],
+        "main": ["quiz-development-project-short-c5ba9"]
+      }
+    }
   }
 }
