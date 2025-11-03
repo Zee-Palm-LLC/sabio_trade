@@ -19,7 +19,7 @@
     {
       "target": "main",
       "site": "quiz-development-project-short-c5ba9",
-      "public": "public",
+      "public": "dist-main",
       "ignore": [
         "firebase.json",
         "**/.*",
