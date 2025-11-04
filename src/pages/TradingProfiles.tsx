@@ -2,12 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { BackButton, BottomShade, PrimaryButton, ProgressCard } from "../components";
+import { saveEmail } from '../services/emailService';
+import { QuizDataService } from '../services/quizDataService';
+import { EmailStorageService } from '../services/emailStorageService';
 
 const TradingProfiles: React.FC = () => {
     const navigate = useNavigate();
     const [progress, setProgress] = useState(0);
     const [isButtonEnabled, setIsButtonEnabled] = useState(false);
     const [email, setEmail] = useState('');
+    const [saving, setSaving] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [emailAlreadySubmitted, setEmailAlreadySubmitted] = useState(false);
+    
+    // Check if email was already submitted in InvestingStyleQuizPage
+    useEffect(() => {
+        const hasEmail = EmailStorageService.hasEmailBeenSubmitted();
+        if (hasEmail) {
+            setEmailAlreadySubmitted(true);
+            const storedEmail = EmailStorageService.getSubmittedEmail();
+            console.log('Email already submitted in InvestingStyleQuizPage, hiding email input. Email:', storedEmail);
+        } else {
+            console.log('Email not submitted yet, showing email input');
+        }
+    }, []);
 
     useEffect(() => {
         const duration = 3000; // 3 seconds to reach 100%
@@ -29,7 +47,35 @@ const TradingProfiles: React.FC = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const handleContinueClick = () => {
+    const handleContinueClick = async () => {
+        // If email is provided, save it with all collected answers
+        if (email.trim()) {
+            setSaving(true);
+            setError(null);
+            
+            try {
+                const sessionId = QuizDataService.getSessionId();
+                const attemptedQuestions = await QuizDataService.collectAnswersForEmail(sessionId);
+                
+                const result = await saveEmail(email.trim(), attemptedQuestions);
+                
+                if (!result.success) {
+                    setError(result.error || 'Failed to save email');
+                    setSaving(false);
+                    return;
+                }
+                
+                console.log('Email saved successfully from TradingProfiles');
+            } catch (err: any) {
+                console.error('Error saving email:', err);
+                setError('Failed to save email. Please try again.');
+                setSaving(false);
+                return;
+            }
+            
+            setSaving(false);
+        }
+        
         navigate('/your-trader-profile');
     };
 
@@ -70,33 +116,44 @@ const TradingProfiles: React.FC = () => {
                         </p>
                     </div>
 
-                    {/* Email Input */}
-                    <div className="mb-8">
-                        <label className="block text-white font-bold text-[15px] mb-2">
-                            Enter E-mail (optional)
-                        </label>
-                        <div className="relative">
-                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
+                    {/* Email Input - Hidden if already submitted in InvestingStyleQuizPage */}
+                    {!emailAlreadySubmitted && (
+                        <div className="mb-8">
+                            <label className="block text-white font-bold text-[15px] mb-2">
+                                Enter E-mail (optional)
+                            </label>
+                            <div className="relative">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => {
+                                        setEmail(e.target.value);
+                                        setError(null);
+                                    }}
+                                    placeholder="Enter your email"
+                                    className={`w-full pl-12 pr-4 py-3 rounded-lg placeholder-white/40 focus:outline-none transition-all ${
+                                        error ? 'border-red-400' : 'border-transparent'
+                                    }`}
+                                    style={{
+                                        background: 'transparent',
+                                        border: `1px solid ${error ? 'rgba(239, 68, 68, 0.5)' : 'rgba(255, 255, 255, 0.3)'}`,
+                                        fontSize: '15px',
+                                        color: 'rgba(255, 255, 255, 0.9)'
+                                    }}
+                                    autoComplete="email"
+                                    disabled={saving}
+                                />
                             </div>
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Enter your email"
-                                className="w-full pl-12 pr-4 py-3 rounded-lg placeholder-white/40 focus:outline-none transition-all"
-                                style={{
-                                    background: 'transparent',
-                                    border: '1px solid rgba(255, 255, 255, 0.3)',
-                                    fontSize: '15px',
-                                    color: 'rgba(255, 255, 255, 0.9)'
-                                }}
-                                autoComplete="email"
-                            />
+                            {error && (
+                                <p className="text-red-400 text-sm mt-2">{error}</p>
+                            )}
                         </div>
-                    </div>
+                    )}
 
                     {/* Progress Circle */}
                     <div className="flex justify-center items-center mb-auto">
@@ -112,9 +169,9 @@ const TradingProfiles: React.FC = () => {
                 <div className="pb-12 mt-auto">
                     <PrimaryButton
                         onClick={handleContinueClick}
-                        text="Get the results!"
+                        text={saving ? 'Saving...' : 'Get the results!'}
                         showIcon={false}
-                        disabled={!isButtonEnabled}
+                        disabled={!isButtonEnabled || saving}
                     />
                 </div>
             </div>

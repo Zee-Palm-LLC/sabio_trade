@@ -2,12 +2,48 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { BottomShade, PrimaryButton } from '../components';
+import { saveEmail } from '../services/emailService';
+import { QuizDataService } from '../services/quizDataService';
+import { EmailStorageService } from '../services/emailStorageService';
 
 const InvestingStyleQuizPage: React.FC = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    const handleContinueClick = () => {
+    const handleContinueClick = async () => {
+        // If email is provided, save it with answers
+        if (email.trim()) {
+            setLoading(true);
+            setError(null);
+            
+            try {
+                const sessionId = QuizDataService.getSessionId();
+                const attemptedQuestions = await QuizDataService.collectAnswersForEmail(sessionId);
+                
+                const result = await saveEmail(email.trim(), attemptedQuestions);
+                
+                if (!result.success) {
+                    setError(result.error || 'Failed to save email');
+                    setLoading(false);
+                    return;
+                }
+                
+                // Store email in helper service to indicate it was already submitted
+                EmailStorageService.setSubmittedEmail(email.trim());
+                
+                console.log('Email saved successfully from InvestingStyleQuizPage');
+            } catch (err: any) {
+                console.error('Error saving email:', err);
+                setError('Failed to save email. Please try again.');
+                setLoading(false);
+                return;
+            }
+            
+            setLoading(false);
+        }
+        
         // Navigate to the next page (quiz page)
         navigate('/trust');
     };
@@ -57,18 +93,27 @@ const InvestingStyleQuizPage: React.FC = () => {
                             <input
                                 type="email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                    setError(null);
+                                }}
                                 placeholder="Enter your email"
-                                className="w-full pl-12 pr-4 py-3 rounded-lg placeholder-white/40 focus:outline-none transition-all"
+                                className={`w-full pl-12 pr-4 py-3 rounded-lg placeholder-white/40 focus:outline-none transition-all ${
+                                    error ? 'border-red-400' : 'border-transparent'
+                                }`}
                                 style={{
                                     background: 'transparent',
-                                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                                    border: `1px solid ${error ? 'rgba(239, 68, 68, 0.5)' : 'rgba(255, 255, 255, 0.3)'}`,
                                     fontSize: '15px',
                                     color: 'rgba(255, 255, 255, 0.9)'
                                 }}
                                 autoComplete="email"
+                                disabled={loading}
                             />
                         </div>
+                        {error && (
+                            <p className="text-red-400 text-sm mt-2">{error}</p>
+                        )}
                     </div>
                 </div>
 
@@ -76,8 +121,9 @@ const InvestingStyleQuizPage: React.FC = () => {
                 <div className="pb-12 mt-auto">
                     <PrimaryButton
                         onClick={handleContinueClick}
-                        text="Sounds good, I am in!"
+                        text={loading ? 'Processing...' : 'Sounds good, I am in!'}
                         showIcon={false}
+                        disabled={loading}
                     />
                 </div>
             </div>

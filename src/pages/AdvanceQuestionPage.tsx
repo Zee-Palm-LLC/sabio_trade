@@ -5,6 +5,7 @@ import { BackButton, BottomShade, PrimaryButton, ProgressIndicator } from '../co
 import AdvancedQuestionCard from '../components/ui/AdvancedQuestionCard';
 import advancedQuestions from '../data/advancedQuestions.json';
 import { DNAIconsService } from '../services/dnaIconsService';
+import { QuizDataService } from '../services/quizDataService';
 
 const AdvanceQuestionPage: React.FC = () => {
     const navigate = useNavigate();
@@ -128,7 +129,7 @@ const AdvanceQuestionPage: React.FC = () => {
         });
     };
 
-    const handleOptionSelect = (value: string) => {
+    const handleOptionSelect = async (value: string) => {
         if (isMulti) return;
 
         // Store the current question ID as the last attempted question
@@ -142,6 +143,19 @@ const AdvanceQuestionPage: React.FC = () => {
             };
             return newAnswers;
         });
+
+        // ✅ Store answer directly to Firestore
+        const sessionId = QuizDataService.getSessionId();
+        try {
+            await QuizDataService.storeAnswer(
+                sessionId,
+                currentQuestion.id,
+                currentQuestion.question,
+                value
+            );
+        } catch (error) {
+            console.error('Error storing answer to Firestore:', error);
+        }
 
         // ✅ Store DNA icon if question ID is 5
         if (currentQuestion.id === 5) {
@@ -242,13 +256,28 @@ const AdvanceQuestionPage: React.FC = () => {
         });
     };
 
-    const handleContinueClick = () => {
+    const handleContinueClick = async () => {
         if (!isButtonActive) return;
+
+        const sessionId = QuizDataService.getSessionId();
 
         if (isMulti) {
             if (selectedOptions.length === 0) return;
             localStorage.setItem('lastAttemptedQuestion', String(currentQuestion.id));
             const value = selectedOptions.join(',');
+            
+            // ✅ Store answer directly to Firestore
+            try {
+                await QuizDataService.storeAnswer(
+                    sessionId,
+                    currentQuestion.id,
+                    currentQuestion.question,
+                    value
+                );
+            } catch (error) {
+                console.error('Error storing answer to Firestore:', error);
+            }
+            
             if (currentQuestion.id === 8) {
                 setShowValidationMessage(true);
                 setTimeout(() => {
@@ -274,6 +303,19 @@ const AdvanceQuestionPage: React.FC = () => {
 
         if (!selectedOption) return;
         localStorage.setItem('lastAttemptedQuestion', String(currentQuestion.id));
+        
+        // ✅ Store answer directly to Firestore
+        try {
+            await QuizDataService.storeAnswer(
+                sessionId,
+                currentQuestion.id,
+                currentQuestion.question,
+                selectedOption
+            );
+        } catch (error) {
+            console.error('Error storing answer to Firestore:', error);
+        }
+        
         if (currentQuestionIndex < advancedQuestions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
             setSelectedOption(null);

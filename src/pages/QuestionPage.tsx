@@ -5,6 +5,7 @@ import StandingAvatar from '../assets/standing_avatar.png';
 import { BackButton, BottomShade, ProgressIndicator, QuestionCard } from '../components';
 import quizData from '../data/quiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
+import { QuizDataService } from '../services/quizDataService';
 
 const QuestionPage: React.FC = () => {
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ const QuestionPage: React.FC = () => {
         }
     };
 
-    const handleOptionSelect = (value: string) => {
+    const handleOptionSelect = async (value: string) => {
         console.log('Selected option:', value);
         setSelectedOption(value);
 
@@ -44,6 +45,19 @@ const QuestionPage: React.FC = () => {
             ...prev,
             [currentQuestion.id]: value,
         }));
+
+        // ✅ Store answer directly to Firestore
+        const sessionId = QuizDataService.getSessionId();
+        try {
+            await QuizDataService.storeAnswer(
+                sessionId,
+                currentQuestion.id,
+                currentQuestion.question,
+                value
+            );
+        } catch (error) {
+            console.error('Error storing answer to Firestore:', error);
+        }
 
         // ✅ Store DNA icon if question ID is 3
         if (currentQuestion.id === 3) {
@@ -53,17 +67,9 @@ const QuestionPage: React.FC = () => {
                 value,
                 'questionPage'
             );
-            
-            // Trigger animation
-            // setIsIconAnimating(true);
-            // setTimeout(() => {
-            //     setIsIconAnimating(false);
-            // }, 1000);
         }
 
-        // Different timing based on whether it's question ID 3 (with animation)
-        // const delayTime = currentQuestion.id === 3 ? 1300 : 400; // Wait for animation to complete + buffer
-        const delayTime = 400; // Removed animation delay
+        const delayTime = 400;
         
         setTimeout(() => {
             if (currentQuestionIndex < availableQuestions.length - 1) {

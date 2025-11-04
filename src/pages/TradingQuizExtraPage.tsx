@@ -17,6 +17,7 @@ import { BackButton, BottomShade, ProgressIndicator } from '../components';
 import IconOptionCard, { type IconOption } from '../components/ui/IconOptionCard';
 import extraQuiz from '../data/extraQuiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
+import { QuizDataService } from '../services/quizDataService';
 
 interface ExtraQuestion {
     id: number;
@@ -94,12 +95,25 @@ const TradingQuizExtraPage: React.FC = () => {
         }
     };
 
-    const handleSelect = (value: string) => {
+    const handleSelect = async (value: string) => {
         console.log('TradingQuizExtraPage - handleSelect called');
         console.log('Question ID:', question.id);
         console.log('Selected value:', value);
         
         setSelected(prev => ({ ...prev, [question.id]: value }));
+        
+        // ✅ Store answer directly to Firestore
+        const sessionId = QuizDataService.getSessionId();
+        try {
+            await QuizDataService.storeAnswer(
+                sessionId,
+                question.id,
+                question.title,
+                value
+            );
+        } catch (error) {
+            console.error('Error storing answer to Firestore:', error);
+        }
         
         // ✅ Store DNA icon if question ID is 2
         if (question.id === 2) {
@@ -110,29 +124,9 @@ const TradingQuizExtraPage: React.FC = () => {
                 value,
                 'tradingQuizExtraPage'
             );
-            
-            // DNA icon will be automatically picked up on next render
-            
-            // Debug: Check if icon was stored
-            setTimeout(() => {
-                const updatedIcons = DNAIconsService.getDNAIcons();
-                console.log('Updated DNA icons after storage:', updatedIcons);
-                const newIcon = updatedIcons.find(icon => icon.questionId === question.id);
-                console.log('New icon found:', newIcon);
-            }, 100);
-            
-            // Trigger animation
-            // console.log('Setting animation to true');
-            // setIsIconAnimating(true);
-            // setTimeout(() => {
-            //     console.log('Setting animation to false');
-            //     setIsIconAnimating(false);
-            // }, 1000);
         }
 
-        // Different timing based on whether it's question ID 2 (with animation)
-        // const delayTime = question.id === 2 ? 1300 : 200; // Wait for animation to complete + buffer
-        const delayTime = 200; // Removed animation delay
+        const delayTime = 200;
         
         setTimeout(() => {
             if (fromProfile) {
