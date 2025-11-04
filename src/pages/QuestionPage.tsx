@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import StandingAvatar from '../assets/standing_avatar.png';
 import { BackButton, BottomShade, ProgressIndicator, QuestionCard } from '../components';
+import advancedQuestions from '../data/advancedQuestions.json';
+import extraQuiz from '../data/extraQuiz.json';
 import quizData from '../data/quiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
 import { QuizDataService } from '../services/quizDataService';
@@ -15,7 +17,8 @@ const QuestionPage: React.FC = () => {
     // const [isIconAnimating, setIsIconAnimating] = useState(false);
 
     const availableQuestions = quizData;
-    const totalQuestions = 13;
+    // Calculate total: quiz.json + advancedQuestions.json + extraQuiz.json
+    const totalQuestions = quizData.length + advancedQuestions.length + (extraQuiz as any).questions.length;
     const currentQuestion = availableQuestions[currentQuestionIndex];
 
     // Get stored DNA icons for display

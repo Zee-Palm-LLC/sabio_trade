@@ -4,6 +4,8 @@ import Logo from '../assets/logo.png';
 import { BackButton, BottomShade, PrimaryButton, ProgressIndicator } from '../components';
 import AdvancedQuestionCard from '../components/ui/AdvancedQuestionCard';
 import advancedQuestions from '../data/advancedQuestions.json';
+import extraQuiz from '../data/extraQuiz.json';
+import quizData from '../data/quiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
 import { QuizDataService } from '../services/quizDataService';
 
@@ -30,7 +32,8 @@ const AdvanceQuestionPage: React.FC = () => {
     const [showValidationMessage, setShowValidationMessage] = useState(false);
     const [isIconAnimating, setIsIconAnimating] = useState(false);
 
-    const totalQuestions = 13;
+    // Calculate total: quiz.json + advancedQuestions.json + extraQuiz.json
+    const totalQuestions = quizData.length + advancedQuestions.length + (extraQuiz as any).questions.length;
     const questionOffset = 4;
     const currentQuestion: any = advancedQuestions[currentQuestionIndex];
 

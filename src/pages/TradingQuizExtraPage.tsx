@@ -15,7 +15,9 @@ import SteadyPng from '../assets/steady.png';
 import SteadyLarge from '../assets/steadyLarge.png';
 import { BackButton, BottomShade, ProgressIndicator } from '../components';
 import IconOptionCard, { type IconOption } from '../components/ui/IconOptionCard';
+import advancedQuestions from '../data/advancedQuestions.json';
 import extraQuiz from '../data/extraQuiz.json';
+import quizData from '../data/quiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
 import { QuizDataService } from '../services/quizDataService';
 
@@ -63,8 +65,10 @@ const TradingQuizExtraPage: React.FC = () => {
     const [selected, setSelected] = useState<Record<number, string>>({});
     // const [isIconAnimating, setIsIconAnimating] = useState(false); // Commented out - emoji display disabled
 
-    const total = 13;
-    const questionOffset = 8;
+    // Calculate offset: QuestionPage (quiz.json) + AdvanceQuestionPage (advancedQuestions.json)
+    const questionOffset = quizData.length + advancedQuestions.length;
+    // Calculate total: quiz.json + advancedQuestions.json + extraQuiz.json
+    const total = quizData.length + advancedQuestions.length + (extraQuiz as any).questions.length;
     const question = mapExtraQuestions[fromProfile ? 4 : current];
 
     // Get stored DNA icons for display (with forceUpdate dependency)
