@@ -3,41 +3,7 @@
 
 import { doc, setDoc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../config/firebase.config';
-import quizData from '../data/quiz.json';
-import advancedQuestions from '../data/advancedQuestions.json';
-import extraQuiz from '../data/extraQuiz.json';
 import { DNAIconsService } from './dnaIconsService';
-
-// Question maps for all quiz files
-const getAllQuestions = () => {
-  const questions: Record<string, { questionText: string; questionId: number }> = {};
-  
-  // From quiz.json
-  quizData.forEach((q: any) => {
-    questions[String(q.id)] = {
-      questionText: q.question,
-      questionId: q.id
-    };
-  });
-  
-  // From advancedQuestions.json
-  advancedQuestions.forEach((q: any) => {
-    questions[String(q.id)] = {
-      questionText: q.question,
-      questionId: q.id
-    };
-  });
-  
-  // From extraQuiz.json
-  (extraQuiz as any).questions.forEach((q: any) => {
-    questions[String(q.id)] = {
-      questionText: q.title,
-      questionId: q.id
-    };
-  });
-  
-  return questions;
-};
 
 export class QuizDataService {
   // Store a single answer directly to Firestore
