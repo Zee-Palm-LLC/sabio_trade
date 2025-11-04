@@ -60,6 +60,38 @@ const ScratchPage: React.FC = () => {
                             <img src={Logo} alt="SabioTrade" width={230} height={80} />
                         </div>
                     </div>
+
+                    {/* Sticky Top-Right Button Card (Post-Scratch) - Now in normal flow above Card */}
+                    {isScratched && (
+                        <Card
+                            className="mb-4 w-full"
+                            style={{
+                                background: 'linear-gradient(135deg, #031340 0%, #0A1B3D 50%, #152850 100%)',
+                                borderRadius: '12px',
+                                padding: '12px 16px',
+                                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(23, 248, 113, 0.2)',
+                                border: '1px solid rgba(23, 248, 113, 0.3)',
+                            }}
+                        >
+
+                            {/* Expiration Timer */}
+                            <div className="text-[14px] font-medium text-center mb-2" style={{ letterSpacing: '0.2px', color: '#fff' }}>
+                                Discount expires in <span style={{ color: '#17F871' }}>{formatTime(timeLeft)}</span>
+                            </div>
+
+                            {/* GET MY PLAN Button */}
+                            <button
+                                onClick={handleReserveClick}
+                                className="w-full bg-white text-[#340863] font-bold text-xs py-2 px-3 rounded-lg hover:bg-gray-100 transition-colors"
+                                style={{
+                                    boxShadow: '0 2px 8px rgba(255, 255, 255, 0.2)'
+                                }}
+                            >
+                                GET MY PLAN
+                            </button>
+                        </Card>
+                    )}
+
                     <Card
                         className={`w-full max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] p-3`}
                     >
@@ -204,45 +236,6 @@ const ScratchPage: React.FC = () => {
 
                 </div>
             </div>
-
-            {/* Sticky Top-Right Button (Post-Scratch) */}
-            {isScratched && (
-                <div 
-                    className="fixed top-4 right-4 z-50"
-                    style={{
-                        background: 'linear-gradient(135deg, #031340 0%, #0A1B3D 50%, #152850 100%)',
-                        borderRadius: '12px',
-                        padding: '12px 16px',
-                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(23, 248, 113, 0.2)',
-                        border: '1px solid rgba(23, 248, 113, 0.3)',
-                        minWidth: '160px',
-                    }}
-                >
-                    {/* SabioTrade ACADEMY Logo/Text */}
-                    <div className="text-white font-bold text-xs mb-1.5 text-center" style={{ 
-                        letterSpacing: '0.3px',
-                        lineHeight: '1.2'
-                    }}>
-                        SabioTrade<br />ACADEMY
-                    </div>
-                    
-                    {/* Expiration Timer */}
-                    <div className="text-white/90 text-[10px] font-medium text-center mb-2" style={{ letterSpacing: '0.2px' }}>
-                        Discount expires in {formatTime(timeLeft)}
-                    </div>
-                    
-                    {/* GET MY PLAN Button */}
-                    <button
-                        onClick={handleReserveClick}
-                        className="w-full bg-white text-[#340863] font-bold text-xs py-2 px-3 rounded-lg hover:bg-gray-100 transition-colors"
-                        style={{
-                            boxShadow: '0 2px 8px rgba(255, 255, 255, 0.2)'
-                        }}
-                    >
-                        GET MY PLAN
-                    </button>
-                </div>
-            )}
 
             <style>{`
             @keyframes glow-pulse {
