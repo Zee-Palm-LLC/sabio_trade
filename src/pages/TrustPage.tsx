@@ -26,6 +26,7 @@ const TrustPage: React.FC = () => {
                         <div className="flex-1 flex justify-center">
                             <img src={Logo} alt="SabioTrade" width={230} height={80} />
                         </div>
+                        <div className="flex-shrink-0" style={{ width: 35, height: 35 }}></div>
                     </div>
                 </div>
 
@@ -39,7 +40,7 @@ const TrustPage: React.FC = () => {
                     {/* Body Text */}
                     <div className="space-y-4 mb-6">
                         <p className="text-white/70 text-[15px] leading-relaxed">
-                            Sabio academy offers amazing investing and wealth management courses with <span className="font-bold text-white">unlimited 1-on-1 mentorship</span> to help you grow faster and smarter.
+                            Sabio academy offers amazing investing and wealth management courses with <span className="font-bold text-white">unlimited 1-on-1 mentorship to help you grow faster and smarter.</span>
                         </p>
                         <p className="text-white/70 text-[15px] leading-relaxed">
                             Our platform is European-based and <span className="font-bold text-white">fully regulated, trusted by a global community of 10,000+ traders.</span>
