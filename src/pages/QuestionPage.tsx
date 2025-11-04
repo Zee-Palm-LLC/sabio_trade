@@ -11,15 +11,15 @@ const QuestionPage: React.FC = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<Record<number, string>>({});
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
-    const [isIconAnimating, setIsIconAnimating] = useState(false);
+    // const [isIconAnimating, setIsIconAnimating] = useState(false);
 
     const availableQuestions = quizData;
     const totalQuestions = 13;
     const currentQuestion = availableQuestions[currentQuestionIndex];
 
     // Get stored DNA icons for display
-    const storedDNAIcons = DNAIconsService.getDNAIcons();
-    const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === currentQuestion.id);
+    // const storedDNAIcons = DNAIconsService.getDNAIcons();
+    // const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === currentQuestion.id);
 
     const questionOptions = currentQuestion.options.map((option: string) => ({
         value: option,
@@ -55,14 +55,15 @@ const QuestionPage: React.FC = () => {
             );
             
             // Trigger animation
-            setIsIconAnimating(true);
-            setTimeout(() => {
-                setIsIconAnimating(false);
-            }, 1000);
+            // setIsIconAnimating(true);
+            // setTimeout(() => {
+            //     setIsIconAnimating(false);
+            // }, 1000);
         }
 
         // Different timing based on whether it's question ID 3 (with animation)
-        const delayTime = currentQuestion.id === 3 ? 1300 : 400; // Wait for animation to complete + buffer
+        // const delayTime = currentQuestion.id === 3 ? 1300 : 400; // Wait for animation to complete + buffer
+        const delayTime = 400; // Removed animation delay
         
         setTimeout(() => {
             if (currentQuestionIndex < availableQuestions.length - 1) {
@@ -113,7 +114,7 @@ const QuestionPage: React.FC = () => {
                 />
 
                 {/* Trader DNA Icons - Visible only for question ID 3 and when option is selected */}
-                {currentQuestion.id === 3 && currentQuestionIcon && selectedOption && (
+                {/* {currentQuestion.id === 3 && currentQuestionIcon && selectedOption && (
                     <div className="relative flex justify-center mt-4 mb-2">
                         <div className="flex space-x-3">
                             <div
@@ -130,7 +131,7 @@ const QuestionPage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {/* QUESTION CARD */}
                 <div className="mb-20">
@@ -145,7 +146,7 @@ const QuestionPage: React.FC = () => {
                 </div>
             </div>
 
-            <style>{`
+            {/* <style>{`
                 @keyframes float {
                     0%, 100% {
                         transform: translateY(0px);
@@ -189,7 +190,7 @@ const QuestionPage: React.FC = () => {
                 .animate-fly-from-top-right {
                     animation: fly-from-top-right 1.0s ease-out forwards;
                 }
-            `}</style>
+            `}</style> */}
         </div>
     );
 };

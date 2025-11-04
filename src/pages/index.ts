@@ -14,6 +14,7 @@ export { default as TradingQuizExtraPage } from './TradingQuizExtraPage';
 export { default as TrustPage } from './TrustPage';
 export { default as WelcomePage } from './WelcomePage';
 export { default as YourTraderProfile } from './YourTraderProfile';
+export { default as SabioAcademyOfferPage } from './SabioAcademyOfferPage';
 
 // Add other pages here as they are created
 // export { default as DashboardPage } from './DashboardPage';

@@ -60,15 +60,15 @@ const TradingQuizExtraPage: React.FC = () => {
 
     const [current, setCurrent] = useState(fromProfile ? 4 : 0);
     const [selected, setSelected] = useState<Record<number, string>>({});
-    const [isIconAnimating, setIsIconAnimating] = useState(false);
+    // const [isIconAnimating, setIsIconAnimating] = useState(false); // Commented out - emoji display disabled
 
     const total = 13;
     const questionOffset = 8;
     const question = mapExtraQuestions[fromProfile ? 4 : current];
 
     // Get stored DNA icons for display (with forceUpdate dependency)
-    const storedDNAIcons = DNAIconsService.getDNAIcons();
-    const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === question.id);
+    // const storedDNAIcons = DNAIconsService.getDNAIcons(); // Commented out - emoji display disabled
+    // const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === question.id); // Commented out - emoji display disabled
 
     const handleBackClick = () => {
         if (fromProfile) {
@@ -122,16 +122,17 @@ const TradingQuizExtraPage: React.FC = () => {
             }, 100);
             
             // Trigger animation
-            console.log('Setting animation to true');
-            setIsIconAnimating(true);
-            setTimeout(() => {
-                console.log('Setting animation to false');
-                setIsIconAnimating(false);
-            }, 1000);
+            // console.log('Setting animation to true');
+            // setIsIconAnimating(true);
+            // setTimeout(() => {
+            //     console.log('Setting animation to false');
+            //     setIsIconAnimating(false);
+            // }, 1000);
         }
 
         // Different timing based on whether it's question ID 2 (with animation)
-        const delayTime = question.id === 2 ? 1300 : 200; // Wait for animation to complete + buffer
+        // const delayTime = question.id === 2 ? 1300 : 200; // Wait for animation to complete + buffer
+        const delayTime = 200; // Removed animation delay
         
         setTimeout(() => {
             if (fromProfile) {
@@ -171,7 +172,7 @@ const TradingQuizExtraPage: React.FC = () => {
                 <ProgressIndicator current={fromProfile ? 13 : current + 1 + questionOffset} total={total} />
 
                 {/* Trader DNA Icons - Visible only for question ID 2 and when option is selected */}
-                {(() => {
+                {/* {(() => {
                     console.log('Icon display check:');
                     console.log('Question ID:', question.id);
                     console.log('Current question icon:', currentQuestionIcon);
@@ -197,7 +198,7 @@ const TradingQuizExtraPage: React.FC = () => {
                             </div>
                         </div>
                     );
-                })()}
+                })()} */}
 
                 {question.id === 4 && (
                     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -225,7 +226,7 @@ const TradingQuizExtraPage: React.FC = () => {
                 </div>
             </div>
 
-            <style>{`
+            {/* <style>{`
                 @keyframes float {
                     0%, 100% {
                         transform: translateY(0px);
@@ -269,7 +270,7 @@ const TradingQuizExtraPage: React.FC = () => {
                 .animate-fly-from-top-right {
                     animation: fly-from-top-right 1.0s ease-out forwards;
                 }
-            `}</style>
+            `}</style> */}
         </div>
     );
 };
