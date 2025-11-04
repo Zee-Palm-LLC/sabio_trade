@@ -9,6 +9,7 @@ import MicrosoftIcon from '../../assets/microsoft.png';
 import NetflixIcon from '../../assets/netflix.png';
 import NvidiaIcon from '../../assets/nvidia.png';
 import TeslaIcon from '../../assets/tesla.png';
+import TopicIcon from '../../assets/topic.png';
 import PrimaryButton from './PrimaryButton';
 
 interface AnalyzingModalProps {
@@ -17,7 +18,7 @@ interface AnalyzingModalProps {
     selectedStocks: string[];
 }
 
-const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, selectedStocks}) => {
+const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, selectedStocks }) => {
     const navigate = useNavigate();
     const [visibleItems, setVisibleItems] = useState<number[]>([]);
 
@@ -90,6 +91,17 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                         You're aligning with top performers — impressive calls!
                     </h1>
                 </div>
+                {/* Building Path Banner */}
+                <div className="mb-3 relative flex items-center gap-2">
+                    
+                    {/* Circular Icon */}
+                    <img src={TopicIcon} alt="Topic Icon" className="w-6 h-6 object-contain flex-shrink-0 ml-2" />
+
+                    {/* Text */}
+                    <span className="text-white text-[12px] font-medium">
+                        Building the right path for you... Hold on
+                    </span>
+                </div>
 
                 {/* Selected Stocks - Tight Grid */}
                 <div className="mb-3">
@@ -99,7 +111,7 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                             return (
                                 <div
                                     key={stock}
-                                    className="px-2 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all duration-300 hover:scale-105"
+                                    className="px-2 py-1.5 rounded-lg flex flex-row items-center justify-start gap-1.5 transition-all duration-300 hover:scale-105"
                                     style={{
                                         background: 'rgba(26, 12, 78, 0.8)',
                                         border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -107,9 +119,11 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                                     }}
                                 >
                                     {iconSrc && (
-                                        <img src={iconSrc} alt={stock} className="w-3.5 h-3.5 object-contain" />
+                                        <div className="w-5 h-5 rounded-full bg-black flex items-center justify-center flex-shrink-0">
+                                            <img src={iconSrc} alt={stock} className="w-3.5 h-3.5 object-contain" />
+                                        </div>
                                     )}
-                                    <span className="text-white font-semibold text-[11px] truncate">{stock}</span>
+                                    <span className="text-white font-semibold text-[11px] truncate whitespace-nowrap">{stock}</span>
                                 </div>
                             );
                         })}
@@ -119,30 +133,29 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                 {/* Benefits List - Consistent Padding */}
                 <div className="mb-3 space-y-1.5">
                     {benefits.map((benefit, index) => (
-                        <div 
-                            key={index} 
-                            className={`flex items-center gap-2 px-1 transition-all duration-300 ${
-                                visibleItems.includes(index) 
-                                    ? 'opacity-100 translate-x-0' 
-                                    : 'opacity-0 -translate-x-2'
-                            }`}
+                        <div
+                            key={index}
+                            className={`flex items-center gap-2 px-1 transition-all duration-300 ${visibleItems.includes(index)
+                                ? 'opacity-100 translate-x-0'
+                                : 'opacity-0 -translate-x-2'
+                                }`}
                         >
                             <div className="w-3 h-3 flex items-center justify-center flex-shrink-0">
                                 {visibleItems.includes(index) && (
-                                    <svg 
-                                        className="w-3 h-3 text-[#17F871] animate-checkmark" 
-                                        fill="none" 
-                                        stroke="currentColor" 
+                                    <svg
+                                        className="w-3 h-3 text-[#17F871] animate-checkmark"
+                                        fill="none"
+                                        stroke="currentColor"
                                         viewBox="0 0 24 24"
                                         style={{
                                             filter: 'drop-shadow(0 0 4px rgba(23, 248, 113, 0.6))',
                                         }}
                                     >
-                                        <path 
-                                            strokeLinecap="round" 
-                                            strokeLinejoin="round" 
-                                            strokeWidth={3} 
-                                            d="M5 13l4 4L19 7" 
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={3}
+                                            d="M5 13l4 4L19 7"
                                         />
                                     </svg>
                                 )}
@@ -250,4 +263,3 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
 };
 
 export default AnalyzingModal;
-

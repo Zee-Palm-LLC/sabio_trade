@@ -12,16 +12,16 @@ import { DNAIconsService } from '../services/dnaIconsService';
 
 const YourTraderProfile: React.FC = () => {
     const navigate = useNavigate();
-    
+
     // Get stored DNA icons
     const storedDNAIcons = DNAIconsService.getDNAIcons();
-    
+
     // State for rolling feedback
     const [currentFeedbackIndex, setCurrentFeedbackIndex] = useState(0);
-    
+
     // Use stored DNA icons for feedback
     const earnedFeedback = storedDNAIcons.slice(0, 3); // Max 3 icons
-    
+
     // Fixed scores (non-dynamic)
     const scores = {
         overall: 75, // Always ~75% (three-quarters)
@@ -31,18 +31,18 @@ const YourTraderProfile: React.FC = () => {
         knowledge: 67.5, // 60-75% range, middle = 67.5% (middle to three-quarters)
         spotsLeft: 16 // Fixed value
     };
-    
+
     // Auto-rotate feedback every 3 seconds
     useEffect(() => {
         if (earnedFeedback.length > 1) {
             const interval = setInterval(() => {
                 setCurrentFeedbackIndex((prev) => (prev + 1) % earnedFeedback.length);
             }, 3000);
-            
+
             return () => clearInterval(interval);
         }
     }, [earnedFeedback.length]);
-    
+
     const handleContinue = () => {
         navigate('/scratch', { state: { fromProfile: true } });
     };
@@ -62,13 +62,35 @@ const YourTraderProfile: React.FC = () => {
                         avatarUrl="https://via.placeholder.com/64"
                     />
                 </div>
-                
-                {/* Rolling Micro-Feedback Lines */}
+
                 {earnedFeedback.length > 0 && (
                     <div className="mb-4">
-                        <div className="relative bg-gradient-to-tr from-[#340863] via-[#2a094b] to-[#512e88] rounded-[10px] border border-[#A080FF80] shadow-[0_0_24px_0_rgba(160,128,255,0.22)] p-3 transition-all duration-300 hover:shadow-[0_6px_36px_2px_rgba(49,22,114,0.25)]">
+                        <div className="relative bg-gradient-to-tr from-[#340863] via-[#2a094b] to-[#512e88] rounded-[10px] border border-[#A080FF80] shadow-[0_0_24px_0_rgba(160,128,255,0.22)] p-3 pt-5 transition-all duration-300 hover:shadow-[0_6px_36px_2px_rgba(49,22,114,0.25)] mt-2 overflow-visible">
+                            {/* Ribbon Banner Overlay - Half outside, half inside */}
+                            <div className="absolute -top-[18px] left-1/2 -translate-x-1/2 z-10">
+                                <div className="relative">
+                                    <div
+                                        className="px-4 py-2 text-white font-bold text-[10px] tracking-wide uppercase shadow-lg whitespace-nowrap"
+                                        style={{
+                                            background: 'linear-gradient(135deg, #9B7EFF 0%, #7D31D8 50%, #9B7EFF 100%)',
+                                            clipPath: 'polygon(8px 0%, calc(100% - 8px) 0%, 100% 50%, calc(100% - 8px) 100%, 8px 100%, 0% 50%)',
+                                            border: '1px solid rgba(255, 255, 255, 0.2)',
+                                            boxShadow: '0 4px 12px rgba(155, 126, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                                        }}
+                                    >
+                                        Your Natural Strengths
+                                    </div>
+                                    <div
+                                        className="absolute left-0 top-full w-0 h-0 border-l-[6px] border-l-transparent border-t-[6px] border-t-[#5a1fb3]"
+                                        style={{ filter: 'drop-shadow(2px 2px 2px rgba(0,0,0,0.3))' }}
+                                    />
+                                    <div
+                                        className="absolute right-0 top-full w-0 h-0 border-r-[6px] border-r-transparent border-t-[6px] border-t-[#5a1fb3]"
+                                        style={{ filter: 'drop-shadow(-2px 2px 2px rgba(0,0,0,0.3))' }}
+                                    />
+                                </div>
+                            </div>
                             <div className="flex items-center space-x-2">
-                                {/* Icon with enhanced vignette glow (smaller and closer) */}
                                 <div
                                     className="w-10 h-10 rounded-full flex items-center justify-center text-2xl font-bold animate-glow-pulse ring-2 ring-[#9B7EFF]/60 ring-offset-2 shadow-[0_0_18px_4px_rgba(155,126,255,0.15)] bg-gradient-to-tr from-[#3b236e] to-[#6842c3]"
                                     style={{
@@ -108,7 +130,7 @@ const YourTraderProfile: React.FC = () => {
                         )}
                     </div>
                 )}
-                
+
                 <div className="flex items-center mb-4">
                     <span className="text-white font-bold text-[24px] leading-[38px] mr-2" style={{ letterSpacing: '-0.2px' }}>
                         Score Breakdown
@@ -118,7 +140,7 @@ const YourTraderProfile: React.FC = () => {
 
                 {/* Score Breakdown Card */}
                 <div className="mb-4">
-                    <ScoreBreakdownCard 
+                    <ScoreBreakdownCard
                         overallScore={scores.overall}
                         scores={[
                             { label: 'Motivation', score: scores.motivation, icon: MotivationIcon },
@@ -144,7 +166,7 @@ const YourTraderProfile: React.FC = () => {
                 </div>
 
             </div>
-            
+
             <style>{`
                 @keyframes glow-pulse {
                     0%, 100% {
