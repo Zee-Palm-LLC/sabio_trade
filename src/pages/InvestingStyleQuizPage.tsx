@@ -72,7 +72,7 @@ const InvestingStyleQuizPage: React.FC = () => {
                             We're excited to help you discover your unique investing styles!
                         </p>
                         <p className="text-white/70 text-[15px] leading-relaxed">
-                            Once you finish this short quiz, <span className="font-bold text-white">we'll connect you</span> <span className="font-bold text-white">with the best Sabio mentor</span> to guide you on your investing journey.
+                            Once you finish this short quiz, <span className="font-bold text-white">we'll connect you</span> <span className="font-bold text-white">with the best Sabio mentor to guide you on your investing journey.</span>
                         </p>
                         <p className="text-white/70 text-[15px] leading-relaxed">
                             Please enter your email address below, we'll use it to match you with your mentor and contact you in case there's any technical issue.

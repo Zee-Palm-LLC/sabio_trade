@@ -27,6 +27,7 @@ const SabioAcademyOfferPage: React.FC = () => {
                         <div className="flex-1 flex justify-center">
                             <img src={Logo} alt="SabioTrade" width={230} height={80} />
                         </div>
+                        <div className="flex-shrink-0" style={{ width: 35, height: 35 }}></div>
                     </div>
                 </div>
 
@@ -115,7 +116,7 @@ const SabioAcademyOfferPage: React.FC = () => {
                     {/* Guarantee and CTA */}
                     <div className="space-y-4 mb-auto pb-12">
                         <p className="text-white/80 text-[15px] leading-relaxed">
-                            2 week money back guarantee, no strings, no deposits, no risk.
+                            💰 2 week money back guarantee, no strings, no deposits, no risk.
                         </p>
                         <p className="text-white font-semibold text-[15px] leading-relaxed">
                             Smart investors act fast, start learning today and shape your future!

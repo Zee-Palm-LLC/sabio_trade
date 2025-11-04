@@ -45,6 +45,7 @@ const YourTraderProfile: React.FC = () => {
                         <div className="flex-1 flex justify-center">
                             <img src={Logo} alt="SabioTrade" width={230} height={80} />
                         </div>
+                        <div className="flex-shrink-0" style={{ width: 35, height: 35 }}></div>
                     </div>
                 </div>
 

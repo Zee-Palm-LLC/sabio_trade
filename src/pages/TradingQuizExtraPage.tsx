@@ -215,7 +215,7 @@ const TradingQuizExtraPage: React.FC = () => {
                         options={question.options}
                         selected={selected[question.id] || null}
                         onSelect={handleSelect}
-                        align={question.id === 1 ? 'left' : 'center'}
+                        align="center"
                     />
                 </div>
             </div>

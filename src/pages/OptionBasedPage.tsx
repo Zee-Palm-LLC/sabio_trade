@@ -47,15 +47,18 @@ const OptionBasedPage: React.FC = () => {
     return (
         <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
             <BottomShade />
-            <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4 relative z-10">         <div className="flex flex-col items-center justify-between pt-8 pb-0">
-                <div className="flex items-center justify-between w-full mb-3">
-                    <BackButton onClick={handleBackClick} />
-                    <div className="flex items-center">
-                        <img src={Logo} alt="SabioTrade" width={230} height={80} />
+            <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4 relative z-10">
+                <div className="flex flex-col items-center pt-8 pb-0">
+                    <div className="relative w-full mb-3 flex items-center">
+                        <div className="flex-shrink-0">
+                            <BackButton onClick={handleBackClick} />
+                        </div>
+                        <div className="flex-1 flex justify-center">
+                            <img src={Logo} alt="SabioTrade" width={230} height={80} />
+                        </div>
+                        <div className="flex-shrink-0" style={{ width: 35, height: 35 }}></div>
                     </div>
-                    <div style={{ width: 35 }}></div>
                 </div>
-            </div>
 
                 {/* Render card based on first answer (question id 5) */}
                 {renderCard()}
