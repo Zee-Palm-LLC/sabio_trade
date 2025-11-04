@@ -62,7 +62,7 @@ const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
         <Card
             className={`w-full max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] p-0 overflow-hidden`}
         >
-            <div className="pt-6 pb-4">
+            <div className="pt-4 pb-4">
                 <div className="relative w-full h-2 rounded-full mb-2"
                     style={{
                         background: 'linear-gradient(90deg, #EF4444 0%, #F59E0B 50%, #10B981 100%)',
@@ -86,56 +86,60 @@ const ScoreBreakdownCard: React.FC<ScoreBreakdownCardProps> = ({
             <div className="w-full h-[1px] bg-white/10"></div>
 
             {/* Score Items - No Padding */}
-            <div className="py-6 space-y-0">
-                {scores.map((item, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                        {/* Left: Icon Section */}
-                        <div
-                            className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                            style={{
-                                background: '#1A2B50',
-                            }}
-                        >
-                            <img src={item.icon} alt={item.label} className="w-5 h-5" />
-                        </div>
-
-                        {/* Right: Column with Title, Progress Bar, and Score */}
-                        <div className="flex-1">
-                            {/* Title */}
-                            <div className="flex items-center justify-between mb-2">
-                                <span className="text-white text-base font-medium">{item.label}</span>
+            <div className="py-5 space-y-0">
+                {scores.map((item, index) => {
+                    const scorePercentage = getScorePercentage(item.score);
+                    const scoreLabel = getScoreLabel(item.score);
+                    
+                    return (
+                        <div key={index} className="flex items-start space-x-3">
+                            {/* Left: Icon Section */}
+                            <div
+                                className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                                style={{
+                                    background: '#1A2B50',
+                                }}
+                            >
+                                <img src={item.icon} alt={item.label} className="w-5 h-5" />
                             </div>
 
-                            {/* Progress Bar */}
-                            <div className="w-full">
-                                <div
-                                    className="w-full rounded-full h-[3px]"
-                                    style={{
-                                        background: '#1A2B50'
-                                    }}
-                                >
+                            {/* Right: Label and Progress Bar */}
+                            <div className="flex-1 min-w-0">
+                                {/* Label */}
+                                <div className="mb-2">
+                                    <span className="text-white text-sm font-medium">{item.label}</span>
+                                </div>
+
+                                {/* Progress Bar Container - Full Width */}
+                                <div className="relative w-full">
+                                    {/* Background Progress Bar - Full Width extending to end */}
                                     <div
-                                        className="h-[3px] rounded-full transition-all duration-500"
+                                        className="w-full rounded-full h-[2px] relative"
                                         style={{
-                                            width: `${getScorePercentage(item.score)}%`,
-                                            background: getScoreColor(item.score)
+                                            background: '#1A2B50'
                                         }}
-                                    ></div>
-                                </div>
-
-                                {/* Score Label Below Progress Bar */}
-                                <div className="flex justify-end mt-1">
-                                    <span
-                                        className="text-sm font-semibold"
-                                        style={{ color: getScoreColor(item.score) }}
                                     >
-                                        {getScoreLabel(item.score)}
-                                    </span>
+                                        {/* Colored Progress Segment - Extends based on score percentage */}
+                                        <div
+                                            className="h-[3px] rounded-full transition-all duration-500 absolute top-0 left-0"
+                                            style={{
+                                                width: `${scorePercentage}%`,
+                                                background: getScoreColor(item.score)
+                                            }}
+                                        ></div>
+                                    </div>
+                                    
+                                    {/* Score Label Below Progress Bar - Aligned Right */}
+                                    <div className="flex justify-end mt-1">
+                                        <span className="text-white/70 text-sm font-medium">
+                                            {scoreLabel}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </Card>
     );

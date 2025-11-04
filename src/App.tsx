@@ -6,6 +6,7 @@ import {
   AnalyzingVid,
   InvestingStyleQuizPage, OptionBasedPage,
   QuestionPage,
+  SabioAcademyOfferPage,
   ScratchPage,
   TradingProfiles,
   TradingQuizExtraPage,
@@ -31,6 +32,7 @@ function App() {
         <Route path="/scratch" element={<ScratchPage />} />
         <Route path="/trading-profiles" element={<TradingProfiles />} />
         <Route path='/your-trader-profile' element={<YourTraderProfile/>}/>
+        <Route path='/sabio-academy-offer' element={<SabioAcademyOfferPage/>}/>
         <Route path='/quiz-extra' element={<TradingQuizExtraPage/>}/>
         <Route path='/trading-quiz-extra' element={<TradingQuizExtraPage/>}/>
       </Routes>
