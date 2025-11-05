@@ -132,7 +132,7 @@ const OptionBasedPage: React.FC = () => {
                         
                         return iconToShow ? (
                             <>
-                                <div className="flex items-center justify-center gap-2 mb-3">
+                                <div className="flex items-center justify-start gap-2 mb-3 pl-5">
                                     <div
                                         className="flex items-center justify-center animate-glow"
                                         style={{
