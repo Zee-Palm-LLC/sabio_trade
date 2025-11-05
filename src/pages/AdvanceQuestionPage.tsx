@@ -115,19 +115,21 @@ const AdvanceQuestionPage: React.FC = () => {
     const handleBackClick = () => {
         console.log('handleBackClick called for question id:', currentQuestion.id);
 
-        // FIRST PRIORITY: Clear any selected option before navigation (only if user is currently selecting)
-        // But don't clear if there's a persisted answer - we want to keep it visible
-        if ((selectedOption || selectedOptions.length > 0) && !AnswerService.getAnswer(currentQuestion.id)) {
-            console.log('Clearing selected options');
+        // FIRST PRIORITY: For question 5, clear any selected option before navigation
+        // This allows user to deselect first, then navigate back on second click
+        if (currentQuestion.id === 5 && (selectedOption || selectedOptions.length > 0)) {
+            console.log('Question 5: Clearing selected options');
             setSelectedOption(null);
             setSelectedOptions([]);
             setShowButton(false);
             setIsButtonActive(false);
             setHasUserInteracted(false);
+            // Also clear from AnswerService
+            AnswerService.clearAnswer(currentQuestion.id);
             return;
         }
 
-        // SECOND: Special handling for question 5
+        // SECOND: Special handling for question 5 (when no selection)
         if (currentQuestion.id === 5) {
             const lastAttemptedQuestionId = localStorage.getItem('lastAttemptedQuestion');
             console.log('lastAttemptedQuestionId:', lastAttemptedQuestionId);
@@ -146,7 +148,19 @@ const AdvanceQuestionPage: React.FC = () => {
             }
         }
 
-        // THIRD: Normal back navigation between questions
+        // THIRD: For other questions, clear any selected option before navigation (only if user is currently selecting)
+        // But don't clear if there's a persisted answer - we want to keep it visible
+        if ((selectedOption || selectedOptions.length > 0) && !AnswerService.getAnswer(currentQuestion.id)) {
+            console.log('Clearing selected options');
+            setSelectedOption(null);
+            setSelectedOptions([]);
+            setShowButton(false);
+            setIsButtonActive(false);
+            setHasUserInteracted(false);
+            return;
+        }
+
+        // FOURTH: Normal back navigation between questions
         if (currentQuestionIndex > 0) {
             console.log('Going to previous question');
             // Navigate to previous question
