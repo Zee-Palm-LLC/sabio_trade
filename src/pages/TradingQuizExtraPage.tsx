@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BreakingNewsPng from '../assets/breaking_news.png';
 import CleanFocused from '../assets/clean_and_focused.svg';
@@ -72,25 +72,54 @@ const TradingQuizExtraPage: React.FC = () => {
     const storedDNAIcons = DNAIconsService.getDNAIcons();
     const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === question.id);
 
+    // Load persisted answer from AnswerService when question changes
+    useEffect(() => {
+        const storedAnswer = AnswerService.getAnswer(question.id);
+        if (storedAnswer) {
+            setSelected(prev => ({ ...prev, [question.id]: storedAnswer }));
+        } else {
+            // Clear selection if no stored answer for this question
+            setSelected(prev => {
+                const newSelected = { ...prev };
+                delete newSelected[question.id];
+                return newSelected;
+            });
+        }
+    }, [question.id]);
+
+    // Subscribe to answer changes to update UI in real-time
+    useEffect(() => {
+        const updateAnswers = () => {
+            const storedAnswer = AnswerService.getAnswer(question.id);
+            if (storedAnswer) {
+                setSelected(prev => ({ ...prev, [question.id]: storedAnswer }));
+            } else {
+                // Clear selection if no stored answer for this question
+                setSelected(prev => {
+                    const newSelected = { ...prev };
+                    delete newSelected[question.id];
+                    return newSelected;
+                });
+            }
+        };
+
+        // Subscribe to answer changes
+        const unsubscribe = AnswerService.subscribeToChanges(() => {
+            updateAnswers();
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, [question.id]);
+
     const handleBackClick = () => {
         if (fromProfile) {
             navigate(-1);
         } else if (current > 0) {
-            // Get the previous question before navigating
-            const previousQuestionIndex = current - 1;
-            const previousQuestion = mapExtraQuestions[previousQuestionIndex];
-            
-            // Clear selected option for the previous question when going back
-            setSelected(prev => {
-                const newSelected = { ...prev };
-                if (previousQuestion) {
-                    delete newSelected[previousQuestion.id];
-                }
-                return newSelected;
-            });
-            
             // Navigate to previous question
-            setCurrent(previousQuestionIndex);
+            // Selected answer will be restored from AnswerService via useEffect
+            setCurrent(current - 1);
         } else {
             navigate(-1);
         }

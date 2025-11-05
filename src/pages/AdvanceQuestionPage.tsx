@@ -39,6 +39,61 @@ const AdvanceQuestionPage: React.FC = () => {
     const storedDNAIcons = DNAIconsService.getDNAIcons();
     const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === currentQuestion.id);
 
+    const isMulti = Boolean(currentQuestion.multi);
+
+    // Load persisted answer from AnswerService when question changes
+    useEffect(() => {
+        const storedAnswer = AnswerService.getAnswer(currentQuestion.id);
+        if (storedAnswer) {
+            if (isMulti) {
+                // For multi-select, split by comma
+                const answerArray = storedAnswer.split(',').filter(a => a.trim());
+                setSelectedOptions(answerArray);
+            } else {
+                setSelectedOption(storedAnswer);
+            }
+        } else {
+            // Clear selection if no stored answer for this question
+            if (isMulti) {
+                setSelectedOptions([]);
+            } else {
+                setSelectedOption(null);
+            }
+        }
+    }, [currentQuestion.id, isMulti]);
+
+    // Subscribe to answer changes to update UI in real-time
+    useEffect(() => {
+        const updateAnswers = () => {
+            const storedAnswer = AnswerService.getAnswer(currentQuestion.id);
+            if (storedAnswer) {
+                if (isMulti) {
+                    // For multi-select, split by comma
+                    const answerArray = storedAnswer.split(',').filter(a => a.trim());
+                    setSelectedOptions(answerArray);
+                } else {
+                    setSelectedOption(storedAnswer);
+                }
+            } else {
+                // Clear selection if no stored answer for this question
+                if (isMulti) {
+                    setSelectedOptions([]);
+                } else {
+                    setSelectedOption(null);
+                }
+            }
+        };
+
+        // Subscribe to answer changes
+        const unsubscribe = AnswerService.subscribeToChanges(() => {
+            updateAnswers();
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, [currentQuestion.id, isMulti]);
+
     useEffect(() => {
         if (location.state?.clearCurrentAnswer && currentQuestionIndex === 2) {
             localStorage.removeItem('tradingTopicOption');
@@ -55,15 +110,14 @@ const AdvanceQuestionPage: React.FC = () => {
         }
     }, [location.state?.clearCurrentAnswer, currentQuestionIndex, location.state]);
 
-    const isMulti = Boolean(currentQuestion.multi);
-
     const showContinueButton = currentQuestion.id === 5 || isMulti;
 
     const handleBackClick = () => {
         console.log('handleBackClick called for question id:', currentQuestion.id);
 
-        // FIRST PRIORITY: Clear any selected option before navigation
-        if (selectedOption || selectedOptions.length > 0) {
+        // FIRST PRIORITY: Clear any selected option before navigation (only if user is currently selecting)
+        // But don't clear if there's a persisted answer - we want to keep it visible
+        if ((selectedOption || selectedOptions.length > 0) && !AnswerService.getAnswer(currentQuestion.id)) {
             console.log('Clearing selected options');
             setSelectedOption(null);
             setSelectedOptions([]);
@@ -95,9 +149,9 @@ const AdvanceQuestionPage: React.FC = () => {
         // THIRD: Normal back navigation between questions
         if (currentQuestionIndex > 0) {
             console.log('Going to previous question');
+            // Navigate to previous question
+            // Selected answer will be restored from AnswerService via useEffect
             setCurrentQuestionIndex(currentQuestionIndex - 1);
-            setSelectedOption(null);
-            setSelectedOptions([]);
             setShowButton(false);
             setIsButtonActive(false);
             setHasUserInteracted(false);
