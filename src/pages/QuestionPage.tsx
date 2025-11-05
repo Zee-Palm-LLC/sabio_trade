@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import StandingAvatar from '../assets/standing_avatar.png';
@@ -29,10 +29,44 @@ const QuestionPage: React.FC = () => {
         color: 'var(--color-purple-primary)',
     }));
 
+    // Load persisted answer from AnswerService when question changes
+    useEffect(() => {
+        const storedAnswer = AnswerService.getAnswer(currentQuestion.id);
+        if (storedAnswer) {
+            setSelectedOption(storedAnswer);
+        } else {
+            // Clear selection if no stored answer for this question
+            setSelectedOption(null);
+        }
+    }, [currentQuestion.id]);
+
+    // Subscribe to answer changes to update UI in real-time
+    useEffect(() => {
+        const updateAnswers = () => {
+            const storedAnswer = AnswerService.getAnswer(currentQuestion.id);
+            if (storedAnswer) {
+                setSelectedOption(storedAnswer);
+            } else {
+                // Clear selection if no stored answer for this question
+                setSelectedOption(null);
+            }
+        };
+
+        // Subscribe to answer changes
+        const unsubscribe = AnswerService.subscribeToChanges(() => {
+            updateAnswers();
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, [currentQuestion.id]);
+
     const handleBackClick = () => {
         if (currentQuestionIndex > 0) {
+            // Navigate to previous question
+            // Selected answer will be restored from AnswerService via useEffect
             setCurrentQuestionIndex(currentQuestionIndex - 1);
-            setSelectedOption(null); // Clear selected option when going back
         } else {
             navigate(-1);
         }
