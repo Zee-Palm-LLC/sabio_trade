@@ -41,6 +41,9 @@ const AdvanceQuestionPage: React.FC = () => {
     const storedDNAIcons = DNAIconsService.getDNAIcons();
     const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === currentQuestion.id);
 
+    const isMulti = Boolean(currentQuestion.multi);
+    const showContinueButton = currentQuestion.id === 5 || isMulti;
+
     useEffect(() => {
         if (location.state?.clearCurrentAnswer && currentQuestionIndex === 2) {
             localStorage.removeItem('tradingTopicOption');
@@ -57,16 +60,64 @@ const AdvanceQuestionPage: React.FC = () => {
         }
     }, [location.state?.clearCurrentAnswer, currentQuestionIndex, location.state]);
 
-    const isMulti = Boolean(currentQuestion.multi);
-
-    const showContinueButton = currentQuestion.id === 5 || isMulti;
+    // Load stored answer when question changes
+    useEffect(() => {
+        const sessionId = QuizDataService.getSessionId();
+        const storedAnswer = QuizDataService.getStoredAnswer(sessionId, currentQuestion.question);
+        
+        if (storedAnswer) {
+            if (isMulti) {
+                // For multi-select, split comma-separated values
+                const selectedArray = storedAnswer.split(',').filter(v => v.trim() !== '');
+                setSelectedOptions(selectedArray);
+                setAnswers(prev => {
+                    if (prev[currentQuestion.id] !== storedAnswer) {
+                        return {
+                            ...prev,
+                            [currentQuestion.id]: storedAnswer
+                        };
+                    }
+                    return prev;
+                });
+                // Show button if we have selections
+                if (selectedArray.length > 0) {
+                    setShowButton(true);
+                    setIsButtonActive(true);
+                }
+            } else {
+                // For single-select
+                setSelectedOption(storedAnswer);
+                setAnswers(prev => {
+                    if (prev[currentQuestion.id] !== storedAnswer) {
+                        return {
+                            ...prev,
+                            [currentQuestion.id]: storedAnswer
+                        };
+                    }
+                    return prev;
+                });
+                // Show button if it's a question that requires continue button
+                if (showContinueButton) {
+                    setShowButton(true);
+                    setIsButtonActive(true);
+                }
+            }
+        } else {
+            // Clear selections if no stored answer
+            setSelectedOption(null);
+            setSelectedOptions([]);
+            setShowButton(false);
+            setIsButtonActive(false);
+        }
+    }, [currentQuestionIndex, currentQuestion.id, currentQuestion.question, isMulti, showContinueButton]);
 
     const handleBackClick = () => {
         console.log('handleBackClick called for question id:', currentQuestion.id);
 
-        // FIRST PRIORITY: Clear any selected option before navigation
-        if (selectedOption || selectedOptions.length > 0) {
-            console.log('Clearing selected options');
+        // FIRST PRIORITY: If user just selected an option and clicks back, clear it
+        // This allows them to undo their selection before moving forward
+        if (hasUserInteracted && (selectedOption || selectedOptions.length > 0)) {
+            console.log('Clearing just-selected options');
             setSelectedOption(null);
             setSelectedOptions([]);
             setShowButton(false);
@@ -98,11 +149,8 @@ const AdvanceQuestionPage: React.FC = () => {
         if (currentQuestionIndex > 0) {
             console.log('Going to previous question');
             setCurrentQuestionIndex(currentQuestionIndex - 1);
-            setSelectedOption(null);
-            setSelectedOptions([]);
-            setShowButton(false);
-            setIsButtonActive(false);
             setHasUserInteracted(false);
+            // Don't clear selections - useEffect will restore from stored answers
             return;
         }
 
@@ -132,7 +180,7 @@ const AdvanceQuestionPage: React.FC = () => {
         });
     };
 
-    const handleOptionSelect = async (value: string) => {
+    const handleOptionSelect = (value: string) => {
         if (isMulti) return;
 
         // Store the current question ID as the last attempted question
@@ -147,18 +195,14 @@ const AdvanceQuestionPage: React.FC = () => {
             return newAnswers;
         });
 
-        // ✅ Store answer directly to Firestore
+        // ✅ Store answer locally (batched sync happens automatically)
         const sessionId = QuizDataService.getSessionId();
-        try {
-            await QuizDataService.storeAnswer(
-                sessionId,
-                currentQuestion.id,
-                currentQuestion.question,
-                value
-            );
-        } catch (error) {
-            console.error('Error storing answer to Firestore:', error);
-        }
+        QuizDataService.storeAnswer(
+            sessionId,
+            currentQuestion.id,
+            currentQuestion.question,
+            value
+        );
 
         // ✅ Store DNA icon if question ID is 5
         if (currentQuestion.id === 5) {
@@ -269,17 +313,13 @@ const AdvanceQuestionPage: React.FC = () => {
             localStorage.setItem('lastAttemptedQuestion', String(currentQuestion.id));
             const value = selectedOptions.join(',');
             
-            // ✅ Store answer directly to Firestore
-            try {
-                await QuizDataService.storeAnswer(
-                    sessionId,
-                    currentQuestion.id,
-                    currentQuestion.question,
-                    value
-                );
-            } catch (error) {
-                console.error('Error storing answer to Firestore:', error);
-            }
+            // ✅ Store answer locally (batched sync happens automatically)
+            QuizDataService.storeAnswer(
+                sessionId,
+                currentQuestion.id,
+                currentQuestion.question,
+                value
+            );
             
             if (currentQuestion.id === 8) {
                 setShowValidationMessage(true);
@@ -307,17 +347,13 @@ const AdvanceQuestionPage: React.FC = () => {
         if (!selectedOption) return;
         localStorage.setItem('lastAttemptedQuestion', String(currentQuestion.id));
         
-        // ✅ Store answer directly to Firestore
-        try {
-            await QuizDataService.storeAnswer(
-                sessionId,
-                currentQuestion.id,
-                currentQuestion.question,
-                selectedOption
-            );
-        } catch (error) {
-            console.error('Error storing answer to Firestore:', error);
-        }
+        // ✅ Store answer locally (batched sync happens automatically)
+        QuizDataService.storeAnswer(
+            sessionId,
+            currentQuestion.id,
+            currentQuestion.question,
+            selectedOption
+        );
         
         if (currentQuestionIndex < advancedQuestions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);

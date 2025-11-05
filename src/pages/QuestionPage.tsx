@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import StandingAvatar from '../assets/standing_avatar.png';
@@ -21,6 +21,29 @@ const QuestionPage: React.FC = () => {
     const totalQuestions = quizData.length + advancedQuestions.length + (extraQuiz as any).questions.length;
     const currentQuestion = availableQuestions[currentQuestionIndex];
 
+    // Load stored answer when question changes
+    useEffect(() => {
+        const sessionId = QuizDataService.getSessionId();
+        const storedAnswer = QuizDataService.getStoredAnswer(sessionId, currentQuestion.question);
+        
+        if (storedAnswer) {
+            setSelectedOption(storedAnswer);
+            setAnswers(prev => {
+                // Only update if it's different to avoid unnecessary updates
+                if (prev[currentQuestion.id] !== storedAnswer) {
+                    return {
+                        ...prev,
+                        [currentQuestion.id]: storedAnswer
+                    };
+                }
+                return prev;
+            });
+        } else {
+            // If no stored answer, clear selection
+            setSelectedOption(null);
+        }
+    }, [currentQuestionIndex, currentQuestion.id, currentQuestion.question]);
+
     // Get stored DNA icons for display
     // const storedDNAIcons = DNAIconsService.getDNAIcons();
     // const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === currentQuestion.id);
@@ -34,13 +57,13 @@ const QuestionPage: React.FC = () => {
     const handleBackClick = () => {
         if (currentQuestionIndex > 0) {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
-            setSelectedOption(null); // Clear selected option when going back
+            // Don't clear selectedOption - useEffect will restore it from stored answers
         } else {
             navigate(-1);
         }
     };
 
-    const handleOptionSelect = async (value: string) => {
+    const handleOptionSelect = (value: string) => {
         console.log('Selected option:', value);
         setSelectedOption(value);
 
@@ -49,18 +72,14 @@ const QuestionPage: React.FC = () => {
             [currentQuestion.id]: value,
         }));
 
-        // ✅ Store answer directly to Firestore
+        // ✅ Store answer locally (batched sync happens automatically)
         const sessionId = QuizDataService.getSessionId();
-        try {
-            await QuizDataService.storeAnswer(
-                sessionId,
-                currentQuestion.id,
-                currentQuestion.question,
-                value
-            );
-        } catch (error) {
-            console.error('Error storing answer to Firestore:', error);
-        }
+        QuizDataService.storeAnswer(
+            sessionId,
+            currentQuestion.id,
+            currentQuestion.question,
+            value
+        );
 
         // ✅ Store DNA icon if question ID is 3
         if (currentQuestion.id === 3) {
