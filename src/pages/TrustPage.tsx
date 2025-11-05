@@ -109,7 +109,7 @@ const TrustPage: React.FC = () => {
                 </div>
 
                 {/* Button */}
-                <div className="pb-12 mt-auto">
+                <div className="pb-12 mt-auto pt-10">
                     <PrimaryButton
                         onClick={handleContinueClick}
                         text="Let's start the quiz"

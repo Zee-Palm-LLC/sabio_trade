@@ -118,7 +118,7 @@ const InvestingStyleQuizPage: React.FC = () => {
                 </div>
 
                 {/* Button */}
-                <div className="pb-12 mt-auto">
+                <div className="pb-12 mt-auto pt-10">
                     <PrimaryButton
                         onClick={handleContinueClick}
                         text={loading ? 'Processing...' : 'Sounds good, I am in!'}
