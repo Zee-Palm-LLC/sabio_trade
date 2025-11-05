@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BreakingNewsPng from '../assets/breaking_news.png';
 import CleanFocused from '../assets/clean_and_focused.svg';
@@ -75,49 +75,57 @@ const TradingQuizExtraPage: React.FC = () => {
     // const storedDNAIcons = DNAIconsService.getDNAIcons(); // Commented out - emoji display disabled
     // const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === question.id); // Commented out - emoji display disabled
 
+    // Load stored answer when question changes
+    useEffect(() => {
+        const sessionId = QuizDataService.getSessionId();
+        const storedAnswer = QuizDataService.getStoredAnswer(sessionId, question.title);
+        
+        if (storedAnswer) {
+            setSelected(prev => ({
+                ...prev,
+                [question.id]: storedAnswer
+            }));
+        } else {
+            // If no stored answer, check local state
+            const localAnswer = selected[question.id];
+            if (!localAnswer) {
+                // Clear selection if no stored answer
+                setSelected(prev => {
+                    const newSelected = { ...prev };
+                    delete newSelected[question.id];
+                    return newSelected;
+                });
+            }
+        }
+    }, [current, question.id, question.title]);
+
     const handleBackClick = () => {
         if (fromProfile) {
             navigate(-1);
         } else if (current > 0) {
-            // Get the previous question before navigating
-            const previousQuestionIndex = current - 1;
-            const previousQuestion = mapExtraQuestions[previousQuestionIndex];
-            
-            // Clear selected option for the previous question when going back
-            setSelected(prev => {
-                const newSelected = { ...prev };
-                if (previousQuestion) {
-                    delete newSelected[previousQuestion.id];
-                }
-                return newSelected;
-            });
-            
             // Navigate to previous question
-            setCurrent(previousQuestionIndex);
+            // Don't clear selection - useEffect will restore it from stored answers
+            setCurrent(current - 1);
         } else {
             navigate(-1);
         }
     };
 
-    const handleSelect = async (value: string) => {
+    const handleSelect = (value: string) => {
         console.log('TradingQuizExtraPage - handleSelect called');
         console.log('Question ID:', question.id);
         console.log('Selected value:', value);
         
         setSelected(prev => ({ ...prev, [question.id]: value }));
         
-        // ✅ Store answer directly to Firestore
+        // ✅ Store answer locally (batched sync happens automatically)
         const sessionId = QuizDataService.getSessionId();
-        try {
-            await QuizDataService.storeAnswer(
-                sessionId,
-                question.id,
-                question.title,
-                value
-            );
-        } catch (error) {
-            console.error('Error storing answer to Firestore:', error);
-        }
+        QuizDataService.storeAnswer(
+            sessionId,
+            question.id,
+            question.title,
+            value
+        );
         
         // ✅ Store DNA icon if question ID is 2
         if (question.id === 2) {
