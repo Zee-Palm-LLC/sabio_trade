@@ -231,7 +231,7 @@ const TradingProfiles: React.FC = () => {
                     {!emailAlreadySubmitted && (
                         <div className="mb-8">
                             <label className="block text-white font-bold text-[15px] mb-2">
-                                Enter E-mail (optional)
+                                Enter E-mail (Recommended)
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
