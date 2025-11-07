@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import HiAvatar from '../assets/hi_avatar.png';
 import Logo from '../assets/logo.png';
-import { BottomShade, PrimaryButton } from '../components';
+import { BottomShade, Card, PrimaryButton } from '../components';
 import { saveEmail } from '../services/emailService';
-import { QuizDataService } from '../services/quizDataService';
 import { EmailStorageService } from '../services/emailStorageService';
+import { QuizDataService } from '../services/quizDataService';
 
 const InvestingStyleQuizPage: React.FC = () => {
     const navigate = useNavigate();
@@ -12,27 +13,31 @@ const InvestingStyleQuizPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    const handleCloseClick = () => {
+        navigate(-1);
+    };
+
     const handleContinueClick = async () => {
         // If email is provided, save it with answers
         if (email.trim()) {
             setLoading(true);
             setError(null);
-            
+
             try {
                 const sessionId = QuizDataService.getSessionId();
                 const attemptedQuestions = await QuizDataService.collectAnswersForEmail(sessionId);
-                
+
                 const result = await saveEmail(email.trim(), attemptedQuestions);
-                
+
                 if (!result.success) {
                     setError(result.error || 'Failed to save email');
                     setLoading(false);
                     return;
                 }
-                
+
                 // Store email in helper service to indicate it was already submitted
                 EmailStorageService.setSubmittedEmail(email.trim());
-                
+
                 console.log('Email saved successfully from InvestingStyleQuizPage');
             } catch (err: any) {
                 console.error('Error saving email:', err);
@@ -40,11 +45,10 @@ const InvestingStyleQuizPage: React.FC = () => {
                 setLoading(false);
                 return;
             }
-            
+
             setLoading(false);
         }
-        
-        // Navigate to the next page (quiz page)
+
         navigate('/trust');
     };
 
@@ -53,31 +57,98 @@ const InvestingStyleQuizPage: React.FC = () => {
             <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4 relative z-10">
                 {/* Header */}
-                <div className="flex flex-col items-center pt-8 pb-4">
-                    <div className="flex items-center justify-center w-full mb-3">
+                <div className="flex items-center justify-between pt-8 pb-4">
+                    <div className="flex items-center">
                         <img src={Logo} alt="SabioTrade" width={230} height={80} />
                     </div>
+                    <button
+                        onClick={handleCloseClick}
+                        className="flex items-center justify-center"
+                        style={{
+                            width: 35,
+                            height: 35,
+                            borderRadius: 6,
+                            backgroundColor: '#031340',
+                            border: '1.1px solid rgba(255,255,255,0.12)',
+                            transition: 'background-color 0.2s',
+                        }}
+                        aria-label="Close"
+                    >
+                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
 
-                {/* Main Content */}
-                <div className="flex-1 flex flex-col px-0 mt-4">
-                    {/* Title */}
-                    <h1 className="text-white text-3xl font-bold mb-6 leading-tight">
-                        Welcome to the Sabio Quiz!
-                    </h1>
+                <div className="flex-1 flex flex-col px-0 mt-4 relative">
+                    {/* Welcome Section */}
+                    <div className="flex items-start gap-4 mb-6">
+                        <div className="flex-1">
+                            <h1
+                                className="text-white mb-2"
+                                style={{
+                                    fontWeight: 700,
+                                    fontStyle: 'bold',
+                                    fontSize: '30px',
+                                }}
+                            >
+                                Welcome to the Sabio Quiz!
+                            </h1>
+                            <p className="text-white/70 text-[15px] leading-relaxed">
+                                We're excited to help you discover your unique investing styles!
+                            </p>
+                        </div>
+                        <div className="flex-shrink-0" style={{ width: '100px' }}></div>
+                    </div>
+                    <div
+                        className="relative"
+                        style={{
+                            alignSelf: 'flex-end',
+                            marginTop: '-147px',
+                            marginBottom: '-10px',
+                            zIndex: 1
+                        }}
+                    >
+                        <img
+                            src={HiAvatar}
+                            alt="Avatar"
+                            style={{
+                                width: '120px',
+                                height: '147px',
+                                objectFit: 'contain'
+                            }}
+                        />
+                    </div>
 
-                    {/* Body Text */}
-                    <div className="space-y-4 mb-8">
-                        <p className="text-white/70 text-[15px] leading-relaxed">
-                            We're excited to help you discover your unique investing styles!
+                    {/* Information Box */}
+                    <Card
+                        className="rounded-lg p-4 mb-6 relative"
+                        style={{
+                            zIndex: 2,
+                            background: '#1A0A4D',
+                        }}
+                    >
+                        <p
+                            className="text-white/70 mb-3"
+                            style={{
+                                fontWeight: 400,
+                                fontStyle: 'normal',
+                                fontSize: '13px',
+                                marginBottom: '0.75rem'
+                            }}
+                        >
+                            Once you finish this short quiz, we'll connect you with the best Sabio mentor to guide you on your investing journey.
                         </p>
-                        <p className="text-white/70 text-[15px] leading-relaxed">
-                            Once you finish this short quiz, <span className="font-bold text-white">we'll connect you</span> <span className="font-bold text-white">with the best Sabio mentor to guide you on your investing journey.</span>
-                        </p>
-                        <p className="text-white/70 text-[15px] leading-relaxed">
+                        <p
+                            className="text-white/70"
+                            style={{
+                                fontWeight: 400,
+                                fontSize: '13px',
+                            }}
+                        >
                             Please enter your email address below, we'll use it to match you with your mentor and contact you in case there's any technical issue.
                         </p>
-                    </div>
+                    </Card>
 
                     {/* Email Input */}
                     <div className="mb-auto">
@@ -98,11 +169,10 @@ const InvestingStyleQuizPage: React.FC = () => {
                                     setError(null);
                                 }}
                                 placeholder="Enter your email"
-                                className={`w-full pl-12 pr-4 py-3 rounded-lg placeholder-white/40 focus:outline-none transition-all ${
-                                    error ? 'border-red-400' : 'border-transparent'
-                                }`}
+                                className={`w-full pl-12 pr-4 py-3 rounded-lg placeholder-white/40 focus:outline-none transition-all ${error ? 'border-red-400' : 'border-transparent'
+                                    }`}
                                 style={{
-                                    background: 'transparent',
+                                    background: '#031340',
                                     border: `1px solid ${error ? 'rgba(239, 68, 68, 0.5)' : 'rgba(255, 255, 255, 0.3)'}`,
                                     fontSize: '15px',
                                     color: 'rgba(255, 255, 255, 0.9)'
