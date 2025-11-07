@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import GraphUpIcon from '../assets/graph_up.svg';
 import Logo from '../assets/logo.png';
-import { BackButton, BottomShade, PrimaryButton, ProgressCard } from "../components";
+import StudyIcon from '../assets/study.png';
+import StudyOutlineIcon from '../assets/study_outline.png';
+import { BackButton, BottomShade, Card, PrimaryButton } from "../components";
 import { saveEmail } from '../services/emailService';
-import { QuizDataService } from '../services/quizDataService';
 import { EmailStorageService } from '../services/emailStorageService';
+import { QuizDataService } from '../services/quizDataService';
 
 const TradingProfiles: React.FC = () => {
     const navigate = useNavigate();
@@ -14,7 +17,7 @@ const TradingProfiles: React.FC = () => {
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [emailAlreadySubmitted, setEmailAlreadySubmitted] = useState(false);
-    
+
     // Check if email was already submitted in InvestingStyleQuizPage
     useEffect(() => {
         const hasEmail = EmailStorageService.hasEmailBeenSubmitted();
@@ -52,19 +55,19 @@ const TradingProfiles: React.FC = () => {
         if (email.trim()) {
             setSaving(true);
             setError(null);
-            
+
             try {
                 const sessionId = QuizDataService.getSessionId();
                 const attemptedQuestions = await QuizDataService.collectAnswersForEmail(sessionId);
-                
+
                 const result = await saveEmail(email.trim(), attemptedQuestions);
-                
+
                 if (!result.success) {
                     setError(result.error || 'Failed to save email');
                     setSaving(false);
                     return;
                 }
-                
+
                 console.log('Email saved successfully from TradingProfiles');
             } catch (err: any) {
                 console.error('Error saving email:', err);
@@ -72,10 +75,10 @@ const TradingProfiles: React.FC = () => {
                 setSaving(false);
                 return;
             }
-            
+
             setSaving(false);
         }
-        
+
         navigate('/your-trader-profile');
     };
 
@@ -83,45 +86,152 @@ const TradingProfiles: React.FC = () => {
         navigate(-1);
     };
 
+    // Create progress circle component
+    const ProgressCircle = ({ progress }: { progress: number }) => {
+        const containerWidth = 74;
+        const containerHeight = 74;
+        const strokeWidth = 4;
+        const radius = containerWidth / 2;
+        const normalizedRadius = radius - strokeWidth / 2;
+        const circumference = normalizedRadius * 2 * Math.PI;
+        const strokeDashoffset = circumference - (progress / 100) * circumference;
+        const centerX = containerWidth / 2;
+        const centerY = containerHeight / 2;
+        const gap = 3.87;
+
+        return (
+            <div
+                className="relative flex-shrink-0"
+                style={{
+                    width: `${containerWidth}px`,
+                    height: `${containerHeight}px`,
+                    opacity: 1
+                }}
+            >
+                <svg
+                    height={containerHeight}
+                    width={containerWidth}
+                    className="transform -rotate-90"
+                    style={{ position: 'absolute', top: 0, left: 0 }}
+                >
+                    {/* Background circle */}
+                    <circle
+                        stroke="rgba(255, 255, 255, 0.1)"
+                        fill="transparent"
+                        strokeWidth={strokeWidth}
+                        r={normalizedRadius}
+                        cx={centerX}
+                        cy={centerY}
+                    />
+                    {/* Progress circle */}
+                    <circle
+                        stroke="url(#progressGradient)"
+                        fill="transparent"
+                        strokeWidth={strokeWidth}
+                        strokeDasharray={circumference}
+                        strokeDashoffset={strokeDashoffset}
+                        strokeLinecap="round"
+                        r={normalizedRadius}
+                        cx={centerX}
+                        cy={centerY}
+                    />
+                    <defs>
+                        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#0FB084" />
+                            <stop offset="100%" stopColor="#2FA6B9" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                {/* Percentage text with arrow */}
+                <div
+                    className="absolute inset-0 flex items-center justify-center"
+                    style={{ gap: `${gap}px` }}
+                >
+                    <span
+                        className="text-white font-bold"
+                        style={{ fontSize: '12px' }}
+                    >
+                        {Math.round(progress)}%
+                    </span>
+                    <img
+                        src={GraphUpIcon}
+                        alt="Graph Up"
+                        className="w-3 h-3"
+                    />
+                </div>
+            </div>
+        );
+    };
+
     return (
         <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
             <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col px-4 relative z-10">
+                <img
+                    src={StudyOutlineIcon}
+                    alt="Study Outline"
+                    className="absolute pointer-events-none"
+                    style={{
+                        width: '74px',
+                        height: '74px',
+                        opacity: 0.32,
+                        top: '51px',
+                        right: '-12px',
+                    }}
+                />
+                <img
+                    src={StudyIcon}
+                    alt="Study"
+                    className="absolute pointer-events-none"
+                    style={{
+                        width: '140px',
+                        height: '140px',
+                        opacity: 0.5,
+                        top: '409px',
+                        left: '-12px',
+                    }}
+                />
                 {/* Header */}
-                <div className="flex flex-col items-center pt-8 pb-4">
-                    <div className="relative w-full px-0 mb-3 flex items-center">
-                        <div className="flex-shrink-0">
-                            <BackButton onClick={handleBackClick} />
-                        </div>
-                        <div className="flex-1 flex justify-center">
-                            <img src={Logo} alt="SabioTrade" width={230} height={80} />
-                        </div>
-                        <div className="flex-shrink-0" style={{ width: 35, height: 35 }}></div>
+                <div className="flex items-center justify-between pt-8 pb-4 mb-4">
+                    <BackButton onClick={handleBackClick} />
+                    <div className="flex-1 flex justify-center">
+                        <img src={Logo} alt="SabioTrade" width={230} height={80} />
                     </div>
                 </div>
 
-                {/* Main Content */}
                 <div className="flex-1 flex flex-col px-0">
-                    {/* Title */}
-                    <h1 className="text-white text-4xl font-bold mb-6 leading-tight text-left">
+                    <h1 className="text-white text-3xl font-bold mb-4 leading-tight text-left">
                         Calculating results
                     </h1>
-
-                    {/* Description Text */}
-                    <div className="space-y-4 mb-6">
-                        <p className="text-white/70 text-[15px] leading-relaxed">
-                            Right now, we're carefully reviewing your responses to find the perfect Sabio mentor - someone who matches your investing style and can guide you toward your financial goals!
-                        </p>
-                        <p className="text-white/70 text-[15px] leading-relaxed">
-                            Please enter your e-mail (if it wasn't added and we will send you the results).
-                        </p>
-                    </div>
+                    <Card
+                        className="rounded-lg p-0 mb-6"
+                        style={{ padding: 10 }}
+                    >
+                        <div className="flex items-start gap-2">
+                            <div className="flex-1">
+                                <p
+                                    style={{
+                                        fontWeight: 400,
+                                        fontSize: '12px',
+                                        lineHeight: '140%',
+                                        color: '#FFFFFFB2',
+                                        letterSpacing: 0
+                                    }}
+                                >
+                                    Right now, we're carefully reviewing your responses to find the perfect Sabio mentor - someone who matches your investing style and can guide you toward your financial goals!
+                                </p>
+                            </div>
+                            <div className="flex-shrink-0">
+                                <ProgressCircle progress={progress} />
+                            </div>
+                        </div>
+                    </Card>
 
                     {/* Email Input - Hidden if already submitted in InvestingStyleQuizPage */}
                     {!emailAlreadySubmitted && (
                         <div className="mb-8">
                             <label className="block text-white font-bold text-[15px] mb-2">
-                                Enter E-mail (optional)
+                                Enter E-mail (Recommended)
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -137,11 +247,10 @@ const TradingProfiles: React.FC = () => {
                                         setError(null);
                                     }}
                                     placeholder="Enter your email"
-                                    className={`w-full pl-12 pr-4 py-3 rounded-lg placeholder-white/40 focus:outline-none transition-all ${
-                                        error ? 'border-red-400' : 'border-transparent'
-                                    }`}
+                                    className={`w-full pl-12 pr-4 py-3 rounded-lg placeholder-white/40 focus:outline-none transition-all ${error ? 'border-red-400' : 'border-transparent'
+                                        }`}
                                     style={{
-                                        background: 'transparent',
+                                        background: '#031340',
                                         border: `1px solid ${error ? 'rgba(239, 68, 68, 0.5)' : 'rgba(255, 255, 255, 0.3)'}`,
                                         fontSize: '15px',
                                         color: 'rgba(255, 255, 255, 0.9)'
@@ -156,14 +265,6 @@ const TradingProfiles: React.FC = () => {
                         </div>
                     )}
 
-                    {/* Progress Circle */}
-                    <div className="flex justify-center items-center mb-auto">
-                        <ProgressCard 
-                            progress={Math.round(progress)}
-                            topText=""
-                            bottomText=""
-                        />
-                    </div>
                 </div>
 
                 {/* Button */}
