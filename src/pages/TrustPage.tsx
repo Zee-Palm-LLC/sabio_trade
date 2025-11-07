@@ -46,11 +46,12 @@ const TrustPage: React.FC = () => {
         <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
             <BottomShade />
             <div className="w-[375px] mx-auto min-h-screen flex flex-col relative z-10">
-                <div className="flex flex-col items-center pt-4 pb-2">
-                    <div className="relative w-full mb-2 px-4 flex items-center justify-center" style={{ minHeight: 56 }}>
+                <div className="flex flex-col items-center pt-2 pb-2">
+                    <div className="relative w-full mb-1 px-4 flex items-center justify-center" style={{ minHeight: 56 }}>
                         <div className="absolute left-4">
                             <BackButton onClick={handleBackClick} />
-                        </div>    <img src={Logo} alt="SabioTrade" width={230} height={80} />
+                        </div>
+                        <img src={Logo} alt="SabioTrade" width={230} height={80} />
                     </div>
                 </div>
 
@@ -62,7 +63,7 @@ const TrustPage: React.FC = () => {
                     <BulletPointsList items={bulletPoints} />
                 </div>
 
-                <div className="px-4 pb-4 mb-12">
+                <div className="px-4 pb-4 mb-4 md:mb-0 mt-auto">
                     <PrimaryButton text="Continue" onClick={handleContinueClick} />
                 </div>
             </div>
