@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import amdIcon from '../assets/amd.svg';
 import Brands1 from '../assets/brands_1.png';
 import Logo from '../assets/logo.png';
@@ -10,6 +10,7 @@ const ScratchPage: React.FC = () => {
     const [showFeatures, setShowFeatures] = useState(false);
     const [timeLeft, setTimeLeft] = useState(9 * 60 + 59); // 9 minutes 59 seconds = 09:59
     const [isScratched, setIsScratched] = useState(false);
+    const featuresRef = useRef<HTMLDivElement>(null);
 
     // Countdown timer effect
     useEffect(() => {
@@ -27,6 +28,19 @@ const ScratchPage: React.FC = () => {
 
         return () => clearInterval(timer);
     }, [isScratched]);
+
+    // Auto-scroll to features section when showFeatures becomes true
+    useEffect(() => {
+        if (showFeatures && featuresRef.current) {
+            // Small delay to ensure DOM has updated
+            setTimeout(() => {
+                featuresRef.current?.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 100);
+        }
+    }, [showFeatures]);
 
     // Format time as MM:SS
     const formatTime = (seconds: number) => {
@@ -102,9 +116,20 @@ const ScratchPage: React.FC = () => {
                             <div className="w-full bg-gray-600 rounded-full h-2 mb-1.5">
                                 <div className="bg-green-400 h-2 rounded-full" style={{ width: '68%' }}></div>
                             </div>
-                            <div className="w-full overflow-hidden" style={{ marginBottom: '8px' }}>
-                                <div className="rounded-[12px] bg-[#031340] border border-slate-600/30 flex flex-col justify-center items-center" style={{ transform: 'scale(1.25)', transformOrigin: 'center', width: '80%', margin: '0 auto' }}>
-                                    <span className="block text-[#FFFFFF] dark:text-white font-semibold text-[10px] leading-tight text-center mt-2" style={{ color: '#FFFFFF', fontWeight: 700 }}>
+                            <div className="w-full overflow-hidden mt-4" style={{ marginBottom: '8px' }}>
+                                <div
+                                    className="rounded-[12px] bg-[#031340] border border-slate-600/30 flex flex-col justify-center items-center"
+                                    style={{
+                                        transform: 'scale(1)',
+                                        transformOrigin: 'center',
+                                        width: '96%',
+                                        margin: '0 auto'
+                                    }}
+                                >
+                                    <span
+                                        className="block font-semibold text-[12px] leading-tight text-center mt-4"
+                                        style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 700 }}
+                                    >
                                         Applauded by Users &amp; Specialists Alike
                                     </span>
                                     <img src={Brands1} alt="Brands" className="w-full" />
@@ -182,7 +207,7 @@ const ScratchPage: React.FC = () => {
                         <div className="mt-6 mb-6">
                             <PrimaryButton
                                 onClick={handleReserveClick}
-                                text="Continue"
+                                text="Unlock full access"
                                 showIcon={true}
                                 className={`w-full ${timeLeft < 120 ? 'animate-glow-pulse' : ''}`}
                                 style={{
@@ -205,7 +230,7 @@ const ScratchPage: React.FC = () => {
 
                     {/* Condition 3: All Content After Reserve Button Click */}
                     {showFeatures && (
-                        <div className="mt-6 space-y-4 mb-6">
+                        <div ref={featuresRef} className="mt-6 space-y-4 mb-6">
                             <SabioTradeFeatures />
                             <MediaLogosCard />
 

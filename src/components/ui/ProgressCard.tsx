@@ -12,8 +12,8 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
     topText = "1,000,000+ trading profiles built — your personalized path is next.",
     bottomText = "Creating the personal challenge and trading profile..."
 }) => {
-    const radius = 80;
-    const strokeWidth = 12;
+    const radius = 150;
+    const strokeWidth = 20;
     const normalizedRadius = radius - strokeWidth * 2;
     const circumference = normalizedRadius * 2 * Math.PI;
     const strokeDasharray = `${circumference} ${circumference}`;
@@ -21,22 +21,28 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
 
     return (
         <Card
-            className={`w-full mb-2 max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)] p-3`}
+            padding="sm"
+            className={`w-full mb-2 max-w-sm bg-[#340863] rounded-[12px] border border-[#7D31D87A] shadow-[0_0_12px_0_rgba(125,49,216,0.47)]`}
+            style={{ padding: '16px' }}
         >
             {/* Top Text */}
-            <div className="text-center mb-3">
-                <h2 className="text-white font-bold text-sm leading-tight">
+            <div className="text-center" style={{ marginBottom: '8px', lineHeight: 1.2 }}>
+                <h2
+                    className="text-white font-[700] text-[20px] leading-[140%] text-center"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontStyle: 'bold', letterSpacing: '0%', margin: 0, padding: 0 }}
+                >
                     {topText}
                 </h2>
             </div>
 
             {/* Progress Circle */}
-            <div className="flex justify-center items-center mb-3">
-                <div className="relative" style={{ transform: 'scale(0.75)' }}>
+            <div className="flex justify-center items-center" style={{ marginTop: 0, marginBottom: 0, height: `${radius * 2 * 0.75}px`, lineHeight: 0 }}>
+                <div className="relative" style={{ transform: 'scale(0.75)', transformOrigin: 'center', width: `${radius * 2}px`, height: `${radius * 2}px`, lineHeight: 0 }}>
                     <svg
                         height={radius * 2}
                         width={radius * 2}
                         className="transform -rotate-90"
+                        style={{ display: 'block', verticalAlign: 'top' }}
                     >
                         {/* Background circle */}
                         <circle
@@ -68,8 +74,8 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
                         </defs>
                     </svg>
                     {/* Percentage text */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-white font-bold text-2xl">
+                    <div className="absolute inset-0 flex items-center justify-center" style={{ lineHeight: 1 }}>
+                        <span className="text-white font-bold text-5xl" style={{ lineHeight: 1 }}>
                             {progress}%
                         </span>
                     </div>
@@ -77,8 +83,20 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
             </div>
 
             {/* Bottom Text */}
-            <div className="text-center">
-                <p className="text-white text-xs leading-tight">
+            <div className="text-center" style={{ marginTop: '8px', lineHeight: 1.2 }}>
+                <p
+                    className="text-white"
+                    style={{
+                        fontWeight: 400,
+                        fontStyle: 'normal',
+                        fontSize: '14px',
+                        lineHeight: '140%',
+                        letterSpacing: '0%',
+                        textAlign: 'center',
+                        margin: 0,
+                        padding: 0
+                    }}
+                >
                     {bottomText}
                 </p>
             </div>

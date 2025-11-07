@@ -60,42 +60,44 @@ const TabImageCarousel: React.FC<TabImageCarouselProps> = ({ isPhone = false }) 
     const items = isPhone ? mobileCarouselItems : carouselItems;
 
     return (
-        <div className="w-full mb-0 flex flex-col items-center">
+        <div className="w-full mb-4 flex flex-col items-center">
             <div className="w-full max-w-[375px]">
-                <Swiper
-                    modules={[Pagination, Autoplay, Navigation]}
-                    spaceBetween={5}
-                    slidesPerView={isPhone ? 2.2 : 1.8}
-                    centeredSlides
-                    loop={true}
-                    autoplay={{
-                        delay: 3000,
-                        disableOnInteraction: false,
-                    }}
-                    pagination={{
-                        clickable: true,
-                        el: ".custom-pagination-dots-tabs",
-                        bulletClass: "custom-bullet-tabs",
-                        bulletActiveClass: "custom-bullet-active-tabs",
-                    }}
-                    onBeforeInit={(swiper) => {
-                        swiperRef.current = swiper;
-                    }}
-                    className={isPhone ? "mobile-image-swiper" : "tab-image-swiper"}
-                >
-                    {items.map((item, index) => (
-                        <SwiperSlide key={index}>
-                            <div
-                                className="tab-carousel-item"
-                                style={{
-                                    backgroundImage: `url(${item.image})`,
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center',
-                                }}
-                            />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                <div className="h-[240px]">
+                    <Swiper
+                        modules={[Pagination, Autoplay, Navigation]}
+                        spaceBetween={5}
+                        slidesPerView={isPhone ? 2.2 : 1.8}
+                        centeredSlides
+                        loop={true}
+                        autoplay={{
+                            delay: 3000,
+                            disableOnInteraction: false,
+                        }}
+                        pagination={{
+                            clickable: true,
+                            el: ".custom-pagination-dots-tabs",
+                            bulletClass: "custom-bullet-tabs",
+                            bulletActiveClass: "custom-bullet-active-tabs",
+                        }}
+                        onBeforeInit={(swiper) => {
+                            swiperRef.current = swiper;
+                        }}
+                        className={isPhone ? "mobile-image-swiper" : "tab-image-swiper"}
+                    >
+                        {items.map((item, index) => (
+                            <SwiperSlide key={index}>
+                                <div
+                                    className="tab-carousel-item"
+                                    style={{
+                                        backgroundImage: `url(${item.image})`,
+                                        backgroundSize: isPhone ? 'contain' : 'cover',
+                                        backgroundPosition: 'center',
+                                    }}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
 
                 {/* Navigation & Pagination */}
                 <div className="flex items-center justify-center mt-2 px-8">
@@ -184,7 +186,7 @@ const TabImageCarousel: React.FC<TabImageCarouselProps> = ({ isPhone = false }) 
         /* Mobile carousel styles */
         .mobile-image-swiper {
           padding-bottom: 0 !important;
-          height: 200px !important;
+          height: 240px !important;
         }
 
         .mobile-image-swiper .swiper-wrapper {
@@ -202,18 +204,22 @@ const TabImageCarousel: React.FC<TabImageCarouselProps> = ({ isPhone = false }) 
 
         .mobile-image-swiper .swiper-slide .tab-carousel-item {
           width: 100px;
-          height: 165px;
+          height: 240px;
           border-radius: 10.61px;
           opacity: 1;
           transition: all 0.3s ease;
+          background-size: contain !important;
+          background-repeat: no-repeat;
         }
 
         /* Center slide (active) for mobile */
         .mobile-image-swiper .swiper-slide-active .tab-carousel-item {
           width: 115px;
-          height: 185px;
+          height: 240px;
           border-radius: 12.16px;
           opacity: 1;
+          background-size: contain !important;
+          background-repeat: no-repeat;
         }
 
         /* Pagination bullets */
