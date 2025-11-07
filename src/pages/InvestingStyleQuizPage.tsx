@@ -13,9 +13,9 @@ const InvestingStyleQuizPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const handleCloseClick = () => {
-        navigate(-1);
-    };
+    // const handleCloseClick = () => {
+    //     navigate(-1);
+    // };
 
     const handleContinueClick = async () => {
         // If email is provided, save it with answers
@@ -61,7 +61,7 @@ const InvestingStyleQuizPage: React.FC = () => {
                     <div className="flex items-center">
                         <img src={Logo} alt="SabioTrade" width={230} height={80} />
                     </div>
-                    <button
+                    {/* <button
                         onClick={handleCloseClick}
                         className="flex items-center justify-center"
                         style={{
@@ -77,7 +77,7 @@ const InvestingStyleQuizPage: React.FC = () => {
                         <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
-                    </button>
+                    </button> */}
                 </div>
 
                 <div className="flex-1 flex flex-col px-0 mt-4 relative">
@@ -90,6 +90,7 @@ const InvestingStyleQuizPage: React.FC = () => {
                                     fontWeight: 700,
                                     fontStyle: 'bold',
                                     fontSize: '30px',
+                                    lineHeight: '140%',
                                 }}
                             >
                                 Welcome to the Sabio Quiz!
