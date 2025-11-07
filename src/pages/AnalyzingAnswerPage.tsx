@@ -124,6 +124,32 @@ const AnalyzingAnswerPage: React.FC = () => {
                                 </svg>
                             )}
                         </div>
+                        {storedDNAIcons.length > 0 && (
+                            <div className="flex justify-center mt-2">
+                                <div
+                                    className="flex items-center justify-center"
+                                    style={{
+                                        width: '48px',
+                                        height: '48px',
+                                        background: 'rgba(255, 255, 255, 0.25)',
+                                        border: '2px solid rgba(255, 255, 255, 0.5)',
+                                        borderRadius: '50%',
+                                        backdropFilter: 'blur(8px)',
+                                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                                    }}
+                                >
+                                    <span
+                                        className="text-2xl leading-none"
+                                        style={{
+                                            filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5))',
+                                            display: 'inline-block',
+                                        }}
+                                    >
+                                        {storedDNAIcons[0].icon}
+                                    </span>
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     <Card
@@ -175,22 +201,10 @@ const AnalyzingAnswerPage: React.FC = () => {
                                 className="h-48 object-contain"
                             />
                             <div className="mt-4 px-4">
-                            {storedDNAIcons.length > 0 && (
-                                <div className="flex items-center justify-center gap-3 mb-3">
-                                    <div
-                                        className="flex items-center justify-center flex-shrink-0"
-                                        style={{
-                                            width: '48px',
-                                            height: '48px',
-                                            background: 'rgba(255, 255, 255, 0.25)',
-                                            border: '2px solid rgba(255, 255, 255, 0.5)',
-                                            borderRadius: '50%',
-                                            backdropFilter: 'blur(8px)',
-                                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-                                        }}
-                                    >
-                                        <span 
-                                            className="text-3xl leading-none"
+                                {storedDNAIcons.length > 0 && (
+                                    <div className="flex items-center justify-center gap-1 mb-3">
+                                        <span
+                                            className="text-[16px] leading-none"
                                             style={{
                                                 filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5))',
                                                 display: 'inline-block',
@@ -198,20 +212,20 @@ const AnalyzingAnswerPage: React.FC = () => {
                                         >
                                             {storedDNAIcons[0].icon}
                                         </span>
+
+                                        <h3
+                                            style={{
+                                                fontWeight: 600,
+                                                fontSize: 16,
+                                                lineHeight: '120%',
+                                                letterSpacing: 0,
+                                            }}
+                                            className="text-white"
+                                        >
+                                            {getTraderDNAInfo().title}
+                                        </h3>
                                     </div>
-                                    <h3
-                                        style={{
-                                            fontWeight: 600,
-                                            fontSize: 16,
-                                            lineHeight: '120%',
-                                            letterSpacing: 0,
-                                        }}
-                                        className="text-white"
-                                    >
-                                        {getTraderDNAInfo().title}
-                                    </h3>
-                                </div>
-                            )}
+                                )}
                                 <p
                                     style={{
                                         fontWeight: 400,

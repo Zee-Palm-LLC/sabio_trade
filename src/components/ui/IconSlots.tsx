@@ -62,7 +62,7 @@ const IconSlots: React.FC<IconSlotsProps> = ({ className = '' }) => {
                     >
                         {iconData ? (
                             <span 
-                                className="text-2xl leading-none animate-pop-in"
+                                className="text-1xl leading-none animate-pop-in"
                                 style={{
                                     filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5))',
                                     display: 'inline-block',

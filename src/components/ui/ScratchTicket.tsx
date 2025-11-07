@@ -130,7 +130,7 @@ const TicketScratchCard: React.FC<TicketScratchCardProps> = ({ onScratchComplete
 
                         {/* Discount Text */}
                         <div className="mb-2">
-                            <h2 className="text-gray-800 font-medium text-[18px] leading-tight">You get 43% off</h2>
+                            <h2 className="text-gray-800 font-medium text-[18px] leading-tight">You get 25% off</h2>
                         </div>
 
                         {/* Discount Code Button */}

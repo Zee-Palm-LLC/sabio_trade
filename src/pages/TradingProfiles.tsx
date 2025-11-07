@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
-import { BottomShade, PrimaryButton, ProgressCard, TabImageCarousel } from "../components";
+import { PrimaryButton, ProgressCard, TabImageCarousel } from "../components";
 
 
 const TradingProfiles: React.FC = () => {
@@ -34,9 +34,9 @@ const TradingProfiles: React.FC = () => {
     }
     return (
         <div className="min-h-screen text-white relative" style={{ background: 'var(--bg-gradient)' }}>
-            <BottomShade />
-            <div className="w-full max-w-[375px] mx-auto min-h-screen flex flex-col px-4">
-                <div className="flex flex-col items-center pt-4 pb-1">
+            {/* <BottomShade /> */}
+            <div className="w-full max-w-[375px] mx-auto flex flex-col px-4">
+                <div className="flex flex-col items-center pt-4 pb-2">
                     <div className="flex items-center space-x-3 mb-1">
                         <img src={Logo} alt="SabioTrade" width={230} height={80} />
                     </div>
@@ -47,7 +47,7 @@ const TradingProfiles: React.FC = () => {
                     bottomText="Creating the personal challenge and trading profile..."
                 />
                 <TabImageCarousel isPhone={true} />
-                <div className="pt-2 pb-4">
+                <div className="mt-6 mb-2 flex justify-center">
                     <PrimaryButton
                         onClick={handleContinueClick}
                         text="Next Step"
@@ -55,6 +55,7 @@ const TradingProfiles: React.FC = () => {
                         disabled={!isButtonEnabled}
                     />
                 </div>
+
             </div>
         </div>
     );
