@@ -19,14 +19,14 @@ const AnalyzingAnswerPage: React.FC = () => {
             return { title: "Analyzing...", quote: "Your trading potential is being analyzed..." };
         }
         const primaryIcon = storedDNAIcons.find(icon => icon.questionId === 3);
-        
+
         if (!primaryIcon) {
             return { title: "Analyzing...", quote: "Your trading potential is being analyzed..." };
         }
-        
+
         // Get archetype name (remove "The " prefix if present)
         const archetypeName = primaryIcon.archetype.replace(/^The\s+/i, '').trim();
-        
+
         // Map archetype to specific quotes from screenshot
         const archetypeQuotes: Record<string, string> = {
             'Strategist': "You're building foundations, not chasing hype.",
@@ -35,9 +35,9 @@ const AnalyzingAnswerPage: React.FC = () => {
             'Confident': "Ownership mindset — you lead your own path.",
             'Explorer': "Freedom fuels your focus — trade on your terms."
         };
-        
+
         const quote = archetypeQuotes[archetypeName] || primaryIcon.quote || "Your trading potential is being analyzed...";
-        
+
         return {
             title: primaryIcon.archetype || "Analyzing...",
             quote: quote
@@ -109,47 +109,21 @@ const AnalyzingAnswerPage: React.FC = () => {
                                 {progress === 100 ? 'Initial Compatibility' : `${progress}% in progress...`}
                             </span>
                             {progress === 100 && (
-                                <svg 
-                                    className="w-4 h-4 text-[#25BBA4]" 
-                                    fill="none" 
-                                    stroke="currentColor" 
+                                <svg
+                                    className="w-4 h-4 text-[#25BBA4]"
+                                    fill="none"
+                                    stroke="currentColor"
                                     viewBox="0 0 24 24"
                                 >
-                                    <path 
-                                        strokeLinecap="round" 
-                                        strokeLinejoin="round" 
-                                        strokeWidth={3} 
-                                        d="M5 13l4 4L19 7" 
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={3}
+                                        d="M5 13l4 4L19 7"
                                     />
                                 </svg>
                             )}
                         </div>
-                        {storedDNAIcons.length > 0 && (
-                            <div className="flex justify-center mt-2">
-                                <div
-                                    className="flex items-center justify-center"
-                                    style={{
-                                        width: '48px',
-                                        height: '48px',
-                                        background: 'rgba(255, 255, 255, 0.25)',
-                                        border: '2px solid rgba(255, 255, 255, 0.5)',
-                                        borderRadius: '50%',
-                                        backdropFilter: 'blur(8px)',
-                                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-                                    }}
-                                >
-                                    <span 
-                                        className="text-3xl leading-none"
-                                        style={{
-                                            filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5))',
-                                            display: 'inline-block',
-                                        }}
-                                    >
-                                        {storedDNAIcons[0].icon}
-                                    </span>
-                                </div>
-                            </div>
-                        )}
                     </div>
 
                     <Card
@@ -200,19 +174,44 @@ const AnalyzingAnswerPage: React.FC = () => {
                                 alt="Testimonial"
                                 className="h-48 object-contain"
                             />
-                            <div className="mt-4 text-center px-4">
-                                <h3
-                                    style={{
-                                        fontWeight: 600,
-                                        fontSize: 16,
-                                        lineHeight: '120%',
-                                        letterSpacing: 0,
-                                        textAlign: 'center'
-                                    }}
-                                    className="text-white mb-2"
-                                >
-                                    {getTraderDNAInfo().title}
-                                </h3>
+                            <div className="mt-4 px-4">
+                            {storedDNAIcons.length > 0 && (
+                                <div className="flex items-center justify-center gap-3 mb-3">
+                                    <div
+                                        className="flex items-center justify-center flex-shrink-0"
+                                        style={{
+                                            width: '48px',
+                                            height: '48px',
+                                            background: 'rgba(255, 255, 255, 0.25)',
+                                            border: '2px solid rgba(255, 255, 255, 0.5)',
+                                            borderRadius: '50%',
+                                            backdropFilter: 'blur(8px)',
+                                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                                        }}
+                                    >
+                                        <span 
+                                            className="text-3xl leading-none"
+                                            style={{
+                                                filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5))',
+                                                display: 'inline-block',
+                                            }}
+                                        >
+                                            {storedDNAIcons[0].icon}
+                                        </span>
+                                    </div>
+                                    <h3
+                                        style={{
+                                            fontWeight: 600,
+                                            fontSize: 16,
+                                            lineHeight: '120%',
+                                            letterSpacing: 0,
+                                        }}
+                                        className="text-white"
+                                    >
+                                        {getTraderDNAInfo().title}
+                                    </h3>
+                                </div>
+                            )}
                                 <p
                                     style={{
                                         fontWeight: 400,
