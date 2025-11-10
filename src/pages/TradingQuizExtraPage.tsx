@@ -114,6 +114,15 @@ const TradingQuizExtraPage: React.FC = () => {
     }, [question.id]);
 
     const handleBackClick = () => {
+        // Clear icon for current question if it has one (when going back)
+        if (question.id === 2) {
+            const hasIcon = storedDNAIcons.some(icon => icon.questionId === question.id);
+            if (hasIcon) {
+                console.log('Clearing icon for question', question.id, 'when going back');
+                DNAIconsService.clearDNAIconForQuestion(question.id);
+            }
+        }
+
         if (fromProfile) {
             navigate(-1);
         } else if (current > 0) {

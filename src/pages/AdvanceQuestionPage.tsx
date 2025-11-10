@@ -115,6 +115,15 @@ const AdvanceQuestionPage: React.FC = () => {
     const handleBackClick = () => {
         console.log('handleBackClick called for question id:', currentQuestion.id);
 
+        // Clear icon for current question if it has one (when going back)
+        if (currentQuestion.id === 5) {
+            const hasIcon = storedDNAIcons.some(icon => icon.questionId === currentQuestion.id);
+            if (hasIcon) {
+                console.log('Clearing icon for question', currentQuestion.id, 'when going back');
+                DNAIconsService.clearDNAIconForQuestion(currentQuestion.id);
+            }
+        }
+
         // FIRST PRIORITY: For question 5, clear any selected option before navigation
         // This allows user to deselect first, then navigate back on second click
         if (currentQuestion.id === 5 && (selectedOption || selectedOptions.length > 0)) {
