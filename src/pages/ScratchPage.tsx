@@ -34,9 +34,9 @@ const ScratchPage: React.FC = () => {
         if (showFeatures && featuresRef.current) {
             // Small delay to ensure DOM has updated
             setTimeout(() => {
-                featuresRef.current?.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
+                featuresRef.current?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             }, 100);
         }
@@ -52,16 +52,12 @@ const ScratchPage: React.FC = () => {
     const handleScratchComplete = () => {
         console.log("🎉 Scratch card completed!");
         setIsScratched(true);
+        setShowFeatures(true); // Automatically reveal all content
     };
 
     const handleReserveClick = () => {
-        console.log("🎉 Reserve button clicked!");
-        setShowFeatures(true);
-    };
-
-    const handleContinueClick = () => {
-        console.log("🎉 Continue button clicked!");
-        // Add your next step logic here
+        console.log("🎉 Unlock full access button clicked!");
+        // Add your next step logic here (e.g., navigate to checkout/payment)
     };
 
     return (
@@ -94,15 +90,20 @@ const ScratchPage: React.FC = () => {
                             </div>
 
                             {/* GET MY PLAN Button */}
-                            <button
+                            <PrimaryButton
                                 onClick={handleReserveClick}
-                                className="w-full bg-white text-[#340863] font-bold text-xs py-2 px-3 rounded-lg hover:bg-gray-100 transition-colors"
+                                text="GET MY PLAN"
+                                showIcon={false}
+                                hideReflection={false}
                                 style={{
-                                    boxShadow: '0 2px 8px rgba(255, 255, 255, 0.2)'
+                                    borderRadius: '8px',
+                                    boxShadow: '0 2px 8px rgba(255, 255, 255, 0.2)',
+                                    fontSize: '12px',
+                                    fontWeight: 'bold',
+                                    padding: ' 12px',
+                                    height: '41px',
                                 }}
-                            >
-                                GET MY PLAN
-                            </button>
+                            />
                         </Card>
                     )}
 
@@ -202,47 +203,23 @@ const ScratchPage: React.FC = () => {
                     </span>
                     <ScratchTicket onScratchComplete={handleScratchComplete} />
 
-                    {/* Condition 2: Continue Button (non-sticky, natural bottom) */}
-                    {isScratched && !showFeatures && (
-                        <div className="mt-6 mb-6">
-                            <PrimaryButton
-                                onClick={handleReserveClick}
-                                text="Unlock full access"
-                                showIcon={true}
-                                className={`w-full ${timeLeft < 120 ? 'animate-glow-pulse' : ''}`}
-                                style={{
-                                    background: timeLeft < 120
-                                        ? 'linear-gradient(45deg, #ff6b6b, #ee5a24)'
-                                        : 'linear-gradient(to right, #0FB084, #2FA6B9)',
-                                    boxShadow: timeLeft < 120
-                                        ? '0 0 20px rgba(255, 107, 107, 0.6)'
-                                        : '0 0 15px rgba(15, 176, 132, 0.4)'
-                                }}
-                            />
-                            {/* Countdown Timer */}
-                            <div className="text-center mt-3">
-                                <p className={`text-white text-base font-medium ${timeLeft < 120 ? 'text-red-400 animate-pulse' : ''}`}>
-                                    Price for the next {formatTime(timeLeft)} minutes
-                                </p>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Condition 3: All Content After Reserve Button Click */}
-                    {showFeatures && (
+                    {/* All Content After Scratching - Automatically Revealed */}
+                    {isScratched && showFeatures && (
                         <div ref={featuresRef} className="mt-6 space-y-4 mb-6">
                             <SabioTradeFeatures />
                             <MediaLogosCard />
 
-                            {/* Continue Button */}
+                            {/* Unlock full access Button */}
                             <div className="w-full mt-4 mb-4">
                                 <PrimaryButton
-                                    onClick={handleContinueClick}
-                                    text="Continue"
-                                    showIcon={true}
+                                    onClick={handleReserveClick}
+                                    text="Unlock full access"
+                                    showIcon={false}
+                                    hideReflection={false}
+                                    className="w-full"
                                 />
                             </div>
-                            {/* Countdown Timer below second button */}
+                            {/* Countdown Timer below button */}
                             <div className="text-center mb-2 mt-1">
                                 <p className={`text-white text-base font-medium ${timeLeft < 120 ? 'text-red-400 animate-pulse' : ''}`}>
                                     Price for the next {formatTime(timeLeft)} minutes

@@ -8,6 +8,7 @@ interface PrimaryButtonProps {
     disabled?: boolean;
     className?: string;
     style?: React.CSSProperties;
+    hideReflection?: boolean;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
@@ -17,6 +18,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     disabled = false,
     className = '',
     style = {},
+    hideReflection = false,
 }) => {
     return (
         <div className={`w-full ${className}`}>
@@ -27,12 +29,13 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
           relative
           w-full
           px-6 py-3
-          text-white font-semibold text-base
+          font-semibold text-base
           disabled:cursor-not-allowed
           flex items-center justify-center
           overflow-hidden
           rounded-full
           transition-all duration-300
+          ${style.color ? '' : 'text-white'}
         `}
                 style={{
                     borderRadius: 108,
@@ -46,7 +49,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
                 }}
             >
                 {/* Reflection Layer */}
-                {!disabled && (
+                {!disabled && !hideReflection && (
                     <div
                         className="reflection-layer animate-shimmer absolute inset-0 overflow-hidden rounded-full pointer-events-none"
              style={{
