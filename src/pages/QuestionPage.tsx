@@ -63,6 +63,15 @@ const QuestionPage: React.FC = () => {
     }, [currentQuestion.id]);
 
     const handleBackClick = () => {
+        // Clear icon for current question if it has one (when going back)
+        if (currentQuestion.id === 3) {
+            const hasIcon = storedDNAIcons.some(icon => icon.questionId === currentQuestion.id);
+            if (hasIcon) {
+                console.log('Clearing icon for question', currentQuestion.id, 'when going back');
+                DNAIconsService.clearDNAIconForQuestion(currentQuestion.id);
+            }
+        }
+
         if (currentQuestionIndex > 0) {
             // Navigate to previous question
             // Selected answer will be restored from AnswerService via useEffect

@@ -130,6 +130,18 @@ export class DNAIconsService {
         listeners.forEach(listener => listener());
     }
 
+    // Clear DNA icon for a specific question ID
+    static clearDNAIconForQuestion(questionId: number): void {
+        const beforeCount = dnaIconsStorage.length;
+        dnaIconsStorage = dnaIconsStorage.filter(item => item.questionId !== questionId);
+        const afterCount = dnaIconsStorage.length;
+        if (beforeCount > afterCount) {
+            console.log(`Cleared DNA icon for question ID ${questionId}`);
+            // Notify all listeners
+            listeners.forEach(listener => listener());
+        }
+    }
+
     // Get DNA icons for specific questions
     static getDNAIconsForQuestions(questionIds: number[]): DNAIconData[] {
         return this.getDNAIcons().filter(item => questionIds.includes(item.questionId));
