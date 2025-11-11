@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { AnalyzingModal, BackButton, BottomShade, PrimaryButton, ProgressIndicator } from '../components';
@@ -40,48 +40,46 @@ const AdvanceQuestionPage: React.FC = () => {
     const currentQuestionIcon = storedDNAIcons.find(icon => icon.questionId === currentQuestion.id);
 
     const isMulti = Boolean(currentQuestion.multi);
+    const showContinueButton = currentQuestion.id === 5 || isMulti;
+
+    const syncSelectionWithStoredAnswer = useCallback((storedAnswer: string | null) => {
+        if (storedAnswer) {
+            if (isMulti) {
+                const answerArray = storedAnswer.split(',').filter(a => a.trim());
+                setSelectedOptions(answerArray);
+                setIsButtonActive(answerArray.length > 0);
+            } else {
+                setSelectedOption(storedAnswer);
+                if (showContinueButton) {
+                    setShowButton(true);
+                    setIsButtonActive(true);
+                }
+            }
+            return;
+        }
+
+        if (isMulti) {
+            setSelectedOptions([]);
+        } else {
+            setSelectedOption(null);
+            if (showContinueButton) {
+                setShowButton(false);
+            }
+        }
+        setIsButtonActive(false);
+    }, [isMulti, showContinueButton]);
 
     // Load persisted answer from AnswerService when question changes
     useEffect(() => {
         const storedAnswer = AnswerService.getAnswer(currentQuestion.id);
-        if (storedAnswer) {
-            if (isMulti) {
-                // For multi-select, split by comma
-                const answerArray = storedAnswer.split(',').filter(a => a.trim());
-                setSelectedOptions(answerArray);
-            } else {
-                setSelectedOption(storedAnswer);
-            }
-        } else {
-            // Clear selection if no stored answer for this question
-            if (isMulti) {
-                setSelectedOptions([]);
-            } else {
-                setSelectedOption(null);
-            }
-        }
-    }, [currentQuestion.id, isMulti]);
+        syncSelectionWithStoredAnswer(storedAnswer);
+    }, [currentQuestion.id, syncSelectionWithStoredAnswer]);
 
     // Subscribe to answer changes to update UI in real-time
     useEffect(() => {
         const updateAnswers = () => {
             const storedAnswer = AnswerService.getAnswer(currentQuestion.id);
-            if (storedAnswer) {
-                if (isMulti) {
-                    // For multi-select, split by comma
-                    const answerArray = storedAnswer.split(',').filter(a => a.trim());
-                    setSelectedOptions(answerArray);
-                } else {
-                    setSelectedOption(storedAnswer);
-                }
-            } else {
-                // Clear selection if no stored answer for this question
-                if (isMulti) {
-                    setSelectedOptions([]);
-                } else {
-                    setSelectedOption(null);
-                }
-            }
+            syncSelectionWithStoredAnswer(storedAnswer);
         };
 
         // Subscribe to answer changes
@@ -92,7 +90,7 @@ const AdvanceQuestionPage: React.FC = () => {
         return () => {
             unsubscribe();
         };
-    }, [currentQuestion.id, isMulti]);
+    }, [currentQuestion.id, syncSelectionWithStoredAnswer]);
 
     useEffect(() => {
         if (location.state?.clearCurrentAnswer && currentQuestionIndex === 2) {
@@ -109,8 +107,6 @@ const AdvanceQuestionPage: React.FC = () => {
             );
         }
     }, [location.state?.clearCurrentAnswer, currentQuestionIndex, location.state]);
-
-    const showContinueButton = currentQuestion.id === 5 || isMulti;
 
     const handleBackClick = () => {
         console.log('handleBackClick called for question id:', currentQuestion.id);
