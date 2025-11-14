@@ -127,7 +127,7 @@ const AnalyzingAnswerPage: React.FC = () => {
                         {storedDNAIcons.length > 0 && (
                             <div className="flex justify-center mt-2">
                                 <div
-                                    className="flex items-center justify-center"
+                                    className="flex items-center justify-center animate-icon-glow"
                                     style={{
                                         width: '48px',
                                         height: '48px',
@@ -202,16 +202,29 @@ const AnalyzingAnswerPage: React.FC = () => {
                             />
                             <div className="mt-4 px-4">
                                 {storedDNAIcons.length > 0 && (
-                                    <div className="flex items-center justify-center gap-1 mb-3">
-                                        <span
-                                            className="text-[16px] leading-none"
+                                    <div className="flex items-center justify-center gap-2 mb-3">
+                                        <div
+                                            className="flex items-center justify-center animate-icon-glow"
                                             style={{
-                                                filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5))',
-                                                display: 'inline-block',
+                                                width: '36px',
+                                                height: '36px',
+                                                background: 'rgba(255, 255, 255, 0.25)',
+                                                border: '2px solid rgba(255, 255, 255, 0.5)',
+                                                borderRadius: '50%',
+                                                backdropFilter: 'blur(8px)',
+                                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                                             }}
                                         >
-                                            {storedDNAIcons[0].icon}
-                                        </span>
+                                            <span
+                                                className="text-[16px] leading-none"
+                                                style={{
+                                                    filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5))',
+                                                    display: 'inline-block',
+                                                }}
+                                            >
+                                                {storedDNAIcons[0].icon}
+                                            </span>
+                                        </div>
 
                                         <h3
                                             style={{
@@ -252,6 +265,22 @@ const AnalyzingAnswerPage: React.FC = () => {
                     />
                 </div>
             </div>
+            <style>{`
+                @keyframes icon-glow {
+                    0%, 100% {
+                        filter: drop-shadow(0 0 8px rgba(23, 248, 113, 0.6)) drop-shadow(0 0 12px rgba(23, 248, 113, 0.4));
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(23, 248, 113, 0.4);
+                    }
+                    50% {
+                        filter: drop-shadow(0 0 12px rgba(23, 248, 113, 0.8)) drop-shadow(0 0 16px rgba(23, 248, 113, 0.6));
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 12px rgba(23, 248, 113, 0.6);
+                    }
+                }
+
+                .animate-icon-glow {
+                    animation: icon-glow 2s ease-in-out infinite;
+                }
+            `}</style>
         </div >
     );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import StandingAvatar from '../assets/standing_avatar.png';
@@ -7,6 +7,7 @@ import IconSlots from '../components/ui/IconSlots';
 import quizData from '../data/quiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
 import { AnswerService } from '../services/answerService';
+import { defaultFlyOffsets, prepareIconFlight, type FlyOffsets } from '../utils/iconFlight';
 
 const QuestionPage: React.FC = () => {
     const navigate = useNavigate();
@@ -14,6 +15,8 @@ const QuestionPage: React.FC = () => {
     const [answers, setAnswers] = useState<Record<number, string>>({});
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [isIconAnimating, setIsIconAnimating] = useState(false);
+    const [flyOffsets, setFlyOffsets] = useState<FlyOffsets>(defaultFlyOffsets);
+    const iconRef = useRef<HTMLDivElement | null>(null);
 
     const availableQuestions = quizData;
     const totalQuestions = 13;
@@ -101,16 +104,22 @@ const QuestionPage: React.FC = () => {
                 value,
                 'questionPage'
             );
-            
-            // Trigger animation
-            setIsIconAnimating(true);
-            setTimeout(() => {
-                setIsIconAnimating(false);
-            }, 1000);
+
+            prepareIconFlight({
+                questionId: currentQuestion.id,
+                optionValue: value,
+                iconRef,
+                setOffsets: setFlyOffsets,
+            }).then(() => {
+                setIsIconAnimating(true);
+                setTimeout(() => {
+                    setIsIconAnimating(false);
+                }, 2000);
+            });
         }
 
         // Different timing based on whether it's question ID 3 (with animation)
-        const delayTime = currentQuestion.id === 3 ? 1300 : 400; // Wait for animation to complete + buffer
+        const delayTime = currentQuestion.id === 3 ? 2300 : 400; // Wait for animation to complete + buffer
         
         setTimeout(() => {
             if (currentQuestionIndex < availableQuestions.length - 1) {
@@ -167,14 +176,22 @@ const QuestionPage: React.FC = () => {
                     <div className="relative flex justify-center mt-4 mb-2">
                         <div className="flex space-x-3">
                             <div
+                                ref={iconRef}
                                 className={`w-10 h-10 rounded-full flex items-center justify-center text-2xl ${
-                                    isIconAnimating ? 'animate-fly-from-top-right' : 'animate-float'
+                                    isIconAnimating ? 'animate-fly-from-answer' : 'animate-float'
                                 }`}
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.1)',
                                     border: '2px solid rgba(255,255,255,0.2)',
                                     backdropFilter: 'blur(6px)',
-                                }}
+                                    zIndex: '30',
+                                    '--fly-start-x': `${flyOffsets.startX}px`,
+                                    '--fly-start-y': `${flyOffsets.startY}px`,
+                                    '--fly-mid-x': `${flyOffsets.midX}px`,
+                                    '--fly-mid-y': `${flyOffsets.midY}px`,
+                                    '--fly-near-x': `${flyOffsets.nearX}px`,
+                                    '--fly-near-y': `${flyOffsets.nearY}px`,
+                                } as React.CSSProperties & Record<string, string>}
                             >
                                 {currentQuestionIcon.icon}
                             </div>
@@ -185,6 +202,7 @@ const QuestionPage: React.FC = () => {
                 {/* QUESTION CARD */}
                 <div className="mb-20">
                     <QuestionCard
+                        questionId={currentQuestion.id}
                         questionText={currentQuestion.question}
                         description={currentQuestion.description}
                         options={questionOptions}
@@ -205,26 +223,10 @@ const QuestionPage: React.FC = () => {
                     }
                 }
                 
-                @keyframes fly-from-top-right {
+                @keyframes fly-from-answer {
                     0% {
-                        transform: translate(-120px, -120px) scale(0.2);
-                        opacity: 0;
-                    }
-                    20% {
-                        transform: translate(-90px, -90px) scale(0.4);
-                        opacity: 0.3;
-                    }
-                    40% {
-                        transform: translate(-60px, -60px) scale(0.6);
-                        opacity: 0.5;
-                    }
-                    60% {
-                        transform: translate(-30px, -30px) scale(0.8);
-                        opacity: 0.7;
-                    }
-                    80% {
-                        transform: translate(-10px, -10px) scale(0.95);
-                        opacity: 0.9;
+                        transform: translate(var(--fly-start-x, -160px), var(--fly-start-y, 60px)) scale(0.9);
+                        opacity: 1;
                     }
                     100% {
                         transform: translate(0px, 0px) scale(1);
@@ -236,8 +238,11 @@ const QuestionPage: React.FC = () => {
                     animation: float 3s ease-in-out infinite;
                 }
                 
-                .animate-fly-from-top-right {
-                    animation: fly-from-top-right 1.0s ease-out forwards;
+                .animate-fly-from-answer {
+                    animation: fly-from-answer 1.15s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+                    animation-delay: 0.1s;
+                    animation-fill-mode: both;
+                    will-change: transform;
                 }
             `}</style>
         </div>

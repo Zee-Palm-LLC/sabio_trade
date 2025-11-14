@@ -17,6 +17,7 @@ interface OptionWithDescription {
 }
 
 interface AdvancedQuestionCardProps {
+    questionId?: number;
     question: string;
     subtitle?: string;
     options: OptionWithDescription[] | string[];
@@ -29,6 +30,7 @@ interface AdvancedQuestionCardProps {
 }
 
 const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
+    questionId,
     question,
     subtitle,
     options,
@@ -100,6 +102,8 @@ const AdvancedQuestionCard: React.FC<AdvancedQuestionCardProps> = ({
                                     :
                                     `w-full py-4 px-6 rounded-xl text-white font-semibold text-[16px] transition-all duration-500 relative`
                                 }
+                                data-question-id={typeof questionId === 'number' ? questionId : undefined}
+                                data-option-value={optionLabel}
                                 style={multi ? {
                                     background: '#1A0C4E',
                                     border: '1px solid #FFFFFF2E'

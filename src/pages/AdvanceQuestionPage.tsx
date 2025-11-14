@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { AnalyzingModal, BackButton, BottomShade, PrimaryButton, ProgressIndicator } from '../components';
@@ -7,6 +7,7 @@ import IconSlots from '../components/ui/IconSlots';
 import advancedQuestions from '../data/advancedQuestions.json';
 import { DNAIconsService } from '../services/dnaIconsService';
 import { AnswerService } from '../services/answerService';
+import { defaultFlyOffsets, prepareIconFlight, type FlyOffsets } from '../utils/iconFlight';
 
 const AdvanceQuestionPage: React.FC = () => {
     const navigate = useNavigate();
@@ -30,6 +31,8 @@ const AdvanceQuestionPage: React.FC = () => {
     const [hasUserInteracted, setHasUserInteracted] = useState(false);
     const [showValidationMessage, setShowValidationMessage] = useState(false);
     const [isIconAnimating, setIsIconAnimating] = useState(false);
+    const [flyOffsets, setFlyOffsets] = useState<FlyOffsets>(defaultFlyOffsets);
+    const iconRef = useRef<HTMLDivElement | null>(null);
 
     const totalQuestions = 13;
     const questionOffset = 4;
@@ -230,11 +233,17 @@ const AdvanceQuestionPage: React.FC = () => {
                 'advanceQuestionPage'
             );
             
-            // Trigger animation
-            setIsIconAnimating(true);
-            setTimeout(() => {
-                setIsIconAnimating(false);
-            }, 1000);
+            prepareIconFlight({
+                questionId: currentQuestion.id,
+                optionValue: value,
+                iconRef,
+                setOffsets: setFlyOffsets,
+            }).then(() => {
+                setIsIconAnimating(true);
+                setTimeout(() => {
+                    setIsIconAnimating(false);
+                }, 2000);
+            });
         }
 
         if (currentQuestion.id === 7) {
@@ -252,7 +261,7 @@ const AdvanceQuestionPage: React.FC = () => {
 
         if (!showContinueButton) {
             // Different timing based on whether it's question ID 5 (with animation)
-            const delayTime = currentQuestion.id === 5 ? 1300 : 250; // Wait for animation to complete + buffer
+            const delayTime = currentQuestion.id === 5 ? 2300 : 250; // Wait for animation to complete + buffer
 
             setTimeout(() => {
                 if (currentQuestion.id === 7) {
@@ -409,13 +418,21 @@ const AdvanceQuestionPage: React.FC = () => {
                     <div className="relative flex justify-center mt-4 mb-2">
                         <div className="flex space-x-3">
                             <div
-                                className={`w-10 h-10 rounded-full flex items-center justify-center text-2xl ${isIconAnimating ? 'animate-fly-from-top-right' : 'animate-float'
+                                ref={iconRef}
+                                className={`w-10 h-10 rounded-full flex items-center justify-center text-2xl ${isIconAnimating ? 'animate-fly-from-answer' : 'animate-float'
                                     }`}
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.1)',
                                     border: '2px solid rgba(255,255,255,0.2)',
                                     backdropFilter: 'blur(6px)',
-                                }}
+                                    zIndex: '30',
+                                    '--fly-start-x': `${flyOffsets.startX}px`,
+                                    '--fly-start-y': `${flyOffsets.startY}px`,
+                                    '--fly-mid-x': `${flyOffsets.midX}px`,
+                                    '--fly-mid-y': `${flyOffsets.midY}px`,
+                                    '--fly-near-x': `${flyOffsets.nearX}px`,
+                                    '--fly-near-y': `${flyOffsets.nearY}px`,
+                                } as React.CSSProperties & Record<string, string>}
                             >
                                 {currentQuestionIcon.icon}
                             </div>
@@ -424,6 +441,7 @@ const AdvanceQuestionPage: React.FC = () => {
                 )}
 
                 <AdvancedQuestionCard
+                    questionId={currentQuestion.id}
                     question={currentQuestion.question}
                     subtitle={currentQuestion.subtitle}
                     options={currentQuestion.options}
@@ -499,26 +517,10 @@ const AdvanceQuestionPage: React.FC = () => {
                     }
                 }
                 
-                @keyframes fly-from-top-right {
+                @keyframes fly-from-answer {
                     0% {
-                        transform: translate(-120px, -120px) scale(0.2);
-                        opacity: 0;
-                    }
-                    20% {
-                        transform: translate(-90px, -90px) scale(0.4);
-                        opacity: 0.3;
-                    }
-                    40% {
-                        transform: translate(-60px, -60px) scale(0.6);
-                        opacity: 0.5;
-                    }
-                    60% {
-                        transform: translate(-30px, -30px) scale(0.8);
-                        opacity: 0.7;
-                    }
-                    80% {
-                        transform: translate(-10px, -10px) scale(0.95);
-                        opacity: 0.9;
+                        transform: translate(var(--fly-start-x, -160px), var(--fly-start-y, 60px)) scale(0.9);
+                        opacity: 1;
                     }
                     100% {
                         transform: translate(0px, 0px) scale(1);
@@ -530,8 +532,11 @@ const AdvanceQuestionPage: React.FC = () => {
                     animation: float 3s ease-in-out infinite;
                 }
                 
-                .animate-fly-from-top-right {
-                    animation: fly-from-top-right 1.0s ease-out forwards;
+                .animate-fly-from-answer {
+                    animation: fly-from-answer 1.15s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+                    animation-delay: 0.1s;
+                    animation-fill-mode: both;
+                    will-change: transform;
                 }
             `}</style>
         </div>
