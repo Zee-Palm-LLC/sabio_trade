@@ -6,13 +6,14 @@ export interface IconOption {
 }
 
 interface IconOptionCardProps {
+    questionId?: number;
     options: IconOption[];
     selected: string | null;
     onSelect: (value: string) => void;
     align?: 'left' | 'center';
 }
 
-const IconOptionCard: React.FC<IconOptionCardProps> = ({ options, selected, onSelect, align = 'center' }) => {
+const IconOptionCard: React.FC<IconOptionCardProps> = ({ questionId, options, selected, onSelect, align = 'center' }) => {
     return (
         <div className="space-y-3">
             {options.map((opt, idx) => {
@@ -22,6 +23,8 @@ const IconOptionCard: React.FC<IconOptionCardProps> = ({ options, selected, onSe
                         key={`${opt.label}-${idx}`}
                         onClick={() => onSelect(opt.label)}
                         className={`w-full py-3 px-4 rounded-xl text-white transition-all duration-200 flex items-center gap-3 relative ${align === 'left' ? 'justify-start' : 'justify-center'}`}
+                        data-question-id={typeof questionId === 'number' ? questionId : undefined}
+                        data-option-value={opt.label}
                         style={{
                             minHeight: '56px',
                             backgroundColor: isSelected ? '#340863' : 'rgba(52, 8, 99, 0.46)',

@@ -7,6 +7,7 @@ interface QuestionOption {
 }
 
 interface QuestionCardProps {
+    questionId?: number;
     questionText: string;
     description: string;
     options: QuestionOption[];
@@ -17,6 +18,7 @@ interface QuestionCardProps {
 }
 
 const QuestionCard: React.FC<QuestionCardProps> = ({
+    questionId,
     questionText,
     description,
     options,
@@ -46,6 +48,8 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                             key={option.value}
                             onClick={() => onOptionSelect(option.value)}
                             className="w-full py-4 px-6 rounded-xl text-white font-semibold text-[16px] relative mb-1"
+                            data-question-id={typeof questionId === 'number' ? questionId : undefined}
+                            data-option-value={option.value}
                             style={{
                                 backgroundColor: isSelected 
                                     ? '#340863' 

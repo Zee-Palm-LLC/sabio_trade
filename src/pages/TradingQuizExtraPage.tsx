@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BreakingNewsPng from '../assets/breaking_news.png';
 import CleanFocused from '../assets/clean_and_focused.svg';
@@ -19,6 +19,7 @@ import IconSlots from '../components/ui/IconSlots';
 import extraQuiz from '../data/extraQuiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
 import { AnswerService } from '../services/answerService';
+import { defaultFlyOffsets, prepareIconFlight, type FlyOffsets } from '../utils/iconFlight';
 
 interface ExtraQuestion {
     id: number;
@@ -63,6 +64,8 @@ const TradingQuizExtraPage: React.FC = () => {
     const [current, setCurrent] = useState(fromProfile ? 4 : 0);
     const [selected, setSelected] = useState<Record<number, string>>({});
     const [isIconAnimating, setIsIconAnimating] = useState(false);
+    const [flyOffsets, setFlyOffsets] = useState<FlyOffsets>(defaultFlyOffsets);
+    const iconRef = useRef<HTMLDivElement | null>(null);
 
     const total = 13;
     const questionOffset = 8;
@@ -166,15 +169,22 @@ const TradingQuizExtraPage: React.FC = () => {
             
             // Trigger animation
             console.log('Setting animation to true');
-            setIsIconAnimating(true);
-            setTimeout(() => {
-                console.log('Setting animation to false');
-                setIsIconAnimating(false);
-            }, 1000);
+            prepareIconFlight({
+                questionId: question.id,
+                optionValue: value,
+                iconRef,
+                setOffsets: setFlyOffsets,
+            }).then(() => {
+                setIsIconAnimating(true);
+                setTimeout(() => {
+                    console.log('Setting animation to false');
+                    setIsIconAnimating(false);
+                }, 2000);
+            });
         }
 
         // Different timing based on whether it's question ID 2 (with animation)
-        const delayTime = question.id === 2 ? 1300 : 200; // Wait for animation to complete + buffer
+        const delayTime = question.id === 2 ? 2300 : 200; // Wait for animation to complete + buffer
         
         setTimeout(() => {
             if (fromProfile) {
@@ -227,14 +237,22 @@ const TradingQuizExtraPage: React.FC = () => {
                         <div className="relative flex justify-center mt-4 mb-2">
                             <div className="flex space-x-3">
                                 <div
+                                    ref={iconRef}
                                     className={`w-10 h-10 rounded-full flex items-center justify-center text-2xl ${
-                                        isIconAnimating ? 'animate-fly-from-top-right' : 'animate-float'
+                                        isIconAnimating ? 'animate-fly-from-answer' : 'animate-float'
                                     }`}
                                     style={{
                                         background: 'rgba(255, 255, 255, 0.1)',
                                         border: '2px solid rgba(255,255,255,0.2)',
                                         backdropFilter: 'blur(6px)',
-                                    }}
+                                        zIndex: '30',
+                                        '--fly-start-x': `${flyOffsets.startX}px`,
+                                        '--fly-start-y': `${flyOffsets.startY}px`,
+                                        '--fly-mid-x': `${flyOffsets.midX}px`,
+                                        '--fly-mid-y': `${flyOffsets.midY}px`,
+                                        '--fly-near-x': `${flyOffsets.nearX}px`,
+                                        '--fly-near-y': `${flyOffsets.nearY}px`,
+                                    } as React.CSSProperties & Record<string, string>}
                                 >
                                     {currentQuestionIcon.icon}
                                 </div>
@@ -261,6 +279,7 @@ const TradingQuizExtraPage: React.FC = () => {
                         )}
                     </div>
                     <IconOptionCard
+                        questionId={question.id}
                         options={question.options}
                         selected={selected[question.id] || null}
                         onSelect={handleSelect}
@@ -279,26 +298,10 @@ const TradingQuizExtraPage: React.FC = () => {
                     }
                 }
                 
-                @keyframes fly-from-top-right {
+                @keyframes fly-from-answer {
                     0% {
-                        transform: translate(-120px, -120px) scale(0.2);
-                        opacity: 0;
-                    }
-                    20% {
-                        transform: translate(-90px, -90px) scale(0.4);
-                        opacity: 0.3;
-                    }
-                    40% {
-                        transform: translate(-60px, -60px) scale(0.6);
-                        opacity: 0.5;
-                    }
-                    60% {
-                        transform: translate(-30px, -30px) scale(0.8);
-                        opacity: 0.7;
-                    }
-                    80% {
-                        transform: translate(-10px, -10px) scale(0.95);
-                        opacity: 0.9;
+                        transform: translate(var(--fly-start-x, -160px), var(--fly-start-y, 60px)) scale(0.9);
+                        opacity: 1;
                     }
                     100% {
                         transform: translate(0px, 0px) scale(1);
@@ -310,8 +313,11 @@ const TradingQuizExtraPage: React.FC = () => {
                     animation: float 3s ease-in-out infinite;
                 }
                 
-                .animate-fly-from-top-right {
-                    animation: fly-from-top-right 1.0s ease-out forwards;
+                .animate-fly-from-answer {
+                    animation: fly-from-answer 1.15s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+                    animation-delay: 0.1s;
+                    animation-fill-mode: both;
+                    will-change: transform;
                 }
             `}</style>
         </div>
