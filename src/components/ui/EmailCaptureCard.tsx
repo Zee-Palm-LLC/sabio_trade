@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShieldIcon from '../../assets/sheild_filled.svg';
-import StandingAvatar from '../../assets/Image-3.png';
+import StandingAvatar from '../../assets/image-3.png';
 import { DNAIconsService } from '../../services/dnaIconsService';
 import { AnswerService } from '../../services/answerService';
 import { saveEmail } from '../../services/emailService';

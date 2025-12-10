@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ColinImage from '../assets/colin.png';
 import Logo from '../assets/logo.png';
-import StandingAvatar from '../assets/Image-3.png';
+import StandingAvatar from '../assets/image-3.png';
 import StarIcon from '../assets/yellow_star.svg';
 import { BottomShade, Card, PrimaryButton, ProgressIndicator } from '../components';
 import { DNAIconsService } from '../services/dnaIconsService';

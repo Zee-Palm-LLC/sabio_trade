@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import chartIcon from '../../assets/chart.png';
-import avatar from '../../assets/Image-3.png';
+import avatar from '../../assets/image-3.png';
 import { Button, Card } from '../index';
 
 interface InvestingStyleCardProps {
