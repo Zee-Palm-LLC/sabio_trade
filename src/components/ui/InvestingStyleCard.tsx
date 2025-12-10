@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import chartIcon from '../../assets/chart.png';
-import avatar from '../../assets/sitting_avatar.png';
+import avatar from '../../assets/image-3.png';
 import { Button, Card } from '../index';
 
 interface InvestingStyleCardProps {
@@ -31,7 +31,7 @@ const InvestingStyleCard: React.FC<InvestingStyleCardProps> = ({ className = '' 
                     <img
                         src={avatar}
                         alt="Avatar"
-                        className="absolute bottom-[-25px] left-1/2 transform -translate-x-1/2 w-30 h-32"
+                        className="absolute bottom-[-25px] left-1/2 transform -translate-x-1/2 w-34 h-[168px]"
                     />
                 </div>
                 <p className="text-white text-[16px] mb-4 pt-3 font-semibold">Do you see yourself more as a saver or an investor?</p>

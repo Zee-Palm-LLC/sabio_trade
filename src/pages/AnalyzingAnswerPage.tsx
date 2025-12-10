@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ColinImage from '../assets/colin.png';
 import Logo from '../assets/logo.png';
-import StandingAvatar from '../assets/standing_avatar.png';
+import StandingAvatar from '../assets/image-3.png';
 import StarIcon from '../assets/yellow_star.svg';
 import { BottomShade, Card, PrimaryButton, ProgressIndicator } from '../components';
 import { DNAIconsService } from '../services/dnaIconsService';
@@ -194,13 +194,13 @@ const AnalyzingAnswerPage: React.FC = () => {
                                 </p>
                             </div>
                         </div>
-                        <div className="mt-4 flex flex-col items-center">
+                        <div className="mt-1 flex flex-col items-center">
                             <img
                                 src={StandingAvatar}
                                 alt="Testimonial"
-                                className="h-48 object-contain"
+                                className="h-60 object-contain"
                             />
-                            <div className="mt-4 px-4">
+                            <div className="mt-6 px-4">
                                 {storedDNAIcons.length > 0 && (
                                     <div className="flex items-center justify-center gap-2 mb-3">
                                         <div

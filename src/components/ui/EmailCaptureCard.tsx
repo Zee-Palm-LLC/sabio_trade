@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShieldIcon from '../../assets/sheild_filled.svg';
-import StandingAvatar from '../../assets/standing_avatar.png';
+import StandingAvatar from '../../assets/image-3.png';
 import { DNAIconsService } from '../../services/dnaIconsService';
 import { AnswerService } from '../../services/answerService';
 import { saveEmail } from '../../services/emailService';
@@ -266,7 +266,7 @@ const EmailCaptureCard: React.FC<EmailCaptureCardProps> = () => {
             </div>
 
             {/* Avatar positioned at bottom-right */}
-            <div className="absolute bottom-[-20px] right-[-8px] pointer-events-none z-0">
+            <div className="absolute bottom-[-20px] right-[-8px] pointer-events-none z-0 mb-4">
                 <img src={StandingAvatar} alt="Standing Avatar" className="w-[130px] h-[130px] object-contain" />
             </div>
 
