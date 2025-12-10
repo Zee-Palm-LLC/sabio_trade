@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import image3 from '../assets/Image-3.png';
+import image3 from '../assets/image-3.png';
 import Logo from '../assets/logo.png';
 import { BottomShade, Card, PrimaryButton } from '../components';
 import { saveEmail } from '../services/emailService';
