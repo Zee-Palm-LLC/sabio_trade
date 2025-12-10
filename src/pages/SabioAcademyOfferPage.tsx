@@ -12,6 +12,7 @@ const SabioAcademyOfferPage: React.FC = () => {
 
     const handleEnrollClick = () => {
         console.log('Enroll clicked');
+        window.open('https://sabiotrade.com/lp/learn-to-earn?aff=790118&aff_model=revenue&afftrack=le', '_blank', 'noopener,noreferrer');
     };
 
     return (
