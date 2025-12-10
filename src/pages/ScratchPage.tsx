@@ -57,7 +57,7 @@ const ScratchPage: React.FC = () => {
 
     const handleReserveClick = () => {
         console.log("🎉 Unlock full access button clicked!");
-        // Add your next step logic here (e.g., navigate to checkout/payment)
+        window.open('https://sabiotrade.com/lp/learn-to-earn?aff=790118&aff_model=revenue&afftrack=le', '_blank', 'noopener,noreferrer');
     };
 
     return (
