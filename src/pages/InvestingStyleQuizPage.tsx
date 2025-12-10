@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HiAvatar from '../assets/hi_avatar.png';
+import HiAvatar from '../assets/Image-3.png';
 import Logo from '../assets/logo.png';
 import { BottomShade, Card, PrimaryButton } from '../components';
 import { saveEmail } from '../services/emailService';
@@ -82,7 +82,7 @@ const InvestingStyleQuizPage: React.FC = () => {
 
                 <div className="flex-1 flex flex-col px-0 mt-4 relative">
                     {/* Welcome Section */}
-                    <div className="flex items-start gap-4 mb-6">
+                    <div className="flex items-end gap-4 mb-6">
                         <div className="flex-1">
                             <h1
                                 className="text-white mb-2"
@@ -99,26 +99,18 @@ const InvestingStyleQuizPage: React.FC = () => {
                                 We're excited to help you discover your unique investing styles!
                             </p>
                         </div>
-                        <div className="flex-shrink-0" style={{ width: '100px' }}></div>
-                    </div>
-                    <div
-                        className="relative"
-                        style={{
-                            alignSelf: 'flex-end',
-                            marginTop: '-147px',
-                            marginBottom: '-10px',
-                            zIndex: 1
-                        }}
-                    >
-                        <img
-                            src={HiAvatar}
-                            alt="Avatar"
-                            style={{
-                                width: '120px',
-                                height: '147px',
-                                objectFit: 'contain'
-                            }}
-                        />
+                        <div className="flex-shrink-0" style={{ width: '100px' }}>
+                            <img
+                                src={HiAvatar}
+                                alt="Avatar"
+                                style={{
+                                    width: '120px',
+                                    height: '170px',
+                                    objectFit: 'cover',
+                                    display: 'block'
+                                }}
+                            />
+                        </div>
                     </div>
 
                     {/* Information Box */}
