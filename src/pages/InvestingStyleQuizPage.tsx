@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HiAvatar from '../assets/Image-3.png';
+import image3 from '../assets/Image-3.png';
 import Logo from '../assets/logo.png';
 import { BottomShade, Card, PrimaryButton } from '../components';
 import { saveEmail } from '../services/emailService';
@@ -101,7 +101,7 @@ const InvestingStyleQuizPage: React.FC = () => {
                         </div>
                         <div className="flex-shrink-0" style={{ width: '100px' }}>
                             <img
-                                src={HiAvatar}
+                                src={image3}
                                 alt="Avatar"
                                 style={{
                                     width: '120px',
