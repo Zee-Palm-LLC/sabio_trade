@@ -99,12 +99,12 @@ const InvestingStyleQuizPage: React.FC = () => {
                                 We're excited to help you discover your unique investing styles!
                             </p>
                         </div>
-                        <div className="flex-shrink-0" style={{ width: '100px' }}>
+                        <div className="flex-shrink-0" style={{ width: '140px' }}>
                             <img
                                 src={image3}
                                 alt="Avatar"
                                 style={{
-                                    width: '120px',
+                                    width: '140px',
                                     height: '170px',
                                     objectFit: 'cover',
                                     display: 'block'
