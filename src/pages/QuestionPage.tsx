@@ -7,6 +7,7 @@ import IconSlots from '../components/ui/IconSlots';
 import quizData from '../data/quiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
 import { AnswerService } from '../services/answerService';
+import { preloadImage } from '../utils/imagePreloader';
 import { defaultFlyOffsets, prepareIconFlight, type FlyOffsets } from '../utils/iconFlight';
 
 const QuestionPage: React.FC = () => {
@@ -31,6 +32,13 @@ const QuestionPage: React.FC = () => {
         label: option,
         color: 'var(--color-purple-primary)',
     }));
+
+    // Preload avatar image on mount
+    useEffect(() => {
+        preloadImage(StandingAvatar).catch(err => {
+            console.warn('Failed to preload avatar image:', err);
+        });
+    }, []);
 
     // Load persisted answer from AnswerService when question changes
     useEffect(() => {

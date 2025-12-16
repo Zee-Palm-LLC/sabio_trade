@@ -10,6 +10,7 @@ import NetflixIcon from '../../assets/netflix.png';
 import NvidiaIcon from '../../assets/nvidia.png';
 import TeslaIcon from '../../assets/tesla.png';
 import TopicIcon from '../../assets/topic.png';
+import { preloadImage } from '../../utils/imagePreloader';
 import PrimaryButton from './PrimaryButton';
 
 interface AnalyzingModalProps {
@@ -46,6 +47,24 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
         onClose();
         navigate('/trading-quiz-extra');
     };
+
+    // Preload images when modal opens
+    useEffect(() => {
+        if (isOpen) {
+            // Preload the main analyzing image
+            preloadImage(Analyzing).catch(err => {
+                console.warn('Failed to preload analyzing image:', err);
+            });
+            
+            // Preload stock icons that might be used
+            const stockIcons = selectedStocks.map(stock => iconMap[stock.toLowerCase()]).filter(Boolean);
+            stockIcons.forEach(icon => {
+                preloadImage(icon).catch(err => {
+                    console.warn('Failed to preload stock icon:', err);
+                });
+            });
+        }
+    }, [isOpen, selectedStocks]);
 
     // Auto-dismiss after 5 seconds
     useEffect(() => {
@@ -175,6 +194,8 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                             style={{
                                 filter: 'brightness(0.9)',
                             }}
+                            loading="eager"
+                            fetchPriority="high"
                         />
                         <div
                             className="absolute left-0 top-0 w-full h-full rounded-xl"

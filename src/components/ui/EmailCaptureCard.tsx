@@ -5,6 +5,7 @@ import StandingAvatar from '../../assets/3.png';
 import { DNAIconsService } from '../../services/dnaIconsService';
 import { AnswerService } from '../../services/answerService';
 import { saveEmail } from '../../services/emailService';
+import { preloadImage } from '../../utils/imagePreloader';
 
 interface EmailCaptureCardProps {
     // No props needed - DNA icons are retrieved from service
@@ -37,6 +38,13 @@ const EmailCaptureCard: React.FC<EmailCaptureCardProps> = () => {
     console.log('EmailCaptureCard - Quiz icons found:', quizIcons);
     console.log('EmailCaptureCard - Display icons:', displayIcons);
     console.log('EmailCaptureCard - Force update count:', forceUpdate);
+
+    // Preload avatar image on mount
+    useEffect(() => {
+        preloadImage(StandingAvatar).catch(err => {
+            console.warn('Failed to preload avatar image:', err);
+        });
+    }, []);
 
     // Listen for DNA icon changes
     useEffect(() => {
@@ -267,7 +275,12 @@ const EmailCaptureCard: React.FC<EmailCaptureCardProps> = () => {
 
             {/* Avatar positioned at bottom-right */}
             <div className="absolute bottom-[-20px] right-[-8px] pointer-events-none z-0 mb-4">
-                <img src={StandingAvatar} alt="Standing Avatar" className="w-[130px] h-[130px] object-contain" />
+                <img 
+                    src={StandingAvatar} 
+                    alt="Standing Avatar" 
+                    className="w-[130px] h-[130px] object-contain"
+                    loading="eager"
+                />
             </div>
 
             <style>{`

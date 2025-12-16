@@ -89,6 +89,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                         src={illustration}
                         alt="Avatar"
                         className="h-52 object-contain"
+                        loading="lazy"
                     />
                 </div>
             )}
