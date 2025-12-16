@@ -22,7 +22,7 @@ export const preloadImages = async (srcs: string[]): Promise<void> => {
  */
 export const preloadCriticalImages = () => {
     // Preload images that are commonly used across pages
-    const criticalImages = [
+    const criticalImages: string[] = [
         // Add paths to your critical images here
         // Example: '/src/assets/logo.png'
     ];
