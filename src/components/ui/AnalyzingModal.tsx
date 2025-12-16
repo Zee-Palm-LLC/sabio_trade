@@ -171,7 +171,7 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
                         <img
                             src={Analyzing}
                             alt="Testimonial"
-                            className="w-full h-full object-cover rounded-xl transition-transform duration-500 hover:scale-105"
+                            className="w-full h-full object-contain rounded-xl transition-transform duration-500 hover:scale-105"
                             style={{
                                 filter: 'brightness(0.9)',
                             }}
