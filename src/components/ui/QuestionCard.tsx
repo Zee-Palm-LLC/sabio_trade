@@ -88,7 +88,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                     <img
                         src={illustration}
                         alt="Avatar"
-                        className="h-48 object-contain"
+                        className="h-52 object-contain"
                     />
                 </div>
             )}

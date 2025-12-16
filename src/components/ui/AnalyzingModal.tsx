@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AmazonIcon from '../../assets/amazon.png';
-import Analyzing from '../../assets/analyzing.png';
+import Analyzing from '../../assets/7.png';
 import AppleIcon from '../../assets/apple.png';
 import BoeingIcon from '../../assets/boeing.png';
 import GoogleIcon from '../../assets/google.png';
