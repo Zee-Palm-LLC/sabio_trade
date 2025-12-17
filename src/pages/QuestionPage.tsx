@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
-import StandingAvatar from '../assets/8.png';
+// import StandingAvatar from '../assets/8.png';
 import { BackButton, BottomShade, ProgressIndicator, QuestionCard } from '../components';
 import IconSlots from '../components/ui/IconSlots';
 import quizData from '../data/quiz.json';
 import { DNAIconsService } from '../services/dnaIconsService';
 import { AnswerService } from '../services/answerService';
-import { preloadImage } from '../utils/imagePreloader';
+// import { preloadImage } from '../utils/imagePreloader';
 import { defaultFlyOffsets, prepareIconFlight, type FlyOffsets } from '../utils/iconFlight';
 
 const QuestionPage: React.FC = () => {
@@ -34,11 +34,11 @@ const QuestionPage: React.FC = () => {
     }));
 
     // Preload avatar image on mount
-    useEffect(() => {
-        preloadImage(StandingAvatar).catch(err => {
-            console.warn('Failed to preload avatar image:', err);
-        });
-    }, []);
+    // useEffect(() => {
+    //     preloadImage(StandingAvatar).catch(err => {
+    //         console.warn('Failed to preload avatar image:', err);
+    //     });
+    // }, []);
 
     // Load persisted answer from AnswerService when question changes
     useEffect(() => {
@@ -214,7 +214,7 @@ const QuestionPage: React.FC = () => {
                         questionText={currentQuestion.question}
                         description={currentQuestion.description}
                         options={questionOptions}
-                        illustration={StandingAvatar}
+                        illustration={undefined}
                         onOptionSelect={handleOptionSelect}
                         selectedOption={selectedOption}
                     />

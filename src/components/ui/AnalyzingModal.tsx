@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AmazonIcon from '../../assets/amazon.png';
-import Analyzing from '../../assets/7.png';
+import Analyzing from '../../assets/5.png';
 import AppleIcon from '../../assets/apple.png';
 import BoeingIcon from '../../assets/boeing.png';
 import GoogleIcon from '../../assets/google.png';
@@ -186,7 +186,7 @@ const AnalyzingModal: React.FC<AnalyzingModalProps> = ({ isOpen, onClose, select
 
                 {/* Centered Character Image + Quote */}
                 <div className="mb-3 flex flex-col items-center">
-                    <div className="relative w-full rounded-xl overflow-hidden" style={{ height: 120 }}>
+                    <div className="relative w-full rounded-xl overflow-hidden" style={{ height: 200 }}>
                         <img
                             src={Analyzing}
                             alt="Testimonial"
