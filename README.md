@@ -1,73 +1,84 @@
-# React + TypeScript + Vite
+# Sabio Trade
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A trading education platform that helps users discover their trading style through an interactive quiz and provides personalized trading profiles.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Trading Style Quiz**: Interactive questionnaire to determine user's trading preferences
+- **Trading Profiles**: Personalized trader profiles based on quiz answers
+- **Answer Analysis**: Analyzes user responses to provide insights
+- **DNA Icons System**: Visual representation of trading preferences
+- **Lead Capture**: Collects user information for follow-up
+- **Scratch Card**: Interactive reward/engagement feature
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** with TypeScript
+- **Vite** for build tooling
+- **React Router** for navigation
+- **Firebase** for backend services
+- **Tailwind CSS** for styling
+- **Swiper** for carousels/sliders
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js (v18 or higher)
+- npm or bun
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+# or
+bun install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
+# or
+bun dev
 ```
+
+### Build
+
+```bash
+# Standard build
+npm run build
+
+# Build for master branch
+npm run build:master
+
+# Build for main branch
+npm run build:main
+```
+
+### Preview
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```
+src/
+├── components/     # Reusable UI components
+├── pages/         # Page components
+├── services/      # Business logic services (answers, DNA icons, email)
+├── data/          # Quiz data and questions
+├── config/        # Configuration files (Firebase)
+└── utils/         # Utility functions
+```
+
+## Scripts
+
+- `dev` - Start development server
+- `build` - Build for production
+- `build:master` - Build with dist output directory
+- `build:main` - Build with dist-main output directory
+- `lint` - Run ESLint
+- `preview` - Preview production build
